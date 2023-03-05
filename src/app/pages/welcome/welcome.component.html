@@ -1,0 +1,20 @@
+<div class="map-container" >
+  <div class="map-frame">
+    <div id="map">
+
+
+    </div>
+  </div>
+</div>
+<ng-container>
+  <div>
+    <input nz-input placeholder="Basic usage" [(ngModel)]="mapService.latValue" />
+    <input nz-input placeholder="Basic usage" [(ngModel)]="mapService.longValue" />
+  <div >
+    <button (click)="AccidentDetailPage()"  nz-button nzType="primary" style="border-radius: 5px;">Next</button>
+  </div>
+    </div>
+</ng-container>
+
+
+

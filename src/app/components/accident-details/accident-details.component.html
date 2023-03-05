@@ -1,0 +1,78 @@
+<div style="background-color: white;padding:15px" nzSpan="6">
+  <h3><b>Accident Detail</b></h3>
+
+<div nz-row style="display: flex;">
+  <div nz-col  nzSpan="8" ><label>Accident Type</label><br/>
+    <nz-select
+    ngModel="selectedValue">
+      <nz-option       *ngFor="let option of accidentDetail"
+      [nzLabel]="option.accidentCauseName"
+      [nzValue]="option.accidentCauseId"
+      ></nz-option>
+
+    </nz-select>
+   </div>
+  <div nz-col  nzSpan="8" ><label>Weather</label><br/>
+    <nz-select ngModel="selectedValue">
+      <nz-option       *ngFor="let option of weatherCondition"
+      [nzLabel]="option.weatherCondName"
+      [nzValue]="option.weatherCondId"
+      ></nz-option>
+    </nz-select></div>
+  <div nz-col nzSpan="8" >Payment type<label></label><br/>
+    <nz-select ngModel="lucy">
+      <nz-option nzValue="Good asphalt" nzLabel="Good asphalt"></nz-option>
+      <nz-option nzValue="Grave" nzLabel="Grave"></nz-option>
+      <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+    </nz-select>
+  </div>
+</div>
+
+
+<div nz-row style="display: flex;">
+  <div nz-col nzSpan="8" style="width:33%;"><label>Road character</label><br/>
+    <nz-select ngModel="lucy">
+      <nz-option nzValue="Dry" nzLabel="Dry"></nz-option>
+      <nz-option nzValue="Wet" nzLabel="Wet"></nz-option>
+      <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+    </nz-select> </div>
+  <div nz-col nzSpan="8" style="width:33%;"><label>Land use</label><br/>
+    <nz-select ngModel="lucy">
+      <nz-option nzValue="With rural vilage" nzLabel="With rural vilage"></nz-option>
+      <nz-option nzValue="around school" nzLabel="around school"></nz-option>
+      <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+    </nz-select></div>
+  <div nz-col nzSpan="8"><label>Intersection type</label><br/>
+    <nz-select ngModel="lucy">
+      <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+      <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+      <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+    </nz-select></div>
+</div>
+
+
+<div nz-row style="display: flex;">
+  <div nz-col nzSpan="8" style="width:33%;"><label>Accident Level</label><br/>
+    <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+  </div>
+  <div nz-col nzSpan="8" style="width:33%;"><label></label><br/>
+    <input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+
+</div>
+
+<div nz-row style="display: flex;">
+  <div nz-col nzSpan="8" style="width:33%;"><br/>
+    <input nz-input placeholder="Basic usage" [(ngModel)]="value" /> </div>
+  <div nz-col nzSpan="8" style="width:33%;"><label></label><br/>
+    <input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
+
+</div>
+<div nz-row style="display: flex;justify-content: space-between;">
+  <div nz-col nzSpan="8"></div>
+  <div nz-col nzSpan="8"> </div>
+  <div nz-col nzSpan="8"  style="display: flex;">
+    <app-button (click)="WelcomePage()" [buttonText]="'Back'" style="padding-right:15px;"></app-button>
+  <app-button [buttonText]="'Next'"></app-button>
+  </div>
+</div>
+</div>

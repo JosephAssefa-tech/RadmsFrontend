@@ -362,6 +362,11 @@ GetAccidentCauses()
     this.route.navigate(['/welcome']);
 
   }
+
+  VictimDetailPage(){
+    this.route.navigate(['/vehicle']);
+
+  }
   // submitForm()
   // {
   //  var formData:any=new FormData();

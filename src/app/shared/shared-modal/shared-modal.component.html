@@ -1,0 +1,10 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true">Region Name</nz-form-label>
+    <nz-form-control [nzErrorTip]="'Please input region name!'">
+      <input nz-input formControlName="region" placeholder="region name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <button nz-button nzType="primary">Add</button>
+</form>

@@ -1,0 +1,27 @@
+<!-- <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzRequired]="true">Region Name</nz-form-label>
+    <nz-form-control [nzErrorTip]="'Please input region name!'">
+      <input nz-input formControlName="region" placeholder="region name">
+    </nz-form-control>
+  </nz-form-item>
+
+  <button nz-button nzType="primary">Add</button>
+</form> -->
+<button class="add-region" style="margin-left: 71vw;"nz-button nzType="primary" (click)="showModal()">Add Region</button>
+<nz-table #middleTable nzSize="middle" [nzData]="data">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Region Names</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of middleTable.data">
+      <td>{{ data.age }}</td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.address }}</td>
+    </tr>
+  </tbody>
+</nz-table>

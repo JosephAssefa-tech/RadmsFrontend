@@ -12,15 +12,35 @@
     </a>
   </div>
     <ul nz-menu  nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item (click)="selectMenuItem('home')" style="color:white">
+      <li nz-menu-item (click)="selectMenuItem('home')" style="color:white" nzIcon="home"><span nz-icon [nzType]="'home'"></span>
         <i class="anticon anticon-dashboard"></i>
         <a>Home</a>
       </li>
-      <li nz-menu-item (click)="selectMenuItem('about')" style="color:white">
-        <i class="anticon anticon-user"></i>
-        <a>Locational Referencing System</a>
+      <li nz-submenu nzTitle="Locational Referencing System" nzIcon="appstore">
+        <ul>
+          <li nz-menu-item (click)="showModal()">Region Master</li>
+          <li nz-menu-item (click)="cityMaster()">City Master</li>
+          <li nz-submenu nzTitle="Submenu">
+            <ul>
+              <li nz-menu-item>Sub City Master</li>
+
+            </ul>
+          </li>
+          <li nz-menu-item>Zone Master</li>
+          <li nz-menu-item>Woreda Master </li>
+          <li nz-menu-item>Kebela Master</li>
+          <li nz-submenu nzTitle="Submenu">
+            <ul>
+              <li nz-menu-item>Junction Type</li>
+              <li nz-menu-item>Land Mark Type</li>
+              <li nz-menu-item>Highway Master</li>
+              <li nz-menu-item>Land Mark Type</li>
+              <li nz-menu-item>Highway Owner Master</li>
+            </ul>
+          </li>
+        </ul>
       </li>
-      <li nz-menu-item  style="color:white">
+      <li nz-menu-item  (click)="selectMenuItem('accident-data')"   style="color:white">
         <i class="anticon anticon-setting"></i>
         <a>Accident Data Collection</a>
       </li>
@@ -28,6 +48,7 @@
         <i class="anticon anticon-setting"></i>
         <a>Report</a>
       </li>
+
       <li nz-menu-item (click)="selectMenuItem('settings')" style="color:white">
         <i class="anticon anticon-setting"></i>
         <a>System Adminstration</a>
@@ -38,13 +59,30 @@
     <nz-header style="background: #fff; padding-left: 15px;height: auto;">
 <h2><b>Hi, Welcome back!</b></h2>
 <p>Your accident data record system dashboard</p>
-<nz-tabset>
-  <nz-tab nzTitle="Home"></nz-tab>
-  <nz-tab nzTitle="Profile"></nz-tab>
-  <nz-tab nzTitle="Setting"></nz-tab>
-  <nz-tab nzTitle="Help">help</nz-tab>
-</nz-tabset>
+<div class="container" style="display:flex;justify-content: space-between;">
+  <nz-tabset>
+    <nz-tab nzTitle="Home"></nz-tab>
+    <nz-tab nzTitle="Profile"></nz-tab>
+    <nz-tab nzTitle="Setting"></nz-tab>
+    <nz-tab nzTitle="Help">help</nz-tab>
+
+  </nz-tabset>
+  <div class="clearfix">
+    <nz-upload
+      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      nzListType="picture"
+ >
+ <!-- [(nzFileList)]="fileList1"   please add this line of code for listing the images on the above tag-->
+      <button nz-button>
+        <span nz-icon nzType="upload"></span>
+        Upload
+      </button>
+    </nz-upload>
+  </div>
+</div>
+
     </nz-header>
+
     <nz-content style="margin: 24px 16px 0;; background: #dde1e5">
       <div style="padding: 24px; min-height: 360px;">
 

@@ -1,0 +1,104 @@
+<div style="background-color: white;padding:15px" nzSpan="6">
+    <form (ngSubmit)="onSubmit()"  [formGroup]="myForm" >
+  
+    <h3><b>Road Involved</b></h3>
+   
+
+
+
+  <div nz-row style="display: flex;">
+   
+  
+    <div nz-col  nzSpan="6" ><label>HighWay Name</label><br/>
+      <nz-select formControlName="highwayControl"
+      [(ngModel)]="selectedHighway">
+      <ng-container  *ngFor="let option of highway">
+        <nz-option
+        [nzLabel]="option.hname"
+        [nzValue]="option"
+        ></nz-option>
+      </ng-container>
+    
+    
+      </nz-select>
+     </div>
+
+
+      
+    <div nz-col  nzSpan="6" ><label>Pavement Type</label><br/>
+      <nz-select formControlName="pavementTypeControl"
+      [(ngModel)]="selectedPavementType">
+      <ng-container  *ngFor="let option of pavementType">
+        <nz-option
+        [nzLabel]="option.pavementName"
+        [nzValue]="option"
+        ></nz-option>
+      </ng-container>
+    
+    
+      </nz-select>
+     </div>
+
+
+
+      
+    <div nz-col  nzSpan="6" ><label>Road Surface Condition</label><br/>
+      <nz-select formControlName="roadSurfaceConditionControl"
+      [(ngModel)]="selectedRoadSurfaceCondition">
+      <ng-container  *ngFor="let option of roadSurfaceCondition">
+        <nz-option
+        [nzLabel]="option.roadSurfaceName"
+        [nzValue]="option"
+        ></nz-option>
+      </ng-container>
+    
+    
+      </nz-select>
+     </div>
+
+
+
+      
+    <div nz-col  nzSpan="6" ><label>Carriage way Type</label><br/>
+      <nz-select formControlName="carriageWayTypeControl"
+      [(ngModel)]="selectedCarriageWayType">
+      <ng-container  *ngFor="let option of carriageWayType">
+        <nz-option
+        [nzLabel]="option.roadCarriagewayName"
+        [nzValue]="option"
+        ></nz-option>
+      </ng-container>
+    
+    
+      </nz-select>
+     </div>
+
+ 
+  
+ </div>
+
+
+
+
+  
+ <div nz-row style="display: flex; height: 20px;" ></div>
+
+
+
+  
+ 
+  
+  <div nz-row style="display: flex;justify-content: space-between;">
+    <div nz-col nzSpan="6"></div>
+    <div nz-col nzSpan="6"> </div>
+    <div nz-col nzSpan="6"> </div>
+    <div nz-col nzSpan="6"  style="display: flex;">
+      <app-button (click)="AccidentPage()" [buttonText]="'Back'" style="padding-right:15px;"></app-button>
+    <app-button (click)="VehicleDetailPage()" [buttonText]="'Next'" type="submit" ></app-button>
+    </div>
+  </div>
+  <!-- (click)="sucessNotification('Sucess')" -->
+  </form>
+  
+  </div>
+  

@@ -363,8 +363,8 @@ GetAccidentCauses()
 
   }
 
-  VictimDetailPage(){
-    this.route.navigate(['/vehicle']);
+  RoadInvolvedPage(){
+    this.route.navigate(['/roadInvolved']);
 
   }
   // submitForm()

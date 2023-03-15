@@ -96,6 +96,7 @@ import { PoliceStationComponent } from './components/police-station/police-stati
 import { SelectOptionsComponent } from './shared/select-options/select-options.component';
 import { VictimDetailsComponent } from './components/victim-details/victim-details.component';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
+import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
 
 registerLocaleData(en);
 
@@ -118,7 +119,8 @@ registerLocaleData(en);
     PoliceStationComponent,
     SelectOptionsComponent,
     VictimDetailsComponent,
-    VehicleDetailsComponent
+    VehicleDetailsComponent,
+    RoadInvolvedComponent,
   ],
   imports: [
     BrowserModule,

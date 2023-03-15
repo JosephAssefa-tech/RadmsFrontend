@@ -10,6 +10,7 @@ import { SideMenuPageComponent } from './components/side-menu-page/side-menu-pag
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { VictimDetailsComponent } from './components/victim-details/victim-details.component';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
+import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
 
 const routes: Routes = [
  // { path: '', pathMatch: 'full', redirectTo: '/welcome' },
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path:'welcome',component:WelcomeComponent},
   {path:'region',component:RegionComponent},
   {path:'victim',component:VictimDetailsComponent},
-  {path:'vehicle',component:VehicleDetailsComponent}
+  {path:'vehicle',component:VehicleDetailsComponent},
+  {path:'roadInvolved',component:RoadInvolvedComponent},
 
  //{ path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
 ];

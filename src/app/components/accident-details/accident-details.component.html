@@ -1,78 +1,296 @@
 <div style="background-color: white;padding:15px" nzSpan="6">
-  <h3><b>Accident Detail</b></h3>
+  <form (ngSubmit)="onSubmit()"  [formGroup]="myForm" >
 
-<div nz-row style="display: flex;">
-  <div nz-col  nzSpan="8" ><label>Accident Type</label><br/>
-    <nz-select
-    ngModel="selectedValue">
-      <nz-option       *ngFor="let option of accidentDetail"
-      [nzLabel]="option.accidentCauseName"
-      [nzValue]="option.accidentCauseId"
+  <h3><b>Accident Detail</b></h3>
+  <div nz-row style="display: flex;">
+    <div nz-col  nzSpan="6" ><label>Date</label><br/>
+    <nz-date-picker formControlName="dateTime" [nzRenderExtraFooter]="plainFooter" nzShowTime></nz-date-picker>
+</div>
+<div nz-col  nzSpan="6" ><label>Investigator Name</label><br/>
+  <input nz-input placeholder="Invistigator name" formControlName="investigatorName" [(ngModel)]="investigator" />
+</div>
+     <div nz-col  nzSpan="6" ><label>Police Record Number</label><br/>
+      <input formControlName="policeRecordNumber" nz-input placeholder="Basic usage" [(ngModel)]="policeRecordNumber" />
+  </div>
+<div nz-col  nzSpan="6" ><label>Police Station</label><br/>
+  <nz-select formControlName="policeStations"
+  [(ngModel)]="selectedPoliceStation" (ngModelChange)="OnPoliceStationSelected()"   >
+  <ng-container  *ngFor="let option of policeStation">
+    <nz-option
+    [nzLabel]="option.psname"
+    [nzValue]="option"
+    ></nz-option>
+  </ng-container>
+
+
+  </nz-select>
+ </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div nz-row style="display: flex;">
+    <div nz-col  nzSpan="6" ><label>Region</label><br/>
+      <nz-select formControlName="region"
+      [(ngModel)]="selectedRegionId"
+       >
+        <nz-option       *ngFor="let option of regionMaster"
+        [nzLabel]="option.regionName"
+        [nzValue]="option.regionId"
+        ></nz-option>
+
+      </nz-select>
+     </div>
+    <div nz-col  nzSpan="6" ><label>Zone</label><br/>
+      <nz-select [(ngModel)]="selectedZone" formControlName="zone">
+        <nz-option       *ngFor="let option of zoneMaster"
+        [nzLabel]="option.zoneName"
+        [nzValue]="option.zoneId"
+        ></nz-option>
+      </nz-select></div>
+    <div nz-col nzSpan="6" >Woreda<label></label><br/>
+      <nz-select [(ngModel)]="selectedWored" formControlName="woreda">
+        <nz-option       *ngFor="let option of woredaMaster"
+        [nzLabel]="option.woredaName"
+        [nzValue]="option.woredaId"
+        ></nz-option>
+      </nz-select>
+    </div>
+    <div nz-col nzSpan="6" >City<label></label><br/>
+      <nz-select [(ngModel)]="selectedCity" formControlName="city">
+        <nz-option       *ngFor="let option of cityMaster"
+        [nzLabel]="option.cityName"
+        [nzValue]="option.cityId"
+        ></nz-option>
+      </nz-select>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div nz-row style="display: flex;">
+    <div nz-col  nzSpan="6" ><label>Subcity</label><br/>
+      <nz-select formControlName="subcity"
+      [(ngModel)]="selectedSubCityId"    >
+        <nz-option       *ngFor="let option of subCityList"
+        [nzLabel]="option.subCityName"
+        [nzValue]="option.subCityId"
+        ></nz-option>
+
+      </nz-select>
+     </div>
+
+    <div nz-col  nzSpan="6" ><label>Kebele Name</label><br/>
+      <input formControlName="kebele" nz-input placeholder="Basic usage" [(ngModel)]="kebeleName" />
+  </div>
+
+
+
+  <div nz-col  nzSpan="6" ><label>Accident Type</label><br/>
+    <nz-select formControlName="accidentType"
+    [(ngModel)]="selectedAccident">
+      <nz-option       *ngFor="let option of accidentType"
+      [nzLabel]="option.accidentType"
+      [nzValue]="option.accidentTypeId"
       ></nz-option>
 
     </nz-select>
    </div>
-  <div nz-col  nzSpan="8" ><label>Weather</label><br/>
-    <nz-select ngModel="selectedValue">
+   <div nz-col  nzSpan="6" ><label>Weather Condition</label><br/>
+    <nz-select [(ngModel)]="selectedWeather" formControlName="weatherCondition">
       <nz-option       *ngFor="let option of weatherCondition"
       [nzLabel]="option.weatherCondName"
       [nzValue]="option.weatherCondId"
       ></nz-option>
     </nz-select></div>
-  <div nz-col nzSpan="8" >Payment type<label></label><br/>
-    <nz-select ngModel="lucy">
-      <nz-option nzValue="Good asphalt" nzLabel="Good asphalt"></nz-option>
-      <nz-option nzValue="Grave" nzLabel="Grave"></nz-option>
-      <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+  </div>
+
+
+
+
+
+
+
+<div nz-row style="display: flex;">
+
+
+  <div nz-col nzSpan="6" >Accident Serverity<label></label><br/>
+    <nz-select [(ngModel)]="selectedAccidentSeverity" formControlName="accidentSeverity">
+      <nz-option       *ngFor="let option of accidentSeverity"
+      [nzLabel]="option.severityType"
+      [nzValue]="option.severityId"
+      ></nz-option>
     </nz-select>
   </div>
+
+  <div nz-col nzSpan="6" >Hightway Name<label></label><br/>
+    <nz-select [(ngModel)]="selectedhighwayName" formControlName="highwayName">
+      <nz-option       *ngFor="let option of highwayNames"
+      [nzLabel]="option.hname"
+      [nzValue]="option.hid"
+      ></nz-option>
+    </nz-select>
+  </div>
+
+  <div nz-col nzSpan="6" >Highway type<label></label><br/>
+    <nz-select [(ngModel)]="selectedhighwayType" formControlName="highwayType">
+      <nz-option       *ngFor="let option of highwayTypes"
+      [nzLabel]="option.htypeName"
+      [nzValue]="option.htypeId"
+      ></nz-option>
+    </nz-select>
+  </div>
+  <div nz-col nzSpan="6" >Payment type<label></label><br/>
+    <nz-select [(ngModel)]="selectedpaymentType" formControlName="paymentType">
+      <nz-option       *ngFor="let option of pavementTypes"
+      [nzLabel]="option.pavementName"
+      [nzValue]="option.pavementTypeId"
+      ></nz-option>
+    </nz-select>
+  </div>
+
+
+
 </div>
 
 
 <div nz-row style="display: flex;">
-  <div nz-col nzSpan="8" style="width:33%;"><label>Road character</label><br/>
-    <nz-select ngModel="lucy">
-      <nz-option nzValue="Dry" nzLabel="Dry"></nz-option>
-      <nz-option nzValue="Wet" nzLabel="Wet"></nz-option>
-      <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+  <div nz-col nzSpan="6" style="width:33%;"><label>Road Surface Condition</label><br/>
+    <nz-select [(ngModel)]="selectedroadSurface" formControlName="roadSurface">
+      <nz-option       *ngFor="let option of roadSurfaces"
+      [nzLabel]="option.roadSurfaceName"
+      [nzValue]="option.roadSurfaceId"
+      ></nz-option>
     </nz-select> </div>
-  <div nz-col nzSpan="8" style="width:33%;"><label>Land use</label><br/>
-    <nz-select ngModel="lucy">
+  <div nz-col nzSpan="6" style="width:33%;"><label>Road Type </label><br/>
+    <nz-select [(ngModel)]="selectedroadType" formControlName="roadType">
       <nz-option nzValue="With rural vilage" nzLabel="With rural vilage"></nz-option>
       <nz-option nzValue="around school" nzLabel="around school"></nz-option>
       <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
     </nz-select></div>
-  <div nz-col nzSpan="8"><label>Intersection type</label><br/>
-    <nz-select ngModel="lucy">
-      <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-      <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-      <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+  <div nz-col nzSpan="6"><label>Land Mark type </label><br/>
+    <nz-select [(ngModel)]="selectedlandMark" formControlName="landMark">
+      <nz-option       *ngFor="let option of landMarkTypes"
+      [nzLabel]="option.landmarkName"
+      [nzValue]="option.landmarkTypeId"
+      ></nz-option>
     </nz-select></div>
+
+    <div nz-col nzSpan="6"><label>Carriage way type </label><br/>
+      <nz-select [(ngModel)]="selectedcarriageWay" formControlName="carriageWay">
+        <nz-option       *ngFor="let option of roadCarriagewayTypes"
+        [nzLabel]="option.roadCarriagewayName"
+        [nzValue]="option.roadCarriagewayId"
+        ></nz-option>
+      </nz-select></div>
 </div>
 
 
+
+
+
 <div nz-row style="display: flex;">
-  <div nz-col nzSpan="8" style="width:33%;"><label>Accident Level</label><br/>
-    <input nz-input placeholder="Basic usage" [(ngModel)]="value" />
+  <div nz-col nzSpan="6" style="width:33%;"><label>Junction Type</label><br/>
+    <nz-select [(ngModel)]="selectedjunctionType" formControlName="junctionType">
+      <nz-option       *ngFor="let option of junctionTypes"
+      [nzLabel]="option.junctionTypeName"
+      [nzValue]="option.junctionTypeId"
+      ></nz-option>
+    </nz-select> </div>
+  <div nz-col nzSpan="6" style="width:33%;"><label>Road speed limit </label><br/>
+    <nz-select [(ngModel)]="selectedspeedLimit" formControlName="speedLimit">
+      <nz-option       *ngFor="let option of roadspeed"
+      [nzLabel]="option.speedLimitName"
+      [nzValue]="option.speedLimitId"
+      ></nz-option>
+    </nz-select></div>
+  <div nz-col nzSpan="6"><label>Light Condition </label><br/>
+    <nz-select [(ngModel)]="selectedlightCondition" formControlName="lightCondition">
+      <nz-option       *ngFor="let option of lightConditions"
+      [nzLabel]="option.lightConditionName"
+      [nzValue]="option.lightConditionId"
+      ></nz-option>
+    </nz-select></div>
+
+    <div nz-col nzSpan="6"><label>Air condition </label><br/>
+      <nz-select [(ngModel)]="selectedairCondition" formControlName="airCondition">
+        <nz-option       *ngFor="let option of airConditions"
+        [nzLabel]="option.airConditionName"
+        [nzValue]="option.airConditionId"
+        ></nz-option>
+      </nz-select></div>
+</div>
+
+
+
+
+
+
+<div nz-row style="display: flex;">
+  <div nz-col nzSpan="6" style="width:33%;"><label>Cause of accident</label><br/>
+    <nz-select [(ngModel)]="selectedaccidentCause" formControlName="accidentCause">
+      <nz-option       *ngFor="let option of accidentCauses"
+      [nzLabel]="option.accidentCauseName"
+      [nzValue]="option.accidentCauseId"
+      ></nz-option>
+    </nz-select> </div>
+    <div nz-col  nzSpan="6" ><label>Location local name</label><br/>
+      <input formControlName="locationName" nz-input placeholder="Invistigator name" [(ngModel)]="locationLocalName" />
+    </div>
+    <div nz-col  nzSpan="6" ><label>Property Damage</label><br/>
+      <input formControlName="propertyDamage" nz-input placeholder="Invistigator name" [(ngModel)]="propertyDamage" />
+    </div>
+
+    <div nz-col  nzSpan="6" ><label>Number of vechile</label><br/>
+      <input formControlName="numberVechile" nz-input placeholder="Invistigator name" [(ngModel)]="numberOfVechile" />
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div nz-row style="display: flex;">
+  <div nz-col  nzSpan="6" ><label>Number of victim</label><br/>
+    <input formControlName="numberVictim" nz-input placeholder="Number of victim " [(ngModel)]="numberOfVictim" />
   </div>
-  <div nz-col nzSpan="8" style="width:33%;"><label></label><br/>
-    <input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
 
 </div>
 
-<div nz-row style="display: flex;">
-  <div nz-col nzSpan="8" style="width:33%;"><br/>
-    <input nz-input placeholder="Basic usage" [(ngModel)]="value" /> </div>
-  <div nz-col nzSpan="8" style="width:33%;"><label></label><br/>
-    <input nz-input placeholder="Basic usage" [(ngModel)]="value" /></div>
-
-</div>
 <div nz-row style="display: flex;justify-content: space-between;">
-  <div nz-col nzSpan="8"></div>
-  <div nz-col nzSpan="8"> </div>
-  <div nz-col nzSpan="8"  style="display: flex;">
+  <div nz-col nzSpan="6"></div>
+  <div nz-col nzSpan="6"> </div>
+  <div nz-col nzSpan="6"> </div>
+  <div nz-col nzSpan="6"  style="display: flex;">
     <app-button (click)="WelcomePage()" [buttonText]="'Back'" style="padding-right:15px;"></app-button>
-  <app-button [buttonText]="'Next'"></app-button>
+  <app-button (click)="RoadInvolvedPage()" [buttonText]="'Next'" type="submit" ></app-button>
   </div>
 </div>
+<!-- (click)="sucessNotification('Sucess')" -->
+</form>
+
 </div>

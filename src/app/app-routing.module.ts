@@ -5,14 +5,30 @@ import { AccidentDetailsComponent } from './components/accident-details/accident
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
+import { RegionComponent } from './components/region/region.component';
+import { SideMenuPageComponent } from './components/side-menu-page/side-menu-page.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { VictimDetailsComponent } from './components/victim-details/victim-details.component';
+import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
+import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/welcome' },
-  {path:'login',component:LoginComponent},
+ // { path: '', pathMatch: 'full', redirectTo: '/welcome' },
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+ // { path: '', pathMatch: 'full', redirectTo: '/login' },
+ // { path: '',component:LoginComponent },
+  { path: 'login',component:LoginComponent },
+  { path: 'side',component:SideMenuPageComponent },
   {path:'home',component:HomeComponent},
   {path:'accident',component:AccidentDetailsComponent},
   {path:'about',component:AboutComponent},
-  { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
+  {path:'welcome',component:WelcomeComponent},
+  {path:'region',component:RegionComponent},
+  {path:'victim',component:VictimDetailsComponent},
+  {path:'vehicle',component:VehicleDetailsComponent},
+  {path:'roadInvolved',component:RoadInvolvedComponent},
+
+ //{ path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
 ];
 
 @NgModule({

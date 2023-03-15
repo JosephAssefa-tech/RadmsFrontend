@@ -12,9 +12,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit , AfterViewInit {
+
   @Input() mapping:any;
   myInput:boolean | undefined;
-  private map: L.Map;
+  private map: L.Map | undefined;
   private marker: any;
   latValue: string | undefined;
   longValue: string | undefined;
@@ -26,6 +27,7 @@ export class WelcomeComponent implements OnInit , AfterViewInit {
     iconAnchor: [16, 32],
     popupAnchor: [0, -32]
   });
+
 constructor(private route:Router,public mapService:MapService)
 {
 

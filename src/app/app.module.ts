@@ -94,6 +94,8 @@ import { SharedModalComponent } from './shared/shared-modal/shared-modal.compone
 import { SharedTableComponent } from './shared/shared-table/shared-table.component';
 import { PoliceStationComponent } from './components/police-station/police-station.component';
 import { SelectOptionsComponent } from './shared/select-options/select-options.component';
+import { VictimDetailsComponent } from './components/victim-details/victim-details.component';
+import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 
 registerLocaleData(en);
 
@@ -114,7 +116,9 @@ registerLocaleData(en);
     SharedModalComponent,
     SharedTableComponent,
     PoliceStationComponent,
-    SelectOptionsComponent
+    SelectOptionsComponent,
+    VictimDetailsComponent,
+    VehicleDetailsComponent
   ],
   imports: [
     BrowserModule,

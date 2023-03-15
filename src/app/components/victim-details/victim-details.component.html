@@ -8,21 +8,31 @@
 
   <div nz-row style="display: flex;">
    
-    <div nz-col  nzSpan="6" ><label>Accused Status</label><br/>
-      <nz-radio-group formControlName="accusedStatusControl" [(ngModel)]="accusedStatus">
-        <label nz-radio nzValue=0>Cause</label>
-        <label nz-radio nzValue=1>Participant</label>
-      </nz-radio-group>
-    </div>
   
+    <div nz-col  nzSpan="6" ><label>Victim Type</label><br/>
+      <nz-select formControlName="victimTypeControl"
+      [(ngModel)]="selectedVictimType">
+      <ng-container  *ngFor="let option of victimType">
+        <nz-option
+        [nzLabel]="option.victimType"
+        [nzValue]="option"
+        ></nz-option>
+      </ng-container>
+    
+    
+      </nz-select>
+     </div>
 
  
   
-  <div nz-col  nzSpan="6" ><label>Name of Driver</label><br/>
-    <input nz-input placeholder="Name of Driver" formControlName="diverNameControl" [(ngModel)]="driverName" />
+  <div nz-col  nzSpan="6" ><label>Victim Name</label><br/>
+    <input nz-input placeholder="Victim Name" formControlName="victimNameControl" [(ngModel)]="victimName" />
   </div>
       
  
+  <div nz-col  nzSpan="6" ><label>Age</label><br/>
+    <input nz-input placeholder="Age" formControlName="ageControl" [(ngModel)]="age" />
+  </div>
 
   <div nz-col  nzSpan="6" ><label>Gender</label><br/>
     <nz-select formControlName="genderControl"
@@ -44,139 +54,182 @@
     </nz-select>
    </div>
 
-
-
-   <div nz-col  nzSpan="6" ><label>Education Level</label><br/>
-    <nz-select formControlName="educationLevelControl"
-    [(ngModel)]="selectedEducationLevel">
-    <ng-container  *ngFor="let option of educationLevel">
-      <nz-option
-      [nzLabel]="option.educationLevelName"
-      [nzValue]="option"
-      ></nz-option>
-    </ng-container>
-  
-  
-    </nz-select>
-   </div>
-
-  </div>
+ </div>
   
 
+
+  
   <div nz-row style="display: flex; height: 20px;" ></div>
 
-  <div nz-row style="display: flex;" >
+
+  <div nz-row style="display: flex;">
    
-    <div nz-col  nzSpan="6" ><label>Driving Licence Available?</label><br/>
-      <nz-radio-group formControlName="driverLicenceAvailableControl" 
-      [(ngModel)]="drivingLicenceStat" (ngModelChange)="OnDriverLicenceStatChanged()">
-        <label nz-radio nzValue=0 selected="selected">No</label>
-        <label nz-radio nzValue=1>Yes</label>
-      </nz-radio-group>
-    </div>
   
-
-  
-  <div nz-col  nzSpan="6" *ngIf="drivingLicenceStat==1" ><label>Licence Number</label><br/>
-    <input nz-input placeholder="Licence Number" formControlName="licenceNumberControl" [(ngModel)]="licenceNumber"  />
-  </div>
-      
-
-
-   <div nz-col  nzSpan="6" *ngIf="drivingLicenceStat==1"><label>Level of Licence</label><br/>
-    <nz-select formControlName="levelOfLicenceControl"
-    [(ngModel)]="selectedLevelOfLicence">
-    <ng-container  *ngFor="let option of levelOfLicence">
-      <nz-option
-      [nzLabel]="option.LeveloflicenceName"
-      [nzValue]="option"
-      ></nz-option>
-    </ng-container>
-  
-  
-    </nz-select>
-   </div>
-
-   <div nz-col  nzSpan="6" *ngIf="drivingLicenceStat==1"><label>Driving Licence Category</label><br/>
-    <nz-select formControlName="drivingLicenceCategoryControl"
-    [(ngModel)]="selectedDrivingLicenceCategory">
-    <ng-container  *ngFor="let option of drivingLicenceCategories">
-      <nz-option
-      [nzLabel]="option.drivingLicenceCatagoryName"
-      [nzValue]="option"
-      ></nz-option>
-    </ng-container>
-  
-  
-    </nz-select>
-   </div>
-
-
-  </div>
-  
-
-
-
-  <div nz-row style="display: flex; height: 20px;" ></div>
-
-  <div nz-row style="display: flex;" >
-   
-    <div nz-col  nzSpan="6" ><label>Third Party Insurance Available?</label><br/>
-      <nz-radio-group formControlName="thirdPartyInsuranceControl" 
-      [(ngModel)]="thirdPartyInsurance">
-        <label nz-radio nzValue=0>No</label>
-        <label nz-radio nzValue=1>Yes</label>
-      </nz-radio-group>
-    </div>
-  
-
-    <div nz-col  nzSpan="6" ><label>Alchcol used?</label><br/>
-      <nz-radio-group formControlName="alcholUsedControl" 
-      [(ngModel)]="alcholUsed" (ngModelChange)="OnAlcholUsedStatChanged()">
-        <label nz-radio nzValue=0 selected="selected">No</label>
-        <label nz-radio nzValue=1>Yes</label>
-      </nz-radio-group>
-    </div>
-  
-
-    <div nz-col  nzSpan="6" *ngIf="alcholUsed==1"><label>Alchcol Tested?</label><br/>
-      <nz-radio-group formControlName="alcholTestedControl" 
-      [(ngModel)]="alcholTested" (ngModelChange)="OnAlcholTestedStatChanged()">
-        <label nz-radio nzValue=0 selected="selected">No</label>
-        <label nz-radio nzValue=1>Yes</label>
-      </nz-radio-group>
-    </div>
-
-  
-  <div nz-col  nzSpan="6" *ngIf="alcholUsed==1 && alcholTested==1" ><label>Alchol Level</label><br/>
-    <input nz-input placeholder="Alchol Level" formControlName="alcholLevelControl" [(ngModel)]="alcholLevel"  />
-  </div>
-      
-  </div>
-
-
-
-
-  <div nz-row style="display: flex; height: 20px;" ></div>
-
-  <div nz-row style="display: flex;" >
-   
+    <div nz-col  nzSpan="6" ><label>Choose Vehicle</label><br/>
+      <nz-select formControlName="vehicleControl"
+      [(ngModel)]="selectedVehicle">
+      <ng-container  *ngFor="let option of vehicle">
+        <nz-option
+        [nzLabel]="option.vehicleInvolvedId"
+        [nzValue]="option"
+        ></nz-option>
+      </ng-container>
     
-    <div nz-col  nzSpan="6"><label>Speed Limit Exceeded?</label><br/>
-      <nz-radio-group formControlName="speedLimitExceededControl" 
-      [(ngModel)]="speedLimitExceeded" (ngModelChange)="OnspeedLimitExceededStatChanged()">
-        <label nz-radio nzValue=0 selected="selected">No</label>
-        <label nz-radio nzValue=1>Yes</label>
-      </nz-radio-group>
-    </div>
+    
+      </nz-select>
+     </div>
+
+
+      
+    <div nz-col  nzSpan="6" ><label>Victim Employment Status</label><br/>
+      <nz-select formControlName="victimEmploymentStatusControl"
+      [(ngModel)]="selectedEmploymentStatus">
+      <ng-container  *ngFor="let option of employmentStatus">
+        <nz-option
+        [nzLabel]="option.employmentStatusName"
+        [nzValue]="option"
+        ></nz-option>
+      </ng-container>
+    
+    
+      </nz-select>
+     </div>
+
+
+
+      
+    <div nz-col  nzSpan="6" ><label>Accident Severity</label><br/>
+      <nz-select formControlName="accidentSeverityControl"
+      [(ngModel)]="selectedAccidentSeverity">
+      <ng-container  *ngFor="let option of accidentSeverity">
+        <nz-option
+        [nzLabel]="option.severityType"
+        [nzValue]="option"
+        ></nz-option>
+      </ng-container>
+    
+    
+      </nz-select>
+     </div>
+
+
+
+      
+    <div nz-col  nzSpan="6" ><label>Health Condition</label><br/>
+      <nz-select formControlName="healthConditionControl"
+      [(ngModel)]="selectedHealthCondition">
+      <ng-container  *ngFor="let option of healthCondition">
+        <nz-option
+        [nzLabel]="option.healthConditionName"
+        [nzValue]="option"
+        ></nz-option>
+      </ng-container>
+    
+    
+      </nz-select>
+     </div>
+
+ 
+  
+ </div>
+
+
+
 
   
-  <div nz-col  nzSpan="6" *ngIf="speedLimitExceeded==1" ><label>Speed Level</label><br/>
-    <input nz-input placeholder="Speed Level" formControlName="speedLevelControl" [(ngModel)]="speedLevel"  />
+ <div nz-row style="display: flex; height: 20px;" ></div>
+
+
+ <div nz-row style="display: flex;">
+
+  <div nz-col nzSpan="6"><label>AirBag Deployed?</label><br/>
+    <nz-radio-group formControlName="airBagControl" 
+    [(ngModel)]="airbag">
+      <label nz-radio nzValue=0>No</label>
+      <label nz-radio nzValue=1>Yes</label>
+    </nz-radio-group>
   </div>
-      
+
+
+  <div nz-col nzSpan="6"><label>SeatBelt used?</label><br/>
+    <nz-radio-group formControlName="seatbeltControl" 
+    [(ngModel)]="seatbelt">
+      <label nz-radio nzValue=0>No</label>
+      <label nz-radio nzValue=1>Yes</label>
+    </nz-radio-group>
   </div>
-  
+
+  <div nz-col nzSpan="6"><label>Heilmet used?</label><br/>
+    <nz-radio-group formControlName="heilmetControl" 
+    [(ngModel)]="heilmet">
+      <label nz-radio nzValue=0>No</label>
+      <label nz-radio nzValue=1>Yes</label>
+    </nz-radio-group>
+  </div>
+
+ </div>
+
+
+
+
+
+
+  <div nz-row style="display: flex; height: 20px;" ></div>
+
+
+
+
+  <div nz-row style="display: flex;">
+ 
+   <div nz-col  nzSpan="6" ><label>Victim Movement</label><br/>
+     <nz-select formControlName="victimMovementControl"
+     [(ngModel)]="selectedVictimMovement">
+     <ng-container  *ngFor="let option of victimMovement">
+       <nz-option
+       [nzLabel]="option.victimMovementType"
+       [nzValue]="option"
+       ></nz-option>
+     </ng-container>
+   
+   
+     </nz-select>
+    </div>
+
+
+     
+   <div nz-col  nzSpan="6" ><label>Seating Type</label><br/>
+     <nz-select formControlName="seatingTypeControl"
+     [(ngModel)]="selectedSeatingType">
+     <ng-container  *ngFor="let option of seatingType">
+       <nz-option
+       [nzLabel]="option.seatingTypeName"
+       [nzValue]="option"
+       ></nz-option>
+     </ng-container>
+   
+   
+     </nz-select>
+    </div>
+
+
+
+     
+   <div nz-col  nzSpan="6" ><label>Pedestrian Movement</label><br/>
+     <nz-select formControlName="pedestrianMovementControl"
+     [(ngModel)]="selectedPedestrianMovement">
+     <ng-container  *ngFor="let option of pedestrianMovement">
+       <nz-option
+       [nzLabel]="option.PedestrianMovementName"
+       [nzValue]="option"
+       ></nz-option>
+     </ng-container>
+   
+   
+     </nz-select>
+    </div>
+
+ 
+</div>
 
 
   

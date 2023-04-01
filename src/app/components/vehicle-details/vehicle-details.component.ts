@@ -261,10 +261,10 @@ this.speedLevel=0;
   }
 
 
-  AccidentPage()
+  RoadInvolvedPage()
   {
     this.errorNotification('error');
-    this.route.navigate(['/accident']);
+    this.route.navigate(['/roadInvolved']);
 
   }
 

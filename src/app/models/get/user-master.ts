@@ -1,3 +1,5 @@
+import { OrganizationMaster } from "./organization-master";
+
 export interface UserMaster{
    userId :number;
 
@@ -5,9 +7,9 @@ export interface UserMaster{
 
     userName :string;
 
-  public DateTime DateTimeUser :Date;
+    dateTimeUser :Date;
 
-   organizationId :number;
-   organizationMasterEntity?  :OrganizationMaster;
+   //organizationId :number;
+   organizationMasterEntity  :OrganizationMaster | undefined;
 
 }

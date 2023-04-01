@@ -13,18 +13,6 @@ export class ZoneMasterService extends BaseService<ZoneMaster> {
     super(httpClient);
   }
   getResourceUrl(): string {
-    return 'zoneMaster';
-   }
-   override getAll(): Observable<ZoneMaster[]> {
-       return of ([
-        {
-          zoneId: 1,
-  zoneName: "zone A"
-        },
-        {
-          zoneId: 2,
-          zoneName: "zone B"
-        }
-       ])
+    return 'ZoneMaster';
    }
 }

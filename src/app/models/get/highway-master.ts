@@ -8,7 +8,7 @@ export interface HighwayMaster
    hlength:number;
   startChange :number;
   endChanage:number;
-   highwayOwner :HighwayOwnerMaster;
-   highwayType? :HighwayType;
+   highwayOwner :HighwayOwnerMaster | undefined;
+   highwayType :HighwayType | undefined;
 
 }

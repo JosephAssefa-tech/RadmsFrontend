@@ -17,8 +17,8 @@ export class WelcomeComponent implements OnInit , AfterViewInit {
   myInput:boolean | undefined;
   private map: L.Map | undefined;
   private marker: any;
-  latValue: string | undefined;
-  longValue: string | undefined;
+  latvValue: number | undefined;
+  longValue: number | undefined;
 
   private iconUrl = 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png';
   private icon = L.icon({
@@ -34,11 +34,14 @@ constructor(private route:Router,public mapService:MapService)
 
 }
 ngAfterViewInit(): void {
+
   this.map = this.mapService.createMap();
+
 
 }
   ngOnInit():void {
-
+    console.log("bakhhhhhh")
+    this.latvValue=this.mapService.latValue;
     // create the map
   //   this.map = L.map('map').setView([8.9733, 38.7930], 13);
 

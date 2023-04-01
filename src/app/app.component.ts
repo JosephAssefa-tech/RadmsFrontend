@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  isAuthenticated=false;
   isCollapsed = false;
   defaultFileList: NzUploadFile[] = [
     {

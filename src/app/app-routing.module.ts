@@ -10,7 +10,7 @@ import { SideMenuPageComponent } from './components/side-menu-page/side-menu-pag
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 const routes: Routes = [
-  //{ path: '', pathMatch: 'full', redirectTo: '/welcome' },
+   //{ path: '', pathMatch: 'full', redirectTo: '/welcome' },
  // {path: '', redirectTo: '/login', pathMatch: 'full'},
  { path: '', pathMatch: 'full', redirectTo: '/login' },
  { path: '',component:LoginComponent },

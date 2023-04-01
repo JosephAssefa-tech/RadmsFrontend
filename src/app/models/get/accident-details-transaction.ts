@@ -18,80 +18,82 @@ import { SeverityLevel } from "./severity-level";
 import { SpeedLimit } from "./speed-limit";
 import { SubCityMaster } from "./subcity";
 import { TerrainType } from "./terrain-type";
+import { UserMaster } from "./user-master";
 import { WeatherCondition } from "./weather-condition-model";
 import { WoredaMaster } from "./woreda";
 import { ZoneMaster } from "./zone";
 
 export interface AccidentDetailsTransaction{
-   Lat :number;
-   Long :number;
-   AccidentId :number;
-    DateAndTime :Date
-  // what is the below Psid
-   Psid :string;
-   KebeleName :string;
-  //public int UserId { get; set; }
-   Piname :string;
-   PoliceRecordNumber :string;
+   lat :number;
+   long :number;
+   accidentId :number;
+   dateAndTime :Date;
+   psid:String;
+   kebeleName :string;
+   piname :string;
+   policeRecordNumber :string;
+
   numberOfVehicles:number;
   propertyDamage :number;
   numberofVictims :number;
-   Video1? :string;
-   Video2? :string;
-   Video3? :string;
-   Video4? :string;
-   Image1:string;
-   Image2:string;
-   Image3:string;
-   Image4:string;
-   Image5:string;
-   Image6:string;
+
+
+   video1? :string;
+   video2? :string;
+   video3? :string;
+   video4? :string;
+   image1?:string;
+   image2?:string;
+   image3?:string;
+   image4?:string;
+   image5?:string;
+   image6?:string;
   submissionFlag:number;
-  hid:string;
+hid:string;
   accidentLocalName :string;
-  accidentType :AccidentType[];
-  AirCondition :AirConditionType[];
-         CauseofAccident :AccidentCause[];
 
-        City:CityMaster[];
+  accidentType :AccidentType | undefined;
+  airCondition :AirConditionType | undefined;
+  causeofAccident :AccidentCause| undefined;
+  city:CityMaster | undefined;
+  region :RegionMaster | undefined;
+  woreda :WoredaMaster | undefined;
+  zoneMasterEntity:ZoneMaster | undefined;
+  pavementType :PavementType | undefined;
+  landmarkType:LandmarkType | undefined;
+  terrianType :TerrainType | undefined;
+  collisionType:CollisionType | undefined;
+  hidNavigation:HighwayMaster | undefined;
+  highwayType :HighwayType | undefined;
+  impactType :ImpactType | undefined;
+  junctionType :JunctionType | undefined;
+  lightCondtion:LightCondition | undefined;
+  subCity :SubCityMaster | undefined;
+  weatherCond :WeatherCondition | undefined;
+  user:UserMaster | undefined;
+  speedLimit:SpeedLimit | undefined;
+  severity :SeverityLevel | undefined;
+  roadCarriageway :RoadCarriageway | undefined;
+  roadSurface :RoadSurfaceCondition | undefined;
+  ps :PoliceStation | undefined;
 
-         CollisionType:CollisionType[];
 
-         HidNavigation:HighwayMaster[];
 
-         HighwayType :HighwayType[];
 
-        ImpactType :ImpactType[];
 
-         JunctionType :JunctionType[];
 
-         LandmarkType :LandmarkType[];
 
-       LightCondtion:LightCondition[];
 
-        PavementType :PavementType[];
 
-       Ps :PoliceStation[];
 
-        Region :RegionMaster[];
 
-         RoadCarriageway :RoadCarriageway[];
 
-        RoadSurface :RoadSurfaceCondition[];
 
-         Severity :SeverityLevel[];
 
-        SpeedLimit:SpeedLimit[];
-
-        SubCity :SubCityMaster[];
-
-         TerrianType :TerrainType[];
 
        // public virtual UserMasterEntity User { get; set; } = null!;
 
-        WeatherCond :WeatherCondition[];
 
-         Woreda :WoredaMaster[];
 
-         ZoneMasterEntity?:ZoneMaster[];
+
 }

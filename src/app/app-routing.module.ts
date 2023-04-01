@@ -10,17 +10,17 @@ import { SideMenuPageComponent } from './components/side-menu-page/side-menu-pag
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 const routes: Routes = [
- // { path: '', pathMatch: 'full', redirectTo: '/welcome' },
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
- // { path: '', pathMatch: 'full', redirectTo: '/login' },
- // { path: '',component:LoginComponent },
+  //{ path: '', pathMatch: 'full', redirectTo: '/welcome' },
+ // {path: '', redirectTo: '/login', pathMatch: 'full'},
+ { path: '', pathMatch: 'full', redirectTo: '/login' },
+ { path: '',component:LoginComponent },
   { path: 'login',component:LoginComponent },
   { path: 'side',component:SideMenuPageComponent },
   {path:'home',component:HomeComponent},
   {path:'accident',component:AccidentDetailsComponent},
   {path:'about',component:AboutComponent},
   {path:'welcome',component:WelcomeComponent},
-  {path:'region',component:RegionComponent}
+  {path:'region',component:RegionComponent},
 
  //{ path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
 ];

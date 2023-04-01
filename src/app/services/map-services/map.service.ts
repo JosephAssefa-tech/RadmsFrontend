@@ -9,8 +9,8 @@ export class MapService {
     // myInput:boolean | undefined;;
     public map:  L.Map;
    private marker: any;
-     latValue: string | undefined;
-     longValue: string | undefined;
+     latValue: number | undefined;
+     longValue: number | undefined;
 
     private iconUrl = 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png';
     private icon = L.icon({
@@ -45,7 +45,7 @@ export class MapService {
 
 
 
-onMapClick(event: any) {
+onMapClick(event: any):any {
   // remove the previous marker if it exists
   if (this.marker) {
     this.map.removeLayer(this.marker);
@@ -55,12 +55,19 @@ onMapClick(event: any) {
   this.marker = L.marker(event.latlng, { icon: this.icon }).addTo(this.map);
 
   // get the latitude and longitude values
-  const lat = event.latlng.lat;
-  const lng = event.latlng.lng;
-  this.latValue = `${event.latlng.lat}`,
-  this.longValue=` ${event.latlng.lng}`;
+
+  var lat = event.latlng.lat;
+  var lng = event.latlng.lng;
+
+  this.latValue = lat,
+  this.longValue=lng;
   console.log("value is equal to"+this.latValue+"long value is "+this.longValue);
   console.log('Latitude:', lat);
   console.log('Longitude:', lng);
+}
+
+
+setLatLng(){
+
 }
 }

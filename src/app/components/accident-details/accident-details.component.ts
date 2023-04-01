@@ -508,6 +508,16 @@ GetAccidentCauses()
 
   }
 
+
+  RoadInvolvedPage(){
+    this.route.navigate(['/roadInvolved']);
+
+  }
+  // submitForm()
+  // {
+  //  var formData:any=new FormData();
+  //  formData.append("dateTime",this.form.get('dateTime').value);
+
  onSubmit(){
   const formData = this.myForm.value ;
   this.formService.setFormValues(formData);

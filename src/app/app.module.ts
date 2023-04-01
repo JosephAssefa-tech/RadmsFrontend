@@ -95,6 +95,10 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import en from '@angular/common/locales/en';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
+import { VictimDetailsComponent } from './components/victim-details/victim-details.component';
+import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
+import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
+
 
 registerLocaleData(en);
 
@@ -115,7 +119,10 @@ registerLocaleData(en);
     SharedModalComponent,
     SharedTableComponent,
     PoliceStationComponent,
-    SelectOptionsComponent
+    SelectOptionsComponent,
+    VictimDetailsComponent,
+    VehicleDetailsComponent,
+    RoadInvolvedComponent,
   ],
   imports: [
     BrowserModule,

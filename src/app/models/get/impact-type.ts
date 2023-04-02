@@ -1,5 +1,5 @@
 export interface ImpactType
 {
-    ImpactTypeId :number;
-    ImpactTypeName :string;
+    impactTypeId :number;
+    impactTypeName :string;
 }

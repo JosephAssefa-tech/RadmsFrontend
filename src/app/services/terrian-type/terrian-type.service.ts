@@ -12,6 +12,6 @@ export class TerrianTypeService extends BaseService<TerrainType>  {
     super(httpClient);
   }
   getResourceUrl(): string {
-    return 'TerrainType';
+    return 'TerrainTypeLookup';
    }
 }

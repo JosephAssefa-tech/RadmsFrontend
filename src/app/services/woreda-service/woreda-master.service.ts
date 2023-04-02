@@ -15,16 +15,4 @@ export class WoredaMasterService extends BaseService<WoredaMaster> {
   getResourceUrl(): string {
     return 'WoredaMaster';
    }
-   override getAll(): Observable<WoredaMaster[]> {
-       return of ([
-        {
-          woredaId:1,
-           woredaName: "woreda A"
-        },
-        {
-          woredaId:2,
-          woredaName: "woreda B"
-        }
-       ])
-   }
 }

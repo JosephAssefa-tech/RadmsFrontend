@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ButtonComponent } from './shared/button/button.component';
 import { CityMasterComponent } from './components/city-master/city-master.component';
+import { FormsBaseStateService } from './services/base-service/FormsBaseStateService';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -80,9 +81,13 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzWaveModule } from 'ng-zorro-antd/core/wave';
+import { PoliceStationComponent } from './components/police-station/police-station.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegionComponent } from './components/region/region.component';
 import { RouterModule } from '@angular/router';
+import { SelectOptionsComponent } from './shared/select-options/select-options.component';
+import { SharedModalComponent } from './shared/shared-modal/shared-modal.component';
+import { SharedTableComponent } from './shared/shared-table/shared-table.component';
 import { SideMenuPageComponent } from './components/side-menu-page/side-menu-page.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { TextFieldComponent } from './shared/text-field/text-field.component';
@@ -90,13 +95,10 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import en from '@angular/common/locales/en';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
-import { SharedModalComponent } from './shared/shared-modal/shared-modal.component';
-import { SharedTableComponent } from './shared/shared-table/shared-table.component';
-import { PoliceStationComponent } from './components/police-station/police-station.component';
-import { SelectOptionsComponent } from './shared/select-options/select-options.component';
 import { VictimDetailsComponent } from './components/victim-details/victim-details.component';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
+
 
 registerLocaleData(en);
 
@@ -208,14 +210,14 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: '', component:LoginComponent},
+     // {path: '', component:LoginComponent},
       { path: 'home', component: HomeComponent },
       { path: 'accident', component: AccidentDetailsComponent },
     ]),
     NzLayoutModule,
 
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US },MapService],
+  providers: [{ provide: NZ_I18N, useValue: en_US },MapService,FormsBaseStateService],
   bootstrap: [AppComponent],
     entryComponents: [LoginComponent]
 })

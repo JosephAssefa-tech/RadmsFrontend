@@ -13,10 +13,10 @@ import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-de
 import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
 
 const routes: Routes = [
- // { path: '', pathMatch: 'full', redirectTo: '/welcome' },
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
- // { path: '', pathMatch: 'full', redirectTo: '/login' },
- // { path: '',component:LoginComponent },
+   //{ path: '', pathMatch: 'full', redirectTo: '/welcome' },
+ // {path: '', redirectTo: '/login', pathMatch: 'full'},
+ { path: '', pathMatch: 'full', redirectTo: '/login' },
+ { path: '',component:LoginComponent },
   { path: 'login',component:LoginComponent },
   { path: 'side',component:SideMenuPageComponent },
   {path:'home',component:HomeComponent},

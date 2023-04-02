@@ -1,6 +1,6 @@
+import {  Validators } from '@angular/forms';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
 import { AccidentCause } from 'src/app/models/get/accident-detail-model';
 import { AccidentDetailServiceService } from 'src/app/services/accident-service/accident-detail-service.service';
 import { AccidentDetailsTransactionService } from 'src/app/services/accident-details-transaction/accident-details-transaction.service';
@@ -63,10 +63,40 @@ import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-
 })
 //create an angular car accident data management system?
 export class AccidentDetailsComponent implements OnInit {
-  myForm: FormGroup;
+  myForm = new FormGroup({
+    dateTime: new FormControl('',Validators.required),
+    investigatorName: new FormControl('',Validators.required),
+    policeRecordNumber: new FormControl('',Validators.required),
+    policeStations: new FormControl(''),
+    region: new FormControl('',Validators.required),
+    zone: new FormControl('',Validators.required),
+    woreda: new FormControl('',Validators.required),
+    city: new FormControl('',Validators.required),
+    subcity: new FormControl('',Validators.required),
+    kebele: new FormControl('',Validators.required),
+    accidentType: new FormControl('',Validators.required),
+    weatherCondition: new FormControl('',Validators.required),
+    accidentSeverity: new FormControl('',Validators.required),
+    highwayName: new FormControl('',Validators.required),
+    paymentType: new FormControl('',Validators.required),
+    highwayType: new FormControl('',Validators.required),
+    roadSurface: new FormControl('',Validators.required),
+    roadType: new FormControl('',Validators.required),
+    landMark: new FormControl('',Validators.required),
+    carriageWay: new FormControl('',Validators.required),
+    junctionType: new FormControl('',Validators.required),
+    speedLimit: new FormControl('',Validators.required),
+    lightCondition: new FormControl('',Validators.required),
+    airCondition: new FormControl('',Validators.required),
+    accidentCause: new FormControl('',Validators.required),
+    locationName: new FormControl('',Validators.required),
+    propertyDamage: new FormControl('',Validators.required),
+    numberVechile: new FormControl('',Validators.required),
+    numberVictim: new FormControl('',Validators.required),
+  });
+
   latitude:number | undefined;
  longtude:number | undefined;
-
 
 
 
@@ -182,6 +212,9 @@ this.form=this.fb.group({
 
 
 
+    }
+    isFormValid(): boolean {
+      return this.myForm.valid;
     }
 
   ngOnInit(): void {

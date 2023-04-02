@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AccidentCause } from 'src/app/models/get/accident-detail-model';
 import { AccidentDetailServiceService } from 'src/app/services/accident-service/accident-detail-service.service';
@@ -53,35 +53,35 @@ import { ZoneMasterService } from 'src/app/services/zone-service/zone-master.ser
 //create an angular car accident data management system?
 export class AccidentDetailsComponent implements OnInit {
   myForm = new FormGroup({
-    dateTime: new FormControl(''),
-    investigatorName: new FormControl(''),
-    policeRecordNumber: new FormControl(''),
+    dateTime: new FormControl('',Validators.required),
+    investigatorName: new FormControl('',Validators.required),
+    policeRecordNumber: new FormControl('',Validators.required),
     policeStations: new FormControl(''),
-    region: new FormControl(''),
-    zone: new FormControl(''),
-    woreda: new FormControl(''),
-    city: new FormControl(''),
-    subcity: new FormControl(''),
-    kebele: new FormControl(''),
-    accidentType: new FormControl(''),
-    weatherCondition: new FormControl(''),
-    accidentSeverity: new FormControl(''),
-    highwayName: new FormControl(''),
-    paymentType: new FormControl(''),
-    highwayType: new FormControl(''),
-    roadSurface: new FormControl(''),
-    roadType: new FormControl(''),
-    landMark: new FormControl(''),
-    carriageWay: new FormControl(''),
-    junctionType: new FormControl(''),
-    speedLimit: new FormControl(''),
-    lightCondition: new FormControl(''),
-    airCondition: new FormControl(''),
-    accidentCause: new FormControl(''),
-    locationName: new FormControl(''),
-    propertyDamage: new FormControl(''),
-    numberVechile: new FormControl(''),
-    numberVictim: new FormControl(''),
+    region: new FormControl('',Validators.required),
+    zone: new FormControl('',Validators.required),
+    woreda: new FormControl('',Validators.required),
+    city: new FormControl('',Validators.required),
+    subcity: new FormControl('',Validators.required),
+    kebele: new FormControl('',Validators.required),
+    accidentType: new FormControl('',Validators.required),
+    weatherCondition: new FormControl('',Validators.required),
+    accidentSeverity: new FormControl('',Validators.required),
+    highwayName: new FormControl('',Validators.required),
+    paymentType: new FormControl('',Validators.required),
+    highwayType: new FormControl('',Validators.required),
+    roadSurface: new FormControl('',Validators.required),
+    roadType: new FormControl('',Validators.required),
+    landMark: new FormControl('',Validators.required),
+    carriageWay: new FormControl('',Validators.required),
+    junctionType: new FormControl('',Validators.required),
+    speedLimit: new FormControl('',Validators.required),
+    lightCondition: new FormControl('',Validators.required),
+    airCondition: new FormControl('',Validators.required),
+    accidentCause: new FormControl('',Validators.required),
+    locationName: new FormControl('',Validators.required),
+    propertyDamage: new FormControl('',Validators.required),
+    numberVechile: new FormControl('',Validators.required),
+    numberVictim: new FormControl('',Validators.required),
   });
 
 
@@ -181,6 +181,9 @@ this.form=this.fb.group({
   );
 
 
+    }
+    isFormValid(): boolean {
+      return this.myForm.valid;
     }
 
   ngOnInit(): void {

@@ -12,6 +12,9 @@ import { RoadSurfaceCondition } from 'src/app/models/get/road-surface-condition'
 import { RoadSurfaceConditionsService } from 'src/app/services/road-surface-condition/road-surface-conditions.service';
 import { RoadCarriageway } from 'src/app/models/get/road-carriageway';
 import { RoadCarriagewayService } from 'src/app/services/road-carriageway/road-carriageway.service';
+import { RoadsInvolvedDetailService } from 'src/app/services/roads-involved-details/roads-involved-detail.service';
+import { AccidentDetail } from 'src/app/models/post/accident-post-model';
+import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-transaction';
 
 
 @Component({
@@ -22,22 +25,24 @@ import { RoadCarriagewayService } from 'src/app/services/road-carriageway/road-c
 export class RoadInvolvedComponent implements OnInit {
 
 
-
+  selectedAccident:any;
   selectedHighway?:any;
   selectedPavementType?:any;
   selectedRoadSurfaceCondition?:any;
   selectedCarriageWayType?:any;
 
   myForm = new FormGroup({
-    highwayControl: new FormControl(''),
-    pavementTypeControl: new FormControl(''),
-    roadSurfaceConditionControl: new FormControl(''),
-    carriageWayTypeControl: new FormControl('')
+    accidentId:new FormControl(''),
+    hid: new FormControl(''),
+    pavementTypeId: new FormControl(''),
+    roadSurfaceId: new FormControl(''),
+    roadCarriagewayId: new FormControl('')
   });
 
 
   plainFooter = 'plain extra footer';
   footerRender = (): string => 'extra footer';
+  accident=[] as AccidentDetailsTransaction[];
   highway=[] as HighwayMaster[];
   pavementType=[] as PavementType[];
   roadSurfaceCondition=[] as RoadSurfaceCondition[];
@@ -47,9 +52,9 @@ export class RoadInvolvedComponent implements OnInit {
    form:FormGroup;
 
   constructor(
-    
-    private accidentDetailTransactionService:AccidentDetailsTransactionService,
 
+    private roadsInvolvedDetailService:RoadsInvolvedDetailService,
+    private accidentDetailTransactionService:AccidentDetailsTransactionService,
     private highwayService:HighwayMasterService,
     private pavementTypeService:PavementTypeService,
     private roadSurfaceConditionService:RoadSurfaceConditionsService,
@@ -69,6 +74,7 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+this.getAccident();
 this.GetHighwayDetail();
 this.GetPavementTypeDetail();
 this.GetRoadCarrriageWayDetail();
@@ -81,7 +87,13 @@ this.GetRoadSurfaceConditionDetail();
   errorNotification(type:string):void{
     this.notification.error("Data was not Saved",'',{nzPlacement:'topRight'})
   }
+  getAccident()
+  {
+    this.accidentDetailTransactionService.getAll().subscribe((response)=>{
+      this.accident=response;
+    })
 
+  }
 
   GetHighwayDetail()
   {
@@ -98,7 +110,7 @@ this.GetRoadSurfaceConditionDetail();
       this.pavementType=response;
     });
   }
-  
+
 
   GetRoadSurfaceConditionDetail()
   {
@@ -106,8 +118,8 @@ this.GetRoadSurfaceConditionDetail();
       this.roadSurfaceCondition=response;
     });
   }
-  
-  
+
+
 
   GetRoadCarrriageWayDetail()
   {
@@ -115,9 +127,9 @@ this.GetRoadSurfaceConditionDetail();
       this.carriageWayType=response;
     });
   }
-  
 
- 
+
+
   AccidentPage()
   {
     this.errorNotification('error');
@@ -137,9 +149,11 @@ this.GetRoadSurfaceConditionDetail();
  //// }
  onSubmit(){
   console.log("submitting a form")
-  this.accidentDetailTransactionService.post(this.myForm.value).subscribe(response => {
+  this.roadsInvolvedDetailService.post(this.myForm.value).subscribe(response => {
     console.log(response);
   });
+  this.sucessNotification('saved');
+  this.route.navigate(['/vehicle']);
   console.log("submitting a form")
  }
 

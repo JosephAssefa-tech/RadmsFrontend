@@ -220,40 +220,40 @@ this.form=this.fb.group({
   ngOnInit(): void {
 
     this.myForm = new FormGroup({
-      lat:new FormControl(''),
-      long:new FormControl(''),
-      collisionType:new FormControl(''),
-      dateAndTime: new FormControl(''),
-      piname: new FormControl(''),
-      impactType:new FormControl(''),
-      policeRecordNumber: new FormControl(''),
-      ps: new FormControl(''),
-      region: new FormControl(''),
-      zone: new FormControl(''),
-      woreda: new FormControl(''),
-      city: new FormControl(''),
-      subcity: new FormControl(''),
-      kebeleName: new FormControl(''),
-      user:new FormControl(''),
-      accidentType: new FormControl(''),
-      weatherCond: new FormControl(''),
-      severity: new FormControl(''),
-      hidNavigation: new FormControl(''),
-      pavementType: new FormControl(''),
-      highwayType: new FormControl(''),
-      roadSurface: new FormControl(''),
-      landmarkType: new FormControl(''),
-      roadCarriageway: new FormControl(''),
-      junctionType: new FormControl(''),
-      roadspeed: new FormControl(''),
-      lightCondtion: new FormControl(''),
-      airCondition: new FormControl(''),
-      causeofAccident: new FormControl(''),
-      accidentLocalName: new FormControl(''),
-      propertyDamage: new FormControl(''),
-      numberVechile: new FormControl(''),
-      numberVictim: new FormControl(''),
-      terrianType:new FormControl('')
+      lat:new FormControl('',Validators.required),
+      long:new FormControl('',Validators.required),
+      collisionType:new FormControl('',Validators.required),
+      dateAndTime: new FormControl('',Validators.required),
+      piname: new FormControl('',Validators.required),
+      impactType:new FormControl('',Validators.required),
+      policeRecordNumber: new FormControl('',Validators.required),
+      ps: new FormControl('',Validators.required),
+      region: new FormControl('',Validators.required),
+      zone: new FormControl('',Validators.required),
+      woreda: new FormControl('',Validators.required),
+      city: new FormControl('',Validators.required),
+      subcity: new FormControl('',Validators.required),
+      kebeleName: new FormControl('',Validators.required),
+      user:new FormControl('',Validators.required),
+      accidentType: new FormControl('',Validators.required),
+      weatherCond: new FormControl('',Validators.required),
+      severity: new FormControl('',Validators.required),
+      hidNavigation: new FormControl('',Validators.required),
+      pavementType: new FormControl('',Validators.required),
+      highwayType: new FormControl('',Validators.required),
+      roadSurface: new FormControl('',Validators.required),
+      landmarkType: new FormControl('',Validators.required),
+      roadCarriageway: new FormControl('',Validators.required),
+      junctionType: new FormControl('',Validators.required),
+      roadspeed: new FormControl('',Validators.required),
+      lightCondtion: new FormControl('',Validators.required),
+      airCondition: new FormControl('',Validators.required),
+      causeofAccident: new FormControl('',Validators.required),
+      accidentLocalName: new FormControl('',Validators.required),
+      propertyDamage: new FormControl('',Validators.required),
+      numberVechile: new FormControl('',Validators.required),
+      numberVictim: new FormControl('',Validators.required),
+      terrianType:new FormControl('',Validators.required)
     });
 
 
@@ -600,10 +600,14 @@ this.accidnentDetailTransaction={
 };
 
   this.accidentDetailTransactionService.post(this.accidnentDetailTransaction).subscribe(response => {
+    // const id = response.id;
+    // this.router.navigate(['second-component'], { queryParams: { id } });
     console.log(response);
   });
 
   this.sucessNotification('data');
+
+  this.route.navigate(['/roadInvolved']);
 
  }
 

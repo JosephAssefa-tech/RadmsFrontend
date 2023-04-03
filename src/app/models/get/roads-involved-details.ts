@@ -1,23 +1,22 @@
+import { AccidentDetailsTransaction } from "./accident-details-transaction";
+
 export interface RoadsInvolvedDetailsTransaction{
-  public decimal? AccidentId { get; set; }
-
-  public string Hid { get; set; } = null!;
-
-  public int PavementTypeId { get; set; }
-
-  public int RoadSurfaceId { get; set; }
-
-  public int RoadCarriagewayId { get; set; }
+  accidentId? :AccidentDetailsTransaction | undefined;
+  roadInvolvedId:number;
+  hid :string;
+  pavementTypeId :number;
+  roadSurfaceId :number;
+  roadCarriagewayId :number;
 
   //[ForeignKey("AccidentId")]
-  public virtual AccidentDetailsTransactionEntity? Accident { get; set; }
+ // public virtual AccidentDetailsTransactionEntity? Accident { get; set; }
   //[ForeignKey("Hid")]
-  public virtual HighwayMasterEntity HidNavigation { get; set; } = null!;
+ // public virtual HighwayMasterEntity HidNavigation { get; set; } = null!;
   //[ForeignKey("PavementTypeId")]
-  public virtual PavementTypeLookupEntity PavementType { get; set; } = null!;
+ // public virtual PavementTypeLookupEntity PavementType { get; set; } = null!;
   //[ForeignKey("RoadCarriagewayId")]
-  public virtual RoadCarriagewayTypeLookupEntity RoadCarriageway { get; set; } = null!;
+ // public virtual RoadCarriagewayTypeLookupEntity RoadCarriageway { get; set; } = null!;
   //[ForeignKey("RoadSurfaceId")]
-  public virtual RoadSurfaceConditionLookupEntity RoadSurface { get; set; } = null!;
+  //public virtual RoadSurfaceConditionLookupEntity RoadSurface { get; set; } = null!;
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AccidentDetailsTransactionService } from 'src/app/services/accident-details-transaction/accident-details-transaction.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -32,11 +32,11 @@ export class RoadInvolvedComponent implements OnInit {
   selectedCarriageWayType?:any;
 
   myForm = new FormGroup({
-    accidentId:new FormControl(''),
-    hid: new FormControl(''),
-    pavementTypeId: new FormControl(''),
-    roadSurfaceId: new FormControl(''),
-    roadCarriagewayId: new FormControl('')
+    accidentId:new FormControl('',Validators.required),
+    hid: new FormControl('',Validators.required),
+    pavementTypeId: new FormControl('',Validators.required),
+    roadSurfaceId: new FormControl('',Validators.required),
+    roadCarriagewayId: new FormControl('',Validators.required)
   });
 
 
@@ -156,6 +156,8 @@ this.GetRoadSurfaceConditionDetail();
   this.route.navigate(['/vehicle']);
   console.log("submitting a form")
  }
-
+ isFormValid(): boolean {
+  return this.myForm.valid;
+}
 
 }

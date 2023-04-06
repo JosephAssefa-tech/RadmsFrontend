@@ -1,7 +1,7 @@
 export interface VehicleMovementMaster
 {
-   vehicleMovementId :number;
- vehicleMovementMasterName :string;
+  vehicleMovementId :number;
+  vehicleMovementMasterName :string;
 
 }
 

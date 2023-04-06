@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AccidentDetailsTransactionService } from 'src/app/services/accident-details-transaction/accident-details-transaction.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -15,6 +15,8 @@ import { RoadCarriagewayService } from 'src/app/services/road-carriageway/road-c
 import { RoadsInvolvedDetailService } from 'src/app/services/roads-involved-details/roads-involved-detail.service';
 import { AccidentDetail } from 'src/app/models/post/accident-post-model';
 import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-transaction';
+import { VechileMasterService } from 'src/app/services/vechile-masters/vechile-master.service';
+import { VechicleMasterEntity } from 'src/app/models/get/vechicle-master';
 
 
 @Component({
@@ -32,11 +34,11 @@ export class RoadInvolvedComponent implements OnInit {
   selectedCarriageWayType?:any;
 
   myForm = new FormGroup({
-    accidentId:new FormControl(''),
-    hid: new FormControl(''),
-    pavementTypeId: new FormControl(''),
-    roadSurfaceId: new FormControl(''),
-    roadCarriagewayId: new FormControl('')
+    accidentId:new FormControl('',Validators.required),
+    hid: new FormControl('',Validators.required),
+    pavementTypeId: new FormControl('',Validators.required),
+    roadSurfaceId: new FormControl('',Validators.required),
+    roadCarriagewayId: new FormControl('',Validators.required)
   });
 
 
@@ -47,6 +49,7 @@ export class RoadInvolvedComponent implements OnInit {
   pavementType=[] as PavementType[];
   roadSurfaceCondition=[] as RoadSurfaceCondition[];
   carriageWayType=[] as RoadCarriageway[];
+  vechileTypes=[] as VechicleMasterEntity[];
 
   value?: string;
    form:FormGroup;
@@ -59,8 +62,6 @@ export class RoadInvolvedComponent implements OnInit {
     private pavementTypeService:PavementTypeService,
     private roadSurfaceConditionService:RoadSurfaceConditionsService,
     private carriageWayTypeService:RoadCarriagewayService,
-
-
     private route:Router,
     private notification:NzNotificationService,
     public fb:FormBuilder
@@ -79,6 +80,7 @@ this.GetHighwayDetail();
 this.GetPavementTypeDetail();
 this.GetRoadCarrriageWayDetail();
 this.GetRoadSurfaceConditionDetail();
+
   }
 
   sucessNotification(type:string):void{
@@ -156,6 +158,8 @@ this.GetRoadSurfaceConditionDetail();
   this.route.navigate(['/vehicle']);
   console.log("submitting a form")
  }
-
+ isFormValid(): boolean {
+  return this.myForm.valid;
+}
 
 }

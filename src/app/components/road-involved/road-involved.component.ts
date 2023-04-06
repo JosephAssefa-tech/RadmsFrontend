@@ -15,6 +15,8 @@ import { RoadCarriagewayService } from 'src/app/services/road-carriageway/road-c
 import { RoadsInvolvedDetailService } from 'src/app/services/roads-involved-details/roads-involved-detail.service';
 import { AccidentDetail } from 'src/app/models/post/accident-post-model';
 import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-transaction';
+import { VechileMasterService } from 'src/app/services/vechile-masters/vechile-master.service';
+import { VechicleMasterEntity } from 'src/app/models/get/vechicle-master';
 
 
 @Component({
@@ -47,6 +49,7 @@ export class RoadInvolvedComponent implements OnInit {
   pavementType=[] as PavementType[];
   roadSurfaceCondition=[] as RoadSurfaceCondition[];
   carriageWayType=[] as RoadCarriageway[];
+  vechileTypes=[] as VechicleMasterEntity[];
 
   value?: string;
    form:FormGroup;
@@ -59,8 +62,6 @@ export class RoadInvolvedComponent implements OnInit {
     private pavementTypeService:PavementTypeService,
     private roadSurfaceConditionService:RoadSurfaceConditionsService,
     private carriageWayTypeService:RoadCarriagewayService,
-
-
     private route:Router,
     private notification:NzNotificationService,
     public fb:FormBuilder
@@ -79,6 +80,7 @@ this.GetHighwayDetail();
 this.GetPavementTypeDetail();
 this.GetRoadCarrriageWayDetail();
 this.GetRoadSurfaceConditionDetail();
+
   }
 
   sucessNotification(type:string):void{

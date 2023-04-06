@@ -11,7 +11,7 @@ export class VechileMasterService extends BaseService<VechicleMasterEntity> {
     super(httpClient);
   }
   getResourceUrl(): string {
-    return 'VechicleMasterEntity';
+    return 'VechicleMasterService';
    }
 }
 

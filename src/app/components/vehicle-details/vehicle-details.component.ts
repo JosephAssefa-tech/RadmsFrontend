@@ -32,12 +32,12 @@ import { VechileDefectsService } from 'src/app/services/vechil-defect/vechile-de
 })
 export class VehicleDetailsComponent implements OnInit {
 
- 
+
 
   accusedStatus:number=0;
   driverName?: string;
   selectedGender:number = 0;
-  selectedEducationLevel?:any;
+  educationLevelId?:any;
   drivingLicenceStat?:number=0;
   licenceNumber?:String;
   selectedLevelOfLicence?:any;
@@ -56,12 +56,13 @@ export class VehicleDetailsComponent implements OnInit {
   selectedVehicleType?:any;
   selectedVehicleMovement?: any;
   selectedVehicleDefect?:any;
+  selectedEducationLevel?:any;
 
 
   myForm = new FormGroup({
     diverNameControl: new FormControl(''),
     genderControl: new FormControl(''),
-    educationLevelControl: new FormControl(''),
+    educationLevelId: new FormControl(''),
     driverLicenceAvailableControl: new FormControl(''),
     accusedStatusControl: new FormControl(''),
     licenceNumberControl: new FormControl(''),
@@ -87,24 +88,23 @@ export class VehicleDetailsComponent implements OnInit {
 
   plainFooter = 'plain extra footer';
   footerRender = (): string => 'extra footer';
-  educationLevel=[] as EducationLevel[];
+
+  educationLevels=[] as EducationLevel[];
   levelOfLicence=[] as LevelOfLicence[];
   drivingLicenceCategories=[] as DrivingLicenceCatagory[];
-  driverExperience=[] as DriverExperience[]; 
-
+  driverExperience=[] as DriverExperience[];
   driverVehicleRelation=[] as VehicleRelation[];
   vehicleOwnership=[] as VehicleOwnership[];
   vehicleServiceAge=[] as VehicleServiceAge[];
-  vehicleType=[] as VechicleMasterEntity[];
-  vehicleMovement=[] as VehicleMovementMaster[];
+  vehicleMovements=[] as VehicleMovementMaster[];
   vehicleDefect=[] as VehicleDefect[];
-
+  vechileTypes=[] as VechicleMasterEntity[];
 
   value?: string;
    form:FormGroup;
 
   constructor(
-    
+
     private educationLevelService:EducationLevelService,
     private accidentDetailTransactionService:AccidentDetailsTransactionService,
     private levelOfLicenceService:LevelOfLicenceService,
@@ -113,9 +113,9 @@ private driverExperienceService: DriverExperienceService,
 private driverVehicleRelationService: VechileRelationService,
 private vehicleOwnershipService: VechileOwnerService,
 private vehicleServiceAgeService: VehicleServiceAgeService,
-private vehicleTypeService: VechileMasterService,
 private vehicleMovementService: VechileMovementService,
 private vehicleDefectService: VechileDefectsService,
+private vechileMasterService:VechileMasterService,
 
     private route:Router,
     private notification:NzNotificationService,
@@ -138,6 +138,8 @@ this.GetDriverVehicleRelationDetail();
 this.GetVehicleOwnershipRelationDetail();
 this.GetVehicleServiceAgeDetail();
 this.GetVehicleDefectDetail();
+this.GetVechileType();
+this.GetVehicleMovementDetail();
   }
   sucessNotification(type:string):void{
     this.notification.success("Data Saved Successfully","",{nzPlacement:'topRight'});
@@ -183,11 +185,17 @@ this.speedLevel=0;
   GetEducationLevelDetail()
   {
     this.educationLevelService.getAll().subscribe((response:EducationLevel[])=>{
-      this.educationLevel=response;
+      this.educationLevels=response;
     });
   }
 
+  GetVechileType()
+  {
+this.vechileMasterService.getAll().subscribe((response)=>{
+this.vechileTypes=response;
 
+})
+  }
   GetLevelOfLicenceDetail()
   {
     this.levelOfLicenceService.getAll().subscribe((response:LevelOfLicence[])=>{
@@ -234,25 +242,17 @@ this.speedLevel=0;
     });
   }
 
-  
-  GetVehicleTypeDetail()
-  {
-    this.vehicleTypeService.getAll().subscribe((response:VechicleMasterEntity[])=>{
-      this.vehicleType=response;
-    });
-  }
-  
-  
-    
+
+
   GetVehicleMovementDetail()
   {
     this.vehicleMovementService.getAll().subscribe((response: VehicleMovementMaster[])=>{
-      this.vehicleMovement=response;
+      this.vehicleMovements=response;
     });
   }
-  
 
-      
+
+
   GetVehicleDefectDetail()
   {
     this.vehicleDefectService.getAll().subscribe((response: VehicleDefect[])=>{
@@ -272,18 +272,11 @@ this.speedLevel=0;
     this.route.navigate(['/victim']);
 
   }
-  // submitForm()
-  // {
-  //  var formData:any=new FormData();
-  //  formData.append("dateTime",this.form.get('dateTime').value);
 
- //// }
  onSubmit(){
-  console.log("submitting a form")
   this.accidentDetailTransactionService.post(this.myForm.value).subscribe(response => {
-    console.log(response);
   });
-  console.log("submitting a form")
+
  }
 
 }

@@ -13,6 +13,6 @@ export class VechileOwnerService extends BaseService<VehicleOwnership> {
     super(httpClient);
   }
   getResourceUrl(): string {
-    return 'VehicleOwnership';
+    return 'VehicleOwnershipLookup';
    }
   }

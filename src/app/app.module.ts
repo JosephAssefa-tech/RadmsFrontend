@@ -98,6 +98,7 @@ import { registerLocaleData } from '@angular/common';
 import { VictimDetailsComponent } from './components/victim-details/victim-details.component';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
+import { AdvanceSearchComponent } from './components/advance-search/advance-search.component';
 
 
 registerLocaleData(en);
@@ -123,6 +124,7 @@ registerLocaleData(en);
     VictimDetailsComponent,
     VehicleDetailsComponent,
     RoadInvolvedComponent,
+    AdvanceSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -210,7 +212,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot([
-     // {path: '', component:LoginComponent},
+      {path: '', component:LoginComponent},
       { path: 'home', component: HomeComponent },
       { path: 'accident', component: AccidentDetailsComponent },
     ]),

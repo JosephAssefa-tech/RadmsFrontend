@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+  margin-right: 10px;
+}

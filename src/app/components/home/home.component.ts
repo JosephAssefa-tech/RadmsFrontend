@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { MapService } from 'src/app/services/map-services/map.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { MapService } from 'src/app/services/map-services/map.service';
 export class HomeComponent implements OnInit,AfterViewInit  {
   private mapp: L.Map;
 
-  constructor(private mapServicee:MapService) {
+  constructor(private mapServicee:MapService,private route:Router) {
 
   }
   ngAfterViewInit(): void {
@@ -23,6 +24,11 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   }
 
 
+  AdvancedSearchPage()
+  {
+    this.route.navigate(['/advanceSearch']);
+
+  }
 
 
 }

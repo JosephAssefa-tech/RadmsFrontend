@@ -62,22 +62,19 @@ export class VehicleDetailsComponent implements OnInit {
 
   myForm = new FormGroup({
     accidentId: new FormControl(''),
-    diverNameControl: new FormControl(''),
+    driverName: new FormControl(''),
     genderId: new FormControl(''),
     educationLevelId: new FormControl(''),
     dlnumber: new FormControl(''),
     accuseStatus: new FormControl(''),
-    licenceNumberControl: new FormControl(''),
     dllevelId: new FormControl(''),
     dlcatagoryId: new FormControl(''),
     validInsurance: new FormControl(''),
+    isAlcohalConsumed: new FormControl(''),
     alcohalConsumptionLevel: new FormControl(''),
-    alcholTestedControl: new FormControl(''),
-    alcholLevelControl: new FormControl(''),
     isOverSpeed: new FormControl(''),
     recordedSpeed: new FormControl(''),
     driverExperienceId: new FormControl(''),
-    driverName:new FormControl(''),
     numberPlate:new FormControl(''),
     vehicleRelationId: new FormControl(''),
     vehicleOwnershipId: new FormControl(''),
@@ -85,6 +82,8 @@ export class VehicleDetailsComponent implements OnInit {
     vehicleId: new FormControl(''),
     vehicleMovementId: new FormControl(''),
     vehicleDefectId: new FormControl(''),
+    driverAge: new FormControl(''),
+    dlstatus: new FormControl('')
 
   });
 
@@ -93,9 +92,9 @@ export class VehicleDetailsComponent implements OnInit {
   footerRender = (): string => 'extra footer';
 
   educationLevels=[] as EducationLevel[];
-  levelOfLicence=[] as LevelOfLicence[];
+  levelOfLicences=[] as LevelOfLicence[];
   drivingLicenceCategories=[] as DrivingLicenceCatagory[];
-  driverExperience=[] as DriverExperience[];
+  driverExperiences=[] as DriverExperience[];
   driverVehicleRelation=[] as VehicleRelation[];
   vehicleOwnership=[] as VehicleOwnership[];
   vehicleServiceAge=[] as VehicleServiceAge[];
@@ -209,7 +208,7 @@ this.vechileTypes=response;
   GetLevelOfLicenceDetail()
   {
     this.levelOfLicenceService.getAll().subscribe((response:LevelOfLicence[])=>{
-      this.levelOfLicence=response;
+      this.levelOfLicences=response;
     });
   }
 
@@ -225,7 +224,7 @@ this.vechileTypes=response;
   GetDriverExperiencesDetail()
   {
     this.driverExperienceService.getAll().subscribe((response:DriverExperience[])=>{
-      this.driverExperience=response;
+      this.driverExperiences=response;
     });
   }
 

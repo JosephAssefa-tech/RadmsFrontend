@@ -68,7 +68,7 @@
   <div nz-row style="display: flex;" >
 
     <div nz-col  nzSpan="6" ><label>Driving Licence Available?</label><br/>
-      <nz-radio-group formControlName="dlnumber"
+      <nz-radio-group formControlName="dlstatus"
       [(ngModel)]="drivingLicenceStat" (ngModelChange)="OnDriverLicenceStatChanged()">
         <label nz-radio nzValue=0 selected="selected">No</label>
         <label nz-radio nzValue=1>Yes</label>
@@ -78,7 +78,7 @@
 
 
   <div nz-col  nzSpan="6" *ngIf="drivingLicenceStat==1" ><label>Licence Number</label><br/>
-    <input nz-input placeholder="Licence Number" formControlName="licenceNumberControl" [(ngModel)]="licenceNumber"  />
+    <input nz-input placeholder="Licence Number" formControlName="dlnumber" [(ngModel)]="licenceNumber"  />
   </div>
 
 
@@ -86,10 +86,10 @@
    <div nz-col  nzSpan="6" *ngIf="drivingLicenceStat==1"><label>Level of Licence</label><br/>
     <nz-select formControlName="dllevelId"
     [(ngModel)]="selectedLevelOfLicence">
-    <ng-container  *ngFor="let option of levelOfLicence">
+    <ng-container  *ngFor="let option of levelOfLicences">
       <nz-option
-      [nzLabel]="option.LeveloflicenceName"
-      [nzValue]="option"
+      [nzLabel]="option.leveloflicenceName"
+      [nzValue]="option.leveloflicenceId"
       ></nz-option>
     </ng-container>
 
@@ -131,7 +131,7 @@
 
 
     <div nz-col  nzSpan="6" ><label>Alchcol used?</label><br/>
-      <nz-radio-group formControlName="alcohalConsumptionLevel"
+      <nz-radio-group formControlName="isAlcohalConsumed"
       [(ngModel)]="alcholUsed" (ngModelChange)="OnAlcholUsedStatChanged()">
         <label nz-radio nzValue=0 selected="selected">No</label>
         <label nz-radio nzValue=1>Yes</label>
@@ -139,8 +139,8 @@
     </div>
 
 
-    <div nz-col  nzSpan="6" *ngIf="alcholUsed==1"><label>Alchcol Tested?</label><br/>
-      <nz-radio-group formControlName="alcholTestedControl"
+    <div nz-col  nzSpan="6" *ngIf="alcholUsed==1"><label>Alchcol Tested??????</label><br/>
+      <nz-radio-group formControlName="alcohalConsumptionLevel"
       [(ngModel)]="alcholTested" (ngModelChange)="OnAlcholTestedStatChanged()">
         <label nz-radio nzValue=0>No</label>
         <label nz-radio nzValue=1>Yes</label>
@@ -149,7 +149,7 @@
 
 
   <div nz-col  nzSpan="6" *ngIf="alcholUsed==1 && alcholTested==1" ><label>Alchol Level</label><br/>
-    <input nz-input placeholder="Alchol Level" formControlName="alcholLevelControl" [(ngModel)]="alcholLevel"  />
+    <input nz-input placeholder="Alchol Level" formControlName="alcohalConsumptionLevel" [(ngModel)]="alcholLevel"  />
   </div>
 
   </div>
@@ -174,6 +174,9 @@
   <div nz-col  nzSpan="6" *ngIf="speedLimitExceeded==1" ><label>Speed Level</label><br/>
     <input nz-input placeholder="Speed Level" formControlName="recordedSpeed" [(ngModel)]="speedLevel"  />
   </div>
+  <div nz-col  nzSpan="6"><label>Driver Age</label><br/>
+    <input nz-input placeholder="Driver Age" formControlName="driverAge" [(ngModel)]="speedLevel"  />
+  </div>
 
   </div>
 
@@ -190,10 +193,10 @@
     <div nz-col  nzSpan="6" ><label>Driver Experinance</label><br/>
         <nz-select formControlName="driverExperienceId"
         [(ngModel)]="selectedDriverExperience">
-        <ng-container *ngFor="let option of driverExperience">
+        <ng-container *ngFor="let option of driverExperiences">
           <nz-option
           [nzLabel]="option.driverExperienceName"
-          [nzValue]="option"
+          [nzValue]="option.driverExperienceId"
           ></nz-option>
         </ng-container>
 

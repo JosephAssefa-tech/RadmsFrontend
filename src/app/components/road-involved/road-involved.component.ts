@@ -34,7 +34,7 @@ export class RoadInvolvedComponent implements OnInit {
   selectedCarriageWayType?:any;
 
   myForm = new FormGroup({
-    accidentId:new FormControl('',Validators.required),
+    accidentId: new FormControl(''),
     hid: new FormControl('',Validators.required),
     pavementTypeId: new FormControl('',Validators.required),
     roadSurfaceId: new FormControl('',Validators.required),
@@ -75,6 +75,13 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+      // Subscribe to the newRecordId observable
+      this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
+        if (id) {
+          // Set the newly created record's ID in the form
+          this.myForm.patchValue({ accidentId: id });
+        }
+      });
 this.getAccident();
 this.GetHighwayDetail();
 this.GetPavementTypeDetail();
@@ -150,8 +157,10 @@ this.GetRoadSurfaceConditionDetail();
 
  //// }
  onSubmit(){
-  console.log("submitting a form")
-  this.roadsInvolvedDetailService.post(this.myForm.value).subscribe(response => {
+  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId };
+  //delete record.accidentId;
+  console.log("submitting a road involved id")
+  this.roadsInvolvedDetailService.post(record).subscribe(response => {
     console.log(response);
   });
   this.sucessNotification('saved');

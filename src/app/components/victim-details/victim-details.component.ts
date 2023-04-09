@@ -63,11 +63,11 @@ export class VictimDetailsComponent implements OnInit {
 
   plainFooter = 'plain extra footer';
   footerRender = (): string => 'extra footer';
-  victimType=[] as VictimTypeLookup[];
+  victimTypes=[] as VictimTypeLookup[];
   vehicle=[] as VehiclesEntity[];
   employmentStatus=[] as EmploymentStatus[];
   accidentSeverity=[] as SeverityLevel[];
-  healthCondition=[] as HealthCondition[];
+  healthConditions=[] as HealthCondition[];
   victimMovement=[] as VictimMovementMaster[];
   seatingType=[] as SeatingType[];
   pedestrianMovement=[] as PedestrianMovement[];
@@ -76,7 +76,7 @@ export class VictimDetailsComponent implements OnInit {
    form:FormGroup;
 
   constructor(
-    
+
     private accidentDetailTransactionService:AccidentDetailsTransactionService,
 
     private victimTypeService:VictimTypeService,
@@ -122,7 +122,7 @@ this.GetVictimMovementDetail();
   GetVictimTypeDetail()
   {
     this.victimTypeService.getAll().subscribe((response:VictimTypeLookup[])=>{
-      this.victimType=response;
+      this.victimTypes=response;
     });
   }
 
@@ -144,7 +144,7 @@ this.GetVictimMovementDetail();
     });
   }
 
-  
+
   GetAccidentSeverityDetail()
   {
     this.accidentSeverityService.getAll().subscribe((response:SeverityLevel[])=>{
@@ -152,13 +152,13 @@ this.GetVictimMovementDetail();
     });
   }
 
-  
+
 
 
   GetHealthConditionDetail()
   {
     this.healthConditionService.getAll().subscribe((response:HealthCondition[])=>{
-      this.healthCondition=response;
+      this.healthConditions=response;
     });
   }
 
@@ -170,7 +170,7 @@ this.GetVictimMovementDetail();
       this.victimMovement=response;
     });
   }
-  
+
 
 
   GetSeatingTypeDetail()
@@ -187,10 +187,10 @@ this.GetVictimMovementDetail();
     });
   }
 
-  
-  
 
- 
+
+
+
   AccidentPage()
   {
     this.errorNotification('error');

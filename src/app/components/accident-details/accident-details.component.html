@@ -28,9 +28,9 @@
     <!-- (ngModelChange)=
   "OnPoliceStationSelected()" -->
 <div nz-col  nzSpan="6" ><label>Police Station</label><br/>
-  <nz-select formControlName="ps"
+  <nz-select formControlName="psid"
 
-  [(ngModel)]="ps"   >
+  [(ngModel)]="psid"   >
   <ng-container  *ngFor="let option of policeStations">
     <nz-option
     [nzLabel]="option.psname"
@@ -47,8 +47,8 @@
 
   <div nz-row style="display: flex;">
     <div nz-col  nzSpan="6" ><label>Region</label><br/>
-      <nz-select formControlName="region"
-      [(ngModel)]="region"
+      <nz-select formControlName="regionId"
+      [(ngModel)]="regionId"
        >
         <nz-option       *ngFor="let option of regionMasters"
         [nzLabel]="option.regionName"
@@ -58,14 +58,14 @@
       </nz-select>
      </div>
     <div nz-col  nzSpan="6" ><label>Zone</label><br/>
-      <nz-select [(ngModel)]="zone" formControlName="zone">
+      <nz-select [(ngModel)]="zoneId" formControlName="zoneId">
         <nz-option       *ngFor="let option of zoneMasters"
         [nzLabel]="option.zoneName"
         [nzValue]="option.zoneId"
         ></nz-option>
       </nz-select></div>
     <div nz-col nzSpan="6" >Woreda<label></label><br/>
-      <nz-select [(ngModel)]="woreda" formControlName="woreda">
+      <nz-select [(ngModel)]="woredaId" formControlName="woredaId">
         <nz-option       *ngFor="let option of woredaMasters"
         [nzLabel]="option.woredaName"
         [nzValue]="option.woredaId"
@@ -73,7 +73,7 @@
       </nz-select>
     </div>
     <div nz-col nzSpan="6" >City<label></label><br/>
-      <nz-select [(ngModel)]="city" formControlName="city">
+      <nz-select [(ngModel)]="cityId" formControlName="cityId">
         <nz-option       *ngFor="let option of cityMasters"
         [nzLabel]="option.cityName"
         [nzValue]="option.cityId"
@@ -97,8 +97,8 @@
 
   <div nz-row style="display: flex;">
     <div nz-col  nzSpan="6" ><label>Subcity</label><br/>
-      <nz-select formControlName="subcity"
-      [(ngModel)]="subcity"    >
+      <nz-select formControlName="subCityId"
+      [(ngModel)]="subCityId"    >
         <nz-option       *ngFor="let option of subCityList"
         [nzLabel]="option.subCityName"
         [nzValue]="option.subCityId"
@@ -114,8 +114,8 @@
 
 
   <div nz-col  nzSpan="6" ><label>Accident Type</label><br/>
-    <nz-select formControlName="accidentType"
-    [(ngModel)]="accidentType">
+    <nz-select formControlName="accidentTypeId"
+    [(ngModel)]="accidentTypeId">
       <nz-option       *ngFor="let option of accidentTypes"
       [nzLabel]="option.accidentType"
       [nzValue]="option.accidentTypeId"
@@ -124,7 +124,7 @@
     </nz-select>
    </div>
    <div nz-col  nzSpan="6" ><label>Weather Condition</label><br/>
-    <nz-select [(ngModel)]="weatherCond" formControlName="weatherCond">
+    <nz-select [(ngModel)]="weatherCondId" formControlName="weatherCondId">
       <nz-option       *ngFor="let option of weatherConditions"
       [nzLabel]="option.weatherCondName"
       [nzValue]="option.weatherCondId"
@@ -142,7 +142,7 @@
 
 
   <div nz-col nzSpan="6" >Accident Serverity<label></label><br/>
-    <nz-select [(ngModel)]="severity" formControlName="severity">
+    <nz-select [(ngModel)]="severityId" formControlName="severityId">
       <nz-option       *ngFor="let option of accidentSeverity"
       [nzLabel]="option.severityType"
       [nzValue]="option.severityId"
@@ -150,8 +150,8 @@
     </nz-select>
   </div>
 
-  <div nz-col nzSpan="6" >Hightway Name<label></label><br/>
-    <nz-select [(ngModel)]="hidNavigation" formControlName="hidNavigation">
+  <div nz-col nzSpan="6" >Road Name<label></label><br/>
+    <nz-select [(ngModel)]="hid" formControlName="hid">
       <nz-option       *ngFor="let option of highwayNames"
       [nzLabel]="option.hname"
       [nzValue]="option.hid"
@@ -160,7 +160,7 @@
   </div>
 
   <div nz-col nzSpan="6" >Highway type<label></label><br/>
-    <nz-select [(ngModel)]="highwayType" formControlName="highwayType">
+    <nz-select [(ngModel)]="highwayTypeId" formControlName="highwayTypeId">
       <nz-option       *ngFor="let option of highwayTypes"
       [nzLabel]="option.htypeName"
       [nzValue]="option.htypeId"
@@ -168,7 +168,7 @@
     </nz-select>
   </div>
   <div nz-col nzSpan="6" >Payment type<label></label><br/>
-    <nz-select [(ngModel)]="pavementType" formControlName="pavementType">
+    <nz-select [(ngModel)]="pavementTypeId" formControlName="pavementTypeId">
       <nz-option       *ngFor="let option of pavementTypes"
       [nzLabel]="option.pavementName"
       [nzValue]="option.pavementTypeId"
@@ -178,7 +178,7 @@
 
 
   <div nz-col nzSpan="6" >Collision type<label></label><br/>
-    <nz-select [(ngModel)]="collisionType" formControlName="collisionType">
+    <nz-select [(ngModel)]="collisionTypeId" formControlName="collisionTypeId">
       <nz-option       *ngFor="let option of collisionTypes"
       [nzLabel]="option.collisionTypeName"
       [nzValue]="option.collisionTypeId"
@@ -188,7 +188,7 @@
 
 
   <div nz-col nzSpan="6" >Impact type<label></label><br/>
-    <nz-select [(ngModel)]="impactType" formControlName="impactType">
+    <nz-select [(ngModel)]="impactTypeId" formControlName="impactTypeId">
       <nz-option       *ngFor="let option of impactTypes"
       [nzLabel]="option.impactTypeName"
       [nzValue]="option.impactTypeId"
@@ -200,7 +200,7 @@
 
 <div nz-row style="display: flex;">
   <div nz-col nzSpan="6" style="width:33%;"><label>Road Surface Condition</label><br/>
-    <nz-select [(ngModel)]="roadSurface" formControlName="roadSurface">
+    <nz-select [(ngModel)]="roadSurfaceId" formControlName="roadSurfaceId">
       <nz-option       *ngFor="let option of roadSurfaces"
       [nzLabel]="option.roadSurfaceName"
       [nzValue]="option.roadSurfaceId"
@@ -208,7 +208,7 @@
     </nz-select> </div>
 
   <div nz-col nzSpan="6"><label>Land Mark type </label><br/>
-    <nz-select [(ngModel)]="landmarkType" formControlName="landmarkType">
+    <nz-select [(ngModel)]="landmarkTypeId" formControlName="landmarkTypeId">
       <nz-option       *ngFor="let option of landMarkTypes"
       [nzLabel]="option.landmarkName"
       [nzValue]="option.landmarkTypeId"
@@ -216,21 +216,21 @@
     </nz-select></div>
 
     <div nz-col nzSpan="6"><label>Carriage way type </label><br/>
-      <nz-select [(ngModel)]="roadCarriageway" formControlName="roadCarriageway">
+      <nz-select [(ngModel)]="roadCarriagewayId" formControlName="roadCarriagewayId">
         <nz-option       *ngFor="let option of roadCarriagewayTypes"
         [nzLabel]="option.roadCarriagewayName"
         [nzValue]="option.roadCarriagewayId"
         ></nz-option>
       </nz-select></div>
 
-
+<!--
       <div nz-col nzSpan="6"><label>User type </label><br/>
         <nz-select [(ngModel)]="user" formControlName="user">
           <nz-option       *ngFor="let option of userMasters"
           [nzLabel]="option.userName"
           [nzValue]="option.userId"
           ></nz-option>
-        </nz-select></div>
+        </nz-select></div> -->
 </div>
 
 
@@ -239,21 +239,21 @@
 
 <div nz-row style="display: flex;">
   <div nz-col nzSpan="6" style="width:33%;"><label>Junction Type</label><br/>
-    <nz-select [(ngModel)]="junctionType" formControlName="junctionType">
+    <nz-select [(ngModel)]="junctionTypeId" formControlName="junctionTypeId">
       <nz-option       *ngFor="let option of junctionTypes"
       [nzLabel]="option.junctionTypeName"
       [nzValue]="option.junctionTypeId"
       ></nz-option>
     </nz-select> </div>
   <div nz-col nzSpan="6" style="width:33%;"><label>Road speed limit </label><br/>
-    <nz-select [(ngModel)]="roadspeed" formControlName="roadspeed">
+    <nz-select [(ngModel)]="speedLimitId" formControlName="speedLimitId">
       <nz-option       *ngFor="let option of roadspeeds"
       [nzLabel]="option.speedLimitName"
       [nzValue]="option.speedLimitId"
       ></nz-option>
     </nz-select></div>
   <div nz-col nzSpan="6"><label>Light Condition </label><br/>
-    <nz-select [(ngModel)]="lightCondtion" formControlName="lightCondtion">
+    <nz-select [(ngModel)]="lightCondtionId" formControlName="lightCondtionId">
       <nz-option       *ngFor="let option of lightConditions"
       [nzLabel]="option.lightConditionName"
       [nzValue]="option.lightConditionId"
@@ -261,14 +261,14 @@
     </nz-select></div>
 
     <div nz-col nzSpan="6"><label>Air condition </label><br/>
-      <nz-select [(ngModel)]="airCondition" formControlName="airCondition">
+      <nz-select [(ngModel)]="airConditionId" formControlName="airConditionId">
         <nz-option       *ngFor="let option of airConditions"
         [nzLabel]="option.airConditionName"
         [nzValue]="option.airConditionId"
         ></nz-option>
       </nz-select></div>
       <div nz-col nzSpan="6"><label>Terrian type </label><br/>
-        <nz-select [(ngModel)]="terrianType" formControlName="terrianType">
+        <nz-select [(ngModel)]="terrianTypeId" formControlName="terrianTypeId">
           <nz-option       *ngFor="let option of terrianTypes"
           [nzLabel]="option.terrianName"
           [nzValue]="option.terrianTypeId"
@@ -286,7 +286,7 @@
 
 <div nz-row style="display: flex;">
   <div nz-col nzSpan="6" style="width:33%;"><label>Cause of accident</label><br/>
-    <nz-select [(ngModel)]="causeofAccident" formControlName="causeofAccident">
+    <nz-select [(ngModel)]="causeofAccidentId" formControlName="causeofAccidentId">
       <nz-option       *ngFor="let option of accidentCauses"
       [nzLabel]="option.accidentCauseName"
       [nzValue]="option.accidentCauseId"
@@ -300,7 +300,7 @@
     </div>
 
     <div nz-col  nzSpan="6" ><label>Number of vechile</label><br/>
-      <input formControlName="numberVechile" nz-input placeholder="number of vechcile name"  [(ngModel)]="numberVechile"/>
+      <input formControlName="numberOfVehicles" nz-input placeholder="number of vechcile name"  [(ngModel)]="numberOfVehicles"/>
     </div>
 </div>
 
@@ -315,7 +315,7 @@
 
 <div nz-row style="display: flex;">
   <div nz-col  nzSpan="6" ><label>Number of victim</label><br/>
-    <input formControlName="numberVictim" nz-input placeholder="Number of victim " [(ngModel)]="numberVictim" />
+    <input formControlName="numberofVictims" nz-input placeholder="Number of victim " [(ngModel)]="numberofVictims" />
   </div>
 
 </div>
@@ -333,7 +333,7 @@
     <app-button (click)="WelcomePage()" [buttonText]="'Back'" style="padding-right:15px;"></app-button>
 
 
-  <app-button  [buttonText]="'Next'" type="submit" [isDisabled]="!isFormValid()"></app-button>
+  <app-button  [buttonText]="'Next'" type="submit" ></app-button>
   </div>
 </div>
 <!-- (click)="sucessNotification('Sucess')" -->

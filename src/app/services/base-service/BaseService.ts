@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 
 export abstract class BaseService<T>
 {
+
   private readonly APIUrl = environment.baseApiUrl + this.getResourceUrl();
 constructor(protected httpClient:HttpClient)
 {
@@ -30,6 +31,7 @@ getById(id: string): Observable<T> {
 
 post(resource: any) {
   return this.httpClient.post(this.APIUrl ,resource,{headers:{"Content-Type":"application/json"}});
+
 }
 delete(id: string | number) {
   return this.httpClient.delete(this.APIUrl + "/" + id);

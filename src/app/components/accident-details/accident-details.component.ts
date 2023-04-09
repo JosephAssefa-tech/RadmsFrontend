@@ -64,35 +64,49 @@ import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-
 //create an angular car accident data management system?
 export class AccidentDetailsComponent implements OnInit {
   myForm = new FormGroup({
-    dateTime: new FormControl('',Validators.required),
-    investigatorName: new FormControl('',Validators.required),
+    userID:new FormControl(1),
+    lat:new FormControl('',Validators.required),
+    long:new FormControl('',Validators.required),
+    dateAndTime: new FormControl('',Validators.required),
+    piname:new FormControl('',Validators.required),
     policeRecordNumber: new FormControl('',Validators.required),
-    policeStations: new FormControl(''),
-    region: new FormControl('',Validators.required),
-    zone: new FormControl('',Validators.required),
-    woreda: new FormControl('',Validators.required),
-    city: new FormControl('',Validators.required),
-    subcity: new FormControl('',Validators.required),
-    kebele: new FormControl('',Validators.required),
-    accidentType: new FormControl('',Validators.required),
-    weatherCondition: new FormControl('',Validators.required),
-    accidentSeverity: new FormControl('',Validators.required),
-    highwayName: new FormControl('',Validators.required),
-    paymentType: new FormControl('',Validators.required),
-    highwayType: new FormControl('',Validators.required),
-    roadSurface: new FormControl('',Validators.required),
-    roadType: new FormControl('',Validators.required),
-    landMark: new FormControl('',Validators.required),
-    carriageWay: new FormControl('',Validators.required),
-    junctionType: new FormControl('',Validators.required),
-    speedLimit: new FormControl('',Validators.required),
-    lightCondition: new FormControl('',Validators.required),
-    airCondition: new FormControl('',Validators.required),
-    accidentCause: new FormControl('',Validators.required),
-    locationName: new FormControl('',Validators.required),
+    psid: new FormControl('',Validators.required),
+
+
+    regionId: new FormControl('',Validators.required),
+    zoneId: new FormControl('',Validators.required),
+    woredaId: new FormControl('',Validators.required),
+    cityId: new FormControl('',Validators.required),
+
+
+    subCityId: new FormControl('',Validators.required),
+    kebeleName: new FormControl('',Validators.required),
+    accidentTypeId: new FormControl('',Validators.required),
+    weatherCondId: new FormControl('',Validators.required),
+
+    severityId: new FormControl('',Validators.required),
+    hid: new FormControl('',Validators.required),
+    pavementTypeId: new FormControl('',Validators.required),
+    collisionTypeId:new FormControl('',Validators.required),
+
+    impactTypeId:new FormControl('',Validators.required),
+    roadSurfaceId: new FormControl('',Validators.required),
+    landmarkTypeId: new FormControl('',Validators.required),
+    roadCarriagewayId: new FormControl('',Validators.required),
+    junctionTypeId: new FormControl('',Validators.required),
+
+    speedLimitId: new FormControl('',Validators.required),
+    lightCondtionId: new FormControl('',Validators.required),
+    airConditionId: new FormControl('',Validators.required),
+    terrianTypeId:new FormControl('',Validators.required),
+    causeofAccidentId: new FormControl('',Validators.required),
+    accidentLocalName: new FormControl('',Validators.required),
+
+
     propertyDamage: new FormControl('',Validators.required),
-    numberVechile: new FormControl('',Validators.required),
-    numberVictim: new FormControl('',Validators.required),
+    numberOfVehicles: new FormControl('',Validators.required),
+    numberofVictims: new FormControl('',Validators.required),
+    highwayTypeId:new FormControl('',Validators.required)
   });
 
   latitude:number | undefined;
@@ -132,43 +146,55 @@ terrianTypes=[] as TerrainType[];
 
 
 
+id:any;
+idd:any;
+//ps?:PoliceStation = undefined;
+lat:any;
+long:any;
+dateAndTime: any;
+piname:any;
+policeRecordNumber: any;
+psid: any;
 
-ps?:PoliceStation = undefined;
-  psId:number = 0;
-  impactType:any;
-  subcity?:any;
-  severity:any;
-  accidentType:any;
-  hidNavigation:any;
-  highwayType:any;
-  pavementType:any;
-  roadSurface:any;
-  collisionType:any;
-  landmarkType:any;
-  roadCarriageway:any;
-  user:any;
-  junctionType:any;
-  roadspeed:any;
-  lightCondtion:any;
-  airCondition:any;
-  terrianType:any;
-  causeofAccident:any;
-  weatherCond:any;
-  selectedAccident:any;
-  city:any;
-  woreda:any;
-  dateAndTime:any;
-  zone:any;
-  policeStationss:any;
-  region?:RegionMaster;
-  piname?: string;
-  policeRecordNumber?: string;
-  propertyDamage?:number;
-  numberVechile?:number;
-  numberVictim?:number;
-  kebeleName?:string;
-  accidentLocalName?:string;
-  value?: string;
+
+regionId: any;
+zoneId: any;
+woredaId: any;
+cityId: any;
+
+
+subCityId: any;
+kebeleName: any;
+accidentTypeId: any;
+weatherCondId: any;
+
+severityId:any;
+hid: any;
+pavementTypeId: any;
+collisionTypeId:any;
+
+impactTypeId:any;
+roadSurfaceId: any;
+landmarkTypeId: any;
+roadCarriagewayId: any;
+junctionTypeId: any;
+
+speedLimitId: any;
+lightCondtionId: any;
+airConditionId: any;
+terrianTypeId:any;
+causeofAccidentId:any;
+accidentLocalName: any;
+
+highwayTypeId:any;
+propertyDamage:any;
+numberOfVehicles: any;
+numberofVictims: any;
+
+
+
+
+
    form:FormGroup;
 
   constructor(
@@ -219,42 +245,43 @@ this.form=this.fb.group({
 
   ngOnInit(): void {
 
-    this.myForm = new FormGroup({
-      lat:new FormControl('',Validators.required),
-      long:new FormControl('',Validators.required),
-      collisionType:new FormControl('',Validators.required),
-      dateAndTime: new FormControl('',Validators.required),
-      piname: new FormControl('',Validators.required),
-      impactType:new FormControl('',Validators.required),
-      policeRecordNumber: new FormControl('',Validators.required),
-      ps: new FormControl('',Validators.required),
-      region: new FormControl('',Validators.required),
-      zone: new FormControl('',Validators.required),
-      woreda: new FormControl('',Validators.required),
-      city: new FormControl('',Validators.required),
-      subcity: new FormControl('',Validators.required),
-      kebeleName: new FormControl('',Validators.required),
-      user:new FormControl('',Validators.required),
-      accidentType: new FormControl('',Validators.required),
-      weatherCond: new FormControl('',Validators.required),
-      severity: new FormControl('',Validators.required),
-      hidNavigation: new FormControl('',Validators.required),
-      pavementType: new FormControl('',Validators.required),
-      highwayType: new FormControl('',Validators.required),
-      roadSurface: new FormControl('',Validators.required),
-      landmarkType: new FormControl('',Validators.required),
-      roadCarriageway: new FormControl('',Validators.required),
-      junctionType: new FormControl('',Validators.required),
-      roadspeed: new FormControl('',Validators.required),
-      lightCondtion: new FormControl('',Validators.required),
-      airCondition: new FormControl('',Validators.required),
-      causeofAccident: new FormControl('',Validators.required),
-      accidentLocalName: new FormControl('',Validators.required),
-      propertyDamage: new FormControl('',Validators.required),
-      numberVechile: new FormControl('',Validators.required),
-      numberVictim: new FormControl('',Validators.required),
-      terrianType:new FormControl('',Validators.required)
-    });
+    // this.myForm = new FormGroup({
+    //   lat:new FormControl('',Validators.required),
+    //   long:new FormControl('',Validators.required),
+    //   collisionType:new FormControl('',Validators.required),
+    //   dateAndTime: new FormControl('',Validators.required),
+    //   piname: new FormControl('',Validators.required),
+    //   impactType:new FormControl('',Validators.required),
+    //   policeRecordNumber: new FormControl('',Validators.required),
+    //   ps: new FormControl('',Validators.required),
+    //   region: new FormControl('',Validators.required),
+    //   zone: new FormControl('',Validators.required),
+    //   woreda: new FormControl('',Validators.required),
+    //   city: new FormControl('',Validators.required),
+    //   subcity: new FormControl('',Validators.required),
+    //   kebeleName: new FormControl('',Validators.required),
+    //   user:new FormControl('',Validators.required),
+    //   accidentType: new FormControl('',Validators.required),
+    //   weatherCond: new FormControl('',Validators.required),
+    //   severity: new FormControl('',Validators.required),
+    //   hidNavigation: new FormControl('',Validators.required),
+    //   pavementType: new FormControl('',Validators.required),
+    //   highwayType: new FormControl('',Validators.required),
+    //   roadSurface: new FormControl('',Validators.required),
+    //   landmarkType: new FormControl('',Validators.required),
+    //   roadCarriageway: new FormControl('',Validators.required),
+    //   junctionType: new FormControl('',Validators.required),
+    //   roadspeed: new FormControl('',Validators.required),
+    //   lightCondtion: new FormControl('',Validators.required),
+    //   airCondition: new FormControl('',Validators.required),
+    //   causeofAccident: new FormControl('',Validators.required),
+    //   accidentLocalName: new FormControl('',Validators.required),
+    //   propertyDamage: new FormControl('',Validators.required),
+    //   numberVechile: new FormControl('',Validators.required),
+    //   numberVictim: new FormControl('',Validators.required),
+    //   terrianType:new FormControl('',Validators.required),
+    //   highwayTypeId:new FormControl('',Validators.required)
+    // });
 
 
 
@@ -304,39 +331,47 @@ this.GetTerrianTypes();
   GetStateFormValue()
   {
     this.formService.getFormValues().subscribe(values=>{
-      this.ps=values.ps;
-      this.dateAndTime=values.dateAndTime;
+      this.lat=values.lat;
+      this.long=values.long;
+
       this.piname=values.piname;
       this.policeRecordNumber=values.policeRecordNumber;
-      this.ps=values.ps;
+      this.psid= values.psid;
+
+
+      this.regionId=values.regionId;
+      this.zoneId=values.zoneId;
+      this.woredaId=values.woredaId;
+      this.cityId=values.cityId;
+
+
+      this.subCityId=values.subCityId;
       this.kebeleName=values.kebeleName;
-      this.subcity=values.subcity;
-      this.zone=values.zone;
-      this.region=values.region;
-      this.woreda=values.woreda;
-      this.city=values.city;
-      this.selectedAccident=values.selectedAccident;
-      this.accidentType=values.accidentType;
-      this.weatherCond=values.weatherCond;
-      this.severity=values.severity;
-      this.hidNavigation=values.hidNavigation;
-      this.highwayType=values.highwayType;
-      this.pavementType=values.pavementType;
-      this.roadSurface=values.roadSurface;
-      this.landmarkType=values.landmarkType;
-      this.roadCarriageway=values.roadCarriageway;
-      this.junctionType=values.junctionType;
-      this.roadspeed=values.roadspeed;
-      this.impactType=values.impactType;
-      this.lightCondtion=values.lightCondtion;
-      this.airCondition=values.airCondition;
-     this.causeofAccident=values.causeofAccident;
-      this.numberVictim=values.numberVictim;
-      this.numberVechile=values.numberVechile;
-      this.propertyDamage=values.propertyDamage;
+      this.accidentTypeId=values.accidentTypeId;
+      this.weatherCondId=values.weatherCondId;
+
+      this.severityId=values.severityId;
+      this.hid=values.hid;
+      this.pavementTypeId=values.pavementTypeId;
+      this.collisionTypeId=values.collisionTypeId;
+
+      this.impactTypeId=values.impactTypeId;
+      this.roadSurfaceId=values.roadSurfaceId;
+      this.landmarkTypeId=values.landmarkTypeId;
+      this.roadCarriagewayId=values.roadCarriagewayId;
+      this.junctionTypeId=values.junctionTypeId;
+
+      this.speedLimitId=values.speedLimitId;
+      this.lightCondtionId=values.lightCondtionId;
+      this.airConditionId=values.airConditionId;
+      this.terrianTypeId=values.terrianTypeId;
+      this.causeofAccidentId=values.causeofAccidentId;
       this.accidentLocalName=values.accidentLocalName;
-      this.collisionType=values.collisionType;
-      this.terrianType=values.terrianType;
+
+      this.dateAndTime=values.dateAndTime;
+      this.propertyDamage=values.propertyDamage;
+      this.numberOfVehicles=values.numberOfVehicles;
+      this.numberofVictims=values.numberofVictims;
     })
 
 
@@ -555,56 +590,65 @@ GetAccidentCauses()
   const formData = this.myForm.value ;
   this.formService.setFormValues(formData);
 
-  this.accidnentDetailTransaction=this.myForm.value  as AccidentDetailsTransaction;
-this.accidnentDetailTransaction={
+//   this.accidnentDetailTransaction=this.myForm.value  as AccidentDetailsTransaction;
+// this.accidnentDetailTransaction={
 
-  lat:this.myForm.value.lat,
-  long:this.myForm.value.long,
-  accidentId:this.myForm.value.accidentId,
-  accidentLocalName:this.myForm.value.accidentLocalName,
-  dateAndTime:this.myForm.value.dateAndTime,
-  kebeleName:this.myForm.value.kebeleName,
-  piname:this.myForm.value.piname,
-  policeRecordNumber:this.myForm.value.policeRecordNumber,
-  numberOfVehicles:this.myForm.value.numberVechile,
-  propertyDamage:this.myForm.value.propertyDamage,
-  numberofVictims:this.myForm.value.numberVictim,
-  accidentType :this.accidentTypes.find(at=>at.accidentTypeId===this.myForm.value.accidentType),
-  airCondition :this.airConditions.find(at=>at.airConditionId===this.myForm.value.airCondition),
-  causeofAccident :this.accidentCauses.find(at=>at.accidentCauseId===this.myForm.value.causeofAccident),
-  city :this.cityMasters.find(at=>at.cityId===this.myForm.value.city),
-  region :this.regionMasters.find(at=>at.regionId===this.myForm.value.region),
-  woreda :this.woredaMasters.find(at=>at.woredaId===this.myForm.value.woreda),
-  zoneMasterEntity :this.zoneMasters.find(at=>at.zoneId===this.myForm.value.zone),
-  pavementType :this.pavementTypes.find(at=>at.pavementTypeId===this.myForm.value.pavementType),
-  landmarkType :this.landMarkTypes.find(at=>at.landmarkTypeId===this.myForm.value.landmarkType),
-  terrianType :this.terrianTypes.find(at=>at.terrianTypeId===this.myForm.value.terrianType),
-  collisionType :this.collisionTypes.find(at=>at.collisionTypeId===this.myForm.value.collisionType),
-  hidNavigation :this.highwayNames.find(at=>at.hid===this.myForm.value.hidNavigation),
-  highwayType :this.highwayTypes.find(at=>at.htypeId===this.myForm.value.highwayType),
-  impactType :this.impactTypes.find(at=>at.impactTypeId===this.myForm.value.impactType),
-  junctionType :this.junctionTypes.find(at=>at.junctionTypeId===this.myForm.value.junctionType),
-  lightCondtion :this.lightConditions.find(at=>at.lightConditionId===this.myForm.value.lightCondtion),
-  subCity :this.subCityList.find(at=>at.subCityId===this.myForm.value.subcity),
-  weatherCond :this.weatherConditions.find(at=>at.weatherCondId===this.myForm.value.weatherCond),
-  user :this.userMasters.find(at=>at.userId===this.myForm.value.user),
-  speedLimit :this.roadspeeds.find(at=>at.speedLimitId===this.myForm.value.roadspeed),
-  severity :this.accidentSeverity.find(at=>at.severityId===this.myForm.value.severity),
-  roadCarriageway :this.roadCarriagewayTypes.find(at=>at.roadCarriagewayId===this.myForm.value.roadCarriageway),
-  roadSurface :this.roadSurfaces.find(at=>at.roadSurfaceId===this.myForm.value.roadSurface),
-  ps:this.policeStations.find(at=>at.psid===this.myForm.value.ps),
-  submissionFlag:1,
-  psid:"1",
-  hid:"dss"
+//   lat:this.myForm.value.lat,
+//   long:this.myForm.value.long,
+//   accidentId:this.myForm.value.accidentId,
+//   accidentLocalName:this.myForm.value.accidentLocalName,
+//   dateAndTime:this.myForm.value.dateAndTime,
+//   kebeleName:this.myForm.value.kebeleName,
+//   piname:this.myForm.value.piname,
+//   policeRecordNumber:this.myForm.value.policeRecordNumber,
+//   numberOfVehicles:this.myForm.value.numberVechile,
+//   propertyDamage:this.myForm.value.propertyDamage,
+//   numberofVictims:this.myForm.value.numberVictim,
+//   accidentType :this.accidentTypes.find(at=>at.accidentTypeId===this.myForm.value.accidentType),
+//   airCondition :this.airConditions.find(at=>at.airConditionId===this.myForm.value.airCondition),
+//   causeofAccident :this.accidentCauses.find(at=>at.accidentCauseId===this.myForm.value.causeofAccident),
+//   city :this.cityMasters.find(at=>at.cityId===this.myForm.value.city),
+//   region :this.regionMasters.find(at=>at.regionId===this.myForm.value.region),
+//   woreda :this.woredaMasters.find(at=>at.woredaId===this.myForm.value.woreda),
+//   zoneMasterEntity :this.zoneMasters.find(at=>at.zoneId===this.myForm.value.zone),
+//   pavementType :this.pavementTypes.find(at=>at.pavementTypeId===this.myForm.value.pavementType),
+//   landmarkType :this.landMarkTypes.find(at=>at.landmarkTypeId===this.myForm.value.landmarkType),
+//   terrianType :this.terrianTypes.find(at=>at.terrianTypeId===this.myForm.value.terrianType),
+//   collisionType :this.collisionTypes.find(at=>at.collisionTypeId===this.myForm.value.collisionType),
+//   hidNavigation :this.highwayNames.find(at=>at.hid===this.myForm.value.hidNavigation),
+//   highwayType :this.highwayTypes.find(at=>at.htypeId===this.myForm.value.highwayType),
+//   impactType :this.impactTypes.find(at=>at.impactTypeId===this.myForm.value.impactType),
+//   junctionType :this.junctionTypes.find(at=>at.junctionTypeId===this.myForm.value.junctionType),
+//   lightCondtion :this.lightConditions.find(at=>at.lightConditionId===this.myForm.value.lightCondtion),
+//   subCity :this.subCityList.find(at=>at.subCityId===this.myForm.value.subcity),
+//   weatherCond :this.weatherConditions.find(at=>at.weatherCondId===this.myForm.value.weatherCond),
+//   user :this.userMasters.find(at=>at.userId===this.myForm.value.user),
+//   speedLimit :this.roadspeeds.find(at=>at.speedLimitId===this.myForm.value.roadspeed),
+//   severity :this.accidentSeverity.find(at=>at.severityId===this.myForm.value.severity),
+//   roadCarriageway :this.roadCarriagewayTypes.find(at=>at.roadCarriagewayId===this.myForm.value.roadCarriageway),
+//   roadSurface :this.roadSurfaces.find(at=>at.roadSurfaceId===this.myForm.value.roadSurface),
+//   ps:this.policeStations.find(at=>at.psid===this.myForm.value.ps),
+//   submissionFlag:1,
+//   psid:"1",
+//   hid:"dss",
+//   //user:1
 
-};
+// };
 
-  this.accidentDetailTransactionService.post(this.accidnentDetailTransaction).subscribe(response => {
-    // const id = response.id;
+   this.accidentDetailTransactionService.post(this.myForm.value).subscribe((response:any) => {
+    this.accidentDetailTransactionService.setNewRecordId(response.data.accidentDetailId);
+
+  //  this.accidentDetailTransactionService.accidentDetailGlobalId=response.data.accidentDetailId;
+// console.log("id settting1")
+//      console.log(this.idd);
+//  console.log("id settting2")
     // this.router.navigate(['second-component'], { queryParams: { id } });
-    console.log(response);
-  });
-
+   //this.id = response;
+   // console.log(response);
+   });
+console.log("hooj")
+console.log( this.accidentDetailTransactionService.accidentDetailGlobalId);
+console.log("jiji")
   this.sucessNotification('data');
 
   this.route.navigate(['/roadInvolved']);

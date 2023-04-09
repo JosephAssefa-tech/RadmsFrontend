@@ -24,6 +24,7 @@ import { VehicleMovementMaster } from 'src/app/models/get/vehicle-movement-maste
 import { VechileMovementService } from 'src/app/services/vechile-movements/vechile-movement.service';
 import { VehicleDefect } from 'src/app/models/get/vehicle-defect';
 import { VechileDefectsService } from 'src/app/services/vechil-defect/vechile-defects.service';
+import { VechileDetailService } from 'src/app/services/vechile-details/vechile-detail.service';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -60,28 +61,30 @@ export class VehicleDetailsComponent implements OnInit {
 
 
   myForm = new FormGroup({
+    accidentId: new FormControl(''),
     diverNameControl: new FormControl(''),
-    genderControl: new FormControl(''),
+    genderId: new FormControl(''),
     educationLevelId: new FormControl(''),
-    driverLicenceAvailableControl: new FormControl(''),
-    accusedStatusControl: new FormControl(''),
+    dlnumber: new FormControl(''),
+    accuseStatus: new FormControl(''),
     licenceNumberControl: new FormControl(''),
-    levelOfLicenceControl: new FormControl(''),
-    drivingLicenceCategoriesControl: new FormControl(''),
-    thirdPartyInsuranceControl: new FormControl(''),
-    alcholUsedControl: new FormControl(''),
+    dllevelId: new FormControl(''),
+    dlcatagoryId: new FormControl(''),
+    validInsurance: new FormControl(''),
+    alcohalConsumptionLevel: new FormControl(''),
     alcholTestedControl: new FormControl(''),
     alcholLevelControl: new FormControl(''),
-    speedLimitExceededControl: new FormControl(''),
-    speedLevelControl: new FormControl(''),
-    driverExperienceControl: new FormControl(''),
-    plateNumberControl:new FormControl(''),
-    driverVehicleRelationControl: new FormControl(''),
-    vehicleOwnershipControl: new FormControl(''),
-    vehicleServiceAgeControl:new FormControl(''),
-    vehicleTypeControl: new FormControl(''),
-    vehicleMovementControl: new FormControl(''),
-    vehicleDefectControl: new FormControl(''),
+    isOverSpeed: new FormControl(''),
+    recordedSpeed: new FormControl(''),
+    driverExperienceId: new FormControl(''),
+    driverName:new FormControl(''),
+    numberPlate:new FormControl(''),
+    vehicleRelationId: new FormControl(''),
+    vehicleOwnershipId: new FormControl(''),
+    vehicleAgeId:new FormControl(''),
+    vehicleId: new FormControl(''),
+    vehicleMovementId: new FormControl(''),
+    vehicleDefectId: new FormControl(''),
 
   });
 
@@ -116,6 +119,7 @@ private vehicleServiceAgeService: VehicleServiceAgeService,
 private vehicleMovementService: VechileMovementService,
 private vehicleDefectService: VechileDefectsService,
 private vechileMasterService:VechileMasterService,
+private vechileDetailService:VechileDetailService,
 
     private route:Router,
     private notification:NzNotificationService,
@@ -130,6 +134,12 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+    this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
+      if (id) {
+        // Set the newly created record's ID in the form
+        this.myForm.patchValue({ accidentId: id });
+      }
+    });
 this.GetEducationLevelDetail();
 this.GetLevelOfLicenceDetail();
 this.GetDrivingLicenceCategoriesDetail();
@@ -274,8 +284,19 @@ this.vechileTypes=response;
   }
 
  onSubmit(){
-  this.accidentDetailTransactionService.post(this.myForm.value).subscribe(response => {
+  //if the first accident id assigning not working
+  //accidentId.patch({
+  //  id:this.accidentDetailTransactionService.idd;
+  //})
+  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId };
+  //delete record.accidentId;
+  console.log("submitting a road involved id")
+  this.vechileDetailService.post(record).subscribe(response => {
+    console.log(response);
   });
+  this.sucessNotification('saved');
+  this.route.navigate(['/victim']);
+  console.log("submitting a form")
 
  }
 

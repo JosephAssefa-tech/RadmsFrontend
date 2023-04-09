@@ -12,6 +12,6 @@ export class VictimTypeService extends BaseService<VictimTypeLookup> {
     super(httpClient);
   }
   getResourceUrl(): string {
-    return 'VictimTypeLookup';
+    return 'VictimType';
    }
 }

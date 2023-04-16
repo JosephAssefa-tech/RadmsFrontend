@@ -32,7 +32,10 @@ import { VechileDetailService } from 'src/app/services/vechile-details/vechile-d
   styleUrls: ['./vehicle-details.component.scss']
 })
 export class VehicleDetailsComponent implements OnInit {
-
+  count = 1;
+  countNumberOfForms: any;
+  iterateOfForms:number[]=[];
+  i=1;
 
 
   accusedStatus:number=0;
@@ -62,28 +65,39 @@ export class VehicleDetailsComponent implements OnInit {
 
   myForm = new FormGroup({
     accidentId: new FormControl(''),
+    vehicleInvolvedId: new FormControl(20230000020),
+    vehicleId: new FormControl(''),
+    numberPlate:new FormControl(''),
+    vehicleAgeId:new FormControl(''),
+    vehicleDefectId: new FormControl(''),
+
+
     driverName: new FormControl(''),
-    genderId: new FormControl(''),
-    educationLevelId: new FormControl(''),
-    dlnumber: new FormControl(''),
-    accuseStatus: new FormControl(''),
-    dllevelId: new FormControl(''),
     dlcatagoryId: new FormControl(''),
-    validInsurance: new FormControl(''),
-    isAlcohalConsumed: new FormControl(''),
-    alcohalConsumptionLevel: new FormControl(''),
+    driverAge: new FormControl(''),
+
+    educationLevelId: new FormControl(''),
+    driverExperienceId: new FormControl(''),
+    vehicleOwnershipId: new FormControl(''),
+    genderId: new FormControl(''),
+
+    dlstatus: new FormControl(''),
+    dllevelId: new FormControl(''),
+    dlnumber: new FormControl(''),
+
+    vehicleRelationId: new FormControl(''),
+    vehicleMovementId: new FormControl(''),
     isOverSpeed: new FormControl(''),
     recordedSpeed: new FormControl(''),
-    driverExperienceId: new FormControl(''),
-    numberPlate:new FormControl(''),
-    vehicleRelationId: new FormControl(''),
-    vehicleOwnershipId: new FormControl(''),
-    vehicleAgeId:new FormControl(''),
-    vehicleId: new FormControl(''),
-    vehicleMovementId: new FormControl(''),
-    vehicleDefectId: new FormControl(''),
-    driverAge: new FormControl(''),
-    dlstatus: new FormControl('')
+
+    isAlcohalConsumed: new FormControl(''),
+    alchcolTested:new FormControl(''),
+    alcohalConsumptionLevel: new FormControl(''),
+    validInsurance: new FormControl(''),
+    accuseStatus: new FormControl(''),
+
+
+
 
   });
 
@@ -125,6 +139,11 @@ private vechileDetailService:VechileDetailService,
     public fb:FormBuilder
 
     ) {
+      // this.accidentDetailTransactionService.number$.subscribe(number => {
+
+      //   this.countNumberOfForms = number;
+      //   console.log(this.countNumberOfForms);
+      // });
 this.form=this.fb.group({
   dateTime:['']}
   );
@@ -133,6 +152,15 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+    // for (let i = 1; i <= this.countNumberOfForms; i++) {
+    //   //this.iterateOfForms.push(i);
+
+    // }
+    // this.accidentDetailTransactionService.number$.subscribe(number => {
+
+    //   this.countNumberOfForms = number;
+    //   console.log(this.countNumberOfForms);
+    // });
     this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
       if (id) {
         // Set the newly created record's ID in the form
@@ -283,6 +311,7 @@ this.vechileTypes=response;
   }
 
  onSubmit(){
+
   //if the first accident id assigning not working
   //accidentId.patch({
   //  id:this.accidentDetailTransactionService.idd;
@@ -294,8 +323,24 @@ this.vechileTypes=response;
     console.log(response);
   });
   this.sucessNotification('saved');
-  this.route.navigate(['/victim']);
-  console.log("submitting a form")
+  if (this.count < this.accidentDetailTransactionService.number) {
+    // reset the form here
+    this.myForm.reset();
+    this.count++;
+  } else {
+    // navigate to other page
+    this.route.navigate(['/victim']);
+  }
+    //  for ( this.i;  this.i <= this.countNumberOfForms; this.i++) {
+    //   //this.iterateOfForms.push(i);
+    //    console.log(this.countNumberOfForms);
+    //     this.myForm.reset();
+
+
+
+    // }
+  //this.route.navigate(['/victim']);
+ // console.log("submitting a form")
 
  }
 

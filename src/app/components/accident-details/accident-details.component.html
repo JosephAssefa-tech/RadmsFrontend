@@ -4,12 +4,12 @@
   <h3><b>Accident Detail</b></h3>
   <div nz-row style="display: flex;">
     <div nz-col  nzSpan="6" >
-      <div style="display:flex;"> <label>Lat</label><input  formControlName="lat" nz-input placeholder="Basic usage"   /></div>
+      <div> <label>Lat</label><input  formControlName="lat" nz-input placeholder="Basic usage"   /></div>
 
 
     </div>
     <div nz-col  nzSpan="6" >
-      <div style="display:flex;"> <label>Long</label><input  formControlName="long" nz-input placeholder="Basic usage"   /></div>
+      <div > <label>Long</label><input  formControlName="long" nz-input placeholder="Basic usage"   /></div>
 
     </div>
   </div>
@@ -20,10 +20,10 @@
     <nz-date-picker formControlName="dateAndTime" [(ngModel)]="dateAndTime" [nzRenderExtraFooter]="plainFooter" nzShowTime></nz-date-picker>
 </div>
 <div nz-col  nzSpan="6" ><label>Investigator Name</label><br/>
-  <input nz-input placeholder="Invistigator name" formControlName="piname" [(ngModel)]="piname" />
+  <input style="width:200px !important"  nz-input placeholder="Invistigator name" formControlName="piname" [(ngModel)]="piname" />
 </div>
      <div nz-col  nzSpan="6" ><label>Police Record Number</label><br/>
-      <input formControlName="policeRecordNumber" nz-input placeholder="Basic usage" [(ngModel)]="policeRecordNumber" />
+      <input style="width:200px !important" formControlName="policeRecordNumber" nz-input placeholder="Basic usage" [(ngModel)]="policeRecordNumber" />
   </div>
     <!-- (ngModelChange)=
   "OnPoliceStationSelected()" -->
@@ -80,6 +80,7 @@
         ></nz-option>
       </nz-select>
     </div>
+    <nz-divider></nz-divider>
   </div>
 
 
@@ -108,7 +109,7 @@
      </div>
 
     <div nz-col  nzSpan="6" ><label>Kebele Name</label><br/>
-      <input formControlName="kebeleName" nz-input placeholder="Basic usage" [(ngModel)]="kebeleName" />
+      <input style="width:200px !important" formControlName="kebeleName" nz-input placeholder="Basic usage" [(ngModel)]="kebeleName" />
   </div>
 
 
@@ -130,6 +131,8 @@
       [nzValue]="option.weatherCondId"
       ></nz-option>
     </nz-select></div>
+
+
   </div>
 
 
@@ -176,7 +179,6 @@
     </nz-select>
   </div>
 
-
   <div nz-col nzSpan="6" >Collision type<label></label><br/>
     <nz-select [(ngModel)]="collisionTypeId" formControlName="collisionTypeId">
       <nz-option       *ngFor="let option of collisionTypes"
@@ -195,6 +197,7 @@
       ></nz-option>
     </nz-select>
   </div>
+  <nz-divider></nz-divider>
 </div>
 
 
@@ -293,14 +296,14 @@
       ></nz-option>
     </nz-select> </div>
     <div nz-col  nzSpan="6" ><label>Location local name</label><br/>
-      <input formControlName="accidentLocalName" nz-input placeholder="Invistigator name" [(ngModel)]="accidentLocalName" />
+      <input style="width:200px !important" formControlName="accidentLocalName" nz-input placeholder="Invistigator name" [(ngModel)]="accidentLocalName" />
     </div>
     <div nz-col  nzSpan="6" ><label>Property Damage</label><br/>
-      <input formControlName="propertyDamage" nz-input placeholder="property damage " [(ngModel)]="propertyDamage" />
+      <input style="width:200px !important" formControlName="propertyDamage" nz-input placeholder="property damage " [(ngModel)]="propertyDamage" />
     </div>
 
     <div nz-col  nzSpan="6" ><label>Number of vechile</label><br/>
-      <input formControlName="numberOfVehicles" nz-input placeholder="number of vechcile name"  [(ngModel)]="numberOfVehicles"/>
+      <input style="width:200px !important" formControlName="numberOfVehicles" nz-input placeholder="number of vechcile name"  [(ngModel)]="numberOfVehicles"/>
     </div>
 </div>
 
@@ -315,7 +318,7 @@
 
 <div nz-row style="display: flex;">
   <div nz-col  nzSpan="6" ><label>Number of victim</label><br/>
-    <input formControlName="numberofVictims" nz-input placeholder="Number of victim " [(ngModel)]="numberofVictims" />
+    <input style="width:200px !important" formControlName="numberofVictims" nz-input placeholder="Number of victim " [(ngModel)]="numberofVictims" />
   </div>
 
 </div>

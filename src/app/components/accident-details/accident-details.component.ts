@@ -587,7 +587,12 @@ GetAccidentCauses()
   //  formData.append("dateTime",this.form.get('dateTime').value);
 
  onSubmit(){
+//the below is for vechile
+  this.accidentDetailTransactionService.number = this.numberOfVehicles;
+
+
   const formData = this.myForm.value ;
+  this.accidentDetailTransactionService.updateNumberOfForms(this.numberOfVehicles);
   this.formService.setFormValues(formData);
 
 //   this.accidnentDetailTransaction=this.myForm.value  as AccidentDetailsTransaction;

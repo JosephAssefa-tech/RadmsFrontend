@@ -1,4 +1,6 @@
 <div style="background-color: white;padding:15px" nzSpan="6">
+  <div >
+
     <form (ngSubmit)="onSubmit()"  [formGroup]="myForm" >
 
     <h3><b>Vehicle Detail</b></h3>
@@ -103,7 +105,8 @@
     <ng-container  *ngFor="let option of drivingLicenceCategories">
       <nz-option
       [nzLabel]="option.drivingLicenceCatagoryName"
-      [nzValue]="option"
+      [nzValue]="option.drivingLicenceCatagoryId
+      "
       ></nz-option>
     </ng-container>
 
@@ -139,8 +142,8 @@
     </div>
 
 
-    <div nz-col  nzSpan="6" *ngIf="alcholUsed==1"><label>Alchcol Tested??????</label><br/>
-      <nz-radio-group formControlName="alcohalConsumptionLevel"
+    <div nz-col  nzSpan="6" *ngIf="alcholUsed==1"><label>Alchcol Tested</label><br/>
+      <nz-radio-group formControlName="alchcolTested"
       [(ngModel)]="alcholTested" (ngModelChange)="OnAlcholTestedStatChanged()">
         <label nz-radio nzValue=0>No</label>
         <label nz-radio nzValue=1>Yes</label>
@@ -229,7 +232,7 @@
         <ng-container *ngFor="let option of driverVehicleRelation">
           <nz-option
           [nzLabel]="option.vehicleRelationName"
-          [nzValue]="option"
+          [nzValue]="option.vehicleRelationId"
           ></nz-option>
         </ng-container>
 
@@ -245,7 +248,7 @@
         <ng-container *ngFor="let option of vehicleOwnership">
           <nz-option
           [nzLabel]="option.vehicleOwnershipName"
-          [nzValue]="option"
+          [nzValue]="option.vehicleOwnershipId"
           ></nz-option>
         </ng-container>
 
@@ -261,7 +264,7 @@
         <ng-container *ngFor="let option of vehicleServiceAge">
           <nz-option
           [nzLabel]="option.vehicleServiceName"
-          [nzValue]="option"
+          [nzValue]="option.vehicleServiceAgeId"
           ></nz-option>
         </ng-container>
 
@@ -319,7 +322,7 @@
         <ng-container *ngFor="let option of vehicleDefect">
           <nz-option
           [nzLabel]="option.vehicleDefectName"
-          [nzValue]="option"
+          [nzValue]="option.vehicleDefectId"
           ></nz-option>
         </ng-container>
 
@@ -345,10 +348,11 @@
     <div nz-col nzSpan="6"> </div>
     <div nz-col nzSpan="6"  style="display: flex;">
       <app-button (click)="RoadInvolvedPage()" [buttonText]="'Back'" style="padding-right:15px;"></app-button>
-    <app-button (click)="VictimDetailPage()" [buttonText]="'Next'" type="submit" ></app-button>
+    <app-button  [buttonText]="'Next'" type="submit" ></app-button>
     </div>
   </div>
   <!-- (click)="sucessNotification('Sucess')" -->
   </form>
 
+</div>
   </div>

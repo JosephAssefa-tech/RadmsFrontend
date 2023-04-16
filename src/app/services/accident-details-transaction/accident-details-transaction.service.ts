@@ -8,6 +8,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AccidentDetailsTransactionService extends BaseService<AccidentDetailsTransaction> {
+  number: any;
+
+
+  private numberSource = new BehaviorSubject<number>(1);
+  number$ = this.numberSource.asObservable();
+
   private newRecordId = new BehaviorSubject<any>(null);
   accidentDetailGlobalId:number | undefined;
   constructor(protected httpClient: HttpClient) {
@@ -22,5 +28,8 @@ export class AccidentDetailsTransactionService extends BaseService<AccidentDetai
 
   getNewRecordId() {
     return this.newRecordId.asObservable();
+  }
+  updateNumberOfForms(number: number) {
+    this.numberSource.next(number);
   }
 }

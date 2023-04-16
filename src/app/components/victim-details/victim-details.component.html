@@ -10,12 +10,12 @@
 
 
     <div nz-col  nzSpan="6" ><label>Victim Type</label><br/>
-      <nz-select formControlName="victimTypeControl"
+      <nz-select style="width:150px" formControlName="victimTypeId"
       [(ngModel)]="selectedVictimType">
       <ng-container  *ngFor="let option of victimTypes">
         <nz-option
         [nzLabel]="option.victimType"
-        [nzValue]="option"
+        [nzValue]="option.victimTypeId"
         ></nz-option>
       </ng-container>
 
@@ -26,16 +26,16 @@
 
 
   <div nz-col  nzSpan="6" ><label>Victim Name</label><br/>
-    <input nz-input placeholder="Victim Name" formControlName="victimNameControl" [(ngModel)]="victimName" />
+    <input nz-input placeholder="Victim Name" formControlName="victimName" [(ngModel)]="victimName" />
   </div>
 
 
   <div nz-col  nzSpan="6" ><label>Age</label><br/>
-    <input nz-input placeholder="Age" formControlName="ageControl" [(ngModel)]="age" />
+    <input nz-input placeholder="Age" formControlName="age" [(ngModel)]="age" />
   </div>
 
   <div nz-col  nzSpan="6" ><label>Gender</label><br/>
-    <nz-select formControlName="genderControl"
+    <nz-select formControlName="genderType"
     [(ngModel)]="selectedGender"    >
     <ng-container >
       <nz-option
@@ -57,7 +57,8 @@
  </div>
 
 
-
+ <!-- [nzLabel]="option.vehicleInvolvedName"
+ [nzValue]="option.vehicleInvolvedId" -->
 
   <div nz-row style="display: flex; height: 20px;" ></div>
 
@@ -65,29 +66,30 @@
   <div nz-row style="display: flex;">
 
 
-    <div nz-col  nzSpan="6" ><label>Choose Vehicle</label><br/>
+    <!-- <div nz-col  nzSpan="6" ><label>Choose Vehicle</label><br/>
       <nz-select formControlName="vehicleControl"
       [(ngModel)]="selectedVehicle">
       <ng-container  *ngFor="let option of vehicle">
         <nz-option
-        [nzLabel]="option.vehicleInvolvedId"
-        [nzValue]="option"
+        [nzLabel]="option.vehicleName"
+        [nzValue]="option.vehicleId"
+
         ></nz-option>
       </ng-container>
 
 
       </nz-select>
-     </div>
+     </div> -->
 
 
 
-    <div nz-col  nzSpan="6" ><label>Victim Employment Status</label><br/>
-      <nz-select formControlName="victimEmploymentStatusControl"
+    <div nz-col nzSpan="6" ><label>Victim Employment Status</label><br/>
+      <nz-select style="width:150px" formControlName="employmentStatusId"
       [(ngModel)]="selectedEmploymentStatus">
       <ng-container  *ngFor="let option of employmentStatus">
         <nz-option
         [nzLabel]="option.employmentStatusName"
-        [nzValue]="option"
+        [nzValue]="option.employmentStatusId"
         ></nz-option>
       </ng-container>
 
@@ -98,7 +100,7 @@
 
 
 
-    <div nz-col  nzSpan="6" ><label>Accident Severity</label><br/>
+    <!-- <div nz-col  nzSpan="6" ><label>Accident Severity</label><br/>
       <nz-select formControlName="accidentSeverityControl"
       [(ngModel)]="selectedAccidentSeverity">
       <ng-container  *ngFor="let option of accidentSeverity">
@@ -110,18 +112,18 @@
 
 
       </nz-select>
-     </div>
+     </div> -->
 
 
 
 
     <div nz-col  nzSpan="6" ><label>Health Condition</label><br/>
-      <nz-select formControlName="healthConditionControl"
+      <nz-select style="width:150px" formControlName="healthConditionId"
       [(ngModel)]="selectedHealthCondition">
       <ng-container  *ngFor="let option of healthConditions">
         <nz-option
         [nzLabel]="option.healthConditionName"
-        [nzValue]="option"
+        [nzValue]="option.healthConditionId"
         ></nz-option>
       </ng-container>
 
@@ -143,7 +145,7 @@
  <div nz-row style="display: flex;">
 
   <div nz-col nzSpan="6"><label>AirBag Deployed?</label><br/>
-    <nz-radio-group formControlName="airBagControl"
+    <nz-radio-group formControlName="airbadDeployed"
     [(ngModel)]="airbag">
       <label nz-radio nzValue=0>No</label>
       <label nz-radio nzValue=1>Yes</label>
@@ -152,7 +154,7 @@
 
 
   <div nz-col nzSpan="6"><label>SeatBelt used?</label><br/>
-    <nz-radio-group formControlName="seatbeltControl"
+    <nz-radio-group formControlName="seatBeltUsed"
     [(ngModel)]="seatbelt">
       <label nz-radio nzValue=0>No</label>
       <label nz-radio nzValue=1>Yes</label>
@@ -160,7 +162,7 @@
   </div>
 
   <div nz-col nzSpan="6"><label>Heilmet used?</label><br/>
-    <nz-radio-group formControlName="heilmetControl"
+    <nz-radio-group formControlName="helmetUsed"
     [(ngModel)]="heilmet">
       <label nz-radio nzValue=0>No</label>
       <label nz-radio nzValue=1>Yes</label>
@@ -182,12 +184,12 @@
   <div nz-row style="display: flex;">
 
    <div nz-col  nzSpan="6" ><label>Victim Movement</label><br/>
-     <nz-select formControlName="victimMovementControl"
+     <nz-select style="width:150px" formControlName="victimMovementId"
      [(ngModel)]="selectedVictimMovement">
      <ng-container  *ngFor="let option of victimMovement">
        <nz-option
        [nzLabel]="option.victimMovementType"
-       [nzValue]="option"
+       [nzValue]="option.victimMovementId"
        ></nz-option>
      </ng-container>
 
@@ -198,12 +200,12 @@
 
 
    <div nz-col  nzSpan="6" ><label>Seating Type</label><br/>
-     <nz-select formControlName="seatingTypeControl"
+     <nz-select style="width:150px" formControlName="seatingTypeId"
      [(ngModel)]="selectedSeatingType">
      <ng-container  *ngFor="let option of seatingType">
        <nz-option
        [nzLabel]="option.seatingTypeName"
-       [nzValue]="option"
+       [nzValue]="option.seatingTypeId"
        ></nz-option>
      </ng-container>
 
@@ -215,12 +217,12 @@
 
 
    <div nz-col  nzSpan="6" ><label>Pedestrian Movement</label><br/>
-     <nz-select formControlName="pedestrianMovementControl"
+     <nz-select style="width:150px" formControlName="pedestrianMovementId"
      [(ngModel)]="selectedPedestrianMovement">
      <ng-container  *ngFor="let option of pedestrianMovement">
        <nz-option
-       [nzLabel]="option.PedestrianMovementName"
-       [nzValue]="option"
+       [nzLabel]="option.pedestrianMovementName"
+       [nzValue]="option.pedestrianMovementId"
        ></nz-option>
      </ng-container>
 

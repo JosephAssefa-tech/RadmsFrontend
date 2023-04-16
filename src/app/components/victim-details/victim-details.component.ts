@@ -20,6 +20,9 @@ import { SeatingType } from 'src/app/models/get/seating-type';
 import { SeatingTypeService } from 'src/app/services/seating-type/seating-type.service';
 import { PedestrianMovement } from 'src/app/models/get/pedestrian-movement';
 import { PedestrainMovementService } from 'src/app/services/pedestrain-movements/pedestrain-movement.service';
+import { VechicleMasterEntity } from 'src/app/models/get/vechicle-master';
+import { VechileMasterService } from 'src/app/services/vechile-masters/vechile-master.service';
+import { VictimDetailService } from 'src/app/services/victim-details/victim-detail.service';
 
 @Component({
   selector: 'app-victim-details',
@@ -27,8 +30,10 @@ import { PedestrainMovementService } from 'src/app/services/pedestrain-movements
   styleUrls: ['./victim-details.component.scss']
 })
 export class VictimDetailsComponent implements OnInit {
+  count = 1;
 
-
+   customId: string | undefined;
+   lastThreeDigits = '000';
 
   selectedVictimType?:any;
   victimName?:string;
@@ -47,24 +52,50 @@ export class VictimDetailsComponent implements OnInit {
 
 
   myForm = new FormGroup({
-    victimTypeControl: new FormControl(''),
-    victimNameControl: new FormControl(''),
-    genderControl: new FormControl(''),
-    ageControl: new FormControl(''),
-    vehicleControl: new FormControl(''),
-    victimEmploymentStatusControl: new FormControl(''),
-    accidentSeverityControl: new FormControl(''),
-    healthConditionControl: new FormControl(''),
-    victimMovementControl: new FormControl(''),
-    seatingTypeControl: new FormControl(''),
-    pedestrianMovementControl: new FormControl('')
-  });
+    accidentId: new FormControl(''),
+    victimId:new FormControl(''),//v+accidentId000/001/002
+    victimName: new FormControl(''),
+    age: new FormControl(''),
+    genderType: new FormControl(''),
+    victimMovementId: new FormControl(''),
+    victimTypeId: new FormControl(''),
+    employmentStatusId: new FormControl(''),
+    seatBeltUsed:new FormControl(''),
+   // vehicleControl: new FormControl(''),
+    airbadDeployed:new FormControl(''),
+    helmetUsed:new FormControl(''),
+    healthConditionId: new FormControl(''),
+    pedestrianMovementId: new FormControl(''),
+    //accidentSeverityControl: new FormControl(''),
+    seatingTypeId: new FormControl(''),
 
+
+
+  });
+  // {
+
+  //   "victimId": "jo1",
+  //   "victimName": "jo",
+  //   "age": 1,
+  //   "genderType": 1,
+  //   "victimMovementId": 1,
+
+  //   "victimTypeId": 1,
+  //   "employmentStatusId": 1,
+  //   "seatBeltUsed": 1,
+
+  //   "airbadDeployed": 1,
+  //   "helmetUsed": 1,
+  //   "healthConditionId": 1,
+  //   "pedestrianMovementId": 1,
+  //   "seatingTypeId": 1
+  // }
 
   plainFooter = 'plain extra footer';
   footerRender = (): string => 'extra footer';
   victimTypes=[] as VictimTypeLookup[];
-  vehicle=[] as VehiclesEntity[];
+  //vehicle=[] as VehiclesEntity[];
+  vehicle=[]  as VechicleMasterEntity[];
   employmentStatus=[] as EmploymentStatus[];
   accidentSeverity=[] as SeverityLevel[];
   healthConditions=[] as HealthCondition[];
@@ -81,12 +112,14 @@ export class VictimDetailsComponent implements OnInit {
 
     private victimTypeService:VictimTypeService,
     private vehicleService:VehicleListService,
+    private victimDetail:VictimDetailService,
     private employmentStatusService:EmployementStatusService,
     private accidentSeverityService:SeverityLevelService,
     private healthConditionService:HealthConditiionService,
     private victimMovementService:VictimMovementService,
     private seatingTypeService:SeatingTypeService,
     private pedestrianMovementService:PedestrainMovementService,
+    private vechileMasterService:VechileMasterService,
 
 
     private route:Router,
@@ -102,6 +135,14 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+    this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
+      if (id) {
+        // Set the newly created record's ID in the form
+        this.myForm.patchValue({ accidentId: id,victimId:'V'+id });
+      }
+    });
+
+
 this.GetVictimTypeDetail();
 this.GetAccidentSeverityDetail();
 this.GetEmploymentStatusDetail();
@@ -130,7 +171,8 @@ this.GetVictimMovementDetail();
 
   GetVehicleDetail()
   {
-    this.vehicleService.getAll().subscribe((response:VehiclesEntity[])=>{
+   // this.vehicleService.getAll().subscribe((response:VehiclesEntity[])=>{
+    this.vechileMasterService.getAll().subscribe((response)=>{
       this.vehicle=response;
     });
   }
@@ -209,10 +251,21 @@ this.GetVictimMovementDetail();
 
  //// }
  onSubmit(){
+
+  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId,victimId:this.myForm.value.victimId };
   console.log("submitting a form")
-  this.accidentDetailTransactionService.post(this.myForm.value).subscribe(response => {
+  this.victimDetail.post(record).subscribe(response => {
     console.log(response);
   });
+  this.sucessNotification('saved');
+  if (this.count < this.accidentDetailTransactionService.number) {
+    // reset the form here
+    this.myForm.reset();
+    this.count++;
+  } else {
+    // navigate to other page
+    this.route.navigate(['/home']);
+  }
   console.log("submitting a form")
  }
 

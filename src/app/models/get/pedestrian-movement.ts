@@ -1,4 +1,4 @@
 export interface PedestrianMovement{
-   pedestrianMovementId :number;
-  PedestrianMovementName :string;
+  pedestrianMovementId :number;
+  pedestrianMovementName :string;
 }

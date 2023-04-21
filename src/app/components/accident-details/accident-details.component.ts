@@ -642,6 +642,7 @@ GetAccidentCauses()
 
    this.accidentDetailTransactionService.post(this.myForm.value).subscribe((response:any) => {
     this.accidentDetailTransactionService.setNewRecordId(response.data.accidentDetailId);
+    this.accidentDetailTransactionService.NoumberOfRoads=response.data.numberOfRoad;
 
   //  this.accidentDetailTransactionService.accidentDetailGlobalId=response.data.accidentDetailId;
 // console.log("id settting1")

@@ -3,12 +3,15 @@ import { BaseService } from '../base-service/BaseService';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccidentDetailsTransactionService extends BaseService<AccidentDetailsTransaction> {
+  totalAccidentCountEndPoint=`${environment.apiUrl}AccidentDetailsTransaction/count`;
   number: any;
+  NoumberOfRoads:any;
 
 
   private numberSource = new BehaviorSubject<number>(1);
@@ -31,5 +34,10 @@ export class AccidentDetailsTransactionService extends BaseService<AccidentDetai
   }
   updateNumberOfForms(number: number) {
     this.numberSource.next(number);
+  }
+  getTotalAccidentCount()
+  {
+    return this.httpClient.get<{ totalAccidentCount: number }>(this.totalAccidentCountEndPoint);
+
   }
 }

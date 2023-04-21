@@ -25,7 +25,7 @@ import { VechicleMasterEntity } from 'src/app/models/get/vechicle-master';
   styleUrls: ['./road-involved.component.scss']
 })
 export class RoadInvolvedComponent implements OnInit {
-
+  count = 1;
 
   selectedAccident:any;
   selectedHighway?:any;
@@ -35,6 +35,7 @@ export class RoadInvolvedComponent implements OnInit {
 
   myForm = new FormGroup({
     accidentId: new FormControl(''),
+    roadInvolvedId:new FormControl(''),
     hid: new FormControl('',Validators.required),
     pavementTypeId: new FormControl('',Validators.required),
     roadSurfaceId: new FormControl('',Validators.required),
@@ -79,7 +80,7 @@ this.form=this.fb.group({
       this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
         if (id) {
           // Set the newly created record's ID in the form
-          this.myForm.patchValue({ accidentId: id });
+          this.myForm.patchValue({ accidentId: id,roadInvolvedId:id });
         }
       });
 this.getAccident();
@@ -157,14 +158,22 @@ this.GetRoadSurfaceConditionDetail();
 
  //// }
  onSubmit(){
-  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId };
+  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId ,roadInvolvedId:this.myForm.value.roadInvolvedId};
   //delete record.accidentId;
   console.log("submitting a road involved id")
   this.roadsInvolvedDetailService.post(record).subscribe(response => {
     console.log(response);
   });
   this.sucessNotification('saved');
-  this.route.navigate(['/vehicle']);
+  if (this.count < this.accidentDetailTransactionService.NoumberOfRoads) {
+    // reset the form here
+    this.myForm.reset();
+    this.count++;
+  } else {
+    // navigate to other page
+    this.route.navigate(['/vehicle']);
+  }
+
   console.log("submitting a form")
  }
  isFormValid(): boolean {

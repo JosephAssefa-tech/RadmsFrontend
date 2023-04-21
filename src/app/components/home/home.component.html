@@ -1,7 +1,7 @@
   <div nz-row style="justify-content: space-around;display:flex;">
           <div style="color:white;border-radius: 10px;text-align: center;width:14vw;background-color: #ffffff;color: #bc3333">
              <p>Total accident</p>
-            <p style="color: #bc3333;font-size: 24px;"><b>349</b></p>
+            <p style="color: #bc3333;font-size: 24px;"><b>{{count}}</b></p>
         </div>
           <div style="color:white;width:14vw;background-color: #bc3333;border-radius: 10px;" >
             <p style="text-align: center;">Fatal</p>
@@ -40,8 +40,8 @@
 
           </div>
           <div style="background-color: white;padding:15px;width: 25%;" nzSpan="6"><h3><b>Trend Analysis</b></h3>
-            <div id="mapp">
-              <img style="width:300px;height:270px;" src="assets/Images/analysis.PNG">
+            <div  [chart]="chart">
+
             </div>
               <div style="padding-top:30px; margin-left: 9.5vw;">
               <app-button  [buttonText]="'Advanced Search'" (click)="AdvancedSearchPage()"></app-button>

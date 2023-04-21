@@ -138,7 +138,7 @@ this.form=this.fb.group({
     this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
       if (id) {
         // Set the newly created record's ID in the form
-        this.myForm.patchValue({ accidentId: id,victimId:'V'+id });
+        this.myForm.patchValue({ accidentId: id,victimId:'VI'+id });
       }
     });
 

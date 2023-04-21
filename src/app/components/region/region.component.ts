@@ -17,29 +17,29 @@ export class RegionComponent implements OnInit {
     {
       name: 'Addis Ababa',
       age: 1,
-      address: 'Edit | Delete'
+      address: 'Edit '
     },
     {
       name: 'Oromiya',
       age: 2,
-      address: 'Edit | Delete'
+      address: 'Edit '
     },
     {
       name: 'Amhara',
       age: 3,
-      address: 'Edit | Delete'
+      address: 'Edit '
     }
     ,
     {
       name: 'Harar',
       age: 4,
-      address: 'Edit | Delete'
+      address: 'Edit '
     }
     ,
     {
       name: 'DireDewa',
       age: 5,
-      address: 'Edit | Delete'
+      address: 'Edit '
     }
   ];
   inputValue: string | undefined;

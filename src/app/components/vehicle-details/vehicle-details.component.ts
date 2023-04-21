@@ -65,7 +65,7 @@ export class VehicleDetailsComponent implements OnInit {
 
   myForm = new FormGroup({
     accidentId: new FormControl(''),
-    vehicleInvolvedId: new FormControl(20230000020),
+    vehicleInvolvedId: new FormControl(),
     vehicleId: new FormControl(''),
     numberPlate:new FormControl(''),
     vehicleAgeId:new FormControl(''),
@@ -164,7 +164,7 @@ this.form=this.fb.group({
     this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
       if (id) {
         // Set the newly created record's ID in the form
-        this.myForm.patchValue({ accidentId: id });
+        this.myForm.patchValue({ accidentId: id ,vehicleInvolvedId:'V'+id});
       }
     });
 this.GetEducationLevelDetail();
@@ -316,7 +316,7 @@ this.vechileTypes=response;
   //accidentId.patch({
   //  id:this.accidentDetailTransactionService.idd;
   //})
-  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId };
+  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId,vehicleInvolvedId:this.myForm.value.vehicleInvolvedId  };
   //delete record.accidentId;
   console.log("submitting a road involved id")
   this.vechileDetailService.post(record).subscribe(response => {

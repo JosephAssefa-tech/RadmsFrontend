@@ -1,20 +1,35 @@
   <div nz-row style="justify-content: space-around;display:flex;">
           <div style="color:white;border-radius: 10px;text-align: center;width:14vw;background-color: #ffffff;color: #bc3333">
              <p>Total accident</p>
-            <p style="color: #bc3333;font-size: 24px;"><b>{{count}}</b></p>
+            <p style="color: #bc3333;font-size: 24px;"><b>{{totalAccidentCount}}</b></p>
         </div>
           <div style="color:white;width:14vw;background-color: #bc3333;border-radius: 10px;" >
-            <p style="text-align: center;">Fatal</p>
-            <p style="color:ffffff;padding-left: 15px;">Injury</p>
+            <p style="color:ffffff;padding-left: 15px;">Fatal</p>
+
+            <div class="text-container" >
+              <span class="left-text">Injury</span>
+             <span class="right-text">{{ getSeverityByType(2).count }}</span>
+            </div>
+
             <p style="color:ffffff;padding-left: 15px;">Crash</p>
             </div>
           <div style="color:white;border-radius: 10px;width:14vw;background-color: #ff9900;">
               <p style="text-align: center" >Serious</p>
-            <p style="color:ffffff;padding-left: 15px;">Ingury<br/>Crash</p>
+              <div class="text-container" >
+                <span class="left-text">Injury</span>
+               <span class="right-text">{{ getSeverityByType(3).count }}</span>
+              </div>
+
+
+              <p style="color:ffffff;padding-left: 15px;">Crash</p>
           </div>
           <div style="color:white;border-radius: 10px;width:14vw;background-color: #1eaab2;">
              <p style="text-align: center;" >Slight</p>
-            <p style="color:ffffff;padding-left: 15px;">Ingury<br/>Crash</p>
+             <div class="text-container" >
+              <span class="left-text">Injury</span>
+             <span class="right-text">{{ getSeverityByType(4).count }}</span>
+            </div>
+            <p style="color:ffffff;padding-left: 15px;">Crash</p>
           </div>
           <div style="color:white;border-radius: 10px;width:14vw;background-color: #4caef4;">
             <p style="color:ffffff;padding-left: 15px;">Property Datamage<br/>Accident Cost<br/>Accident Prone Section</p>
@@ -40,7 +55,16 @@
 
           </div>
           <div style="background-color: white;padding:15px;width: 25%;" nzSpan="6"><h3><b>Trend Analysis</b></h3>
-            <div  [chart]="chart">
+            <div id="chart">
+              <!-- <div class="card-deck">
+                <div *ngFor="let item of data" class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ item.severityType }}</h5>
+                    <p class="card-text">Count: {{ item.count }}</p>
+                  </div>
+                </div>
+              </div> -->
+
 
             </div>
               <div style="padding-top:30px; margin-left: 9.5vw;">

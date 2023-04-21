@@ -4,12 +4,14 @@ import { BaseService } from '../base-service/BaseService';
 import { VictimDetailsTransaction } from 'src/app/models/get/victim-details-transaction';
 import { SummaryCount } from 'src/app/models/get/SummaryCount';
 import { environment } from 'src/environments/environment';
+import { SummaryData } from 'src/app/models/get/SummaryData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VictimDetailService extends BaseService<VictimDetailsTransaction>{
-  totalAccidentCountEndPoint=`${environment.apiUrl}VictimDetailsTransaction/grouped-data`;
+  summaryData=`${environment.apiUrl}VictimDetailsTransaction/grouped-data`;
+
   constructor(protected httpClient: HttpClient)  {
     super(httpClient);
   }
@@ -18,6 +20,6 @@ export class VictimDetailService extends BaseService<VictimDetailsTransaction>{
    }
    getGroupedData()
    {
-    return this.httpClient.get<SummaryCount[]>(this.totalAccidentCountEndPoint);
+    return this.httpClient.get<SummaryData[]>(this.summaryData);
    }
 }

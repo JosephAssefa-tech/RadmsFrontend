@@ -1,0 +1,11 @@
+.text-container {
+  display: flex; /* Use flexbox to align the two text elements */
+  justify-content: space-between; /* Add space between the elements */
+}
+
+.left-text {
+  padding-left: 15px; /* Add space to the right of the left text */
+}
+.right-text {
+  padding-right: 15px; /* Add space to the right of the left text */
+}

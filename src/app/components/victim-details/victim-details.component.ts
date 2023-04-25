@@ -39,6 +39,7 @@ export class VictimDetailsComponent implements OnInit {
   victimName?:string;
   selectedGender?:number=0;
   age?:number;
+  severityId:any;
   selectedVehicle?:any;
   selectedEmploymentStatus?:any;
   selectedAccidentSeverity?:any;
@@ -53,6 +54,7 @@ export class VictimDetailsComponent implements OnInit {
 
   myForm = new FormGroup({
     accidentId: new FormControl(''),
+    severityId: new FormControl(''),
     victimId:new FormControl(''),//v+accidentId000/001/002
     victimName: new FormControl(''),
     age: new FormControl(''),
@@ -62,7 +64,7 @@ export class VictimDetailsComponent implements OnInit {
     employmentStatusId: new FormControl(''),
     seatBeltUsed:new FormControl(''),
    // vehicleControl: new FormControl(''),
-    airbadDeployed:new FormControl(''),
+   airbagDeployed:new FormControl(''),
     helmetUsed:new FormControl(''),
     healthConditionId: new FormControl(''),
     pedestrianMovementId: new FormControl(''),
@@ -142,7 +144,7 @@ this.form=this.fb.group({
       }
     });
 
-
+    this.GetAccidentSeverity();
 this.GetVictimTypeDetail();
 this.GetAccidentSeverityDetail();
 this.GetEmploymentStatusDetail();
@@ -158,7 +160,12 @@ this.GetVictimMovementDetail();
   errorNotification(type:string):void{
     this.notification.error("Data was not Saved",'',{nzPlacement:'topRight'})
   }
-
+  GetAccidentSeverity()
+  {
+    this.accidentSeverityService.getAll().subscribe((response)=>{
+      this.accidentSeverity=response;
+    })
+  }
 
   GetVictimTypeDetail()
   {

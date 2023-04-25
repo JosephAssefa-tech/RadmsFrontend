@@ -35,7 +35,7 @@ export class RoadInvolvedComponent implements OnInit {
 
   myForm = new FormGroup({
     accidentId: new FormControl(''),
-    roadInvolvedId:new FormControl(''),
+    roadsInvolvedId:new FormControl(''),
     hid: new FormControl('',Validators.required),
     pavementTypeId: new FormControl('',Validators.required),
     roadSurfaceId: new FormControl('',Validators.required),
@@ -80,7 +80,7 @@ this.form=this.fb.group({
       this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
         if (id) {
           // Set the newly created record's ID in the form
-          this.myForm.patchValue({ accidentId: id,roadInvolvedId:id });
+          this.myForm.patchValue({ accidentId: id,roadsInvolvedId:id });
         }
       });
 this.getAccident();
@@ -158,7 +158,7 @@ this.GetRoadSurfaceConditionDetail();
 
  //// }
  onSubmit(){
-  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId ,roadInvolvedId:this.myForm.value.roadInvolvedId};
+  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId ,roadsInvolvedId:this.myForm.value.roadsInvolvedId};
   //delete record.accidentId;
   console.log("submitting a road involved id")
   this.roadsInvolvedDetailService.post(record).subscribe(response => {

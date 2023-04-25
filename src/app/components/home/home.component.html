@@ -1,4 +1,8 @@
-  <div nz-row style="justify-content: space-around;display:flex;">
+<div nz-col   ><label>Date</label><br/>
+  <nz-date-picker formControlName="dateAndTime" [(ngModel)]="dateAndTime"  nzShowTime></nz-date-picker>
+</div>
+ <div nz-row style="justify-content: space-around;display:flex;">
+
           <div style="color:white;border-radius: 10px;text-align: center;width:14vw;background-color: #ffffff;color: #bc3333">
              <p>Total accident</p>
             <p style="color: #bc3333;font-size: 24px;"><b>{{totalAccidentCount}}</b></p>
@@ -40,7 +44,17 @@
           <div nz-col nzSpan="18">
             <div style="display:flex;color:white;width:14vw;background-color: white;width: auto;padding: 15px;">
              <div>              <p style="text-align: center;color:black" ><b>Region Wise Accident Summary</b></p>
-              <p style="color:black;padding-left: 15px;">Addis Ababa</p>
+              <div nz-col  nzSpan="6" ><label>Region</label><br/>
+                <nz-select style="width:150px"  formControlName="regionId"
+                [(ngModel)]="regionId"
+                 >
+                  <nz-option       *ngFor="let option of regionMasters"
+                  [nzLabel]="option.regionName"
+                  [nzValue]="option.regionId"
+                  ></nz-option>
+
+                </nz-select>
+               </div>
               <p style="color:black;padding-left: 15px; color: #bc3333;">Fatal Injury<br>Fatal Crash</p>
               <p style="color:black;padding-left: 15px; color: #ff9900;">Seriously Injury Injury<br>Seriously Crash</p>
               <p style="color:black;padding-left: 15px; color: #1eaab2;">Slightly Injury<br>Slightly Crash</p>
@@ -54,7 +68,11 @@
           </div>
           <div style="background-color: white;padding:15px;width: 25%;" nzSpan="6"><h3><b>Trend Analysis</b></h3>
             <div id="chart">
-
+          <div nz-col nzSpan="18">
+            <div class="chart-container">
+              <canvas  id="MyChart" >{{ chart }}</canvas>
+          </div>
+<!-- <img src="assets/Images/analysis.PNG">"/> -->
               <!-- <div class="card-deck">
                 <div *ngFor="let item of data" class="card">
                   <div class="card-body">

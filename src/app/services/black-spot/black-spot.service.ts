@@ -18,7 +18,7 @@ export class BlackSpotService  {
   }
 
   getBlackSpots(): Observable<BlackSpot[]> {
-    console.log("Seee")
+
     return this.http.get<BlackSpot[]>(this.blackSpotEndPoint);
   }
 }

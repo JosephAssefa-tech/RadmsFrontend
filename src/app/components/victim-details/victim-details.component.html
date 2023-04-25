@@ -131,7 +131,14 @@
       </nz-select>
      </div>
 
-
+     <div nz-col nzSpan="6" >Accident Serverity<label></label><br/>
+      <nz-select style="width:150px" [(ngModel)]="severityId" formControlName="severityId">
+        <nz-option       *ngFor="let option of accidentSeverity"
+        [nzLabel]="option.severityType"
+        [nzValue]="option.severityId"
+        ></nz-option>
+      </nz-select>
+    </div>
 
  </div>
 
@@ -145,7 +152,7 @@
  <div nz-row style="display: flex;">
 
   <div nz-col nzSpan="6"><label>AirBag Deployed?</label><br/>
-    <nz-radio-group formControlName="airbadDeployed"
+    <nz-radio-group formControlName="airbagDeployed"
     [(ngModel)]="airbag">
       <label nz-radio nzValue=0>No</label>
       <label nz-radio nzValue=1>Yes</label>

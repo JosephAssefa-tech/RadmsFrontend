@@ -65,7 +65,7 @@ export class VehicleDetailsComponent implements OnInit {
 
   myForm = new FormGroup({
     accidentId: new FormControl(''),
-    vehicleInvolvedId: new FormControl(),
+    vehicleInvolvedId: new FormControl(202300005),
     vehicleId: new FormControl(''),
     numberPlate:new FormControl(''),
     vehicleAgeId:new FormControl(''),

@@ -13,7 +13,10 @@ import { VictimDetailService } from 'src/app/services/victim-details/victim-deta
 import { SummaryData } from 'src/app/models/get/SummaryData';
 import { Pipe, PipeTransform } from '@angular/core';
 import { BlackSpotService } from 'src/app/services/black-spot/black-spot.service';
-
+import Chart from 'chart.js/auto';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { RegionMaster } from 'src/app/models/get/region';
+import { RegionsService } from 'src/app/services/region/regions.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,9 +24,14 @@ import { BlackSpotService } from 'src/app/services/black-spot/black-spot.service
 })
 
 export class HomeComponent implements OnInit,AfterViewInit  {
+  myForm = new FormGroup({
+  regionId: new FormControl('',Validators.required)});
+
+  regionId:any;
+  regionMasters=[] as RegionMaster[];
   center = latLng(11.1, 12.1);
   zoom = 10;
-
+  public chart: any;
   // Define the options for the map
   options = {
     layers: [
@@ -39,11 +47,12 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   layers = [];
   //chart: Chart;
   private mapp: L.Map;
+  dateAndTime:any;
   totalAccidentCount:number | undefined;
   severityData : SummaryData[];
   blackSpots: any[];
 
-  constructor(private blackSpotService: BlackSpotService,private accidentDetailTransactionService:AccidentDetailsTransactionService,private victimDetailService:VictimDetailService
+  constructor( private regionService:RegionsService,private blackSpotService: BlackSpotService,private accidentDetailTransactionService:AccidentDetailsTransactionService,private victimDetailService:VictimDetailService
    , private mapServicee:MapService,private route:Router) {
 
 
@@ -52,6 +61,8 @@ export class HomeComponent implements OnInit,AfterViewInit  {
    // this.mapp = this.mapServicee.createMap();
   }
   ngOnInit(): void {
+    this.GetRegionMaster();
+    this.createChart();
     this.blackSpotService.getBlackSpots().subscribe(data=>{
 
       this.blackSpots = data;
@@ -83,6 +94,41 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   this.GetSeverity();
 
   this.GetTotalAccidentCount();
+  }
+  createChart(){
+
+    this.chart = new Chart("MyChart", {
+      type: 'line', //this denotes tha type of chart
+
+      data: {// values on X-Axis
+        labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
+								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
+	       datasets: [
+          {
+            label: "Sales",
+            data: ['467','576', '572', '79', '92',
+								 '574', '573', '576'],
+            backgroundColor: 'blue'
+          },
+          {
+            label: "Profit",
+            data: ['542', '542', '536', '327', '17',
+									 '0.00', '538', '541'],
+            backgroundColor: 'limegreen'
+          }
+        ]
+      },
+      options: {
+        aspectRatio:2
+      }
+
+    });
+  }
+  GetRegionMaster()
+  {
+    this.regionService.getAll().subscribe((response)=>{
+      this.regionMasters=response;
+    })
   }
   GetSeverity()
   {

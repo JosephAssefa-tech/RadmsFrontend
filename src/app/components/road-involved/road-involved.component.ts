@@ -157,7 +157,10 @@ this.GetRoadSurfaceConditionDetail();
   //  formData.append("dateTime",this.form.get('dateTime').value);
 
  //// }
+
  onSubmit(){
+
+
   const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId ,roadsInvolvedId:this.myForm.value.roadsInvolvedId};
   //delete record.accidentId;
   console.log("submitting a road involved id")
@@ -167,6 +170,7 @@ this.GetRoadSurfaceConditionDetail();
   this.sucessNotification('saved');
   if (this.count < this.accidentDetailTransactionService.NoumberOfRoads) {
     // reset the form here
+
     this.myForm.reset();
     this.count++;
   } else {

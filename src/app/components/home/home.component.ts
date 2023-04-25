@@ -49,6 +49,8 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   private mapp: L.Map;
   dateAndTime:any;
   totalAccidentCount:number | undefined;
+  totalPropertyDamage:number | undefined;
+  totalBlackspotCount:number | undefined;
   severityData : SummaryData[];
   blackSpots: any[];
 
@@ -92,8 +94,10 @@ export class HomeComponent implements OnInit,AfterViewInit  {
 
 
   this.GetSeverity();
-
+  this.getTotalBlackspotCount();
   this.GetTotalAccidentCount();
+  this.GettotalPropertyDamageCount();
+
   }
   createChart(){
 
@@ -105,16 +109,28 @@ export class HomeComponent implements OnInit,AfterViewInit  {
 								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
 	       datasets: [
           {
-            label: "Sales",
+
             data: ['467','576', '572', '79', '92',
 								 '574', '573', '576'],
-            backgroundColor: 'blue'
+
           },
           {
-            label: "Profit",
+
             data: ['542', '542', '536', '327', '17',
 									 '0.00', '538', '541'],
-            backgroundColor: 'limegreen'
+
+          },
+          {
+
+            data: ['580', '580', '596', '387', '67',
+									 '10.00', '738', '641'],
+
+          },
+          {
+
+            data: ['542', '542', '536', '327', '17',
+									 '32.00', '888', '781'],
+
           }
         ]
       },
@@ -144,7 +160,24 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   {
     this.accidentDetailTransactionService.getTotalAccidentCount().subscribe(result => {
       this.totalAccidentCount = result.totalAccidentCount;
-      console.log(this.totalAccidentCount);
+
+
+    });
+  }
+  GettotalPropertyDamageCount()
+  {
+    this.accidentDetailTransactionService.getTotalPropertyDamageCount().subscribe(result => {
+      this.totalPropertyDamage = result.totalPropertyDamage;
+
+
+    });
+
+  }
+  getTotalBlackspotCount()
+  {
+    this.blackSpotService.getTotalBlackspotCount().subscribe(result => {
+      this.totalBlackspotCount = result.blackspotCount;
+
 
     });
   }

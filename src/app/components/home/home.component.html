@@ -36,7 +36,21 @@
             <p style="color:ffffff;padding-left: 15px;">Crash</p>
           </div>
           <div style="color:white;border-radius: 10px;width:14vw;background-color: #4caef4;">
-            <p style="color:ffffff;padding-left: 15px;">Property Datamage<br/>Accident Cost<br/>Accident Prone Section</p>
+
+            <div class="text-container" >
+              <span class="left-text">Property Datamage</span>
+             <span class="right-text">{{ totalPropertyDamage }}</span>
+
+            </div>
+            <div class="text-container" >
+            <span class="left-text">Accident Cost</span>
+            <span class="right-text">{{ totalPropertyDamage }}</span>
+            </div>
+            <div class="text-container" >
+
+              <span class="left-text">Accident Prone Section</span>
+              <span class="right-text">{{ totalBlackspotCount }}</span>
+              </div>
           </div>
 
         </div>

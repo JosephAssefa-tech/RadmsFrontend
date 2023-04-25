@@ -40,4 +40,9 @@ export class AccidentDetailsTransactionService extends BaseService<AccidentDetai
     return this.httpClient.get<{ totalAccidentCount: number }>(this.totalAccidentCountEndPoint);
 
   }
+  getTotalPropertyDamageCount()
+  {
+    return this.httpClient.get<{ totalPropertyDamage: number }>(this.totalAccidentCountEndPoint);
+  }
+
 }

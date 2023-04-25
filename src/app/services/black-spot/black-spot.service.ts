@@ -21,4 +21,8 @@ export class BlackSpotService  {
 
     return this.http.get<BlackSpot[]>(this.blackSpotEndPoint);
   }
+  getTotalBlackspotCount()
+  {
+    return this.http.get<{ blackspotCount: number }>(this.blackSpotEndPoint+'/count-blackspot');
+  }
 }

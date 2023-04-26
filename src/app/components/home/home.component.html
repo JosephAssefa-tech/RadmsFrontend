@@ -1,6 +1,6 @@
-<div nz-col   ><label>Date</label><br/>
+<!-- <div nz-col   ><label>Date</label><br/>
   <nz-date-picker formControlName="dateAndTime" [(ngModel)]="dateAndTime"  nzShowTime></nz-date-picker>
-</div>
+</div> -->
  <div nz-row style="justify-content: space-around;display:flex;">
 
           <div style="color:white;border-radius: 10px;text-align: center;width:14vw;background-color: #ffffff;color: #bc3333">
@@ -59,8 +59,9 @@
             <div style="display:flex;color:white;width:14vw;background-color: white;width: auto;padding: 15px;">
              <div>              <p style="text-align: center;color:black" ><b>Region Wise Accident Summary</b></p>
               <div nz-col  nzSpan="6" ><label>Region</label><br/>
-                <nz-select style="width:150px"  formControlName="regionId"
-                [(ngModel)]="regionId"
+                <nz-select style="width:150px"
+                [(ngModel)]="regionIdd"
+                (ngModelChange)="getRegionBasedSummaryData($event)"
                  >
                   <nz-option       *ngFor="let option of regionMasters"
                   [nzLabel]="option.regionName"
@@ -69,9 +70,10 @@
 
                 </nz-select>
                </div>
-              <p style="color:black;padding-left: 15px; color: #bc3333;">Fatal Injury<br>Fatal Crash</p>
-              <p style="color:black;padding-left: 15px; color: #ff9900;">Seriously Injury Injury<br>Seriously Crash</p>
-              <p style="color:black;padding-left: 15px; color: #1eaab2;">Slightly Injury<br>Slightly Crash</p>
+
+              <p style="color:black;padding-left: 15px; color: #bc3333;">Fatal Injury{{deathCount}}<br>Fatal Crash</p>
+              <p style="color:black;padding-left: 15px; color: #ff9900;">Seriously Injury {{seriousCount}}<br>Seriously Crash</p>
+              <p style="color:black;padding-left: 15px; color: #1eaab2;">Slightly Injury{{slightCount}}<br>Slightly Crash</p>
               <p style="color:black;padding-left: 15px; color: #4caef4;">Accident Cost <br>Accident Prone Section </p></div>
 
              <div style="padding-left:15px;">

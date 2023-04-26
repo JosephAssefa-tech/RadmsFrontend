@@ -17,6 +17,7 @@ import Chart from 'chart.js/auto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegionMaster } from 'src/app/models/get/region';
 import { RegionsService } from 'src/app/services/region/regions.service';
+import { RegionBasedSummaryData } from 'src/app/models/get/SummaryCount';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,9 +26,18 @@ import { RegionsService } from 'src/app/services/region/regions.service';
 
 export class HomeComponent implements OnInit,AfterViewInit  {
   myForm = new FormGroup({
-  regionId: new FormControl('',Validators.required)});
+    regionId:new FormControl('',Validators.required),
+  });
+  regionIdd: number;
+  data: RegionBasedSummaryData;
+  deathCount = 0;
+  seriousCount=0;
+  slightCount=0;
+  propertyDamageCount=0;
 
-  regionId:any;
+
+
+
   regionMasters=[] as RegionMaster[];
   center = latLng(11.1, 12.1);
   zoom = 10;
@@ -181,11 +191,32 @@ export class HomeComponent implements OnInit,AfterViewInit  {
 
     });
   }
+  getRegionBasedSummaryData(regionId:number)
+  {
+
+
+    this.regionService.getDataByRegion(regionId)
+    .subscribe(data => {
+this.data=data;
+this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death').count;
+this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury').count;
+this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury').count;
+this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage').count;
+
+
+
+    },
+    error => {
+      console.log('Error sending filter request: ', error);
+    });
+
+  }
   AdvancedSearchPage()
   {
     this.route.navigate(['/advanceSearch']);
 
   }
+
 
 
 }

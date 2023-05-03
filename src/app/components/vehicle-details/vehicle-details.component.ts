@@ -65,7 +65,7 @@ export class VehicleDetailsComponent implements OnInit {
 
   myForm = new FormGroup({
     accidentId: new FormControl(''),
-    vehicleInvolvedId: new FormControl(202300005),
+    vehicleInvolvedId: new FormControl(2023000031),
     vehicleId: new FormControl(''),
     numberPlate:new FormControl(''),
     vehicleAgeId:new FormControl(''),
@@ -152,6 +152,7 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+  //this.CheckNumberOfRoadsAndRouteToForm();
     // for (let i = 1; i <= this.countNumberOfForms; i++) {
     //   //this.iterateOfForms.push(i);
 
@@ -215,6 +216,12 @@ if(this.alcholTested!=1){
 if(this.speedLimitExceeded != 1){
 this.speedLevel=0;
 }
+}
+CheckNumberOfRoadsAndRouteToForm()
+{
+  if(this.accidentDetailTransactionService.NoumberOfRoads<=0){
+    this.route.navigate(['/accident']);
+  }
 }
 
 
@@ -300,8 +307,14 @@ this.vechileTypes=response;
 
   RoadInvolvedPage()
   {
+    if(this.accidentDetailTransactionService.NoumberOfRoads<=0){
+      this.route.navigate(['/accident']);
+    }else{
+      this.route.navigate(['/roadInvolved']);
+
+    }
     this.errorNotification('error');
-    this.route.navigate(['/roadInvolved']);
+
 
   }
 
@@ -322,6 +335,7 @@ this.vechileTypes=response;
   this.vechileDetailService.post(record).subscribe(response => {
     console.log(response);
   });
+ this. CheckNumberOfRoadsAndRouteToForm();
   this.sucessNotification('saved');
   if (this.count < this.accidentDetailTransactionService.number) {
     // reset the form here

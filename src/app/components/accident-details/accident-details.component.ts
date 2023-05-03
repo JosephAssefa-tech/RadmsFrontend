@@ -245,6 +245,7 @@ this.form=this.fb.group({
 
   ngOnInit(): void {
 
+
     // this.myForm = new FormGroup({
     //   lat:new FormControl('',Validators.required),
     //   long:new FormControl('',Validators.required),
@@ -642,6 +643,14 @@ GetAccidentCauses()
 
    this.accidentDetailTransactionService.post(this.myForm.value).subscribe((response:any) => {
     this.accidentDetailTransactionService.setNewRecordId(response.data.accidentDetailId);
+    console.log("consoloingggg number of Reoadddd")
+    console.log(response.data.numberOfRoad)
+    if(response.data.numberOfRoad<=0)
+    {
+
+      console.log(response.data.numberOfRoad)
+      this.route.navigate(['/vehicle']);
+    }
     this.accidentDetailTransactionService.NoumberOfRoads=response.data.numberOfRoad;
 
   //  this.accidentDetailTransactionService.accidentDetailGlobalId=response.data.accidentDetailId;

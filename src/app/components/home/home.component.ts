@@ -18,6 +18,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegionMaster } from 'src/app/models/get/region';
 import { RegionsService } from 'src/app/services/region/regions.service';
 import { RegionBasedSummaryData } from 'src/app/models/get/SummaryCount';
+import { TrendAnalysisService } from 'src/app/services/trend-analysis/trend-analysis.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,15 +26,17 @@ import { RegionBasedSummaryData } from 'src/app/models/get/SummaryCount';
 })
 
 export class HomeComponent implements OnInit,AfterViewInit  {
+  dataa: any[];
+  chart: any = [];
   myForm = new FormGroup({
     regionId:new FormControl('',Validators.required),
   });
   regionIdd: number;
   data: RegionBasedSummaryData;
-  deathCount = 0;
-  seriousCount=0;
-  slightCount=0;
-  propertyDamageCount=0;
+  deathCount: number;
+  seriousCount: number;
+  slightCount: number;
+  propertyDamageCount: number;
 
 
 
@@ -41,7 +44,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   regionMasters=[] as RegionMaster[];
   center = latLng(11.1, 12.1);
   zoom = 10;
-  public chart: any;
+
   // Define the options for the map
   options = {
     layers: [
@@ -64,7 +67,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   severityData : SummaryData[];
   blackSpots: any[];
 
-  constructor( private regionService:RegionsService,private blackSpotService: BlackSpotService,private accidentDetailTransactionService:AccidentDetailsTransactionService,private victimDetailService:VictimDetailService
+  constructor(private trendAnalysisService:TrendAnalysisService, public regionService:RegionsService,private blackSpotService: BlackSpotService,private accidentDetailTransactionService:AccidentDetailsTransactionService,private victimDetailService:VictimDetailService
    , private mapServicee:MapService,private route:Router) {
 
 
@@ -74,7 +77,8 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   }
   ngOnInit(): void {
     this.GetRegionMaster();
-    this.createChart();
+    this.TrendanalysisService();
+
     this.blackSpotService.getBlackSpots().subscribe(data=>{
 
       this.blackSpots = data;
@@ -109,47 +113,22 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   this.GettotalPropertyDamageCount();
 
   }
-  createChart(){
-
-    this.chart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
-
-      data: {// values on X-Axis
-        labels: ['2022-05-10', '2022-05-11', '2022-05-12','2022-05-13',
-								 '2022-05-14', '2022-05-15', '2022-05-16','2022-05-17', ],
-	       datasets: [
-          {
-
-            data: ['467','576', '572', '79', '92',
-								 '574', '573', '576'],
-
-          },
-          {
-
-            data: ['542', '542', '536', '327', '17',
-									 '0.00', '538', '541'],
-
-          },
-          {
-
-            data: ['580', '580', '596', '387', '67',
-									 '10.00', '738', '641'],
-
-          },
-          {
-
-            data: ['542', '542', '536', '327', '17',
-									 '32.00', '888', '781'],
-
-          }
-        ]
-      },
-      options: {
-        aspectRatio:2
-      }
-
+  TrendanalysisService()
+  {
+    this.trendAnalysisService.getGroupedData().subscribe((data :any[])=> {
+      this.dataa = data;
+      this.createChart();
     });
   }
+  createChart()
+  {
+    const labels = this.dataa.map(item => item.severityType);
+    const values = this.dataa.map(item => item.count);
+
+
+  }
+
+
   GetRegionMaster()
   {
     this.regionService.getAll().subscribe((response)=>{
@@ -178,7 +157,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   {
     this.accidentDetailTransactionService.getTotalPropertyDamageCount().subscribe(result => {
       this.totalPropertyDamage = result.totalPropertyDamage;
-
+      console.log(this.totalPropertyDamage);
 
     });
 
@@ -195,22 +174,22 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   {
 
 
-    this.regionService.getDataByRegion(regionId)
-    .subscribe(data => {
-this.data=data;
-this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death').count;
-this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury').count;
-this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury').count;
-this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage').count;
+    this.regionService.getDataByRegion(regionId).subscribe(data => {
 
+      this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death').count;
+      console.log(this.deathCount);
+      this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury').count;
+      console.log(this.seriousCount);
+      this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury').count;
+      this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage').count;
 
-
-    },
-    error => {
+      this.regionService.updateCounts(this.deathCount, this.seriousCount, this.slightCount, this.propertyDamageCount);
+    }, error => {
       console.log('Error sending filter request: ', error);
     });
-
   }
+
+
   AdvancedSearchPage()
   {
     this.route.navigate(['/advanceSearch']);

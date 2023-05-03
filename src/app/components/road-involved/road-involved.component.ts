@@ -171,7 +171,12 @@ this.GetRoadSurfaceConditionDetail();
   if (this.count < this.accidentDetailTransactionService.NoumberOfRoads) {
     // reset the form here
 
-    this.myForm.reset();
+    this.myForm.controls['hid'].reset();
+    this.myForm.controls['pavementTypeId'].reset();
+    this.myForm.controls['roadSurfaceId'].reset();
+    this.myForm.controls['roadCarriagewayId'].reset();
+
+
     this.count++;
   } else {
     // navigate to other page

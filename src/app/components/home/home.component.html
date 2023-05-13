@@ -135,10 +135,16 @@
              </div>
              <div id="mapid" style="width:50vw">
             </div>
-            <div style="background-color: white;padding:15px;width: 25%;" nzSpan="6"><h3><b>Trend Analysis</b></h3>
 
+            <div style="background-color: white;padding:15px;" nzSpan="6">
+              <!-- <div>
+                <canvas id="canvas" width="400" height="200"></canvas>
+              </div> -->
+              <div>
+                <canvas id="trendChart" width="300" height="300"></canvas>
+              </div>
 
-              <div style="padding-top:30px; margin-left: 9.5vw;">
+              <div style="padding-top:10px; margin-left: 9.5vw;">
               <app-button  [buttonText]="'Advanced Search'" (click)="AdvancedSearchPage()"></app-button>
             </div>
 

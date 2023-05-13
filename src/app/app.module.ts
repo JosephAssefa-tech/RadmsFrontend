@@ -99,7 +99,7 @@ import { VictimDetailsComponent } from './components/victim-details/victim-detai
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
 import { AdvanceSearchComponent } from './components/advance-search/advance-search.component';
-
+import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 
 registerLocaleData(en);
 

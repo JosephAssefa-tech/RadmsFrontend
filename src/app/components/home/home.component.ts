@@ -19,6 +19,9 @@ import { RegionMaster } from 'src/app/models/get/region';
 import { RegionsService } from 'src/app/services/region/regions.service';
 import { RegionBasedSummaryData } from 'src/app/models/get/SummaryCount';
 import { TrendAnalysisService } from 'src/app/services/trend-analysis/trend-analysis.service';
+import { TrendAnalysisResponse } from 'src/app/models/get/TrendAnalysisResponse';
+import { ChartDataset, ChartOptions } from 'chart.js';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,8 +29,13 @@ import { TrendAnalysisService } from 'src/app/services/trend-analysis/trend-anal
 })
 
 export class HomeComponent implements OnInit,AfterViewInit  {
-  dataa: any[];
+
+
+  /////////////
+  trendAnalysisData: TrendAnalysisResponse[] = [];
+  apiResponse: any[]=[];
   chart: any = [];
+  lineChart:any;
   myForm = new FormGroup({
     regionId:new FormControl('',Validators.required),
   });
@@ -115,17 +123,83 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   }
   TrendanalysisService()
   {
-    this.trendAnalysisService.getGroupedData().subscribe((data :any[])=> {
-      this.dataa = data;
+    this.trendAnalysisService.getTrendAnalysisdData().subscribe(data => {
+      this.trendAnalysisData=data;
       this.createChart();
+
+    });
+
+  }
+    createChart() {
+      const years = this.trendAnalysisData.map(item => item.year);
+    const datasets = [
+      {
+        label: 'Fatal',
+        data: this.trendAnalysisData.map(item => item.fatalCount),
+        borderColor: 'red',
+        fill: false
+      },
+      {
+        label: 'Serious',
+        data: this.trendAnalysisData.map(item => item.seriousCount),
+        borderColor: 'orange',
+        fill: false
+      },
+      {
+        label: 'Slight',
+        data: this.trendAnalysisData.map(item => item.slightCount),
+        borderColor: 'green',
+        fill: false
+      },
+      {
+        label: 'Property Damage',
+        data: this.trendAnalysisData.map(item => item.propertyDamageCount),
+        borderColor: 'blue',
+        fill: false
+      }
+    ];
+
+    new Chart('trendChart', {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: datasets
+      },
+        options: {
+        responsive: true,
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Year'
+            }
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Count'
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Trend Analysis'
+          }
+        }
+      }
     });
   }
-  createChart()
-  {
-    const labels = this.dataa.map(item => item.severityType);
-    const values = this.dataa.map(item => item.count);
 
-
+  getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 
 

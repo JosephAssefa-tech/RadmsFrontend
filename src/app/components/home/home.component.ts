@@ -137,7 +137,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
         label: 'Fatal',
         data: this.trendAnalysisData.map(item => item.fatalCount),
         borderColor: 'red',
-        fill: false
+        fill: false,
       },
       {
         label: 'Serious',
@@ -187,6 +187,9 @@ export class HomeComponent implements OnInit,AfterViewInit  {
           title: {
             display: true,
             text: 'Trend Analysis'
+          },
+          legend: {
+            position: 'bottom' // Position the legend at the bottom
           }
         }
       }

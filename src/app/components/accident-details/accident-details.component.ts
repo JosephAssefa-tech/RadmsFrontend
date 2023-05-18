@@ -64,7 +64,7 @@ import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-
 //create an angular car accident data management system?
 export class AccidentDetailsComponent implements OnInit {
   myForm = new FormGroup({
-    userID:new FormControl(3),
+    userID:new FormControl(1),
     lat:new FormControl('',Validators.required),
     long:new FormControl('',Validators.required),
     dateAndTime: new FormControl('',Validators.required),
@@ -306,7 +306,7 @@ this.GetAccidentDetail();
 this.GetWeatherCondition();
 this.GetPoliceStatioin();
 this.GetSubCityMaster();
-this.GetRegionMaster()
+this.GetRegionMaster();
 this.GetZoneMaster();
 this.GetWoredaMaster();
 this.GetCityMaster();
@@ -422,6 +422,7 @@ this.GetTerrianTypes();
     this.regionService.getAll().subscribe((response)=>{
       this.regionMasters=response;
     })
+
   }
   GetZoneMaster()
   {

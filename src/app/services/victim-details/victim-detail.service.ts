@@ -11,7 +11,7 @@ import { SummaryData } from 'src/app/models/get/SummaryData';
 })
 export class VictimDetailService extends BaseService<VictimDetailsTransaction>{
   summaryData=`${environment.apiUrl}VictimDetailsTransaction/grouped-data`;
-  trendAnalysisData=`${environment.apiUrl}VictimDetailsTransaction/trend-analysis-data`;
+
 
   constructor(protected httpClient: HttpClient)  {
     super(httpClient);
@@ -23,8 +23,5 @@ export class VictimDetailService extends BaseService<VictimDetailsTransaction>{
    {
     return this.httpClient.get<SummaryData[]>(this.summaryData);
    }
-   getTrendAnalysisdData()
-   {
-    return this.httpClient.get<SummaryData[]>(this.trendAnalysisData);
-   }
+
 }

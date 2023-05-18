@@ -15,12 +15,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { BlackSpotService } from 'src/app/services/black-spot/black-spot.service';
 import Chart from 'chart.js/auto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { RegionMaster } from 'src/app/models/get/region';
 import { RegionsService } from 'src/app/services/region/regions.service';
 import { RegionBasedSummaryData } from 'src/app/models/get/SummaryCount';
 import { TrendAnalysisService } from 'src/app/services/trend-analysis/trend-analysis.service';
 import { TrendAnalysisResponse } from 'src/app/models/get/TrendAnalysisResponse';
 import { ChartDataset, ChartOptions } from 'chart.js';
+import { RegionMaster } from 'src/app/models/post/region-master-model';
 
 @Component({
   selector: 'app-home',
@@ -33,11 +33,12 @@ export class HomeComponent implements OnInit,AfterViewInit  {
 
   /////////////
   trendAnalysisData: TrendAnalysisResponse[] = [];
+  regionMasters: RegionMaster[]=[];
   apiResponse: any[]=[];
   chart: any = [];
   lineChart:any;
   myForm = new FormGroup({
-    regionId:new FormControl('',Validators.required),
+    regionId: new FormControl('',Validators.required)
   });
   regionIdd: number;
   data: RegionBasedSummaryData;
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
 
 
 
-  regionMasters=[] as RegionMaster[];
+
   center = latLng(11.1, 12.1);
   zoom = 10;
 
@@ -94,7 +95,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
       const map = L.map('mapid').setView([8.9733, 38.7930], 8);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
+
       }).addTo(map);
 
       for (const blackSpot of this.blackSpots) {
@@ -208,9 +209,15 @@ export class HomeComponent implements OnInit,AfterViewInit  {
 
   GetRegionMaster()
   {
+
     this.regionService.getAll().subscribe((response)=>{
       this.regionMasters=response;
     })
+
+    console.log("regionssssssss")
+
+    console.log(this.regionMasters);
+    console.log("regionssssssss")
   }
   GetSeverity()
   {
@@ -254,9 +261,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
     this.regionService.getDataByRegion(regionId).subscribe(data => {
 
       this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death').count;
-      console.log(this.deathCount);
       this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury').count;
-      console.log(this.seriousCount);
       this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury').count;
       this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage').count;
 

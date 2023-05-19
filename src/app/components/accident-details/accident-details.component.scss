@@ -6,7 +6,10 @@ nz-select {
   margin-right: 8px;
   margin-bottom: 12px;
 }
-
+.language {
+  justify-content: end;
+  display: flex;
+}
 
 
 // my api is returning a data with have a relationship and i want to display in select box in angular?

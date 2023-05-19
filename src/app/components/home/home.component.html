@@ -59,12 +59,12 @@
             <div style="display:flex;color:white;width:14vw;background-color: white;width: 100%;padding: 15px;">
              <div>
               <p style="text-align: center;color:black" ><b>Region Wise Accident Summary</b></p>
-              <div nz-col  nzSpan="18" ><label style="color:black">Please select region</label><br/>
+              <div  ><label style="color:black">Please select region</label><br/>
                 <nz-select
                 [(ngModel)]="regionIdd"
                 (ngModelChange)="getRegionBasedSummaryData($event)"
                  >
-                  <nz-option       *ngFor="let option of regionMasters"
+                  <nz-option       *ngFor="let option of regionMasters$ | async"
                   [nzLabel]="option.regionName"
                   [nzValue]="option.regionId"
                   ></nz-option>

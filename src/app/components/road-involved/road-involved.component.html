@@ -24,12 +24,12 @@
     <div nz-col  nzSpan="6" ><label>Road Name</label><br/>
       <nz-select formControlName="hid"
       [(ngModel)]="selectedHighway">
-      <ng-container  *ngFor="let option of highway">
-        <nz-option
+
+        <nz-option *ngFor="let option of highway$ | async"
         [nzLabel]="option.hname"
         [nzValue]="option.hid"
         ></nz-option>
-      </ng-container>
+
 
 
       </nz-select>
@@ -57,12 +57,12 @@
     <div nz-col  nzSpan="6" ><label>Road Surface Condition</label><br/>
       <nz-select formControlName="roadSurfaceId"
       [(ngModel)]="selectedRoadSurfaceCondition">
-      <ng-container  *ngFor="let option of roadSurfaceCondition">
-        <nz-option
+
+        <nz-option *ngFor="let option of roadSurfaceCondition$ | async"
         [nzLabel]="option.roadSurfaceName"
         [nzValue]="option.roadSurfaceId"
         ></nz-option>
-      </ng-container>
+
 
 
       </nz-select>
@@ -74,17 +74,17 @@
     <div nz-col  nzSpan="6" ><label>Carriage way Type</label><br/>
       <nz-select formControlName="roadCarriagewayId"
       [(ngModel)]="selectedCarriageWayType">
-      <ng-container  *ngFor="let option of carriageWayType">
-        <nz-option
+
+        <nz-option  *ngFor="let option of carriageWayType$ | async"
         [nzLabel]="option.roadCarriagewayName"
         [nzValue]="option.roadCarriagewayId"
         ></nz-option>
-      </ng-container>
+
 
 
       </nz-select>
      </div>
-.3
+
 
 
  </div>

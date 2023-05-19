@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -21,6 +21,13 @@ getAll(): Observable<Array<T>> {
 
   return this.httpClient.get<T[]>(this.APIUrl);
 
+}
+getAllByLanguage(language: string): Observable<Array<T>>
+{
+  const params = new HttpParams().set('language', language);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+  return this.httpClient.get<T[]>(this.APIUrl,{ params, headers });
 }
 get(id: string | number): Observable<[T]> {
   return this.httpClient.get<[T]>(this.APIUrl + "/" + id);

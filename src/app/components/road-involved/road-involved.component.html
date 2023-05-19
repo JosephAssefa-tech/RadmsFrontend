@@ -40,12 +40,12 @@
     <div nz-col  nzSpan="6" ><label>Pavement Type</label><br/>
       <nz-select formControlName="pavementTypeId"
       [(ngModel)]="selectedPavementType">
-      <ng-container  *ngFor="let option of pavementType">
+
         <nz-option
-        [nzLabel]="option.pavementName"
-        [nzValue]="option.pavementTypeId"
+        *ngFor="let option of pavements$ | async" [nzValue]="option.pavementTypeId" [nzLabel]="option.pavementName"
+
         ></nz-option>
-      </ng-container>
+
 
 
       </nz-select>

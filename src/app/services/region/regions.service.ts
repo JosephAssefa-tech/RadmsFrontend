@@ -6,11 +6,18 @@ import { RegionBasedSummaryData, SummaryCount } from 'src/app/models/get/Summary
 import { SummaryData } from 'src/app/models/get/SummaryData';
 import { RegionMaster } from 'src/app/models/post/region-master-model';
 import { environment } from 'src/environments/environment';
+import { LanguageService } from '../language-change/language-change-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegionsService extends BaseService<RegionMaster> {
+  //the below is for listing regions
+
+  private regionsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  public regions$ = this.regionsSubject.asObservable();
+
+
   private deathCountSubject = new BehaviorSubject<number>(0);
   private seriousCountSubject = new BehaviorSubject<number>(0);
   private slightCountSubject = new BehaviorSubject<number>(0);
@@ -21,10 +28,13 @@ export class RegionsService extends BaseService<RegionMaster> {
   slightCount$ = this.slightCountSubject.asObservable();
   propertyDamageCount$ = this.propertyDamageCountSubject.asObservable();
 
-
+ listOfRegions=`${environment.apiUrl}RegionMaster`;
   totalVictimEndPoint=`${environment.apiUrl}VictimDetailsTransaction/grouped-region-data?`;
-  constructor(protected httpClient: HttpClient) {
+  constructor(protected httpClient: HttpClient,private languageService:LanguageService) {
     super(httpClient);
+    this.languageService.selectedLanguage$.subscribe(language => {
+    this.getRegionsListByLanguage(language);
+    });
   }
 
   getResourceUrl(): string {
@@ -43,4 +53,23 @@ export class RegionsService extends BaseService<RegionMaster> {
     this.slightCountSubject.next(slightCount);
     this.propertyDamageCountSubject.next(propertyDamageCount);
   }
+  getRegionsListByLanguage(language:string):Observable<any[]> {
+    const params = { language: language };
+    this.httpClient.get<any[]>(this.listOfRegions, { params: params })
+      .subscribe(regions => {
+        this.regionsSubject.next(regions); // Update the regions data in the BehaviorSubject
+      });
+
+    return this.regionsSubject.asObservable(); // Return the Observable of the BehaviorSubject
+
+
+  }
+
+  // addRegion(region: any) {
+  //   // Your logic to add the region to the backend
+  //   this.regions.push(region); // Append the newly added region to the existing regions
+  // }
+
+
+
 }

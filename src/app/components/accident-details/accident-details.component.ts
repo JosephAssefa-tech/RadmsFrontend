@@ -794,10 +794,10 @@ console.log("jiji")
   this.route.navigate(['/roadInvolved']);
 
  }
- switchLanguage(language: string) {
-  this.languageService.selectedLanguage = language;
+//  switchLanguage(language: string) {
+//   this.languageService.selectedLanguage = language;
 
-}
+// }
   }
 
 

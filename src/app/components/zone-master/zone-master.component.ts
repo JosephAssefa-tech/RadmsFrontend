@@ -1,47 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { NzButtonType } from 'ng-zorro-antd/button';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { CityMaster } from 'src/app/models/get/city';
-import { CityService } from 'src/app/services/city/city.service';
+import { ZoneMaster } from 'src/app/models/get/zone';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
-import { CityModalComponent } from 'src/app/shared/city-modal/city-modal.component';
-@Component({
-  selector: 'app-city-master',
-  templateUrl: './city-master.component.html',
-  styleUrls: ['./city-master.component.scss']
-})
-export class CityMasterComponent implements OnInit {
-  cities: CityMaster[]=[];
-  validateForm!: FormGroup;
+import { ZoneMasterService } from 'src/app/services/zone-service/zone-master.service';
+import { SharedModalComponent } from 'src/app/shared/shared-modal/shared-modal.component';
+import { ZoneModalComponent } from 'src/app/shared/zone-modal/zone-modal.component';
 
-  constructor(private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private cityService:CityService) {}
+@Component({
+  selector: 'app-zone-master',
+  templateUrl: './zone-master.component.html',
+  styleUrls: ['./zone-master.component.scss']
+})
+export class ZoneMasterComponent implements OnInit {
+  zones: ZoneMaster[]=[];
+
+  constructor(private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private zoneService:ZoneMasterService) { }
 
   ngOnInit(): void {
     this.languageService.selectedLanguage$.subscribe(language => {
-      this.cityService.getCitiesListByLanguage(language).subscribe((city: any[]) => {
-        this.cities = city;
+      this.zoneService.getZonesListByLanguage(language).subscribe((zoness: any[]) => {
+        this.zones = zoness;
 
       });});
-      this.loadCityies();
+      this.loadZones();
   }
-  loadCityies()
+  loadZones()
   {
-    this.cityService.cities$.subscribe(citys => {
-      this.cities = citys;
+    this.zoneService.zones$.subscribe(regions => {
+      this.zones = regions;
 
     });
 
   }
-
-  submitForm(): void {
-    // Do something with the form data here
-  }
   showModal(): void {
     const modalRef = this.modal.create({
       nzTitle: 'Zone Master',
-      nzContent: CityModalComponent,
+      nzContent: ZoneModalComponent,
       nzFooter: null,
       nzOnOk: () => {
         // This function will be called when the user clicks the OK button in the modal
@@ -50,8 +47,8 @@ export class CityMasterComponent implements OnInit {
       }
     });
   }
-  editCity(zoneId: number) {
-    this.cityService.update(zoneId);
+  editZone(zoneId: number) {
+    this.zoneService.update(zoneId);
   }
   openDeleteConfirmation(zoneId: number) {
     this.modal.confirm({
@@ -69,14 +66,14 @@ export class CityMasterComponent implements OnInit {
       }
     });
   }
-  deleteZone(cityId:number)
+  deleteZone(zoneId:number)
   {
-    this.cityService.delete(cityId).subscribe(
+    this.zoneService.delete(zoneId).subscribe(
       (response) => {
         // Success logic, if needed
         // Remove the deleted region from the regions array
-        const updatedRegions = this.cities.filter(city => city.cityId !== cityId);
-        this.cities = updatedRegions;
+        const updatedRegions = this.zones.filter(zone => zone.zoneId !== zoneId);
+        this.zones = updatedRegions;
       },
       (error) => {
         console.error('Error deleting region:', error);
@@ -92,5 +89,4 @@ export class CityMasterComponent implements OnInit {
   errorNotification(type:string):void{
     this.notification.error("Data was not Deleted",'',{nzPlacement:'topRight'})
   }
-
 }

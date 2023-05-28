@@ -1,0 +1,12 @@
+.custom-confirm-modal .ant-modal-confirm-body {
+  text-align: center !important;
+}
+
+.custom-confirm-modal .ant-modal-confirm-btns {
+  display: flex !important;
+  justify-content: center !important;
+}
+::ng-deep .custom-confirm-modal .ant-modal-confirm-btns .ant-btn-danger {
+  background-color: red;
+  color: white;
+}

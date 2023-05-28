@@ -12,6 +12,10 @@ import { VictimDetailsComponent } from './components/victim-details/victim-detai
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
 import { AdvanceSearchComponent } from './components/advance-search/advance-search.component';
+import { ZoneMasterComponent } from './components/zone-master/zone-master.component';
+import { WoredaMasterComponent } from './components/woreda-master/woreda-master.component';
+import { CityMasterComponent } from './components/city-master/city-master.component';
+import { SubcityMasterComponent } from './components/subcity-master/subcity-master.component';
 
 const routes: Routes = [
    //{ path: '', pathMatch: 'full', redirectTo: '/welcome' },
@@ -25,6 +29,10 @@ const routes: Routes = [
   {path:'about',component:AboutComponent},
   {path:'welcome',component:WelcomeComponent},
   {path:'region',component:RegionComponent},
+  {path:'zone',component:ZoneMasterComponent},
+  {path:'woreda',component:WoredaMasterComponent},
+  {path:'city',component:CityMasterComponent},
+  {path:'subcity',component:SubcityMasterComponent},
   {path:'victim',component:VictimDetailsComponent},
   {path:'vehicle',component:VehicleDetailsComponent},
   {path:'roadInvolved',component:RoadInvolvedComponent},

@@ -1,10 +1,23 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-  <nz-form-item>
-    <nz-form-label [nzRequired]="true">City Name</nz-form-label>
-    <nz-form-control [nzErrorTip]="'Please input city name!'">
-      <input nz-input formControlName="city" placeholder="city name">
-    </nz-form-control>
-  </nz-form-item>
 
-  <button nz-button nzType="primary">Add</button>
-</form>
+<button class="add-region" style="margin-left: 71vw;"nz-button nzType="primary" (click)="showModal()">Add City</button>
+<nz-table #middleTable nzSize="middle" [nzData]="cities">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>City Names</th>
+      <th>Zone Names</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let city of cities">
+      <td>{{ city.cityId }}</td>
+      <td>{{ city.cityName }}</td>
+      <td>{{ city.woreda?.woredaName }}</td>
+      <td>
+        <a href="#" (click)="editCity(city.cityId)">Edit</a> |
+        <a  (click)="openDeleteConfirmation(city.cityId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

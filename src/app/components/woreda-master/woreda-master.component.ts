@@ -1,47 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { NzButtonType } from 'ng-zorro-antd/button';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { CityMaster } from 'src/app/models/get/city';
-import { CityService } from 'src/app/services/city/city.service';
+import { WoredaMaster } from 'src/app/models/get/woreda';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
-import { CityModalComponent } from 'src/app/shared/city-modal/city-modal.component';
-@Component({
-  selector: 'app-city-master',
-  templateUrl: './city-master.component.html',
-  styleUrls: ['./city-master.component.scss']
-})
-export class CityMasterComponent implements OnInit {
-  cities: CityMaster[]=[];
-  validateForm!: FormGroup;
+import { WoredaMasterService } from 'src/app/services/woreda-service/woreda-master.service';
+import { WoredaModalComponent } from 'src/app/shared/woreda-modal/woreda-modal.component';
+import { ZoneModalComponent } from 'src/app/shared/zone-modal/zone-modal.component';
 
-  constructor(private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private cityService:CityService) {}
+@Component({
+  selector: 'app-woreda-master',
+  templateUrl: './woreda-master.component.html',
+  styleUrls: ['./woreda-master.component.scss']
+})
+export class WoredaMasterComponent implements OnInit {
+  woredas: WoredaMaster[]=[];
+
+  constructor(private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private woredaService:WoredaMasterService) { }
 
   ngOnInit(): void {
     this.languageService.selectedLanguage$.subscribe(language => {
-      this.cityService.getCitiesListByLanguage(language).subscribe((city: any[]) => {
-        this.cities = city;
+      this.woredaService.getWoredasListByLanguage(language).subscribe((woredass: any[]) => {
+        this.woredas = woredass;
+        console.log(this.woredas)
 
       });});
-      this.loadCityies();
+      this.loadWoredas();
   }
-  loadCityies()
+  loadWoredas()
   {
-    this.cityService.cities$.subscribe(citys => {
-      this.cities = citys;
+    this.woredaService.woredas$.subscribe(woreds => {
+      this.woredas = woreds;
 
     });
 
   }
-
-  submitForm(): void {
-    // Do something with the form data here
-  }
   showModal(): void {
     const modalRef = this.modal.create({
       nzTitle: 'Zone Master',
-      nzContent: CityModalComponent,
+      nzContent: WoredaModalComponent,
       nzFooter: null,
       nzOnOk: () => {
         // This function will be called when the user clicks the OK button in the modal
@@ -50,8 +48,8 @@ export class CityMasterComponent implements OnInit {
       }
     });
   }
-  editCity(zoneId: number) {
-    this.cityService.update(zoneId);
+  editWoreda(zoneId: number) {
+    this.woredaService.update(zoneId);
   }
   openDeleteConfirmation(zoneId: number) {
     this.modal.confirm({
@@ -69,14 +67,14 @@ export class CityMasterComponent implements OnInit {
       }
     });
   }
-  deleteZone(cityId:number)
+  deleteZone(woredaId:number)
   {
-    this.cityService.delete(cityId).subscribe(
+    this.woredaService.delete(woredaId).subscribe(
       (response) => {
         // Success logic, if needed
         // Remove the deleted region from the regions array
-        const updatedRegions = this.cities.filter(city => city.cityId !== cityId);
-        this.cities = updatedRegions;
+        const updatedRegions = this.woredas.filter(zone => zone.woredaId !== woredaId);
+        this.woredas = updatedRegions;
       },
       (error) => {
         console.error('Error deleting region:', error);

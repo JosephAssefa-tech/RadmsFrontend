@@ -40,8 +40,12 @@ post(resource: any) {
   return this.httpClient.post(this.APIUrl ,resource,{headers:{"Content-Type":"application/json"}});
 
 }
-delete(id: string | number) {
-  return this.httpClient.delete(this.APIUrl + "/" + id);
+delete(id: number | number) {
+  console.log("deleteddIdddd")
+  console.log(id)
+    const params = new HttpParams().set('regionId', id);
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+  return this.httpClient.delete(this.APIUrl  ,{ params, headers });
 }
 update(resource: any) {
   return this.httpClient.put(`${this.APIUrl}/EditClient`, resource)
@@ -49,3 +53,5 @@ update(resource: any) {
 }
 
 }
+// const params = { language: language };
+// return this.httpClient.get<any[]>(this.listOfRegions, { params: params });

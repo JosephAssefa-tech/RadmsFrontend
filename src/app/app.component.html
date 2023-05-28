@@ -18,26 +18,12 @@
       </li>
       <li nz-submenu nzTitle="Locational Referencing System" nzIcon="appstore">
         <ul>
-          <li nz-menu-item (click)="showModal()">Region Master</li>
-          <li nz-menu-item (click)="cityMaster()">City Master</li>
-          <li nz-submenu nzTitle="Submenu">
-            <ul>
-              <li nz-menu-item>Sub City Master</li>
+          <li nz-menu-item (click)="regionTable()">Region Master</li>
+          <li nz-menu-item (click)="zoneTable()">Zone Master</li>
+          <li nz-menu-item (click)="woredaTable()">Woreda Master </li>
+          <li nz-menu-item (click)="cityTable()">City Master</li>
+          <li nz-menu-item (click)="subcityTable()">Subcity Master</li>
 
-            </ul>
-          </li>
-          <li nz-menu-item>Zone Master</li>
-          <li nz-menu-item>Woreda Master </li>
-          <li nz-menu-item>Kebela Master</li>
-          <li nz-submenu nzTitle="Submenu">
-            <ul>
-              <li nz-menu-item>Junction Type</li>
-              <li nz-menu-item>Land Mark Type</li>
-              <li nz-menu-item>Highway Master</li>
-              <li nz-menu-item>Land Mark Type</li>
-              <li nz-menu-item>Highway Owner Master</li>
-            </ul>
-          </li>
         </ul>
       </li>
       <li nz-menu-item  (click)="selectMenuItem('accident-data')"   style="color:white">
@@ -59,14 +45,15 @@
     <nz-header style="background: #fff; padding-left: 15px;height: auto;">
       <div style="display:flex;justify-content: space-between;padding-right:15px;">
         <h2><b>Hi, Welcome back!</b></h2>
-        <!-- <div class="language">language
-            <nz-select ngModel="lucy">
-              <nz-option nzValue="jack" nzLabel="English"></nz-option>
-              <nz-option nzValue="amahric" nzLabel="አማርኛ"></nz-option>
-              <nz-option nzValue="tigrya" nzLabel="Tigryan"></nz-option>
-              <nz-option nzValue="oromo" nzLabel="Afan Oromo"></nz-option>
-            </nz-select>
-        </div> -->
+        <div class="language">
+          Language
+          <nz-select [(ngModel)]="selectedLanguage" (ngModelChange)="switchLanguage(selectedLanguage)">
+            <nz-option nzValue="english" nzLabel="English"></nz-option>
+            <nz-option nzValue="amharic" nzLabel="አማርኛ"></nz-option>
+            <nz-option nzValue="tigrya" nzLabel="Tigryan"></nz-option>
+            <nz-option nzValue="oromo" nzLabel="Afan Oromo"></nz-option>
+          </nz-select>
+        </div>
 
       </div>
 
@@ -80,6 +67,33 @@
     <nz-tab nzTitle="Help">help</nz-tab>
 
   </nz-tabset>
+  <div>
+    <nz-date-picker
+
+    nzShowTime
+    nzFormat="yyyy-MM-dd HH:mm:ss"
+
+    nzPlaceHolder="Start"
+
+  ></nz-date-picker>
+  <nz-date-picker
+    #endDatePicker
+
+    nzShowTime
+    nzFormat="yyyy-MM-dd HH:mm:ss"
+
+    nzPlaceHolder="End"
+
+  ></nz-date-picker>
+  <button nz-button>
+    Search
+  </button>
+  </div>
+  <nz-upload nzAccept=".xlsx">
+    <button nz-button>
+      <i nz-icon nzType="import"></i> Import Data
+    </button>
+  </nz-upload>
 
 </div>
 

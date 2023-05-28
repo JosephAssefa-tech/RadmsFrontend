@@ -5,6 +5,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { RegionComponent } from './components/region/region.component';
 import { Router } from '@angular/router';
+import { LanguageService } from './services/language-change/language-change-service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  selectedLanguage: string = 'english';
   isAuthenticated=false;
   isCollapsed = false;
   defaultFileList: NzUploadFile[] = [
@@ -24,7 +26,7 @@ export class AppComponent {
     }]
 
   fileList1 = [...this.defaultFileList];
-constructor(private router:Router,private modal: NzModalService, private fb: FormBuilder)
+constructor(private languageService:LanguageService,private router:Router,private modal: NzModalService, private fb: FormBuilder)
 {
 
 }
@@ -42,25 +44,40 @@ constructor(private router:Router,private modal: NzModalService, private fb: For
         case 'region':
           this.router.navigate(['/region']);
           break;
+        case 'zone':
+          this.router.navigate(['/zone']);
+          break;
       default:
         this.router.navigate(['/welcome']);
         break;
     }
   }
-  showModal(): void {
-    // const modalRef = this.modal.create({
-    //   nzTitle: 'Region Master',
-    //   nzContent: RegionComponent,
-    //   nzFooter: null
-    // });
+  regionTable(): void {
+
     this.router.navigate(['/region']);
 }
-cityMaster(): void {
-  const modalRef = this.modal.create({
-    nzTitle: 'City Master ',
-    nzContent: CityMasterComponent,
-    nzFooter: null
-  });
+zoneTable():void{
+  this.router.navigate(['/zone']);
 }
+woredaTable():void{
+  this.router.navigate(['/woreda']);
+}
+subcityTable():void{
+  this.router.navigate(['/subcity']);
+}
+cityTable():void{
+  this.router.navigate(['/city']);
 
+}
+// cityMaster(): void {
+//   const modalRef = this.modal.create({
+//     nzTitle: 'City Master ',
+//     nzContent: CityMasterComponent,
+//     nzFooter: null
+//   });
+// }
+switchLanguage(language: string) {
+  this.languageService.selectedLanguage = language;
+
+}
 }

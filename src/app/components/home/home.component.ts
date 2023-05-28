@@ -21,6 +21,8 @@ import { TrendAnalysisService } from 'src/app/services/trend-analysis/trend-anal
 import { TrendAnalysisResponse } from 'src/app/models/get/TrendAnalysisResponse';
 import { ChartDataset, ChartOptions } from 'chart.js';
 import { RegionMaster } from 'src/app/models/post/region-master-model';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { LanguageService } from 'src/app/services/language-change/language-change-service';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +32,7 @@ import { RegionMaster } from 'src/app/models/post/region-master-model';
 
 export class HomeComponent implements OnInit,AfterViewInit  {
 
-
+  regionMasters$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   /////////////
   trendAnalysisData: TrendAnalysisResponse[] = [];
   regionMasters: RegionMaster[]=[];
@@ -40,7 +42,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   myForm = new FormGroup({
     regionId: new FormControl('',Validators.required)
   });
-  regionIdd: number;
+  regionIdd: any;
   data: RegionBasedSummaryData;
   deathCount: number;
   seriousCount: number;
@@ -76,7 +78,8 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   severityData : SummaryData[];
   blackSpots: any[];
 
-  constructor(private trendAnalysisService:TrendAnalysisService, public regionService:RegionsService,private blackSpotService: BlackSpotService,private accidentDetailTransactionService:AccidentDetailsTransactionService,private victimDetailService:VictimDetailService
+  constructor(private languageService:LanguageService,
+    private trendAnalysisService:TrendAnalysisService, public regionService:RegionsService,private blackSpotService: BlackSpotService,private accidentDetailTransactionService:AccidentDetailsTransactionService,private victimDetailService:VictimDetailService
    , private mapServicee:MapService,private route:Router) {
 
 
@@ -85,7 +88,14 @@ export class HomeComponent implements OnInit,AfterViewInit  {
    // this.mapp = this.mapServicee.createMap();
   }
   ngOnInit(): void {
-    this.GetRegionMaster();
+    this.languageService.selectedLanguage$.subscribe(language => {
+      this.GetRegionMaster(language);
+
+
+    });
+
+
+   // this.GetRegionMaster();
     this.TrendanalysisService();
 
     this.blackSpotService.getBlackSpots().subscribe(data=>{
@@ -207,12 +217,20 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   }
 
 
-  GetRegionMaster()
+  GetRegionMaster(language:string)
   {
 
-    this.regionService.getAll().subscribe((response)=>{
-      this.regionMasters=response;
-    })
+    this.regionService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.regionMasters$ .next(response);
+        // Reset the selected option when the options change
+        this.regionIdd = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
 
     console.log("regionssssssss")
 

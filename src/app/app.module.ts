@@ -99,7 +99,13 @@ import { VictimDetailsComponent } from './components/victim-details/victim-detai
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { RoadInvolvedComponent } from './components/road-involved/road-involved.component';
 import { AdvanceSearchComponent } from './components/advance-search/advance-search.component';
-
+import { WoredaMasterComponent } from './components/woreda-master/woreda-master.component';
+import { SubcityMasterComponent } from './components/subcity-master/subcity-master.component';
+import { WoredaModalComponent } from './shared/woreda-modal/woreda-modal.component';
+import { SubcityModalComponent } from './shared/subcity-modal/subcity-modal.component';
+import { ZoneMasterComponent } from './components/zone-master/zone-master.component';
+import{ZoneModalComponent} from './shared/zone-modal/zone-modal.component';
+import { CityModalComponent } from './shared/city-modal/city-modal.component';
 
 registerLocaleData(en);
 
@@ -125,6 +131,13 @@ registerLocaleData(en);
     VehicleDetailsComponent,
     RoadInvolvedComponent,
     AdvanceSearchComponent,
+    WoredaMasterComponent,
+    SubcityMasterComponent,
+    WoredaModalComponent,
+    ZoneModalComponent,
+    SubcityModalComponent,
+    ZoneMasterComponent,
+    CityModalComponent,
   ],
   imports: [
     BrowserModule,

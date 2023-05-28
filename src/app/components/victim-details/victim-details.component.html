@@ -133,7 +133,7 @@
 
      <div nz-col nzSpan="6" >Accident Serverity<label></label><br/>
       <nz-select style="width:150px" [(ngModel)]="severityId" formControlName="severityId">
-        <nz-option       *ngFor="let option of accidentSeverity"
+        <nz-option       *ngFor="let option of accidentSeverity$ | async"
         [nzLabel]="option.severityType"
         [nzValue]="option.severityId"
         ></nz-option>

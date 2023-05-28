@@ -17,6 +17,9 @@ import { AccidentDetail } from 'src/app/models/post/accident-post-model';
 import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-transaction';
 import { VechileMasterService } from 'src/app/services/vechile-masters/vechile-master.service';
 import { VechicleMasterEntity } from 'src/app/models/get/vechicle-master';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+
+import { LanguageService } from 'src/app/services/language-change/language-change-service';
 
 
 @Component({
@@ -26,10 +29,18 @@ import { VechicleMasterEntity } from 'src/app/models/get/vechicle-master';
 })
 export class RoadInvolvedComponent implements OnInit {
   count = 1;
+  pavements$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  highway$ :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  carriageWayType$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  roadSurfaceCondition$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+
+
+
+  selectedPavementType:any;
 
   selectedAccident:any;
   selectedHighway?:any;
-  selectedPavementType?:any;
+
   selectedRoadSurfaceCondition?:any;
   selectedCarriageWayType?:any;
 
@@ -56,7 +67,7 @@ export class RoadInvolvedComponent implements OnInit {
    form:FormGroup;
 
   constructor(
-
+    private languageService:LanguageService,
     private roadsInvolvedDetailService:RoadsInvolvedDetailService,
     private accidentDetailTransactionService:AccidentDetailsTransactionService,
     private highwayService:HighwayMasterService,
@@ -76,6 +87,13 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+    this.languageService.selectedLanguage$.subscribe(language => {
+      this.GetPavementTypeDetail(language);
+      this.GetHighwayDetail(language);
+      this.GetRoadSurfaceConditionDetail(language);
+      this.GetRoadCarrriageWayDetail(language);
+
+    });
       // Subscribe to the newRecordId observable
       this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
         if (id) {
@@ -84,10 +102,10 @@ this.form=this.fb.group({
         }
       });
 this.getAccident();
-this.GetHighwayDetail();
-this.GetPavementTypeDetail();
-this.GetRoadCarrriageWayDetail();
-this.GetRoadSurfaceConditionDetail();
+//this.GetHighwayDetail();
+//this.GetPavementTypeDetail();
+//this.GetRoadCarrriageWayDetail();
+//this.GetRoadSurfaceConditionDetail();
 
   }
 
@@ -105,37 +123,69 @@ this.GetRoadSurfaceConditionDetail();
 
   }
 
-  GetHighwayDetail()
+  GetHighwayDetail(language:string)
   {
-    this.highwayService.getAll().subscribe((response:HighwayMaster[])=>{
-      this.highway=response;
-    });
+    this.highwayService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.highway$ .next(response);
+        // Reset the selected option when the options change
+        this.selectedHighway = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
 
 
 
-  GetPavementTypeDetail()
+  GetPavementTypeDetail(language:string)
   {
-    this.pavementTypeService.getAll().subscribe((response:PavementType[])=>{
-      this.pavementType=response;
-    });
+    this.pavementTypeService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.pavements$ .next(response);
+        // Reset the selected option when the options change
+        this.selectedPavementType = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
 
 
-  GetRoadSurfaceConditionDetail()
+  GetRoadSurfaceConditionDetail(language:string)
   {
-    this.roadSurfaceConditionService.getAll().subscribe((response:RoadSurfaceCondition[])=>{
-      this.roadSurfaceCondition=response;
-    });
+    this.roadSurfaceConditionService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.roadSurfaceCondition$.next(response);
+        // Reset the selected option when the options change
+        this.selectedRoadSurfaceCondition = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
 
 
 
-  GetRoadCarrriageWayDetail()
+  GetRoadCarrriageWayDetail(language:string)
   {
-    this.carriageWayTypeService.getAll().subscribe((response:RoadCarriageway[])=>{
-      this.carriageWayType=response;
-    });
+    this.carriageWayTypeService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.carriageWayType$.next(response);
+        // Reset the selected option when the options change
+        this.selectedCarriageWayType = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
 
 

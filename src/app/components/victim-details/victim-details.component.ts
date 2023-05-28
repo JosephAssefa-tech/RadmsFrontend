@@ -23,6 +23,8 @@ import { PedestrainMovementService } from 'src/app/services/pedestrain-movements
 import { VechicleMasterEntity } from 'src/app/models/get/vechicle-master';
 import { VechileMasterService } from 'src/app/services/vechile-masters/vechile-master.service';
 import { VictimDetailService } from 'src/app/services/victim-details/victim-detail.service';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { LanguageService } from 'src/app/services/language-change/language-change-service';
 
 @Component({
   selector: 'app-victim-details',
@@ -31,6 +33,7 @@ import { VictimDetailService } from 'src/app/services/victim-details/victim-deta
 })
 export class VictimDetailsComponent implements OnInit {
   count = 1;
+  accidentSeverity$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
    customId: string | undefined;
    lastThreeDigits = '000';
@@ -74,7 +77,7 @@ export class VictimDetailsComponent implements OnInit {
 
 
   });
-  // {
+  // {Fngonit
 
   //   "victimId": "jo1",
   //   "victimName": "jo",
@@ -109,7 +112,7 @@ export class VictimDetailsComponent implements OnInit {
    form:FormGroup;
 
   constructor(
-
+    private languageService:LanguageService,
     private accidentDetailTransactionService:AccidentDetailsTransactionService,
 
     private victimTypeService:VictimTypeService,
@@ -137,6 +140,12 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+    this.languageService.selectedLanguage$.subscribe(language => {
+      this.GetAccidentSeverityDetail(language);
+
+
+    });
+
     this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
       if (id) {
         // Set the newly created record's ID in the form
@@ -146,7 +155,7 @@ this.form=this.fb.group({
 
     this.GetAccidentSeverity();
 this.GetVictimTypeDetail();
-this.GetAccidentSeverityDetail();
+//this.GetAccidentSeverityDetail();
 this.GetEmploymentStatusDetail();
 this.GetHealthConditionDetail();
 this.GetPedestrianMovementDetail();
@@ -194,11 +203,19 @@ this.GetVictimMovementDetail();
   }
 
 
-  GetAccidentSeverityDetail()
+  GetAccidentSeverityDetail(language:string)
   {
-    this.accidentSeverityService.getAll().subscribe((response:SeverityLevel[])=>{
-      this.accidentSeverity=response;
-    });
+    this.accidentSeverityService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.accidentSeverity$ .next(response);
+        // Reset the selected option when the options change
+        this.severityId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
 
 

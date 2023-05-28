@@ -55,6 +55,8 @@ import { WoredaMasterService } from 'src/app/services/woreda-service/woreda-mast
 import { ZoneMaster } from 'src/app/models/get/zone';
 import { ZoneMasterService } from 'src/app/services/zone-service/zone-master.service';
 import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-transaction';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { LanguageService } from 'src/app/services/language-change/language-change-service';
 
 @Component({
   selector: 'app-accident-details',
@@ -63,6 +65,38 @@ import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-
 })
 //create an angular car accident data management system?
 export class AccidentDetailsComponent implements OnInit {
+  options$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  polices$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  regionMasters$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  zoneMasters$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  woredaMasters$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  cityMasters$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  subCityList$ :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  accidentTypes$ :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  weatherConditions$ :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  accidentSeverity$  :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  highwayNames$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  highwayTypes$  :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  pavementTypes$   :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  collisionTypes$ :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  impactTypes$   :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  roadSurfaces$  :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  landMarkTypes$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  roadCarriagewayTypes$  :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  junctionTypes$   :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  roadspeeds$  :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  lightConditions$   :BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  airConditions$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  terrianTypes$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+
+
+
+
+  selectedOption: any;
+  policeOption:any;
+  regionId:any;
+
+  //currentLanguage = 'english';
   myForm = new FormGroup({
     userID:new FormControl(1),
     lat:new FormControl('',Validators.required),
@@ -157,7 +191,7 @@ policeRecordNumber: any;
 psid: any;
 
 
-regionId: any;
+
 zoneId: any;
 woredaId: any;
 cityId: any;
@@ -182,7 +216,7 @@ junctionTypeId: any;
 speedLimitId: any;
 lightCondtionId: any;
 airConditionId: any;
-terrianTypeId:any;
+terrianTypeIdd:any;
 causeofAccidentId:any;
 accidentLocalName: any;
 
@@ -198,6 +232,7 @@ numberofVictims: any;
    form:FormGroup;
 
   constructor(
+    private languageService:LanguageService,
     private formService:FormsBaseStateService,
     public mapService:MapService,
     private userMasterService:UserMasterService,
@@ -244,88 +279,62 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
-
-
-    // this.myForm = new FormGroup({
-    //   lat:new FormControl('',Validators.required),
-    //   long:new FormControl('',Validators.required),
-    //   collisionType:new FormControl('',Validators.required),
-    //   dateAndTime: new FormControl('',Validators.required),
-    //   piname: new FormControl('',Validators.required),
-    //   impactType:new FormControl('',Validators.required),
-    //   policeRecordNumber: new FormControl('',Validators.required),
-    //   ps: new FormControl('',Validators.required),
-    //   region: new FormControl('',Validators.required),
-    //   zone: new FormControl('',Validators.required),
-    //   woreda: new FormControl('',Validators.required),
-    //   city: new FormControl('',Validators.required),
-    //   subcity: new FormControl('',Validators.required),
-    //   kebeleName: new FormControl('',Validators.required),
-    //   user:new FormControl('',Validators.required),
-    //   accidentType: new FormControl('',Validators.required),
-    //   weatherCond: new FormControl('',Validators.required),
-    //   severity: new FormControl('',Validators.required),
-    //   hidNavigation: new FormControl('',Validators.required),
-    //   pavementType: new FormControl('',Validators.required),
-    //   highwayType: new FormControl('',Validators.required),
-    //   roadSurface: new FormControl('',Validators.required),
-    //   landmarkType: new FormControl('',Validators.required),
-    //   roadCarriageway: new FormControl('',Validators.required),
-    //   junctionType: new FormControl('',Validators.required),
-    //   roadspeed: new FormControl('',Validators.required),
-    //   lightCondtion: new FormControl('',Validators.required),
-    //   airCondition: new FormControl('',Validators.required),
-    //   causeofAccident: new FormControl('',Validators.required),
-    //   accidentLocalName: new FormControl('',Validators.required),
-    //   propertyDamage: new FormControl('',Validators.required),
-    //   numberVechile: new FormControl('',Validators.required),
-    //   numberVictim: new FormControl('',Validators.required),
-    //   terrianType:new FormControl('',Validators.required),
-    //   highwayTypeId:new FormControl('',Validators.required)
-    // });
-
-
-
-
-
-
-
-
-
-
-
-
-
+this.languageService.selectedLanguage$.subscribe(language => {
+  this.GetAccidentDetail(language);
+  this.GetPoliceStatioin(language);
+  this.GetRegionMaster(language);
+  this.GetZoneMaster(language);
+  this.GetWoredaMaster(language);
+  this.GetCityMaster(language);
+  this.GetSubCityMaster(language);
+  this.GetAccidentType(language)
+  this.GetWeatherCondition(language);
+  this.GetAccidentSeverity(language);
+  this.GetHighwayNames(language);
+this.GetHighwayTypes(language);
+this.GetImpactTypes(language);
+this.GetLandmarkTypes(language);
+this.GetRoadCarriageTypes(language);
+this.GetLightCondition(language);
+this.GetAirConditiion(language);
+this.GetJunctionTypes(language);
+this.GetRoadSpeeds(language);
+// this.GetAccidentCauses(language);
+this.GetTerrianTypes(language);
+this.GetPavementTypes(language);
+this.GetRoadSurfaces(language);
+this.GetCollisionType(language);
+});
 
 
     this.GetStateFormValue();
     this.GetLatitude();
     this.GetLongtitude();
-this.GetCollisionType();
-this.GetAccidentDetail();
-this.GetWeatherCondition();
-this.GetPoliceStatioin();
-this.GetSubCityMaster();
-this.GetRegionMaster();
-this.GetZoneMaster();
-this.GetWoredaMaster();
-this.GetCityMaster();
-this.GetAccidentType();
-this.GetAccidentSeverity();
-this.GetHighwayNames();
-this.GetHighwayTypes();
-this.GetPavementTypes();
-this.GetRoadSurfaces();
+// this.GetCollisionType();
+//this.GetAccidentDetail();
+//this.GetWeatherCondition();
+
+// this.GetSubCityMaster();
+//this.GetRegionMaster();
+// this.GetZoneMaster();
+// this.GetWoredaMaster();
+// this.GetCityMaster();
+//this.GetAccidentType();
+// this.GetAccidentSeverity();
+// this.GetHighwayNames();
+// this.GetHighwayTypes();
+//this.GetPavementTypes();
+//this.GetRoadSurfaces();
 this.GetUserType();
-this.GetImpactTypes();
-this.GetLandmarkTypes();
-this.GetRoadCarriageTypes();
-this.GetLightCondition();
-this.GetAirConditiion();
-this.GetJunctionTypes();
-this.GetRoadSpeeds();
-this.GetAccidentCauses();
-this.GetTerrianTypes();
+// this.GetImpactTypes();
+// this.GetLandmarkTypes();
+// this.GetRoadCarriageTypes();
+// this.GetLightCondition();
+// this.GetAirConditiion();
+// this.GetJunctionTypes();
+// this.GetRoadSpeeds();
+// this.GetAccidentCauses();
+// this.GetTerrianTypes();
 
   }
 
@@ -365,7 +374,7 @@ this.GetTerrianTypes();
       this.speedLimitId=values.speedLimitId;
       this.lightCondtionId=values.lightCondtionId;
       this.airConditionId=values.airConditionId;
-      this.terrianTypeId=values.terrianTypeId;
+      this.terrianTypeIdd=values.terrianTypeIdd;
       this.causeofAccidentId=values.causeofAccidentId;
       this.accidentLocalName=values.accidentLocalName;
 
@@ -411,150 +420,323 @@ this.GetTerrianTypes();
   //   console.log(this.selectedSubCity);
 
   // }
-  GetImpactTypes()
+  GetImpactTypes(language:string)
   {
-    this.impactService.getAll().subscribe((res)=>{
-      this.impactTypes=res;
-    })
+    this.impactService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.impactTypes$.next(response);
+        // Reset the selected option when the options change
+        this.impactTypeId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetRegionMaster()
+  GetRegionMaster(lanugage:string)
   {
-    this.regionService.getAll().subscribe((response)=>{
-      this.regionMasters=response;
-    })
+    this.regionService.getAllByLanguage(lanugage).subscribe(
+      (response) => {
+        this.regionMasters$.next(response);
+        // Reset the selected option when the options change
+        this.regionId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
+
 
   }
-  GetZoneMaster()
+  GetZoneMaster(language:string)
   {
-    this.zoneService.getAll().subscribe((response)=>{
-      this.zoneMasters=response;
-    })
+    this.zoneService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.zoneMasters$.next(response);
+        // Reset the selected option when the options change
+        this.zoneId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetWoredaMaster()
+  GetWoredaMaster(language:string)
   {
-    this.woredaService.getAll().subscribe((response)=>{
-      this.woredaMasters=response;
-    })
+    this.woredaService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.woredaMasters$.next(response);
+        // Reset the selected option when the options change
+        this.woredaId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetCityMaster()
+  GetCityMaster(language:string)
   {
-    this.cityMasterService.getAll().subscribe((response)=>{
-      this.cityMasters=response;
-    })
+    this.cityMasterService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.cityMasters$.next(response);
+        // Reset the selected option when the options change
+        this.cityId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetAccidentDetail()
+  GetAccidentDetail(language: string)
   {
-    this.accidentService.getAll().subscribe((response:AccidentCause[])=>{
-      this.accidentDetail=response;
-    });
+    this.accidentService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.options$.next(response);
+        // Reset the selected option when the options change
+        this.selectedOption = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetAccidentType()
+  GetAccidentType(language:string)
   {
-    this.accidentTypeService.getAll().subscribe((response:AccidentType[])=>{
-      this.accidentTypes=response;
-    });
+    this.accidentTypeService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.accidentTypes$.next(response);
+        // Reset the selected option when the options change
+        this.accidentTypeId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetLandmarkTypes()
+  GetLandmarkTypes(language:string)
   {
-    this.landMarkTypeService.getAll().subscribe((response)=>{
-      this.landMarkTypes=response;
-    })
+    this.landMarkTypeService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.landMarkTypes$.next(response);
+        // Reset the selected option when the options change
+        this.landmarkTypeId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetRoadCarriageTypes()
+  GetRoadCarriageTypes(language:string)
   {
-    this.roadCarriwageService.getAll().subscribe((response)=>{
-      this.roadCarriagewayTypes=response;
-    })
+    this.roadCarriwageService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.roadCarriagewayTypes$.next(response);
+        // Reset the selected option when the options change
+        this.roadCarriagewayId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetCollisionType()
+  GetCollisionType(language:string)
   {
-    this.collisionService.getAll().subscribe((res)=>{
-      this.collisionTypes=res;
-    })
+    this.collisionService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.collisionTypes$.next(response);
+        // Reset the selected option when the options change
+        this.collisionTypeId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetAccidentSeverity()
+  GetAccidentSeverity(language:string)
   {
-    this.accidentSeverityService.getAll().subscribe((response)=>{
-      this.accidentSeverity=response;
-    })
+    this.accidentSeverityService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.accidentSeverity$.next(response);
+        // Reset the selected option when the options change
+        this.severityId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetHighwayNames()
+  GetHighwayNames(language:string)
   {
-    this.highwayService.getAll().subscribe((resposne)=>{
-      this.highwayNames=resposne;
-    })
+    this.highwayService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.highwayNames$.next(response);
+        // Reset the selected option when the options change
+        this.hid = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetHighwayTypes()
+  GetHighwayTypes(language:string)
   {
-    this.highwayTypesService.getAll().subscribe((response)=>{
-      this.highwayTypes=response;
-    })
+    this.highwayTypesService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.highwayTypes$.next(response);
+        // Reset the selected option when the options change
+        this.highwayTypeId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
 
   }
-  GetPavementTypes()
+  GetPavementTypes(language:string)
   {
-    this.pavementService.getAll().subscribe((response)=>{
-      this.pavementTypes=response;
-    })
+    this.pavementService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.pavementTypes$.next(response);
+        // Reset the selected option when the options change
+        this.pavementTypeId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetRoadSurfaces()
+  GetRoadSurfaces(language:string)
   {
-    this.roadSurfaceService.getAll().subscribe((response)=>{
-      this.roadSurfaces=response;
-    })
+    this.roadSurfaceService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.roadSurfaces$.next(response);
+        // Reset the selected option when the options change
+        this.roadSurfaceId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
-  GetLightCondition(){
-    this.ligtConditionService.getAll().subscribe((response)=>{
-      this.lightConditions=response;
-    })
+  GetLightCondition(language:string){
+    this.ligtConditionService.getAllByLanguage(language).subscribe(
+      (response) => {
+        this.lightConditions$.next(response);
+        // Reset the selected option when the options change
+        this.lightCondtionId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
 
   }
-GetAirConditiion(){
-  this.airConditionService.getAll().subscribe((response)=>{
-    this.airConditions=response;
-  })
+GetAirConditiion(language:string){
+  this.airConditionService.getAllByLanguage(language).subscribe(
+    (response) => {
+      this.airConditions$.next(response);
+      // Reset the selected option when the options change
+      this.airConditionId = null;
+    },
+    (error) => {
+      console.error('Error retrieving data:', error);
+    }
+  );
 
 }
-GetJunctionTypes(){
-  this.junctionTypeService.getAll().subscribe((response)=>{
-    this.junctionTypes=response;
-  })
+GetJunctionTypes(language:string){
+  this.junctionTypeService.getAllByLanguage(language).subscribe(
+    (response) => {
+      this.junctionTypes$.next(response);
+      // Reset the selected option when the options change
+      this.junctionTypeId = null;
+    },
+    (error) => {
+      console.error('Error retrieving data:', error);
+    }
+  );
 
 }
-GetRoadSpeeds(){
-  this.roadSpeedService.getAll().subscribe((response)=>{
-    this.roadspeeds=response;
-  })
+GetRoadSpeeds(language:string){
+  this.roadSpeedService.getAllByLanguage(language).subscribe(
+    (response) => {
+      this.roadspeeds$ .next(response);
+      // Reset the selected option when the options change
+      this.speedLimitId = null;
+    },
+    (error) => {
+      console.error('Error retrieving data:', error);
+    }
+  );
 
 }
-GetAccidentCauses()
-{
-  this.accidentCauseServices.getAll().subscribe((response)=>{
-    this.accidentCauses=response;
-  })
-}
-  GetWeatherCondition()
+// GetAccidentCauses()
+// {
+//   this.accidentCauseServices.getAll().subscribe((response)=>{
+//     this.accidentCauses=response;
+//   })
+// }
+  GetWeatherCondition(language:string)
   {
-    this.weatherService.getAll().subscribe((response:WeatherCondition[])=>{
-      this.weatherConditions=response;
-    })
+    this.weatherService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.weatherConditions$.next(response);
+        // Reset the selected option when the options change
+        this.weatherCondId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
 
   }
 
-  GetPoliceStatioin()
+  GetPoliceStatioin(language:string)
   {
-    this.policeStationService.getAll()
-    .subscribe((response:PoliceStation[])=>{
+    this.policeStationService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.polices$.next(response);
+        // Reset the selected option when the options change
+        this.policeOption = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
 
-      this.policeStations=response;
-
-    });
   }
-  GetSubCityMaster()
+  GetSubCityMaster(language:string)
   {
-    this.subCityService.getAll().subscribe((response)=>{
-      this.subCityList=response;
-    })
+    this.subCityService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.subCityList$.next(response);
+        // Reset the selected option when the options change
+        this.subCityId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
+
+  }
+  GetTerrianTypes(language:string)
+  {
+    this.terianService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.terrianTypes$.next(response);
+        // Reset the selected option when the options change
+        this.terrianTypeIdd = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
+
+
 
   }
   GetUserType()
@@ -564,13 +746,7 @@ GetAccidentCauses()
     })
 
   }
-  GetTerrianTypes()
 
-    {
-      this.terianService.getAll().subscribe((res)=>{
-        this.terrianTypes=res;
-      })
-    }
   WelcomePage()
   {
     this.errorNotification('error');
@@ -583,10 +759,7 @@ GetAccidentCauses()
     this.route.navigate(['/roadInvolved']);
 
   }
-  // submitForm()
-  // {
-  //  var formData:any=new FormData();
-  //  formData.append("dateTime",this.form.get('dateTime').value);
+
 
  onSubmit(){
 //the below is for vechile
@@ -597,50 +770,7 @@ GetAccidentCauses()
   this.accidentDetailTransactionService.updateNumberOfForms(this.numberOfVehicles);
   this.formService.setFormValues(formData);
 
-//   this.accidnentDetailTransaction=this.myForm.value  as AccidentDetailsTransaction;
-// this.accidnentDetailTransaction={
 
-//   lat:this.myForm.value.lat,
-//   long:this.myForm.value.long,
-//   accidentId:this.myForm.value.accidentId,
-//   accidentLocalName:this.myForm.value.accidentLocalName,
-//   dateAndTime:this.myForm.value.dateAndTime,
-//   kebeleName:this.myForm.value.kebeleName,
-//   piname:this.myForm.value.piname,
-//   policeRecordNumber:this.myForm.value.policeRecordNumber,
-//   numberOfVehicles:this.myForm.value.numberVechile,
-//   propertyDamage:this.myForm.value.propertyDamage,
-//   numberofVictims:this.myForm.value.numberVictim,
-//   accidentType :this.accidentTypes.find(at=>at.accidentTypeId===this.myForm.value.accidentType),
-//   airCondition :this.airConditions.find(at=>at.airConditionId===this.myForm.value.airCondition),
-//   causeofAccident :this.accidentCauses.find(at=>at.accidentCauseId===this.myForm.value.causeofAccident),
-//   city :this.cityMasters.find(at=>at.cityId===this.myForm.value.city),
-//   region :this.regionMasters.find(at=>at.regionId===this.myForm.value.region),
-//   woreda :this.woredaMasters.find(at=>at.woredaId===this.myForm.value.woreda),
-//   zoneMasterEntity :this.zoneMasters.find(at=>at.zoneId===this.myForm.value.zone),
-//   pavementType :this.pavementTypes.find(at=>at.pavementTypeId===this.myForm.value.pavementType),
-//   landmarkType :this.landMarkTypes.find(at=>at.landmarkTypeId===this.myForm.value.landmarkType),
-//   terrianType :this.terrianTypes.find(at=>at.terrianTypeId===this.myForm.value.terrianType),
-//   collisionType :this.collisionTypes.find(at=>at.collisionTypeId===this.myForm.value.collisionType),
-//   hidNavigation :this.highwayNames.find(at=>at.hid===this.myForm.value.hidNavigation),
-//   highwayType :this.highwayTypes.find(at=>at.htypeId===this.myForm.value.highwayType),
-//   impactType :this.impactTypes.find(at=>at.impactTypeId===this.myForm.value.impactType),
-//   junctionType :this.junctionTypes.find(at=>at.junctionTypeId===this.myForm.value.junctionType),
-//   lightCondtion :this.lightConditions.find(at=>at.lightConditionId===this.myForm.value.lightCondtion),
-//   subCity :this.subCityList.find(at=>at.subCityId===this.myForm.value.subcity),
-//   weatherCond :this.weatherConditions.find(at=>at.weatherCondId===this.myForm.value.weatherCond),
-//   user :this.userMasters.find(at=>at.userId===this.myForm.value.user),
-//   speedLimit :this.roadspeeds.find(at=>at.speedLimitId===this.myForm.value.roadspeed),
-//   severity :this.accidentSeverity.find(at=>at.severityId===this.myForm.value.severity),
-//   roadCarriageway :this.roadCarriagewayTypes.find(at=>at.roadCarriagewayId===this.myForm.value.roadCarriageway),
-//   roadSurface :this.roadSurfaces.find(at=>at.roadSurfaceId===this.myForm.value.roadSurface),
-//   ps:this.policeStations.find(at=>at.psid===this.myForm.value.ps),
-//   submissionFlag:1,
-//   psid:"1",
-//   hid:"dss",
-//   //user:1
-
-// };
 
    this.accidentDetailTransactionService.post(this.myForm.value).subscribe((response:any) => {
     this.accidentDetailTransactionService.setNewRecordId(response.data.accidentDetailId);
@@ -654,13 +784,7 @@ GetAccidentCauses()
     }
     this.accidentDetailTransactionService.NoumberOfRoads=response.data.numberOfRoad;
 
-  //  this.accidentDetailTransactionService.accidentDetailGlobalId=response.data.accidentDetailId;
-// console.log("id settting1")
-//      console.log(this.idd);
-//  console.log("id settting2")
-    // this.router.navigate(['second-component'], { queryParams: { id } });
-   //this.id = response;
-   // console.log(response);
+
    });
 console.log("hooj")
 console.log( this.accidentDetailTransactionService.accidentDetailGlobalId);
@@ -670,21 +794,14 @@ console.log("jiji")
   this.route.navigate(['/roadInvolved']);
 
  }
+//  switchLanguage(language: string) {
+//   this.languageService.selectedLanguage = language;
 
+// }
   }
 
 
 
-
-
-//   this.formService.setFormValues(data);
-//   console.log("submitting a form")
-//   console.log(this.myForm.value);
-//   this.accidentDetailTransactionService.post(data).subscribe(response => {
-//     console.log(response);
-//   });
-//   console.log("submitting a form")
-//  }
 
 
 

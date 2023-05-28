@@ -1,9 +1,20 @@
 <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <div nz-col  nzSpan="6" ><label>Pleaase select Region</label><br/>
+    <nz-select formControlName="regionId"
+    [(ngModel)]="regionId"
+     >
+      <nz-option       *ngFor="let option of regionMasters$ | async"
+      [nzLabel]="option.regionName"
+      [nzValue]="option.regionId"
+      ></nz-option>
+
+    </nz-select>
+   </div>
   <nz-form-item>
     <nz-form-label [nzRequired]="true">Region English</nz-form-label>
     <nz-form-control [nzErrorTip]="'Please input region name!'"
                      [nzValidateStatus]="validateForm.controls.regionName.invalid && validateForm.controls.regionName.touched ? 'error' : ''">
-      <input nz-input formControlName="regionName" placeholder="region name">
+      <input nz-input formControlName="zoneName" placeholder="zone name">
     </nz-form-control>
   </nz-form-item>
 

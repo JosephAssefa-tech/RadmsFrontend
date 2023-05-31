@@ -1,5 +1,5 @@
 
-<button class="add-region" style="margin-left: 71vw;"nz-button nzType="primary" (click)="showModal()">Add Region</button>
+<button class="add-region" style="margin-left: 71vw;"nz-button nzType="primary" (click)="showModal('Add Region')">Add Region</button>
 <nz-table #middleTable nzSize="middle" [nzData]="regions">
   <thead>
     <tr>
@@ -13,9 +13,12 @@
       <td>{{ region.regionId }}</td>
       <td>{{ region.regionName }}</td>
       <td>
-        <a href="#" (click)="editRegion(region.regionId)">Edit</a> |
+
+        <a  (click)="onEditRow(region)">Edit</a> |
+        <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
         <a  (click)="openDeleteConfirmation(region.regionId)">Delete</a>
       </td>
     </tr>
   </tbody>
+
 </nz-table>

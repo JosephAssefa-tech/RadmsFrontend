@@ -12,7 +12,11 @@ import { LanguageService } from '../language-change/language-change-service';
   providedIn: 'root'
 })
 export class RegionsService extends BaseService<RegionMaster> {
+  private buttonLabelSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   //the below is for listing regions
+  private selectedRegionRowData$ = new BehaviorSubject<any>(null);
+
 
   private regionsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   public regions$ = this.regionsSubject.asObservable();
@@ -64,11 +68,33 @@ export class RegionsService extends BaseService<RegionMaster> {
 
 
   }
-
+  updateRegions(regions: any[]): void {
+    this.regionsSubject.next(regions);
+  }
   // addRegion(region: any) {
   //   // Your logic to add the region to the backend
   //   this.regions.push(region); // Append the newly added region to the existing regions
   // }
+  addRegion(region: RegionMaster): Observable<any> {
+    return this.httpClient.post<any>(this.listOfRegions, region);
+  }
+
+  updateSelectedRegionRowData(data: any): void {
+    this.selectedRegionRowData$.next(data);
+  }
+
+  getSelectedRegionRowData(): BehaviorSubject<any> {
+    return this.selectedRegionRowData$;
+  }
+
+  getButtonLabel(): Observable<string> {
+    return this.buttonLabelSubject.asObservable();
+  }
+
+  setButtonLabel(label: string) {
+    console.log('Label value:', label);
+    this.buttonLabelSubject.next(label);
+  }
 
 
 

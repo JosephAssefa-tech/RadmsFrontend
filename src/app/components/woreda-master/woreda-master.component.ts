@@ -5,6 +5,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { WoredaMaster } from 'src/app/models/get/woreda';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
+import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
 import { WoredaMasterService } from 'src/app/services/woreda-service/woreda-master.service';
 import { WoredaModalComponent } from 'src/app/shared/woreda-modal/woreda-modal.component';
 import { ZoneModalComponent } from 'src/app/shared/zone-modal/zone-modal.component';
@@ -17,7 +18,7 @@ import { ZoneModalComponent } from 'src/app/shared/zone-modal/zone-modal.compone
 export class WoredaMasterComponent implements OnInit {
   woredas: WoredaMaster[]=[];
 
-  constructor(private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private woredaService:WoredaMasterService) { }
+  constructor(private sharedbuttonService: SharedButtonLabelService,private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private woredaService:WoredaMasterService) { }
 
   ngOnInit(): void {
     this.languageService.selectedLanguage$.subscribe(language => {
@@ -36,9 +37,10 @@ export class WoredaMasterComponent implements OnInit {
     });
 
   }
-  showModal(): void {
+  showModal(action: string): void {
+    this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
-      nzTitle: 'Zone Master',
+      nzTitle: 'Woreda Master',
       nzContent: WoredaModalComponent,
       nzFooter: null,
       nzOnOk: () => {
@@ -48,8 +50,11 @@ export class WoredaMasterComponent implements OnInit {
       }
     });
   }
-  editWoreda(zoneId: number) {
-    this.woredaService.update(zoneId);
+  editWoreda(rowData: any) {
+    this.sharedbuttonService.setButtonLabel('Update');
+    this.woredaService.update(rowData);
+    this.showModal('Update Woreda');
+    // Open the modal component
   }
   openDeleteConfirmation(zoneId: number) {
     this.modal.confirm({

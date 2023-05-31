@@ -8,43 +8,45 @@
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzRequired]="true">የክልል ስም</nz-form-label>
-    <nz-form-control [nzErrorTip]="'Please input region name!'"
-                     [nzValidateStatus]="validateForm.controls.regionNameAm.invalid && validateForm.controls.regionNameAm.touched ? 'error' : ''">
+    <nz-form-label >የክልል ስም</nz-form-label>
+    <nz-form-control                     >
       <input nz-input formControlName="regionNameAm" placeholder="የክልል ስም">
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzRequired]="true">Region Afan Oroma</nz-form-label>
-    <nz-form-control [nzErrorTip]="'Please input region name!'"
-                     [nzValidateStatus]="validateForm.controls.regionNameOr.invalid && validateForm.controls.regionNameOr.touched ? 'error' : ''">
+    <nz-form-label>Region Afan Oroma</nz-form-label>
+    <nz-form-control
+>
       <input nz-input formControlName="regionNameOr" placeholder="region name">
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzRequired]="true">Region Somalia</nz-form-label>
-    <nz-form-control [nzErrorTip]="'Please input region name!'"
-                     [nzValidateStatus]="validateForm.controls.regionNameSo.invalid && validateForm.controls.regionNameSo.touched ? 'error' : ''">
+    <nz-form-label >Region Somalia</nz-form-label>
+    <nz-form-control
+>
       <input nz-input formControlName="regionNameSo" placeholder="region name">
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzRequired]="true">Region Tigiray</nz-form-label>
-    <nz-form-control [nzErrorTip]="'Please input region name!'"
-                     [nzValidateStatus]="validateForm.controls.regionNameTi.invalid && validateForm.controls.regionNameTi.touched ? 'error' : ''">
+    <nz-form-label >Region Tigiray</nz-form-label>
+    <nz-form-control
+>
       <input nz-input formControlName="regionNameTi" placeholder="region name">
     </nz-form-control>
   </nz-form-item>
 
   <nz-form-item>
-    <nz-form-label [nzRequired]="true">Region Afar</nz-form-label>
-    <nz-form-control [nzErrorTip]="'Please input region name!'"
-                     [nzValidateStatus]="validateForm.controls.regionNameTi.invalid && validateForm.controls.regionNameTi.touched ? 'error' : ''">
+    <nz-form-label >Region Afar</nz-form-label>
+    <nz-form-control
+>
       <input nz-input formControlName="regionNameAf" placeholder="region name">
     </nz-form-control>
   </nz-form-item>
-  <button nz-button nzType="primary" [disabled]="!validateForm.valid">Add</button>
+  <button nz-button nzType="primary" [disabled]="!validateForm.valid" (click)="onSave()">{{buttonLabel}}</button>
+  <!-- <button nz-button nzType="primary" (click)="onSave()">
+    {{ isEditMode ? 'Update' : 'Add' }}
+  </button> -->
 </form>

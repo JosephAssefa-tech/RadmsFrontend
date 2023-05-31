@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NzModalService  } from 'ng-zorro-antd/modal';
@@ -10,6 +10,8 @@ import { RegionsService } from 'src/app/services/region/regions.service';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
 import { NzButtonType } from 'ng-zorro-antd/button';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
+
 
 @Component({
   selector: 'app-region',
@@ -17,6 +19,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   styleUrls: ['./region.component.scss']
 })
 export class RegionComponent implements OnInit {
+  @Output() buttonLabelChanged: EventEmitter<string> = new EventEmitter<string>();
+
   // private regionsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   // public regions$ = this.regionsSubject.asObservable();
   regions: RegionMaster[]=[];
@@ -27,7 +31,7 @@ export class RegionComponent implements OnInit {
 
   validateForm!: FormGroup;
 
-  constructor( private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private regionService:RegionsService) {}
+  constructor(private sharedbuttonService: SharedButtonLabelService, private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private regionService:RegionsService) {}
 
   ngOnInit(): void {
 
@@ -52,7 +56,8 @@ export class RegionComponent implements OnInit {
   submitForm(): void {
     // Do something with the form data here
   }
-  showModal(): void {
+  showModal(action: string): void {
+    this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
       nzTitle: 'Region Master',
       nzContent: SharedModalComponent,
@@ -61,8 +66,17 @@ export class RegionComponent implements OnInit {
         // This function will be called when the user clicks the OK button in the modal
         // You can perform any necessary actions here, such as closing the modal
         modalRef.destroy();
-      }
+
+
+      },
+      nzComponentParams: {
+        action: action // Pass the action to the modal component
+      } as Partial<SharedModalComponent> // Type assertion to Partial<SharedModalComponent>
+
     });
+
+    this.loadRegions();
+
   }
   openDeleteConfirmation(regionId: number) {
     this.modal.confirm({
@@ -79,6 +93,14 @@ export class RegionComponent implements OnInit {
         this.errorNotification('data');
       }
     });
+  }
+  onEditRow(rowData: any): void {
+    console.log("update the lable here")
+    this.sharedbuttonService.setButtonLabel('Update');
+    this.regionService.updateSelectedRegionRowData(rowData);
+    this.showModal('Edit');
+    // Open the modal component
+    // ...
   }
   deleteRegion(regionId:number)
 {

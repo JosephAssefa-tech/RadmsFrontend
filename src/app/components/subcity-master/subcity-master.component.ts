@@ -5,6 +5,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { SubCityMaster } from 'src/app/models/get/subcity';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
+import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
 import { SubCityService } from 'src/app/services/sub-city/sub-city.service';
 import { CityModalComponent } from 'src/app/shared/city-modal/city-modal.component';
 import { SubcityModalComponent } from 'src/app/shared/subcity-modal/subcity-modal.component';
@@ -16,7 +17,7 @@ import { SubcityModalComponent } from 'src/app/shared/subcity-modal/subcity-moda
 })
 export class SubcityMasterComponent implements OnInit {
   subCities: SubCityMaster[]=[];
-  constructor(private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private subCityService:SubCityService) { }
+  constructor(private sharedbuttonService: SharedButtonLabelService,private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private subCityService:SubCityService) { }
 
   ngOnInit(): void {
     this.languageService.selectedLanguage$.subscribe(language => {
@@ -34,7 +35,8 @@ export class SubcityMasterComponent implements OnInit {
     });
 
   }
-  showModal(): void {
+  showModal(action: string): void {
+    this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
       nzTitle: 'Subcity Master',
       nzContent: SubcityModalComponent,
@@ -45,9 +47,15 @@ export class SubcityMasterComponent implements OnInit {
         modalRef.destroy();
       }
     });
+
+
   }
-  editSubCity(zoneId: number) {
-    this.subCityService.update(zoneId);
+  editSubCity(subcity:any) {
+    this.subCityService.update(subcity);
+
+    this.sharedbuttonService.setButtonLabel('Update');
+    //this.regionService.updateSelectedRegionRowData(rowData);
+    this.showModal('Update Subcity');
   }
   openDeleteConfirmation(subCityId: number) {
     this.modal.confirm({

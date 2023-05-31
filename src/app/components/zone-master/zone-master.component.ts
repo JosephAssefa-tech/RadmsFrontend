@@ -5,6 +5,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ZoneMaster } from 'src/app/models/get/zone';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
+import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
 import { ZoneMasterService } from 'src/app/services/zone-service/zone-master.service';
 import { SharedModalComponent } from 'src/app/shared/shared-modal/shared-modal.component';
 import { ZoneModalComponent } from 'src/app/shared/zone-modal/zone-modal.component';
@@ -17,7 +18,7 @@ import { ZoneModalComponent } from 'src/app/shared/zone-modal/zone-modal.compone
 export class ZoneMasterComponent implements OnInit {
   zones: ZoneMaster[]=[];
 
-  constructor(private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private zoneService:ZoneMasterService) { }
+  constructor(private sharedbuttonService: SharedButtonLabelService,private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private zoneService:ZoneMasterService) { }
 
   ngOnInit(): void {
     this.languageService.selectedLanguage$.subscribe(language => {
@@ -35,7 +36,8 @@ export class ZoneMasterComponent implements OnInit {
     });
 
   }
-  showModal(): void {
+  showModal(action: string): void {
+    this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
       nzTitle: 'Zone Master',
       nzContent: ZoneModalComponent,
@@ -47,8 +49,12 @@ export class ZoneMasterComponent implements OnInit {
       }
     });
   }
-  editZone(zoneId: number) {
+  editZone(zoneId:  any) {
     this.zoneService.update(zoneId);
+    console.log("update the lable here")
+    this.sharedbuttonService.setButtonLabel('Update');
+    //this.regionService.updateSelectedRegionRowData(rowData);
+    this.showModal('Update Zone');
   }
   openDeleteConfirmation(zoneId: number) {
     this.modal.confirm({

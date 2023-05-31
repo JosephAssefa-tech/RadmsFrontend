@@ -6,6 +6,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CityMaster } from 'src/app/models/get/city';
 import { CityService } from 'src/app/services/city/city.service';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
+import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
 import { CityModalComponent } from 'src/app/shared/city-modal/city-modal.component';
 @Component({
   selector: 'app-city-master',
@@ -16,7 +17,7 @@ export class CityMasterComponent implements OnInit {
   cities: CityMaster[]=[];
   validateForm!: FormGroup;
 
-  constructor(private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private cityService:CityService) {}
+  constructor(private sharedbuttonService: SharedButtonLabelService,private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private cityService:CityService) {}
 
   ngOnInit(): void {
     this.languageService.selectedLanguage$.subscribe(language => {
@@ -38,9 +39,10 @@ export class CityMasterComponent implements OnInit {
   submitForm(): void {
     // Do something with the form data here
   }
-  showModal(): void {
+  showModal(action:string): void {
+    this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
-      nzTitle: 'Zone Master',
+      nzTitle: 'City Master',
       nzContent: CityModalComponent,
       nzFooter: null,
       nzOnOk: () => {
@@ -50,8 +52,10 @@ export class CityMasterComponent implements OnInit {
       }
     });
   }
-  editCity(zoneId: number) {
-    this.cityService.update(zoneId);
+  editCity(city: any) {
+    this.sharedbuttonService.setButtonLabel('Update');
+    this.cityService.update(city);
+    this.showModal('Update City');
   }
   openDeleteConfirmation(zoneId: number) {
     this.modal.confirm({

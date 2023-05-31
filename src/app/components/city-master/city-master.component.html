@@ -1,5 +1,5 @@
 
-<button class="add-region" style="margin-left: 71vw;"nz-button nzType="primary" (click)="showModal()">Add City</button>
+<button class="add-region" style="margin-left: 71vw;"nz-button nzType="primary" (click)="showModal('Add City')">Add City</button>
 <nz-table #middleTable nzSize="middle" [nzData]="cities">
   <thead>
     <tr>
@@ -15,7 +15,7 @@
       <td>{{ city.cityName }}</td>
       <td>{{ city.woreda?.woredaName }}</td>
       <td>
-        <a href="#" (click)="editCity(city.cityId)">Edit</a> |
+        <a  (click)="editCity(city)">Edit</a> |
         <a  (click)="openDeleteConfirmation(city.cityId)">Delete</a>
       </td>
     </tr>

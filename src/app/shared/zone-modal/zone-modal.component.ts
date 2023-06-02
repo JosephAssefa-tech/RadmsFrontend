@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { RegionMaster } from 'src/app/models/get/region';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
 import { RegionsService } from 'src/app/services/region/regions.service';
@@ -16,30 +16,50 @@ import { ZoneMasterService } from 'src/app/services/zone-service/zone-master.ser
 })
 export class ZoneModalComponent implements OnInit {
   regionMasters$:BehaviorSubject<RegionMaster[]> = new BehaviorSubject<RegionMaster[]>([]);
+  @Output() dataUpdated: EventEmitter<any> = new EventEmitter<any>();
   @Input() action: string | undefined; // Receive the action parameter
+  private selectedRowDataSubscription: any;
   buttonLabel!: string;
+  selectedRowData: any;
 
-  regionId:any;
   validateForm: FormGroup;
   zones: any[] = [];
   constructor( private sharedbuttonService: SharedButtonLabelService, private regionService:RegionsService, private languageService:LanguageService,private router: Router, private fb: FormBuilder,private zoneService:ZoneMasterService,private notification:NzNotificationService) {
-    this.validateForm = new FormGroup({
-      regionId: new FormControl(null),
-      zoneName:new FormControl(null),
-      zoneNameAm:new FormControl(null),
-      zoneNameOr:new FormControl(null),
-      zoneNameTi:new FormControl(null),
-      zoneNameAf:new FormControl(null),
-      zoneNameSo:new FormControl(null),
 
-    });
    }
 
   ngOnInit(): void {
     this.setButtonLable();
+    this.validateForm = this.fb.group({
+      regionId: ['', Validators.required],
+      zoneName:[''],
+      zoneNameAm:[''],
+      zoneNameOr:[''],
+      zoneNameTi:[''],
+      zoneNameAf:[''],
+      zoneNameSo:[''],
+
+    });
     this.languageService.selectedLanguage$.subscribe(language => {
 
       this.GetRegionMaster(language);
+
+    });
+    this.selectedRowDataSubscription = this.zoneService.getSelectedZoneRowData()
+    .subscribe((rowData: any) => {
+
+      this.selectedRowData = rowData;
+      this.validateForm.patchValue({
+        regionId:rowData.regionName,
+        zoneName: rowData.zoneName,
+        zoneNameAm:rowData.zoneNameAm,
+        zoneNameOr:rowData.zoneNameOr,
+        zoneNameSo:rowData.zoneNameSo,
+        zoneNameTi:rowData.zoneNameTi,
+        zoneNameAf:rowData.zoneNameAf,
+
+      });
+
 
     });
 
@@ -50,11 +70,31 @@ export class ZoneModalComponent implements OnInit {
     if (this.action === 'Edit') {
 
       this.buttonLabel = 'Update Zone'; // Customize the label for editing
-      console.log(this.buttonLabel);
+      this.onUpdate();
     } else {
       this.buttonLabel = label; // Use the label as it is for adding
+      this.submitForm();
     }
   });
+}
+onUpdate(): void {
+  console.log("Updating form");
+  if (this.validateForm.valid) {
+    const updatedData = {
+      ...this.selectedRowData,
+      ...this.validateForm.value
+    };
+    this.zoneService.update(updatedData).subscribe(
+      response => {
+        // Handle the success response
+        this.dataUpdated.emit(updatedData);
+      },
+      error => {
+        // Handle the error response
+        console.error('Error updating row data:', error);
+      }
+    );
+}
 }
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -107,10 +147,9 @@ export class ZoneModalComponent implements OnInit {
     this.regionService.getAllByLanguage(lanugage).subscribe(
       (response) => {
         this.regionMasters$.next(response);
-        console.log("regionListList")
         console.log(this.regionMasters$)
         // Reset the selected option when the options change
-        this.regionId = null;
+       // this.regionId = null;
       },
       (error) => {
         console.error('Error retrieving data:', error);

@@ -106,6 +106,7 @@ import { SubcityModalComponent } from './shared/subcity-modal/subcity-modal.comp
 import { ZoneMasterComponent } from './components/zone-master/zone-master.component';
 import{ZoneModalComponent} from './shared/zone-modal/zone-modal.component';
 import { CityModalComponent } from './shared/city-modal/city-modal.component';
+import { RecordCompletionDialogComponent } from './shared/record-completion-dialog/record-completion-dialog.component';
 
 registerLocaleData(en);
 
@@ -138,6 +139,7 @@ registerLocaleData(en);
     SubcityModalComponent,
     ZoneMasterComponent,
     CityModalComponent,
+    RecordCompletionDialogComponent,
   ],
   imports: [
     BrowserModule,

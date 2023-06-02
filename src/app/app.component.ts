@@ -47,6 +47,9 @@ constructor(private languageService:LanguageService,private router:Router,privat
         case 'zone':
           this.router.navigate(['/zone']);
           break;
+          case 'looksup':
+            this.router.navigate(['/looksup']);
+            break;
       default:
         this.router.navigate(['/welcome']);
         break;

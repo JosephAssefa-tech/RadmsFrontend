@@ -16,6 +16,17 @@
         <i class="anticon anticon-dashboard"></i>
         <a>Home</a>
       </li>
+      <li nz-submenu nzTitle="Conditions" nzIcon="appstore">
+        <ul>
+          <li nz-menu-item (click)="subcityTable()">Road Surface Condition</li>
+          <li nz-menu-item (click)="subcityTable()">Weather Condition Type </li>
+          <li nz-menu-item (click)="subcityTable()">Road Surface Condition</li>
+          <li nz-menu-item (click)="regionTable()">Light Condition </li>
+          <li nz-menu-item (click)="cityTable()">AirCondition Type</li>
+
+
+        </ul>
+      </li>
       <li nz-submenu nzTitle="Locational Referencing System" nzIcon="appstore">
         <ul>
           <li nz-menu-item (click)="regionTable()">Region Master</li>
@@ -23,6 +34,65 @@
           <li nz-menu-item (click)="woredaTable()">Woreda Master </li>
           <li nz-menu-item (click)="cityTable()">City Master</li>
           <li nz-menu-item (click)="subcityTable()">Subcity Master</li>
+
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Vechile" nzIcon="appstore">
+        <ul>
+          <li nz-menu-item (click)="zoneTable()">Vechile Master </li>
+          <li nz-menu-item (click)="woredaTable()">Vechile Defect </li>
+          <li nz-menu-item (click)="cityTable()">Vehicle Movement Master</li>
+          <li nz-menu-item (click)="subcityTable()">Vechile Ownership</li>
+          <li nz-menu-item (click)="regionTable()">Vechile Relation </li>
+          <li nz-menu-item (click)="zoneTable()">Vechile Service Age </li>
+          <li nz-menu-item (click)="woredaTable()">Speed Limit </li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Driver" nzIcon="appstore">
+          <ul>
+            <li nz-menu-item (click)="subcityTable()">Licence Level </li>
+            <li nz-menu-item (click)="woredaTable()">Education Level </li>
+            <li nz-menu-item (click)="regionTable()">Driver Experience </li>
+            <li nz-menu-item (click)="zoneTable()">Driving Licience Category</li>
+            <li nz-menu-item (click)="subcityTable()">Health Condition</li>
+            </ul>
+          </li>
+      <li nz-submenu nzTitle="looksup" nzIcon="appstore">
+        <ul>
+          <li nz-menu-item (click)="regionTable()">Accident Cause </li>
+          <li nz-menu-item (click)="zoneTable()">Accident Type</li>
+          <li nz-menu-item (click)="woredaTable()">Activity Type </li>
+
+          <li nz-menu-item (click)="subcityTable()">Collision Type</li>
+
+
+          <li nz-menu-item (click)="cityTable()">Employment Status</li>
+
+          <li nz-menu-item (click)="regionTable()">Highway Type </li>
+          <li nz-menu-item (click)="zoneTable()">Impact Type</li>
+          <li nz-menu-item (click)="woredaTable()">Junction Type </li>
+          <li nz-menu-item (click)="cityTable()">Landmark Type</li>
+          <li nz-menu-item (click)="subcityTable()">Licence Level </li>
+
+          <li nz-menu-item (click)="zoneTable()">Pavemenet Type</li>
+          <li nz-menu-item (click)="woredaTable()">Pedestrian Movement </li>
+          <li nz-menu-item (click)="cityTable()">RoadCarriageway Type</li>
+
+          <li nz-menu-item (click)="regionTable()">Seating Type </li>
+          <li nz-menu-item (click)="zoneTable()">Severity Level </li>
+
+          <li nz-menu-item (click)="cityTable()">Terian Type</li>
+
+
+
+
+          <li nz-menu-item (click)="regionTable()">User Type </li>
+
+          <li nz-menu-item (click)="woredaTable()">Victim Movement </li>
+          <li nz-menu-item (click)="cityTable()">Victim Type</li>
+
+
+
 
         </ul>
       </li>

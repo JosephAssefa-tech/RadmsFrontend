@@ -25,6 +25,8 @@ import { VechileMasterService } from 'src/app/services/vechile-masters/vechile-m
 import { VictimDetailService } from 'src/app/services/victim-details/victim-detail.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
+import { RecordCompletionDialogComponent } from 'src/app/shared/record-completion-dialog/record-completion-dialog.component';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-victim-details',
@@ -114,7 +116,7 @@ export class VictimDetailsComponent implements OnInit {
   constructor(
     private languageService:LanguageService,
     private accidentDetailTransactionService:AccidentDetailsTransactionService,
-
+    private modal: NzModalService,
     private victimTypeService:VictimTypeService,
     private vehicleService:VehicleListService,
     private victimDetail:VictimDetailService,
@@ -281,16 +283,33 @@ this.GetVictimMovementDetail();
   this.victimDetail.post(record).subscribe(response => {
     console.log(response);
   });
-  this.sucessNotification('saved');
   if (this.count < this.accidentDetailTransactionService.number) {
     // reset the form here
     this.myForm.reset();
     this.count++;
   } else {
+    this.showModal();
     // navigate to other page
     this.route.navigate(['/home']);
   }
   console.log("submitting a form")
  }
+ showModal(): void {
+
+  const modalRef = this.modal.create({
+    nzContent: RecordCompletionDialogComponent,
+    nzFooter: null,
+    nzOnOk: () => {
+      // This function will be called when the user clicks the OK button in the modal
+      // You can perform any necessary actions here, such as closing the modal
+      modalRef.destroy();
+
+
+    }
+
+  });
+
+
+}
 
 }

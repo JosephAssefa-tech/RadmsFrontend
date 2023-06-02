@@ -49,11 +49,11 @@ export class ZoneMasterComponent implements OnInit {
       }
     });
   }
-  editZone(zoneId:  any) {
-    this.zoneService.update(zoneId);
+  editZone(rowData:  any) {
+    this.zoneService.update(rowData);
     console.log("update the lable here")
     this.sharedbuttonService.setButtonLabel('Update');
-    //this.regionService.updateSelectedRegionRowData(rowData);
+    this.zoneService.updateSelectedZoneRowData(rowData);
     this.showModal('Update Zone');
   }
   openDeleteConfirmation(zoneId: number) {

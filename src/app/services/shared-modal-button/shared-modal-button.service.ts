@@ -24,7 +24,6 @@ export class SharedButtonLabelService{
   }
 
   setButtonLabel(label: string) {
-    console.log('Label value:', label);
     this.buttonLabelSubject.next(label);
   }
 

@@ -1,77 +1,72 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NzModalRef } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { RegionMaster } from 'src/app/models/get/region';
-import { LanguageService } from 'src/app/services/language-change/language-change-service';
-import { RegionsService } from 'src/app/services/region/regions.service';
+import { Subscription } from 'rxjs';
+import { HealthConditiionService } from 'src/app/services/health-condition/health-conditiion.service';
 import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
-import { ZoneMasterService } from 'src/app/services/zone-service/zone-master.service';
 
 @Component({
-  selector: 'app-zone-modal',
-  templateUrl: './zone-modal.component.html',
-  styleUrls: ['./zone-modal.component.scss']
+  selector: 'app-health-condition-modal',
+  templateUrl: './health-condition-modal.component.html',
+  styleUrls: ['./health-condition-modal.component.scss']
 })
-export class ZoneModalComponent implements OnInit {
-  regionMasters$:BehaviorSubject<RegionMaster[]> = new BehaviorSubject<RegionMaster[]>([]);
-  @Output() dataUpdated: EventEmitter<any> = new EventEmitter<any>();
-  @Input() action: string | undefined; // Receive the action parameter
-  private selectedRowDataSubscription: any;
-  buttonLabel!: string;
+export class HealthConditionModalComponent implements OnInit {
+  @Input() action: string; // Receive the action parameter
+  @Input() isEditMode: boolean;
+  validateForm!: FormGroup;
   selectedRowData: any;
-
-  validateForm: FormGroup;
-  zones: any[] = [];
-  constructor( private sharedbuttonService: SharedButtonLabelService, private regionService:RegionsService, private languageService:LanguageService,private router: Router, private fb: FormBuilder,private zoneService:ZoneMasterService,private notification:NzNotificationService) {
-
-   }
+  healths: any[] = [];
+  buttonLabel: string;
+  private selectedRowDataSubscription: Subscription;
+  @Output() dataUpdated: EventEmitter<any> = new EventEmitter<any>();
+  constructor(
+    private router: Router,
+    private notification:NzNotificationService,
+    private sharedbuttonService: SharedButtonLabelService,
+    private modalRef: NzModalRef,
+    private fb: FormBuilder,
+    private healthService: HealthConditiionService
+  ) { }
 
   ngOnInit(): void {
     this.setButtonLable();
     this.validateForm = this.fb.group({
-      regionId: ['', Validators.required],
-      zoneName:[''],
-      zoneNameAm:[''],
-      zoneNameOr:[''],
-      zoneNameTi:[''],
-      zoneNameAf:[''],
-      zoneNameSo:[''],
+      healthConditionName: ['', Validators.required],
+      healthConditionNameAm:[''],
+      healthConditionNameOr:[''],
+      healthConditionNameTi:[''],
+      healthConditionNameAf:[''],
+      healthConditionNameSo:['']
+
 
     });
-    this.languageService.selectedLanguage$.subscribe(language => {
 
-      this.GetRegionMaster(language);
-
-    });
-    this.selectedRowDataSubscription = this.zoneService.getSelectedZoneRowData()
+    this.selectedRowDataSubscription = this.healthService.getSelectedHealthConditionRowData()
     .subscribe((rowData: any) => {
-
       this.selectedRowData = rowData;
       this.validateForm.patchValue({
-        regionId: rowData.regionId,
-        zoneName: rowData.zoneName,
-        zoneNameAm:rowData.zoneNameAm,
-        zoneNameOr:rowData.zoneNameOr,
-        zoneNameSo:rowData.zoneNameSo,
-        zoneNameTi:rowData.zoneNameTi,
-        zoneNameAf:rowData.zoneNameAf,
+        healthConditionName: rowData.healthConditionName,
+        healthConditionNameAm:rowData.healthConditionNameAm,
+        healthConditionNameOr:rowData.healthConditionNameOr,
+        healthConditionNameTi:rowData.healthConditionNameTi,
+        healthConditionNameAf:rowData.healthConditionNameAf,
+        healthConditionNameSo:rowData.healthConditionNameSo,
 
       });
-
-
     });
-
   }
   setButtonLable()
 {
   this.sharedbuttonService.getButtonLabel().subscribe((label: string) => {
     if (this.action === 'Edit') {
 
-      this.buttonLabel = 'Update Zone'; // Customize the label for editing
+      this.buttonLabel = 'Update Health'; // Customize the label for editing
       this.onUpdate();
+
     } else {
+
       this.buttonLabel = label; // Use the label as it is for adding
       this.submitForm();
     }
@@ -84,7 +79,7 @@ onUpdate(): void {
       ...this.selectedRowData,
       ...this.validateForm.value
     };
-    this.zoneService.update(updatedData).subscribe(
+    this.healthService.update(updatedData).subscribe(
       response => {
         // Handle the success response
         this.dataUpdated.emit(updatedData);
@@ -97,6 +92,7 @@ onUpdate(): void {
 }
 }
   submitForm(): void {
+    console.log("submitting form")
     for (const i in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(i)) {
         this.validateForm.controls[i].markAsDirty();
@@ -108,7 +104,7 @@ onUpdate(): void {
     // Get the form values
     const formValues = this.validateForm.value;
       // Invoke the service method
-      this.zoneService.post(formValues).subscribe(
+      this.healthService.post(formValues).subscribe(
         response => {
           // Handle the success response
           this.sucessNotification('data');
@@ -116,7 +112,7 @@ onUpdate(): void {
     const newZone = response;
 
     // Add the newly added region to the regions array
-    this.zones.push(newZone);
+    this.healths.push(newZone);
           this.closeModalAndNavigate();
           window.location.reload();
         },
@@ -142,20 +138,5 @@ onUpdate(): void {
     // Navigate back to the list of table page
     this.router.navigate(['/region']);
   }
-  GetRegionMaster(lanugage:string)
-  {
-    this.regionService.getAllByLanguage(lanugage).subscribe(
-      (response) => {
-        this.regionMasters$.next(response);
-        console.log(this.regionMasters$)
-        // Reset the selected option when the options change
-       // this.regionId = null;
-      },
-      (error) => {
-        console.error('Error retrieving data:', error);
-      }
-    );
 
-
-  }
 }

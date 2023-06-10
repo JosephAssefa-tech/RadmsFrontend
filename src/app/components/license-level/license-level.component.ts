@@ -9,6 +9,7 @@ import { LanguageService } from 'src/app/services/language-change/language-chang
 import { LicenseLevelService } from 'src/app/services/licence-levels/license-level.service';
 import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
 import { AccidentCasuseModalComponent } from 'src/app/shared/accident-casuse-modal/accident-casuse-modal.component';
+import { LicenseLevelModalComponent } from 'src/app/shared/license-level-modal/license-level-modal.component';
 
 @Component({
   selector: 'app-license-level',
@@ -92,7 +93,7 @@ export class LicenseLevelComponent implements OnInit {
     this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
       nzTitle: 'Vechile Master',
-      nzContent: AccidentCasuseModalComponent,
+      nzContent: LicenseLevelModalComponent,
       nzFooter: null,
       nzOnOk: () => {
         // This function will be called when the user clicks the OK button in the modal
@@ -102,7 +103,7 @@ export class LicenseLevelComponent implements OnInit {
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<AccidentCasuseModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<LicenseLevelModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 

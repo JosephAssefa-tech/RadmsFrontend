@@ -54,7 +54,7 @@ export class RoadSurfaceConditionComponent implements OnInit {
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<SharedModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<RoadSurfaceModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 

@@ -56,7 +56,7 @@ export class WeatherConditionComponent implements OnInit {
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<SharedModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<WeatherConditionModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 

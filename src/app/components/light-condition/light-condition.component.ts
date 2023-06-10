@@ -42,7 +42,7 @@ lights:LightCondition[]=[];
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<HealthConditionModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<LightConditionModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 
@@ -82,7 +82,7 @@ lights:LightCondition[]=[];
 
 
 }
-editLightConditioinRow(rowData: number) {
+editLightConditioinRow(rowData: any) {
   console.log("update the lable here")
   this.sharedbuttonService.setButtonLabel('Update');
   this.lightConditionService.updateSelectedLightConditionRowData(rowData);

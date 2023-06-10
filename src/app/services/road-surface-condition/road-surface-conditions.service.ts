@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class RoadSurfaceConditionsService extends BaseService<RoadSurfaceCondition> {
+  private buttonLabelSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   listOfRoadSurfaceCondition=`${environment.apiUrl}RoadSurfaceConditionLookup`;
 
 
@@ -46,4 +47,12 @@ export class RoadSurfaceConditionsService extends BaseService<RoadSurfaceConditi
     return this.roadSurfaceSubject.asObservable(); // Return the Observable of the BehaviorSubjec
 
   }
+  // getButtonLabel(): Observable<string> {
+  //   return this.buttonLabelSubject.asObservable();
+  // }
+
+  // setButtonLabel(label: string) {
+  //   console.log('Label value:', label);
+  //   this.buttonLabelSubject.next(label);
+  // }
 }

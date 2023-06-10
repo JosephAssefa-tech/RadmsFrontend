@@ -112,6 +112,32 @@ vechileOwnership():void{
   this.router.navigate(['/vechileOwnership']);
 
 }
+highwayMaster():void{
+  this.router.navigate(['/highwayMaster']);
+}
+highwayType():void{
+  this.router.navigate(['/highwayType']);
+}
+junctionType():void{
+  this.router.navigate(['/junctionType']);
+}
+
+landmarkType():void{
+  this.router.navigate(['/landmarkType']);
+}
+driverLicenseCategory():void{
+  this.router.navigate(['/driverLicenseCategory']);
+}
+roadcariagewayType():void{
+  this.router.navigate(['/roadcariagewayType']);
+}
+educationLevel():void{
+  this.router.navigate(['/educationLevel']);
+}
+driverExperience():void{
+  this.router.navigate(['/driverExperience']);
+}
+
 accidentCause():void{
   this.router.navigate(['/accidentCause'])
 }

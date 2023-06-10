@@ -91,7 +91,7 @@ export class AccidentTypeComponent implements OnInit {
   showModal(action: string): void {
     this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
-      nzTitle: 'Vechile Master',
+      nzTitle: 'Accident type Master',
       nzContent: AccidentTypeModalComponent,
       nzFooter: null,
       nzOnOk: () => {

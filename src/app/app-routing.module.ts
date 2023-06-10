@@ -42,7 +42,7 @@ import { SeatingTypeModalComponent } from './shared/seating-type-modal/seating-t
 import { ImpactTypeModalComponent } from './shared/impact-type-modal/impact-type-modal.component';
 import { UserTypeModalComponent } from './shared/user-type-modal/user-type-modal.component';
 import { VictimMovementModalComponent } from './shared/victim-movement-modal/victim-movement-modal.component';
-import { VictimTypeModalComponent } from './shared/victim-type-modal/victim-type-modal.component';
+// import { VictimTypeModalComponent } from './shared/victim-type-modal/victim-type-modal.component';
 import { AccidentCauseComponent } from './components/accident-cause/accident-cause.component';
 import { AccidentTypeComponent } from './components/accident-type/accident-type.component';
 import { CollisionTypeComponent } from './components/collision-type/collision-type.component';

@@ -7,6 +7,7 @@ import { SpeedLimit } from 'src/app/models/get/speed-limit';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
 import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
 import { SpeedLimitService } from 'src/app/services/speed-limit/speed-limit.service';
+import { SpeedModalComponent } from 'src/app/shared/speed-modal/speed-modal.component';
 import { VechileRelationModalComponent } from 'src/app/shared/vechile-relation-modal/vechile-relation-modal.component';
 
 @Component({
@@ -90,8 +91,8 @@ export class SpeedLimitComponent implements OnInit {
   showModal(action: string): void {
     this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
-      nzTitle: 'Vechile Relation Master',
-      nzContent: VechileRelationModalComponent,
+      nzTitle: 'Speed limit Master',
+      nzContent: SpeedModalComponent,
       nzFooter: null,
       nzOnOk: () => {
         // This function will be called when the user clicks the OK button in the modal
@@ -101,7 +102,7 @@ export class SpeedLimitComponent implements OnInit {
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<VechileRelationModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<SpeedModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 

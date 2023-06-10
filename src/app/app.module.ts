@@ -158,6 +158,23 @@ import { PedstrianMovementModalComponent } from './shared/pedstrian-movement-mod
 import { SeatingTypeModalComponent } from './shared/seating-type-modal/seating-type-modal.component';
 import { SeverityLevelModalComponent } from './shared/severity-level-modal/severity-level-modal.component';
 import { TerianTypeModalComponent } from './shared/terian-type-modal/terian-type-modal.component';
+import { HighwayMasterComponent } from './components/highway-master/highway-master.component';
+import { HighwayTypeComponent } from './components/highway-type/highway-type.component';
+import { JunctionTypeComponent } from './components/junction-type/junction-type.component';
+import { LandmarkTypeComponent } from './components/landmark-type/landmark-type.component';
+import { RoadCarriagewayTypeComponent } from './components/road-carriageway-type/road-carriageway-type.component';
+import { HighwayMasterModalComponent } from './shared/highway-master-modal/highway-master-modal.component';
+import { HighwayTypeModalComponent } from './shared/highway-type-modal/highway-type-modal.component';
+import { JunctionTypeModalComponent } from './shared/junction-type-modal/junction-type-modal.component';
+import { LandmarkTypeModalComponent } from './shared/landmark-type-modal/landmark-type-modal.component';
+import { RoadcaarriagewayTypeModalComponent } from './shared/roadcaarriageway-type-modal/roadcaarriageway-type-modal.component';
+import { AirConditionModalComponent } from './shared/air-condition-modal/air-condition-modal.component';
+import { EducationLevelComponent } from './components/education-level/education-level.component';
+import { EducationLevelModalComponent } from './shared/education-level-modal/education-level-modal.component';
+import { DriverExperienceModalComponent } from './shared/driver-experience-modal/driver-experience-modal.component';
+import { DriverExperienceComponent } from './components/driver-experience/driver-experience.component';
+import { DriverLicenseCategoryComponent } from './components/driver-license-category/driver-license-category.component';
+import { DriverLicenseCategoryModalComponent } from './shared/driver-license-category-modal/driver-license-category-modal.component';
 
 
 registerLocaleData(en);
@@ -243,6 +260,23 @@ registerLocaleData(en);
     SeatingTypeModalComponent,
     SeverityLevelModalComponent,
     TerianTypeModalComponent,
+    HighwayMasterComponent,
+    HighwayTypeComponent,
+    JunctionTypeComponent,
+    LandmarkTypeComponent,
+    RoadCarriagewayTypeComponent,
+    HighwayMasterModalComponent,
+    HighwayTypeModalComponent,
+    JunctionTypeModalComponent,
+    LandmarkTypeModalComponent,
+    RoadcaarriagewayTypeModalComponent,
+    AirConditionModalComponent,
+    EducationLevelComponent,
+    EducationLevelModalComponent,
+    DriverExperienceModalComponent,
+    DriverExperienceComponent,
+    DriverLicenseCategoryComponent,
+    DriverLicenseCategoryModalComponent,
   ],
   imports: [
     BrowserModule,

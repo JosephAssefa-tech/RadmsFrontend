@@ -83,7 +83,7 @@ export class HealthConditionComponent implements OnInit {
 
 
 }
-editHealthConditioinRow(rowData: number) {
+editHealthConditioinRow(rowData: any) {
   console.log("update the lable here")
   this.sharedbuttonService.setButtonLabel('Update');
   this.healthConditionService.updateSelectedHealthConditionRowData(rowData);

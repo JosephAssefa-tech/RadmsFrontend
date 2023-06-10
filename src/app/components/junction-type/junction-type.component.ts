@@ -3,23 +3,22 @@ import { FormBuilder } from '@angular/forms';
 import { NzButtonType } from 'ng-zorro-antd/button';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { LicenceLevel } from 'src/app/models/get/licence-level';
-import { AccidentDetailServiceService } from 'src/app/services/accident-service/accident-detail-service.service';
+import { JunctionType } from 'src/app/models/get/junction-type';
+import { JunctionTypeService } from 'src/app/services/junction-types/junction-type.service';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
-import { LicenseLevelService } from 'src/app/services/licence-levels/license-level.service';
 import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
 import { AccidentCasuseModalComponent } from 'src/app/shared/accident-casuse-modal/accident-casuse-modal.component';
-import { LicenseLevelModalComponent } from 'src/app/shared/license-level-modal/license-level-modal.component';
+import { JunctionTypeModalComponent } from 'src/app/shared/junction-type-modal/junction-type-modal.component';
 
 @Component({
-  selector: 'app-license-level',
-  templateUrl: './license-level.component.html',
-  styleUrls: ['./license-level.component.scss']
+  selector: 'app-junction-type',
+  templateUrl: './junction-type.component.html',
+  styleUrls: ['./junction-type.component.scss']
 })
-export class LicenseLevelComponent implements OnInit {
-  accidentCauses:LicenceLevel[]=[];
-  constructor(private sharedbuttonService: SharedButtonLabelService, private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private vechileService:LicenseLevelService) {}
+export class JunctionTypeComponent implements OnInit {
 
+  accidentCauses:JunctionType[]=[];
+  constructor(private sharedbuttonService: SharedButtonLabelService, private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private vechileService:JunctionTypeService) {}
 
 
   ngOnInit(): void {
@@ -31,6 +30,8 @@ export class LicenseLevelComponent implements OnInit {
 
     this.loadVechileMasters();
   }
+
+ 
   loadVechileMasters()
   {
     this.vechileService.vechiles$.subscribe(vechiles => {
@@ -39,7 +40,7 @@ export class LicenseLevelComponent implements OnInit {
     });
 
   }
-  openDeleteConfirmation(leveloflicenceId: number) {
+  openDeleteConfirmation(junctionTypeId: number) {
     this.modal.confirm({
       nzTitle: 'Confirm Delete',
       nzContent: 'Are you sure you want to delete this region?',
@@ -48,7 +49,7 @@ export class LicenseLevelComponent implements OnInit {
       nzCancelText: 'No',
       nzClassName: 'custom-confirm-modal',
       nzOnOk: () => {
-        this.deleteVechile(leveloflicenceId);
+        this.deleteVechile(junctionTypeId);
       },
       nzOnCancel: () => {
         this.errorNotification('data');
@@ -63,13 +64,13 @@ export class LicenseLevelComponent implements OnInit {
     // Open the modal component
     // ...
   }
-  deleteVechile(leveloflicenceId:number)
+  deleteVechile(junctionTypeId:number)
 {
-  this.vechileService.delete(leveloflicenceId,'leveloflicenceId').subscribe(
+  this.vechileService.delete(junctionTypeId,'junctionTypeId').subscribe(
     (response) => {
       // Success logic, if needed
       // Remove the deleted region from the regions array
-      const updatedVechiles = this.accidentCauses.filter(vechile => vechile.leveloflicenceId !== leveloflicenceId);
+      const updatedVechiles = this.accidentCauses.filter(vechile => vechile.junctionTypeId !== junctionTypeId);
       this.accidentCauses = updatedVechiles;
     },
     (error) => {
@@ -92,8 +93,8 @@ export class LicenseLevelComponent implements OnInit {
   showModal(action: string): void {
     this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
-      nzTitle: 'Vechile Master',
-      nzContent: LicenseLevelModalComponent,
+      nzTitle: 'Junction type Master',
+      nzContent: JunctionTypeModalComponent,
       nzFooter: null,
       nzOnOk: () => {
         // This function will be called when the user clicks the OK button in the modal
@@ -103,7 +104,7 @@ export class LicenseLevelComponent implements OnInit {
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<LicenseLevelModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<JunctionTypeModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 

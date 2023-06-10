@@ -7,6 +7,7 @@ import { AirConditionType } from 'src/app/models/get/air-condition';
 import { AirconditionService } from 'src/app/services/air-condition/aircondition.service';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
 import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
+import { AirConditionModalComponent } from 'src/app/shared/air-condition-modal/air-condition-modal.component';
 import { HealthConditionModalComponent } from 'src/app/shared/health-condition-modal/health-condition-modal.component';
 
 @Component({
@@ -32,7 +33,7 @@ airConditions:AirConditionType[]=[];
     this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
       nzTitle: 'Air Condition',
-      nzContent: HealthConditionModalComponent,
+      nzContent: AirConditionModalComponent,
       nzFooter: null,
       nzOnOk: () => {
         // This function will be called when the user clicks the OK button in the modal
@@ -42,7 +43,7 @@ airConditions:AirConditionType[]=[];
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<HealthConditionModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<AirConditionModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 
@@ -82,7 +83,7 @@ airConditions:AirConditionType[]=[];
 
 
 }
-editAirConditioinRow(rowData: number) {
+editAirConditioinRow(rowData: any) {
   console.log("update the lable here")
   this.sharedbuttonService.setButtonLabel('Update');
   this.airConditionService.updateSelectedAirConditionRowData(rowData);

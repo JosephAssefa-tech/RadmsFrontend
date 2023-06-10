@@ -57,6 +57,14 @@ import { ImpactTypeComponent } from './components/impact-type/impact-type.compon
 import { UserTypeComponent } from './components/user-type/user-type.component';
 import { VictimTypeComponent } from './components/victim-type/victim-type.component';
 import { VictimMovementComponent } from './components/victim-movement/victim-movement.component';
+import { HighwayMasterComponent } from './components/highway-master/highway-master.component';
+import { HighwayTypeComponent } from './components/highway-type/highway-type.component';
+import { JunctionTypeComponent } from './components/junction-type/junction-type.component';
+import { LandmarkTypeComponent } from './components/landmark-type/landmark-type.component';
+import { RoadCarriagewayTypeComponent } from './components/road-carriageway-type/road-carriageway-type.component';
+import { EducationLevelComponent } from './components/education-level/education-level.component';
+import { DriverExperienceComponent } from './components/driver-experience/driver-experience.component';
+import { DriverLicenseCategoryComponent } from './components/driver-license-category/driver-license-category.component';
 
 const routes: Routes = [
    //{ path: '', pathMatch: 'full', redirectTo: '/welcome' },
@@ -105,6 +113,16 @@ const routes: Routes = [
   {path:'userType',component:UserTypeComponent},
   {path:'victimMovement',component:VictimMovementComponent},
   {path:'victimType',component:VictimTypeComponent},
+  {path:'highwayMaster',component:HighwayMasterComponent},
+  {path:'highwayType',component:HighwayTypeComponent},
+  {path:'junctionType',component:JunctionTypeComponent},
+  {path:'landmarkType',component:LandmarkTypeComponent},
+  {path:'roadcariagewayType',component:RoadCarriagewayTypeComponent},
+  {path:'licenseLevel',component:LicenseLevelComponent},
+  {path:'educationLevel',component:EducationLevelComponent},
+  {path:'driverExperience',component:DriverExperienceComponent},
+  {path:'driverLicenseCategory',component:DriverLicenseCategoryComponent},
+  
  //{ path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
 ];
 

@@ -3,22 +3,20 @@ import { FormBuilder } from '@angular/forms';
 import { NzButtonType } from 'ng-zorro-antd/button';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { LicenceLevel } from 'src/app/models/get/licence-level';
-import { AccidentDetailServiceService } from 'src/app/services/accident-service/accident-detail-service.service';
+import { DrivingLicenceCatagory } from 'src/app/models/get/driving-licence-catagory';
+import { DrivingLicenceCategoriesService } from 'src/app/services/driving-licence-category/driving-licence-categories.service';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
-import { LicenseLevelService } from 'src/app/services/licence-levels/license-level.service';
 import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
-import { AccidentCasuseModalComponent } from 'src/app/shared/accident-casuse-modal/accident-casuse-modal.component';
-import { LicenseLevelModalComponent } from 'src/app/shared/license-level-modal/license-level-modal.component';
+import { DriverLicenseCategoryModalComponent } from 'src/app/shared/driver-license-category-modal/driver-license-category-modal.component';
 
 @Component({
-  selector: 'app-license-level',
-  templateUrl: './license-level.component.html',
-  styleUrls: ['./license-level.component.scss']
+  selector: 'app-driver-license-category',
+  templateUrl: './driver-license-category.component.html',
+  styleUrls: ['./driver-license-category.component.scss']
 })
-export class LicenseLevelComponent implements OnInit {
-  accidentCauses:LicenceLevel[]=[];
-  constructor(private sharedbuttonService: SharedButtonLabelService, private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private vechileService:LicenseLevelService) {}
+export class DriverLicenseCategoryComponent implements OnInit {
+  accidentCauses:DrivingLicenceCatagory[]=[];
+  constructor(private sharedbuttonService: SharedButtonLabelService, private notification:NzNotificationService, private languageService:LanguageService,private fb: FormBuilder,private modal: NzModalService,private vechileService:DrivingLicenceCategoriesService) {}
 
 
 
@@ -39,7 +37,7 @@ export class LicenseLevelComponent implements OnInit {
     });
 
   }
-  openDeleteConfirmation(leveloflicenceId: number) {
+  openDeleteConfirmation(drivingLicenceCatagoryId: number) {
     this.modal.confirm({
       nzTitle: 'Confirm Delete',
       nzContent: 'Are you sure you want to delete this region?',
@@ -48,7 +46,7 @@ export class LicenseLevelComponent implements OnInit {
       nzCancelText: 'No',
       nzClassName: 'custom-confirm-modal',
       nzOnOk: () => {
-        this.deleteVechile(leveloflicenceId);
+        this.deleteVechile(drivingLicenceCatagoryId);
       },
       nzOnCancel: () => {
         this.errorNotification('data');
@@ -63,13 +61,13 @@ export class LicenseLevelComponent implements OnInit {
     // Open the modal component
     // ...
   }
-  deleteVechile(leveloflicenceId:number)
+  deleteVechile(drivingLicenceCatagoryId:number)
 {
-  this.vechileService.delete(leveloflicenceId,'leveloflicenceId').subscribe(
+  this.vechileService.delete(drivingLicenceCatagoryId,'drivingLicenceCatagoryId').subscribe(
     (response) => {
       // Success logic, if needed
       // Remove the deleted region from the regions array
-      const updatedVechiles = this.accidentCauses.filter(vechile => vechile.leveloflicenceId !== leveloflicenceId);
+      const updatedVechiles = this.accidentCauses.filter(vechile => vechile.drivingLicenceCatagoryId !== drivingLicenceCatagoryId);
       this.accidentCauses = updatedVechiles;
     },
     (error) => {
@@ -92,8 +90,8 @@ export class LicenseLevelComponent implements OnInit {
   showModal(action: string): void {
     this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
-      nzTitle: 'Vechile Master',
-      nzContent: LicenseLevelModalComponent,
+      nzTitle: 'Driver license category  Master',
+      nzContent: DriverLicenseCategoryModalComponent,
       nzFooter: null,
       nzOnOk: () => {
         // This function will be called when the user clicks the OK button in the modal
@@ -103,7 +101,7 @@ export class LicenseLevelComponent implements OnInit {
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<LicenseLevelModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<DriverLicenseCategoryModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 
@@ -111,3 +109,4 @@ export class LicenseLevelComponent implements OnInit {
 
   }
 }
+

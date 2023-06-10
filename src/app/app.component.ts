@@ -6,6 +6,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { RegionComponent } from './components/region/region.component';
 import { Router } from '@angular/router';
 import { LanguageService } from './services/language-change/language-change-service';
+import { VictimDetailService } from './services/victim-details/victim-detail.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ import { LanguageService } from './services/language-change/language-change-serv
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  startDate: Date;
+  endDate: Date;
   selectedLanguage: string = 'english';
   isAuthenticated=false;
   isCollapsed = false;
@@ -26,7 +29,7 @@ export class AppComponent {
     }]
 
   fileList1 = [...this.defaultFileList];
-constructor(private languageService:LanguageService,private router:Router,private modal: NzModalService, private fb: FormBuilder)
+constructor(private victimDetailService:VictimDetailService, private languageService:LanguageService,private router:Router,private modal: NzModalService, private fb: FormBuilder)
 {
 
 }
@@ -59,6 +62,10 @@ constructor(private languageService:LanguageService,private router:Router,privat
 
     this.router.navigate(['/region']);
 }
+LightConditionTable():void{
+  this.router.navigate(['/lightCondition']);
+
+}
 zoneTable():void{
   this.router.navigate(['/zone']);
 }
@@ -68,10 +75,104 @@ woredaTable():void{
 subcityTable():void{
   this.router.navigate(['/subcity']);
 }
+RoadSurfaceTable():void{
+  this.router.navigate(['/roadSurface']);
+
+}
+AirTable():void{
+  this.router.navigate(['/airCondition']);
+}
+weatheronditionTable():void{
+  this.router.navigate(['/weatherCondition']);
+}
+healthTable():void{
+  this.router.navigate(['/healthCondition'])
+}
 cityTable():void{
   this.router.navigate(['/city']);
 
 }
+roadSurface():void{
+  this.router.navigate(['/roadSurfaceCondition']);
+
+}
+vechileMaster():void{
+  this.router.navigate(['/vechileMaster']);
+
+}
+vechileDefect():void{
+  this.router.navigate(['/vechileDefect']);
+
+}
+vechileMovement():void{
+  this.router.navigate(['/vechileMovement']);
+
+}
+vechileOwnership():void{
+  this.router.navigate(['/vechileOwnership']);
+
+}
+accidentCause():void{
+  this.router.navigate(['/accidentCause'])
+}
+accidentType():void{
+  this.router.navigate(['/accidentType'])
+
+}
+collisionType():void{
+  this.router.navigate(['/collisionType'])
+
+}
+employmentStatus():void{
+  this.router.navigate(['/employmentStatus'])
+
+}
+impactType():void{
+  this.router.navigate(['/impactType'])
+}
+licenseLevel():void{
+  this.router.navigate(['/licenseLevel'])
+}
+pavementType():void{
+  this.router.navigate(['/pavementType'])
+}
+pedestrianMovement():void{
+  this.router.navigate(['/pedestrianMovement']) 
+}
+vechileRelation():void{
+  this.router.navigate(['/vechileRelation']);
+
+}
+vechileServiceAge():void{
+  this.router.navigate(['/vechileServiceAge']);
+
+}
+speedLimit():void{
+  this.router.navigate(['/speedLimit']);
+
+}
+seatingType():void{
+  this.router.navigate(['/seatingType']);
+
+}
+victimType():void{
+  this.router.navigate(['/victimType']); 
+}
+victimMovement():void{
+  this.router.navigate(['/victimMovement']); 
+}
+userType():void{
+  this.router.navigate(['/userType']);
+
+}
+severityLevel():void{
+  this.router.navigate(['/severityLevel']);
+
+}
+terianType():void{
+  this.router.navigate(['/terianType']);
+}
+
 // cityMaster(): void {
 //   const modalRef = this.modal.create({
 //     nzTitle: 'City Master ',
@@ -83,4 +184,19 @@ switchLanguage(language: string) {
   this.languageService.selectedLanguage = language;
 
 }
+vechileTable()
+{
+  this.router.navigate(['/vechileMaster']);
+}
+// onFilterClick() {
+//   // Handle the search button click event
+//   // You can use the startDate and endDate values to make an API call or perform any desired action
+//   console.log('Start Date:', this.startDate);
+//   console.log('End Date:', this.endDate);
+//   // Call your API or perform other actions here
+//   this.victimDetailService.getGroupedData().subscribe(data=>{
+//     this.severityData  = data;
+
+//   })
+// }
 }

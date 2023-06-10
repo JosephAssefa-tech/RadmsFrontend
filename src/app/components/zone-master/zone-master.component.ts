@@ -27,6 +27,12 @@ export class ZoneMasterComponent implements OnInit {
 
       });});
       this.loadZones();
+      // switchLanguage(language: string): void {
+      //   this.translationService.setLanguage(language).subscribe(() => {
+      //     // Update the translations after switching the language
+      //     // You may need to reload the current component or use change detection if necessary
+      //   });
+      // }
   }
   loadZones()
   {
@@ -74,7 +80,7 @@ export class ZoneMasterComponent implements OnInit {
   }
   deleteZone(zoneId:number)
   {
-    this.zoneService.delete(zoneId).subscribe(
+    this.zoneService.delete(zoneId,'zoneId').subscribe(
       (response) => {
         // Success logic, if needed
         // Remove the deleted region from the regions array

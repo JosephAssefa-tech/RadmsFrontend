@@ -1,0 +1,24 @@
+
+<button class="add-region" nz-button nzType="primary" (click)="showModal('Add Weather')">Add Weather</button>
+<nz-table #middleTable nzSize="middle" [nzData]="weathers">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Weather Condition Names</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let weather of weathers">
+      <td>{{ weather.weatherCondId }}</td>
+      <td>{{ weather.weatherCondName }}</td>
+      <td>
+
+        <a  (click)="onEditRow(weather)">Edit</a> |
+        <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
+        <a  (click)="openDeleteConfirmation(weather.weatherCondId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+
+</nz-table>

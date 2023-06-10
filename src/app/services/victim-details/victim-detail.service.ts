@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base-service/BaseService';
 import { VictimDetailsTransaction } from 'src/app/models/get/victim-details-transaction';
@@ -19,9 +19,18 @@ export class VictimDetailService extends BaseService<VictimDetailsTransaction>{
   getResourceUrl(): string {
     return 'VictimDetailsTransaction';
    }
-   getGroupedData()
+   getGroupedData(startDate?: Date, endDate?: Date)
    {
-    return this.httpClient.get<SummaryData[]>(this.summaryData);
+      // Create HTTP params with the start and end date values
+      let params = new HttpParams();
+      if (startDate) {
+        params = params.set('startDate', startDate.toISOString()); // Convert Date to ISO string format
+      }
+      if (endDate) {
+        params = params.set('endDate', endDate.toISOString());
+      }
+      
+      return this.httpClient.get<SummaryData[]>(this.summaryData, { params });
    }
 
 }

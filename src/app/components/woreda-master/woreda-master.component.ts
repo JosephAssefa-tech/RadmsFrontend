@@ -74,7 +74,7 @@ export class WoredaMasterComponent implements OnInit {
   }
   deleteZone(woredaId:number)
   {
-    this.woredaService.delete(woredaId).subscribe(
+    this.woredaService.delete(woredaId,'woredaId').subscribe(
       (response) => {
         // Success logic, if needed
         // Remove the deleted region from the regions array

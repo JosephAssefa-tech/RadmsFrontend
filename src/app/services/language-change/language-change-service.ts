@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -7,15 +8,25 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LanguageService {
   private selectedLanguageSubject: BehaviorSubject<string> = new BehaviorSubject<string>('english');
+  private currentLanguage: string = 'english';
+  private translations: any = {};
 
 
-  private translations: any;
-  private currentLanguage: string = 'en';
+  constructor(private http: HttpClient) {
 
+  }
+  loadTranslations(): Observable<any> {
+    return this.http.get(`assets/i18n/${this.currentLanguage}.json`);
+  }
 
-  // constructor() {
-  //   this.loadTranslations(this.currentLanguage);
-  // }
+  setLanguage(language: string): Observable<any> {
+    this.currentLanguage = language;
+    return this.loadTranslations();
+  }
+
+  getTranslation(key: string): string {
+    return this.translations[key] || key;
+  }
 
   get selectedLanguage$() {
     return this.selectedLanguageSubject.asObservable();

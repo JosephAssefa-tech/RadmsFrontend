@@ -1,0 +1,24 @@
+
+<button class="add-region" nz-button nzType="primary" (click)="showModal('Add Road Surface')">Add Road Surface</button>
+<nz-table #middleTable nzSize="middle" [nzData]="roadSurfaces">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Road Surface</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let surface of roadSurfaces">
+      <td>{{ surface.roadSurfaceId }}</td>
+      <td>{{ surface.roadSurfaceName }}</td>
+      <td>
+
+        <a  (click)="onEditRow(surface)">Edit</a> |
+        <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
+        <a  (click)="openDeleteConfirmation(surface.roadSurfaceId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+
+</nz-table>

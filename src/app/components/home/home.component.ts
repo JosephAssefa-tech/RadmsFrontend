@@ -295,7 +295,14 @@ export class HomeComponent implements OnInit,AfterViewInit  {
     this.route.navigate(['/advanceSearch']);
 
   }
+onFilterClick() {
 
+  // Call your API or perform other actions here
+  this.victimDetailService.getGroupedData().subscribe(data=>{
+    this.severityData  = data;
+
+  })
+}
 
 
 }

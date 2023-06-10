@@ -40,12 +40,15 @@ post(resource: any) {
   return this.httpClient.post(this.APIUrl ,resource,{headers:{"Content-Type":"application/json"}});
 
 }
-delete(id: number | number) {
-  console.log("deleteddIdddd")
-  console.log(id)
-    const params = new HttpParams().set('regionId', id);
-      const headers = new HttpHeaders().set('Content-Type', 'application/json');
-  return this.httpClient.delete(this.APIUrl  ,{ params, headers });
+deletre(id: string | number) {
+  return this.httpClient.delete(this.APIUrl + "/" + id);
+}
+delete(id: number |  string, paramName: string) {
+  const params = new HttpParams().set(paramName, id.toString()); // Convert id to string if it's a number
+  const headers = new HttpHeaders().set('Content-Type', 'application/json');
+  const options = { params, headers }; // Assign params and headers to options object
+  
+  return this.httpClient.delete(this.APIUrl, options); // Pass op
 }
 update(resource: any) {
   return this.httpClient.put(`${this.APIUrl}/EditClient`, resource)

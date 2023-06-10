@@ -107,6 +107,58 @@ import { ZoneMasterComponent } from './components/zone-master/zone-master.compon
 import{ZoneModalComponent} from './shared/zone-modal/zone-modal.component';
 import { CityModalComponent } from './shared/city-modal/city-modal.component';
 import { RecordCompletionDialogComponent } from './shared/record-completion-dialog/record-completion-dialog.component';
+import { WeatherConditionComponent } from './components/weather-condition/weather-condition.component';
+import { RoadSurfaceConditionComponent } from './components/road-surface-condition/road-surface-condition.component';
+import { LightConditionComponent } from './components/light-condition/light-condition.component';
+import { AirConditionComponent } from './components/air-condition/air-condition.component';
+import { WeatherConditionModalComponent } from './shared/weather-condition-modal/weather-condition-modal.component';
+import { RoadSurfaceModalComponent } from './shared/road-surface-modal/road-surface-modal.component';
+import { HealthConditionComponent } from './components/health-condition/health-condition.component';
+import { HealthConditionModalComponent } from './shared/health-condition-modal/health-condition-modal.component';
+import { LightConditionModalComponent } from './shared/light-condition-modal/light-condition-modal.component';
+import { VechileMasterComponent } from './components/vechile-master/vechile-master.component';
+import { VechileDefectComponent } from './components/vechile-defect/vechile-defect.component';
+import { VechileMovementMasterComponent } from './components/vechile-movement-master/vechile-movement-master.component';
+import { VechileOwnershipComponent } from './components/vechile-ownership/vechile-ownership.component';
+import { VechileRelationComponent } from './components/vechile-relation/vechile-relation.component';
+import { VechileServiceAgeComponent } from './components/vechile-service-age/vechile-service-age.component';
+import { SpeedLimitComponent } from './components/speed-limit/speed-limit.component';
+import { VechileMasterModalComponent } from './shared/vechile-master-modal/vechile-master-modal.component';
+import { VechileDefectModalComponent } from './shared/vechile-defect-modal/vechile-defect-modal.component';
+import { VechileMovementModalComponent } from './shared/vechile-movement-modal/vechile-movement-modal.component';
+import { VechileOwnerModalComponent } from './shared/vechile-owner-modal/vechile-owner-modal.component';
+import { VechileRelationModalComponent } from './shared/vechile-relation-modal/vechile-relation-modal.component';
+import { VechileServiceAgeModalComponent } from './shared/vechile-service-age-modal/vechile-service-age-modal.component';
+import { SpeedModalComponent } from './shared/speed-modal/speed-modal.component';
+import { AccidentCauseComponent } from './components/accident-cause/accident-cause.component';
+import { AccidentTypeComponent } from './components/accident-type/accident-type.component';
+import { CollisionTypeComponent } from './components/collision-type/collision-type.component';
+import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
+import { ImpactTypeComponent } from './components/impact-type/impact-type.component';
+import { LicenseLevelComponent } from './components/license-level/license-level.component';
+import { PavementTypeComponent } from './components/pavement-type/pavement-type.component';
+import { PedestrianMovementComponent } from './components/pedestrian-movement/pedestrian-movement.component';
+import { SeatingTypeComponent } from './components/seating-type/seating-type.component';
+import { SeverityLevelComponent } from './components/severity-level/severity-level.component';
+import { TerianTypeComponent } from './components/terian-type/terian-type.component';
+import { UserTypeComponent } from './components/user-type/user-type.component';
+import { VictimMovementComponent } from './components/victim-movement/victim-movement.component';
+import { VictimTypeComponent } from './components/victim-type/victim-type.component';
+import { VictimTypeModalComponent } from './shared/victim-type-modal/victim-type-modal.component';
+import { VictimMovementModalComponent } from './shared/victim-movement-modal/victim-movement-modal.component';
+import { UserTypeModalComponent } from './shared/user-type-modal/user-type-modal.component';
+import { AccidentCasuseModalComponent } from './shared/accident-casuse-modal/accident-casuse-modal.component';
+import { AccidentTypeModalComponent } from './shared/accident-type-modal/accident-type-modal.component';
+import { CollisionTypeModalComponent } from './shared/collision-type-modal/collision-type-modal.component';
+import { EmploymentStatusModalComponent } from './shared/employment-status-modal/employment-status-modal.component';
+import { ImpactTypeModalComponent } from './shared/impact-type-modal/impact-type-modal.component';
+import { LicenseLevelModalComponent } from './shared/license-level-modal/license-level-modal.component';
+import { PavementTypeModalComponent } from './shared/pavement-type-modal/pavement-type-modal.component';
+import { PedstrianMovementModalComponent } from './shared/pedstrian-movement-modal/pedstrian-movement-modal.component';
+import { SeatingTypeModalComponent } from './shared/seating-type-modal/seating-type-modal.component';
+import { SeverityLevelModalComponent } from './shared/severity-level-modal/severity-level-modal.component';
+import { TerianTypeModalComponent } from './shared/terian-type-modal/terian-type-modal.component';
+
 
 registerLocaleData(en);
 
@@ -140,6 +192,57 @@ registerLocaleData(en);
     ZoneMasterComponent,
     CityModalComponent,
     RecordCompletionDialogComponent,
+    WeatherConditionComponent,
+    RoadSurfaceConditionComponent,
+    LightConditionComponent,
+    AirConditionComponent,
+    WeatherConditionModalComponent,
+    RoadSurfaceModalComponent,
+    HealthConditionComponent,
+    HealthConditionModalComponent,
+    LightConditionModalComponent,
+    VechileMasterComponent,
+    VechileDefectComponent,
+    VechileMovementMasterComponent,
+    VechileOwnershipComponent,
+    VechileRelationComponent,
+    VechileServiceAgeComponent,
+    SpeedLimitComponent,
+    VechileMasterModalComponent,
+    VechileDefectModalComponent,
+    VechileMovementModalComponent,
+    VechileOwnerModalComponent,
+    VechileRelationModalComponent,
+    VechileServiceAgeModalComponent,
+    SpeedModalComponent,
+    AccidentCauseComponent,
+    AccidentTypeComponent,
+    CollisionTypeComponent,
+    EmploymentStatusComponent,
+    ImpactTypeComponent,
+    LicenseLevelComponent,
+    PavementTypeComponent,
+    PedestrianMovementComponent,
+    SeatingTypeComponent,
+    SeverityLevelComponent,
+    TerianTypeComponent,
+    UserTypeComponent,
+    VictimMovementComponent,
+    VictimTypeComponent,
+    VictimTypeModalComponent,
+    VictimMovementModalComponent,
+    UserTypeModalComponent,
+    AccidentCasuseModalComponent,
+    AccidentTypeModalComponent,
+    CollisionTypeModalComponent,
+    EmploymentStatusModalComponent,
+    ImpactTypeModalComponent,
+    LicenseLevelModalComponent,
+    PavementTypeModalComponent,
+    PedstrianMovementModalComponent,
+    SeatingTypeModalComponent,
+    SeverityLevelModalComponent,
+    TerianTypeModalComponent,
   ],
   imports: [
     BrowserModule,

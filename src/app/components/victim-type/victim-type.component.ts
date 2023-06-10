@@ -7,7 +7,7 @@ import { VictimTypeLookup } from 'src/app/models/get/victim-type-lookup';
 import { LanguageService } from 'src/app/services/language-change/language-change-service';
 import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
 import { VictimTypeService } from 'src/app/services/victim-type/victim-type.service';
-import { VictimTypeModalComponent } from 'src/app/shared/victim-type-modal/victim-type-modal.component';
+import { VictimMovementTypeModalComponent } from 'src/app/shared/victim-type-modal/victim-type-modal.component';
 
 @Component({
   selector: 'app-victim-type',
@@ -91,7 +91,7 @@ export class VictimTypeComponent implements OnInit {
     this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
       nzTitle: 'Vechile Master',
-      nzContent: VictimTypeModalComponent,
+      nzContent: VictimMovementTypeModalComponent,
       nzFooter: null,
       nzOnOk: () => {
         // This function will be called when the user clicks the OK button in the modal
@@ -101,7 +101,7 @@ export class VictimTypeComponent implements OnInit {
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<VictimTypeModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<VictimMovementTypeModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 

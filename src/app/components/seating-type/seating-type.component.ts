@@ -9,6 +9,7 @@ import { LanguageService } from 'src/app/services/language-change/language-chang
 import { SeatingTypeService } from 'src/app/services/seating-type/seating-type.service';
 import { SharedButtonLabelService } from 'src/app/services/shared-modal-button/shared-modal-button.service';
 import { AccidentCasuseModalComponent } from 'src/app/shared/accident-casuse-modal/accident-casuse-modal.component';
+import { SeatingTypeModalComponent } from 'src/app/shared/seating-type-modal/seating-type-modal.component';
 
 @Component({
   selector: 'app-seating-type',
@@ -92,7 +93,7 @@ export class SeatingTypeComponent implements OnInit {
     this.sharedbuttonService.setButtonLabel(action);
     const modalRef = this.modal.create({
       nzTitle: 'Vechile Master',
-      nzContent: AccidentCasuseModalComponent,
+      nzContent: SeatingTypeModalComponent,
       nzFooter: null,
       nzOnOk: () => {
         // This function will be called when the user clicks the OK button in the modal
@@ -102,7 +103,7 @@ export class SeatingTypeComponent implements OnInit {
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
-      } as Partial<AccidentCasuseModalComponent> // Type assertion to Partial<SharedModalComponent>
+      } as Partial<SeatingTypeModalComponent> // Type assertion to Partial<SharedModalComponent>
 
     });
 

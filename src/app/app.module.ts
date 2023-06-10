@@ -144,7 +144,7 @@ import { TerianTypeComponent } from './components/terian-type/terian-type.compon
 import { UserTypeComponent } from './components/user-type/user-type.component';
 import { VictimMovementComponent } from './components/victim-movement/victim-movement.component';
 import { VictimTypeComponent } from './components/victim-type/victim-type.component';
-import { VictimTypeModalComponent } from './shared/victim-type-modal/victim-type-modal.component';
+import { VictimMovementTypeModalComponent } from './shared/victim-type-modal/victim-type-modal.component';
 import { VictimMovementModalComponent } from './shared/victim-movement-modal/victim-movement-modal.component';
 import { UserTypeModalComponent } from './shared/user-type-modal/user-type-modal.component';
 import { AccidentCasuseModalComponent } from './shared/accident-casuse-modal/accident-casuse-modal.component';
@@ -246,7 +246,7 @@ registerLocaleData(en);
     UserTypeComponent,
     VictimMovementComponent,
     VictimTypeComponent,
-    VictimTypeModalComponent,
+    VictimMovementTypeModalComponent,
     VictimMovementModalComponent,
     UserTypeModalComponent,
     AccidentCasuseModalComponent,

@@ -15,8 +15,11 @@
       <td>{{ city.cityName }}</td>
       <td>{{ city.woreda?.woredaName }}</td>
       <td>
-        <a  (click)="editCity(city)">Edit</a> |
-        <a  (click)="openDeleteConfirmation(city.cityId)">Delete</a>
+        <button class="edit-button"  (click)="editCity(city)">    <i class="icon-edit"></i>
+          Edit</button> 
+          <span class="button-spacing"></span>
+        <a class="delete"  (click)="openDeleteConfirmation(city.cityId)"><i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span></a>
       </td>
     </tr>
   </tbody>

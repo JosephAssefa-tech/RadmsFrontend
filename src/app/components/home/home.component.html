@@ -82,7 +82,7 @@
                 [(ngModel)]="regionIdd"
                 (ngModelChange)="getRegionBasedSummaryData($event)"
                  >
-                  <nz-option       *ngFor="let option of regionMasters$ | async"
+                  <nz-option       *ngFor="let option of regionMasters"
                   [nzLabel]="option.regionName"
                   [nzValue]="option.regionId"
                   ></nz-option>

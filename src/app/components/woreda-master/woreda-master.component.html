@@ -15,8 +15,12 @@
       <td>{{ woreda.woredaName }}</td>
       <td>{{ woreda.zone?.zoneName }}</td>
       <td>
-        <a  (click)="editWoreda(woreda)">Edit</a> |
-        <a  (click)="openDeleteConfirmation(woreda.woredaId)">Delete</a>
+        <button class="edit-button"   (click)="editWoreda(woreda)">
+          <i class="icon-edit"></i>
+          Edit</button> 
+          <span class="button-spacing"></span>
+        <a class="delete" (click)="openDeleteConfirmation(woreda.woredaId)">  <i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span></a>
       </td>
     </tr>
   </tbody>

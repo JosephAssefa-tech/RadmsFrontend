@@ -15,8 +15,15 @@
       <td>{{ zone.zoneName }}</td>
       <td>{{ zone.region?.regionName }}</td>
       <td>
-        <a  (click)="editZone(zone)">Edit</a> |
-        <a  (click)="openDeleteConfirmation(zone.zoneId)">Delete</a>
+        <button class="edit-button"   (click)="editZone(zone)">
+          <i class="icon-edit"></i>
+          Edit</button> 
+          <span class="button-spacing"></span>
+
+        <a  class="delete" (click)="openDeleteConfirmation(zone.zoneId)">
+          <i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span>
+        </a>
       </td>
     </tr>
   </tbody>

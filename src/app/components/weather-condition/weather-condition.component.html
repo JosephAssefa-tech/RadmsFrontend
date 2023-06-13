@@ -14,9 +14,16 @@
       <td>{{ weather.weatherCondName }}</td>
       <td>
 
-        <a  (click)="onEditRow(weather)">Edit</a> |
+        <button class="edit-button" (click)="onEditRow(weather)">
+          <i class="icon-edit"></i>
+          Edit
+        </button>
+        
+        <span class="button-spacing"></span> <!-- Add a span element for spacing -->
         <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
-        <a  (click)="openDeleteConfirmation(weather.weatherCondId)">Delete</a>
+        <a  class="delete" (click)="openDeleteConfirmation(weather.weatherCondId)">
+          <i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span></a>
       </td>
     </tr>
   </tbody>

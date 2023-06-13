@@ -14,9 +14,12 @@
       <td>{{ vechile.hname }}</td>
       <td>
 
-        <a  (click)="onEditRow(vechile)">Edit</a> |
-        <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
-        <a  (click)="openDeleteConfirmation(vechile.hid)">Delete</a>
+        <button class="edit-button"  (click)="onEditRow(vechile)"><i class="icon-edit"></i>
+          Edit</button> 
+          <span class="button-spacing"></span>
+        <a class="delete"  (click)="openDeleteConfirmation(vechile.hid)">  <i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span>
+          </a>
       </td>
     </tr>
   </tbody>

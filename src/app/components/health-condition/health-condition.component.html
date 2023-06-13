@@ -1,0 +1,24 @@
+
+<button class="add-region" nz-button nzType="primary" (click)="showModal('Add Health')">Add Health Condition</button>
+<nz-table #middleTable nzSize="middle" [nzData]="healths">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>HealthConditionName</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let health of healths">
+      <td>{{ health.healthConditionId }}</td>
+      <td>{{ health.healthConditionName }}</td>
+      <td>
+
+        <a  (click)="editHealthConditioinRow(health)">Edit</a> |
+        <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
+        <a  (click)="openDeleteConfirmation(health.healthConditionId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+
+</nz-table>

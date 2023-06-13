@@ -13,6 +13,6 @@ export class LevelOfLicenceService extends BaseService<LevelOfLicence>{
   }
 
   getResourceUrl(): string {
-    return 'LevelOfLicence';
+    return 'LicenceLevel';
    }
 }

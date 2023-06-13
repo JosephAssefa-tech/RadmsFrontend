@@ -20,6 +20,13 @@ import { SeatingType } from 'src/app/models/get/seating-type';
 import { SeatingTypeService } from 'src/app/services/seating-type/seating-type.service';
 import { PedestrianMovement } from 'src/app/models/get/pedestrian-movement';
 import { PedestrainMovementService } from 'src/app/services/pedestrain-movements/pedestrain-movement.service';
+import { VechicleMasterEntity } from 'src/app/models/get/vechicle-master';
+import { VechileMasterService } from 'src/app/services/vechile-masters/vechile-master.service';
+import { VictimDetailService } from 'src/app/services/victim-details/victim-detail.service';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { LanguageService } from 'src/app/services/language-change/language-change-service';
+import { RecordCompletionDialogComponent } from 'src/app/shared/record-completion-dialog/record-completion-dialog.component';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-victim-details',
@@ -27,13 +34,17 @@ import { PedestrainMovementService } from 'src/app/services/pedestrain-movements
   styleUrls: ['./victim-details.component.scss']
 })
 export class VictimDetailsComponent implements OnInit {
+  count = 1;
+  accidentSeverity$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
-
+   customId: string | undefined;
+   lastThreeDigits = '000';
 
   selectedVictimType?:any;
   victimName?:string;
   selectedGender?:number=0;
   age?:number;
+  severityId:any;
   selectedVehicle?:any;
   selectedEmploymentStatus?:any;
   selectedAccidentSeverity?:any;
@@ -47,27 +58,54 @@ export class VictimDetailsComponent implements OnInit {
 
 
   myForm = new FormGroup({
-    victimTypeControl: new FormControl(''),
-    victimNameControl: new FormControl(''),
-    genderControl: new FormControl(''),
-    ageControl: new FormControl(''),
-    vehicleControl: new FormControl(''),
-    victimEmploymentStatusControl: new FormControl(''),
-    accidentSeverityControl: new FormControl(''),
-    healthConditionControl: new FormControl(''),
-    victimMovementControl: new FormControl(''),
-    seatingTypeControl: new FormControl(''),
-    pedestrianMovementControl: new FormControl('')
-  });
+    accidentId: new FormControl(''),
+    severityId: new FormControl(''),
+    victimId:new FormControl(''),//v+accidentId000/001/002
+    victimName: new FormControl(''),
+    age: new FormControl(''),
+    genderType: new FormControl(''),
+    victimMovementId: new FormControl(''),
+    victimTypeId: new FormControl(''),
+    employmentStatusId: new FormControl(''),
+    seatBeltUsed:new FormControl(''),
+   // vehicleControl: new FormControl(''),
+   airbagDeployed:new FormControl(''),
+    helmetUsed:new FormControl(''),
+    healthConditionId: new FormControl(''),
+    pedestrianMovementId: new FormControl(''),
+    //accidentSeverityControl: new FormControl(''),
+    seatingTypeId: new FormControl(''),
 
+
+
+  });
+  // {Fngonit
+
+  //   "victimId": "jo1",
+  //   "victimName": "jo",
+  //   "age": 1,
+  //   "genderType": 1,
+  //   "victimMovementId": 1,
+
+  //   "victimTypeId": 1,
+  //   "employmentStatusId": 1,
+  //   "seatBeltUsed": 1,
+
+  //   "airbadDeployed": 1,
+  //   "helmetUsed": 1,
+  //   "healthConditionId": 1,
+  //   "pedestrianMovementId": 1,
+  //   "seatingTypeId": 1
+  // }
 
   plainFooter = 'plain extra footer';
   footerRender = (): string => 'extra footer';
-  victimType=[] as VictimTypeLookup[];
-  vehicle=[] as VehiclesEntity[];
+  victimTypes=[] as VictimTypeLookup[];
+  //vehicle=[] as VehiclesEntity[];
+  vehicle=[]  as VechicleMasterEntity[];
   employmentStatus=[] as EmploymentStatus[];
   accidentSeverity=[] as SeverityLevel[];
-  healthCondition=[] as HealthCondition[];
+  healthConditions=[] as HealthCondition[];
   victimMovement=[] as VictimMovementMaster[];
   seatingType=[] as SeatingType[];
   pedestrianMovement=[] as PedestrianMovement[];
@@ -76,17 +114,19 @@ export class VictimDetailsComponent implements OnInit {
    form:FormGroup;
 
   constructor(
-    
+    private languageService:LanguageService,
     private accidentDetailTransactionService:AccidentDetailsTransactionService,
-
+    private modal: NzModalService,
     private victimTypeService:VictimTypeService,
     private vehicleService:VehicleListService,
+    private victimDetail:VictimDetailService,
     private employmentStatusService:EmployementStatusService,
     private accidentSeverityService:SeverityLevelService,
     private healthConditionService:HealthConditiionService,
     private victimMovementService:VictimMovementService,
     private seatingTypeService:SeatingTypeService,
     private pedestrianMovementService:PedestrainMovementService,
+    private vechileMasterService:VechileMasterService,
 
 
     private route:Router,
@@ -102,8 +142,22 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+    this.languageService.selectedLanguage$.subscribe(language => {
+      this.GetAccidentSeverityDetail(language);
+
+
+    });
+
+    this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
+      if (id) {
+        // Set the newly created record's ID in the form
+        this.myForm.patchValue({ accidentId: id,victimId:'VI'+id });
+      }
+    });
+
+    this.GetAccidentSeverity();
 this.GetVictimTypeDetail();
-this.GetAccidentSeverityDetail();
+//this.GetAccidentSeverityDetail();
 this.GetEmploymentStatusDetail();
 this.GetHealthConditionDetail();
 this.GetPedestrianMovementDetail();
@@ -117,12 +171,17 @@ this.GetVictimMovementDetail();
   errorNotification(type:string):void{
     this.notification.error("Data was not Saved",'',{nzPlacement:'topRight'})
   }
-
+  GetAccidentSeverity()
+  {
+    this.accidentSeverityService.getAll().subscribe((response)=>{
+      this.accidentSeverity=response;
+    })
+  }
 
   GetVictimTypeDetail()
   {
     this.victimTypeService.getAll().subscribe((response:VictimTypeLookup[])=>{
-      this.victimType=response;
+      this.victimTypes=response;
     });
   }
 
@@ -130,7 +189,8 @@ this.GetVictimMovementDetail();
 
   GetVehicleDetail()
   {
-    this.vehicleService.getAll().subscribe((response:VehiclesEntity[])=>{
+   // this.vehicleService.getAll().subscribe((response:VehiclesEntity[])=>{
+    this.vechileMasterService.getAll().subscribe((response)=>{
       this.vehicle=response;
     });
   }
@@ -144,21 +204,29 @@ this.GetVictimMovementDetail();
     });
   }
 
-  
-  GetAccidentSeverityDetail()
+
+  GetAccidentSeverityDetail(language:string)
   {
-    this.accidentSeverityService.getAll().subscribe((response:SeverityLevel[])=>{
-      this.accidentSeverity=response;
-    });
+    this.accidentSeverityService.getAllByLanguage(language)
+    .subscribe(
+      (response) => {
+        this.accidentSeverity$ .next(response);
+        // Reset the selected option when the options change
+        this.severityId = null;
+      },
+      (error) => {
+        console.error('Error retrieving data:', error);
+      }
+    );
   }
 
-  
+
 
 
   GetHealthConditionDetail()
   {
     this.healthConditionService.getAll().subscribe((response:HealthCondition[])=>{
-      this.healthCondition=response;
+      this.healthConditions=response;
     });
   }
 
@@ -170,7 +238,7 @@ this.GetVictimMovementDetail();
       this.victimMovement=response;
     });
   }
-  
+
 
 
   GetSeatingTypeDetail()
@@ -187,10 +255,10 @@ this.GetVictimMovementDetail();
     });
   }
 
-  
-  
 
- 
+
+
+
   AccidentPage()
   {
     this.errorNotification('error');
@@ -209,11 +277,39 @@ this.GetVictimMovementDetail();
 
  //// }
  onSubmit(){
+
+  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId,victimId:this.myForm.value.victimId };
   console.log("submitting a form")
-  this.accidentDetailTransactionService.post(this.myForm.value).subscribe(response => {
+  this.victimDetail.post(record).subscribe(response => {
     console.log(response);
   });
+  if (this.count < this.accidentDetailTransactionService.number) {
+    // reset the form here
+    this.myForm.reset();
+    this.count++;
+  } else {
+    this.showModal();
+    // navigate to other page
+    this.route.navigate(['/home']);
+  }
   console.log("submitting a form")
  }
+ showModal(): void {
+
+  const modalRef = this.modal.create({
+    nzContent: RecordCompletionDialogComponent,
+    nzFooter: null,
+    nzOnOk: () => {
+      // This function will be called when the user clicks the OK button in the modal
+      // You can perform any necessary actions here, such as closing the modal
+      modalRef.destroy();
+
+
+    }
+
+  });
+
+
+}
 
 }

@@ -1,0 +1,24 @@
+
+<button class="add-region" nz-button nzType="primary" (click)="showModal('Add Light Conditions')">Add Light Conditions</button>
+<nz-table #middleTable nzSize="middle" [nzData]="lights">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Light Condition Names</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let light of lights">
+      <td>{{ light.lightConditionId }}</td>
+      <td>{{ light.lightConditionName }}</td>
+      <td>
+
+        <a  (click)="editLightConditioinRow(light)">Edit</a> |
+        <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
+        <a  (click)="openDeleteConfirmation(light.lightConditionId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+
+</nz-table>

@@ -24,6 +24,7 @@ import { VehicleMovementMaster } from 'src/app/models/get/vehicle-movement-maste
 import { VechileMovementService } from 'src/app/services/vechile-movements/vechile-movement.service';
 import { VehicleDefect } from 'src/app/models/get/vehicle-defect';
 import { VechileDefectsService } from 'src/app/services/vechil-defect/vechile-defects.service';
+import { VechileDetailService } from 'src/app/services/vechile-details/vechile-detail.service';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -31,13 +32,16 @@ import { VechileDefectsService } from 'src/app/services/vechil-defect/vechile-de
   styleUrls: ['./vehicle-details.component.scss']
 })
 export class VehicleDetailsComponent implements OnInit {
+  count = 1;
+  countNumberOfForms: any;
+  iterateOfForms:number[]=[];
+  i=1;
 
- 
 
   accusedStatus:number=0;
   driverName?: string;
   selectedGender:number = 0;
-  selectedEducationLevel?:any;
+  educationLevelId?:any;
   drivingLicenceStat?:number=0;
   licenceNumber?:String;
   selectedLevelOfLicence?:any;
@@ -56,55 +60,67 @@ export class VehicleDetailsComponent implements OnInit {
   selectedVehicleType?:any;
   selectedVehicleMovement?: any;
   selectedVehicleDefect?:any;
+  selectedEducationLevel?:any;
 
 
   myForm = new FormGroup({
-    diverNameControl: new FormControl(''),
-    genderControl: new FormControl(''),
-    educationLevelControl: new FormControl(''),
-    driverLicenceAvailableControl: new FormControl(''),
-    accusedStatusControl: new FormControl(''),
-    licenceNumberControl: new FormControl(''),
-    levelOfLicenceControl: new FormControl(''),
-    drivingLicenceCategoriesControl: new FormControl(''),
-    thirdPartyInsuranceControl: new FormControl(''),
-    alcholUsedControl: new FormControl(''),
-    alcholTestedControl: new FormControl(''),
-    alcholLevelControl: new FormControl(''),
-    speedLimitExceededControl: new FormControl(''),
-    speedLevelControl: new FormControl(''),
-    driverExperienceControl: new FormControl(''),
-    plateNumberControl:new FormControl(''),
-    driverVehicleRelationControl: new FormControl(''),
-    vehicleOwnershipControl: new FormControl(''),
-    vehicleServiceAgeControl:new FormControl(''),
-    vehicleTypeControl: new FormControl(''),
-    vehicleMovementControl: new FormControl(''),
-    vehicleDefectControl: new FormControl(''),
+    accidentId: new FormControl(''),
+    vehicleInvolvedId: new FormControl(2023000031),
+    vehicleId: new FormControl(''),
+    numberPlate:new FormControl(''),
+    vehicleAgeId:new FormControl(''),
+    vehicleDefectId: new FormControl(''),
+
+
+    driverName: new FormControl(''),
+    dlcatagoryId: new FormControl(''),
+    driverAge: new FormControl(''),
+
+    educationLevelId: new FormControl(''),
+    driverExperienceId: new FormControl(''),
+    vehicleOwnershipId: new FormControl(''),
+    genderId: new FormControl(''),
+
+    dlstatus: new FormControl(''),
+    dllevelId: new FormControl(''),
+    dlnumber: new FormControl(''),
+
+    vehicleRelationId: new FormControl(''),
+    vehicleMovementId: new FormControl(''),
+    isOverSpeed: new FormControl(''),
+    recordedSpeed: new FormControl(''),
+
+    isAlcohalConsumed: new FormControl(''),
+    alchcolTested:new FormControl(''),
+    alcohalConsumptionLevel: new FormControl(''),
+    validInsurance: new FormControl(''),
+    accuseStatus: new FormControl(''),
+
+
+
 
   });
 
 
   plainFooter = 'plain extra footer';
   footerRender = (): string => 'extra footer';
-  educationLevel=[] as EducationLevel[];
-  levelOfLicence=[] as LevelOfLicence[];
-  drivingLicenceCategories=[] as DrivingLicenceCatagory[];
-  driverExperience=[] as DriverExperience[]; 
 
+  educationLevels=[] as EducationLevel[];
+  levelOfLicences=[] as LevelOfLicence[];
+  drivingLicenceCategories=[] as DrivingLicenceCatagory[];
+  driverExperiences=[] as DriverExperience[];
   driverVehicleRelation=[] as VehicleRelation[];
   vehicleOwnership=[] as VehicleOwnership[];
   vehicleServiceAge=[] as VehicleServiceAge[];
-  vehicleType=[] as VechicleMasterEntity[];
-  vehicleMovement=[] as VehicleMovementMaster[];
+  vehicleMovements=[] as VehicleMovementMaster[];
   vehicleDefect=[] as VehicleDefect[];
-
+  vechileTypes=[] as VechicleMasterEntity[];
 
   value?: string;
    form:FormGroup;
 
   constructor(
-    
+
     private educationLevelService:EducationLevelService,
     private accidentDetailTransactionService:AccidentDetailsTransactionService,
     private levelOfLicenceService:LevelOfLicenceService,
@@ -113,15 +129,21 @@ private driverExperienceService: DriverExperienceService,
 private driverVehicleRelationService: VechileRelationService,
 private vehicleOwnershipService: VechileOwnerService,
 private vehicleServiceAgeService: VehicleServiceAgeService,
-private vehicleTypeService: VechileMasterService,
 private vehicleMovementService: VechileMovementService,
 private vehicleDefectService: VechileDefectsService,
+private vechileMasterService:VechileMasterService,
+private vechileDetailService:VechileDetailService,
 
     private route:Router,
     private notification:NzNotificationService,
     public fb:FormBuilder
 
     ) {
+      // this.accidentDetailTransactionService.number$.subscribe(number => {
+
+      //   this.countNumberOfForms = number;
+      //   console.log(this.countNumberOfForms);
+      // });
 this.form=this.fb.group({
   dateTime:['']}
   );
@@ -130,6 +152,22 @@ this.form=this.fb.group({
     }
 
   ngOnInit(): void {
+  //this.CheckNumberOfRoadsAndRouteToForm();
+    // for (let i = 1; i <= this.countNumberOfForms; i++) {
+    //   //this.iterateOfForms.push(i);
+
+    // }
+    // this.accidentDetailTransactionService.number$.subscribe(number => {
+
+    //   this.countNumberOfForms = number;
+    //   console.log(this.countNumberOfForms);
+    // });
+    this.accidentDetailTransactionService.getNewRecordId().subscribe(id => {
+      if (id) {
+        // Set the newly created record's ID in the form
+        this.myForm.patchValue({ accidentId: id ,vehicleInvolvedId:'V'+id});
+      }
+    });
 this.GetEducationLevelDetail();
 this.GetLevelOfLicenceDetail();
 this.GetDrivingLicenceCategoriesDetail();
@@ -138,6 +176,8 @@ this.GetDriverVehicleRelationDetail();
 this.GetVehicleOwnershipRelationDetail();
 this.GetVehicleServiceAgeDetail();
 this.GetVehicleDefectDetail();
+this.GetVechileType();
+this.GetVehicleMovementDetail();
   }
   sucessNotification(type:string):void{
     this.notification.success("Data Saved Successfully","",{nzPlacement:'topRight'});
@@ -177,21 +217,33 @@ if(this.speedLimitExceeded != 1){
 this.speedLevel=0;
 }
 }
+CheckNumberOfRoadsAndRouteToForm()
+{
+  if(this.accidentDetailTransactionService.NoumberOfRoads<=0){
+    this.route.navigate(['/accident']);
+  }
+}
 
 
 
   GetEducationLevelDetail()
   {
     this.educationLevelService.getAll().subscribe((response:EducationLevel[])=>{
-      this.educationLevel=response;
+      this.educationLevels=response;
     });
   }
 
+  GetVechileType()
+  {
+this.vechileMasterService.getAll().subscribe((response)=>{
+this.vechileTypes=response;
 
+})
+  }
   GetLevelOfLicenceDetail()
   {
     this.levelOfLicenceService.getAll().subscribe((response:LevelOfLicence[])=>{
-      this.levelOfLicence=response;
+      this.levelOfLicences=response;
     });
   }
 
@@ -207,7 +259,7 @@ this.speedLevel=0;
   GetDriverExperiencesDetail()
   {
     this.driverExperienceService.getAll().subscribe((response:DriverExperience[])=>{
-      this.driverExperience=response;
+      this.driverExperiences=response;
     });
   }
 
@@ -234,25 +286,17 @@ this.speedLevel=0;
     });
   }
 
-  
-  GetVehicleTypeDetail()
-  {
-    this.vehicleTypeService.getAll().subscribe((response:VechicleMasterEntity[])=>{
-      this.vehicleType=response;
-    });
-  }
-  
-  
-    
+
+
   GetVehicleMovementDetail()
   {
     this.vehicleMovementService.getAll().subscribe((response: VehicleMovementMaster[])=>{
-      this.vehicleMovement=response;
+      this.vehicleMovements=response;
     });
   }
-  
 
-      
+
+
   GetVehicleDefectDetail()
   {
     this.vehicleDefectService.getAll().subscribe((response: VehicleDefect[])=>{
@@ -263,8 +307,14 @@ this.speedLevel=0;
 
   RoadInvolvedPage()
   {
+    if(this.accidentDetailTransactionService.NoumberOfRoads<=0){
+      this.route.navigate(['/accident']);
+    }else{
+      this.route.navigate(['/roadInvolved']);
+
+    }
     this.errorNotification('error');
-    this.route.navigate(['/roadInvolved']);
+
 
   }
 
@@ -272,18 +322,40 @@ this.speedLevel=0;
     this.route.navigate(['/victim']);
 
   }
-  // submitForm()
-  // {
-  //  var formData:any=new FormData();
-  //  formData.append("dateTime",this.form.get('dateTime').value);
 
- //// }
  onSubmit(){
-  console.log("submitting a form")
-  this.accidentDetailTransactionService.post(this.myForm.value).subscribe(response => {
+
+  //if the first accident id assigning not working
+  //accidentId.patch({
+  //  id:this.accidentDetailTransactionService.idd;
+  //})
+  const record = { ...this.myForm.value, accidentId: this.myForm.value.accidentId,vehicleInvolvedId:this.myForm.value.vehicleInvolvedId  };
+  //delete record.accidentId;
+  console.log("submitting a road involved id")
+  this.vechileDetailService.post(record).subscribe(response => {
     console.log(response);
   });
-  console.log("submitting a form")
+ this. CheckNumberOfRoadsAndRouteToForm();
+  this.sucessNotification('saved');
+  if (this.count < this.accidentDetailTransactionService.number) {
+    // reset the form here
+    this.myForm.reset();
+    this.count++;
+  } else {
+    // navigate to other page
+    this.route.navigate(['/victim']);
+  }
+    //  for ( this.i;  this.i <= this.countNumberOfForms; this.i++) {
+    //   //this.iterateOfForms.push(i);
+    //    console.log(this.countNumberOfForms);
+    //     this.myForm.reset();
+
+
+
+    // }
+  //this.route.navigate(['/victim']);
+ // console.log("submitting a form")
+
  }
 
 }

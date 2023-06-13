@@ -1,6 +1,6 @@
 export interface  LevelOfLicence
 {
-  LeveloflicenceID :number;
-  LeveloflicenceName:string;
+  leveloflicenceId :number;
+  leveloflicenceName:string;
 
 }

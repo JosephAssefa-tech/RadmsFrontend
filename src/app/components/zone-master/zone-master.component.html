@@ -1,0 +1,23 @@
+
+<button class="add-region" nz-button nzType="primary" (click)="showModal('Add Zone')">Add Zones</button>
+<nz-table #middleTable nzSize="middle" [nzData]="zones">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Zone Names</th>
+      <th>Region Names</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let zone of zones">
+      <td>{{ zone.zoneId }}</td>
+      <td>{{ zone.zoneName }}</td>
+      <td>{{ zone.region?.regionName }}</td>
+      <td>
+        <a  (click)="editZone(zone)">Edit</a> |
+        <a  (click)="openDeleteConfirmation(zone.zoneId)">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

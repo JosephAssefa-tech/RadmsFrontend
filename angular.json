@@ -41,6 +41,8 @@
             "styles": [
               "node_modules/mapbox-gl/dist/mapbox-gl.css",
               "node_modules/leaflet/dist/leaflet.css",
+              "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
+              "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
               "node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css",
               "node_modules/ng-zorro-antd/resizable/style/index.min.css",
               "src/theme.less",
@@ -48,20 +50,21 @@
               /* You can add global styles to this file, and also import other style files */
 
             ],
-            "scripts": []
+            "scripts": [  "node_modules/leaflet/dist/leaflet.js",
+            "node_modules/leaflet.markercluster/dist/leaflet.markercluster.js"]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "8mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "8mb",
+                  "maximumError": "8mb"
                 }
               ],
               "fileReplacements": [

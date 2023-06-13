@@ -7,7 +7,7 @@
 
 
   <div nz-row style="display: flex;">
-    <div nz-col  nzSpan="6" ><label>Accident</label><br/>
+    <!-- <div nz-col  nzSpan="6" ><label>Accident</label><br/>
       <nz-select formControlName="accidentId"
       [(ngModel)]="selectedAccident">
       <ng-container  *ngFor="let option of accident">
@@ -19,17 +19,17 @@
 
 
       </nz-select>
-     </div>
+     </div> -->
 
-    <div nz-col  nzSpan="6" ><label>HighWay Name</label><br/>
+    <div nz-col  nzSpan="6" ><label>Road Name</label><br/>
       <nz-select formControlName="hid"
       [(ngModel)]="selectedHighway">
-      <ng-container  *ngFor="let option of highway">
-        <nz-option
+
+        <nz-option *ngFor="let option of highway$ | async"
         [nzLabel]="option.hname"
         [nzValue]="option.hid"
         ></nz-option>
-      </ng-container>
+
 
 
       </nz-select>
@@ -40,12 +40,12 @@
     <div nz-col  nzSpan="6" ><label>Pavement Type</label><br/>
       <nz-select formControlName="pavementTypeId"
       [(ngModel)]="selectedPavementType">
-      <ng-container  *ngFor="let option of pavementType">
+
         <nz-option
-        [nzLabel]="option.pavementName"
-        [nzValue]="option.pavementTypeId"
+        *ngFor="let option of pavements$ | async" [nzValue]="option.pavementTypeId" [nzLabel]="option.pavementName"
+
         ></nz-option>
-      </ng-container>
+
 
 
       </nz-select>
@@ -57,12 +57,12 @@
     <div nz-col  nzSpan="6" ><label>Road Surface Condition</label><br/>
       <nz-select formControlName="roadSurfaceId"
       [(ngModel)]="selectedRoadSurfaceCondition">
-      <ng-container  *ngFor="let option of roadSurfaceCondition">
-        <nz-option
+
+        <nz-option *ngFor="let option of roadSurfaceCondition$ | async"
         [nzLabel]="option.roadSurfaceName"
         [nzValue]="option.roadSurfaceId"
         ></nz-option>
-      </ng-container>
+
 
 
       </nz-select>
@@ -74,12 +74,12 @@
     <div nz-col  nzSpan="6" ><label>Carriage way Type</label><br/>
       <nz-select formControlName="roadCarriagewayId"
       [(ngModel)]="selectedCarriageWayType">
-      <ng-container  *ngFor="let option of carriageWayType">
-        <nz-option
+
+        <nz-option  *ngFor="let option of carriageWayType$ | async"
         [nzLabel]="option.roadCarriagewayName"
         [nzValue]="option.roadCarriagewayId"
         ></nz-option>
-      </ng-container>
+
 
 
       </nz-select>
@@ -106,7 +106,7 @@
     <div nz-col nzSpan="6"> </div>
     <div nz-col nzSpan="6"  style="display: flex;">
       <app-button (click)="AccidentPage()" [buttonText]="'Back'" style="padding-right:15px;"></app-button>
-    <app-button  [buttonText]="'Next'" type="submit" ></app-button>
+    <app-button  [buttonText]="'Next'" type="submit" [isDisabled]="!isFormValid()"></app-button>
     </div>
   </div>
   <!-- (click)="sucessNotification('Sucess')" -->

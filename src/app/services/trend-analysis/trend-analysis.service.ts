@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SummaryData } from 'src/app/models/get/SummaryData';
 import { environment } from 'src/environments/environment';
@@ -25,8 +25,17 @@ export class TrendAnalysisService extends  BaseService<RegionBasedSummaryData>{
    {
     return this.httpClient.get<any[]>(this.summaryData);
    }
-   getTrendAnalysisdData(): Observable<TrendAnalysisResponse[]>
+   getTrendAnalysisdData(startDate?: Date, endDate?: Date): Observable<TrendAnalysisResponse[]>
    {
-    return this.httpClient.get<TrendAnalysisResponse[]>(this.trendAnalysisData);
+    let params = new HttpParams();
+  
+    if (startDate) {
+      params = params.set('startDate', startDate.toISOString());
+    }
+  
+    if (endDate) {
+      params = params.set('endDate', endDate.toISOString());
+    }
+    return this.httpClient.get<TrendAnalysisResponse[]>(this.trendAnalysisData,{ params });
    }
 }

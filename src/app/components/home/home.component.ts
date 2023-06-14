@@ -290,6 +290,11 @@ endDate?:Date
         this.accidentDetailTransactionService.getTotalAccidentCount(filter.startDate, filter.endDate).subscribe(result => {
           this.totalAccidentCount = result.totalAccidentCount;
         });
+      }else{
+        
+        this.accidentDetailTransactionService.getTotalAccidentCount().subscribe(result => {
+          this.totalAccidentCount = result.totalAccidentCount;
+        });
       }
     });
   }

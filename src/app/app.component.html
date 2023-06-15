@@ -16,7 +16,41 @@
         <i class="anticon anticon-dashboard"></i>
         <a>Home</a>
       </li>
-      <li nz-submenu nzTitle="Conditions" nzIcon="appstore">
+      <li nz-menu-item (click)="selectMenuItem('accident-data')" style="color: white">
+        <i nz-icon nzType="car" style="margin-right: 8px;"></i>
+        <a>Accident Data Collection</a>
+      </li>
+      <li nz-submenu nzTitle="Locational Referencing System" nzIcon="environment">
+        <ul>
+          <li nz-menu-item (click)="regionTable()">Region Master</li>
+          <li nz-menu-item (click)="zoneTable()">Zone Master</li>
+          <li nz-menu-item (click)="woredaTable()">Woreda Master </li>
+          <li nz-menu-item (click)="cityTable()">City Master</li>
+          <li nz-menu-item (click)="subcityTable()">Subcity Master</li>
+
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="Vechile" nzIcon="car">
+        <ul>
+          <li nz-menu-item (click)="vechileMaster()">Vechile Master </li>
+          <li nz-menu-item (click)="vechileDefect()">Vechile Defect </li>
+          <li nz-menu-item (click)="vechileMovement()">Vehicle Movement Master</li>
+          <li nz-menu-item (click)="vechileOwnership()">Vechile Ownership</li>
+          <li nz-menu-item (click)="vechileRelation()">Vechile Relation </li>
+          <li nz-menu-item (click)="vechileServiceAge()">Vechile Service Age </li>
+          <li nz-menu-item (click)="speedLimit()">Speed Limit </li>
+          </ul>
+        </li>
+        <li nz-submenu nzTitle="Roads" nzIcon="fork">
+          <ul> 
+            <li nz-menu-item (click)="highwayType()">Highway Type </li>
+            <li nz-menu-item (click)="junctionType()">Junction Type </li>
+            <li nz-menu-item (click)="landmarkType()">Landmark Type</li>
+            <li nz-menu-item (click)="highwayMaster()">Highway Master </li>
+            <li nz-menu-item (click)="roadcariagewayType()">RoadCarriageway Type</li>
+          </ul>
+         </li>
+      <li nz-submenu nzTitle="Conditions" nzIcon="cloud">
         <ul>
           <li nz-menu-item (click)="roadSurface()">Road Surface Condition</li>
           <li nz-menu-item (click)="weatheronditionTable()">Weather Condition Type </li>
@@ -29,28 +63,9 @@
 
         </ul>
       </li>
-      <li nz-submenu nzTitle="Locational Referencing System" nzIcon="appstore">
-        <ul>
-          <li nz-menu-item (click)="regionTable()">Region Master</li>
-          <li nz-menu-item (click)="zoneTable()">Zone Master</li>
-          <li nz-menu-item (click)="woredaTable()">Woreda Master </li>
-          <li nz-menu-item (click)="cityTable()">City Master</li>
-          <li nz-menu-item (click)="subcityTable()">Subcity Master</li>
 
-        </ul>
-      </li>
-      <li nz-submenu nzTitle="Vechile" nzIcon="appstore">
-        <ul>
-          <li nz-menu-item (click)="vechileMaster()">Vechile Master </li>
-          <li nz-menu-item (click)="vechileDefect()">Vechile Defect </li>
-          <li nz-menu-item (click)="vechileMovement()">Vehicle Movement Master</li>
-          <li nz-menu-item (click)="vechileOwnership()">Vechile Ownership</li>
-          <li nz-menu-item (click)="vechileRelation()">Vechile Relation </li>
-          <li nz-menu-item (click)="vechileServiceAge()">Vechile Service Age </li>
-          <li nz-menu-item (click)="speedLimit()">Speed Limit </li>
-          </ul>
-        </li>
-        <li nz-submenu nzTitle="Driver" nzIcon="appstore">
+
+        <li nz-submenu nzTitle="Driver" nzIcon="contacts">
           <ul>
             <li nz-menu-item (click)="licenseLevel()">Licence Level </li>
             <li nz-menu-item (click)="educationLevel()">Education Level </li>
@@ -95,16 +110,8 @@
 
         </ul>
       </li>
-      <li nz-submenu nzTitle="Roads" nzIcon="appstore">
-      <ul> 
-        <li nz-menu-item (click)="highwayType()">Highway Type </li>
-        <li nz-menu-item (click)="junctionType()">Junction Type </li>
-        <li nz-menu-item (click)="landmarkType()">Landmark Type</li>
-        <li nz-menu-item (click)="highwayMaster()">Highway Master </li>
-        <li nz-menu-item (click)="roadcariagewayType()">RoadCarriageway Type</li>
-      </ul>
-     </li>
-       <li nz-submenu nzTitle="Users" nzIcon="appstore">
+ 
+       <li nz-submenu nzTitle="Users" nzIcon="user">
       <!-- <ul>
         <li nz-menu-item (click)="regionTable()">User Master </li>
         <li nz-menu-item (click)="regionTable()">User Role transaction </li>
@@ -112,19 +119,20 @@
 
       </ul> -->
      </li>
-      <li nz-menu-item  (click)="selectMenuItem('accident-data')"   style="color:white">
-        <i class="anticon anticon-setting"></i>
-        <a>Accident Data Collection</a>
-      </li>
-      <li nz-menu-item (click)="selectMenuItem('settings')" style="color:white">
-        <i class="anticon anticon-setting"></i>
+ 
+    
+      <li nz-menu-item (click)="selectMenuItem('settings')" style="color: white">
+        <i nz-icon nzType="file-text" style="margin-right: 8px;"></i>
         <a>Report</a>
       </li>
+      
 
-      <li nz-menu-item (click)="selectMenuItem('settings')" style="color:white">
-        <i class="anticon anticon-setting"></i>
-        <a>System Adminstration</a>
+      <li nz-menu-item (click)="selectMenuItem('settings')" style="color: white">
+        <i nz-icon nzType="setting" style="margin-right: 8px;"></i>
+        <a>System Administration</a>
       </li>
+      
+      
     </ul>
   </nz-sider>
   <nz-layout>

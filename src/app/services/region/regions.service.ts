@@ -44,13 +44,27 @@ export class RegionsService extends BaseService<RegionMaster> {
   getResourceUrl(): string {
     return 'RegionMaster';
    }
-   getDataByRegion(regionId: number):Observable<any>
-   {
+  //  getDataByRegion(regionId: number):Observable<any>
+  //  {
 
 
-    let params = { regionId };
-    return this.httpClient.get<any>(this.totalVictimEndPoint, { params: { regionId } });
-   }
+  //   let params = { regionId };
+  //   return this.httpClient.get<any>(this.totalVictimEndPoint, { params: { regionId } });
+  //  }
+  getDataByRegion(regionId: number, startDate?: Date, endDate?: Date): Observable<any> {
+    let params: any = { regionId };
+  
+    if (startDate) {
+      params.startDate = startDate.toISOString();
+    }
+  
+    if (endDate) {
+      params.endDate = endDate.toISOString();
+    }
+  
+    return this.httpClient.get<any>(this.totalVictimEndPoint, { params });
+  }
+  
    updateCounts(deathCount: number, seriousCount: number, slightCount: number, propertyDamageCount: number) {
     this.deathCountSubject.next(deathCount);
     this.seriousCountSubject.next(seriousCount);

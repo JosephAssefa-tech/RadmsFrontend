@@ -107,6 +107,7 @@ import { ZoneMasterComponent } from './components/zone-master/zone-master.compon
 import{ZoneModalComponent} from './shared/zone-modal/zone-modal.component';
 import { CityModalComponent } from './shared/city-modal/city-modal.component';
 import { RecordCompletionDialogComponent } from './shared/record-completion-dialog/record-completion-dialog.component';
+import { LanguageService } from './services/language-change/language-change-service';
 
 registerLocaleData(en);
 
@@ -234,7 +235,7 @@ registerLocaleData(en);
     NzLayoutModule,
 
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US },MapService,FormsBaseStateService],
+  providers: [{ provide: NZ_I18N, useValue: en_US },MapService,FormsBaseStateService,LanguageService],
   bootstrap: [AppComponent],
     entryComponents: [LoginComponent]
 })

@@ -83,4 +83,9 @@ switchLanguage(language: string) {
   this.languageService.selectedLanguage = language;
 
 }
+// getTranslation(key: string): string {
+//   // return this.languageService.getTranslation(key);
+//   return 's'
+// }
+
 }

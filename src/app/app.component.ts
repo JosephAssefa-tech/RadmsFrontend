@@ -212,6 +212,11 @@ switchLanguage(language: string) {
   this.languageService.selectedLanguage = language;
 
 }
+// getTranslation(key: string): string {
+//   // return this.languageService.getTranslation(key);
+//   return 's'
+// }
+
 vechileTable()
 {
   this.router.navigate(['/vechileMaster']);
@@ -236,5 +241,8 @@ onFilterButtonClick(startDate: Date, endDate: Date): void {
 
   this.victimDetailService.setDateFilter(startDate, endDate);
 }
+ getTranslation(key: string): string {
+    return this.languageService.getTranslation(key);
+  }
 
 }

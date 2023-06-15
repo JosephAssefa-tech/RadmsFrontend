@@ -399,5 +399,7 @@ endDate?:Date
 //   })
 // }
 
-
+getTranslation(key: string): string {
+  return this.languageService.getTranslation(key);
+}
 }

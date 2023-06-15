@@ -1,53 +1,48 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LanguageService {
   private selectedLanguageSubject: BehaviorSubject<string> = new BehaviorSubject<string>('english');
-  private currentLanguage: string = 'english';
-  private translations: any = {};
-
+  private languageData: any;
 
   constructor(private http: HttpClient) {
-
-  }
-  loadTranslations(): Observable<any> {
-    return this.http.get(`assets/i18n/${this.currentLanguage}.json`);
+     this.loadLanguageData(this.selectedLanguageSubject.value);
   }
 
-  setLanguage(language: string): Observable<any> {
-    this.currentLanguage = language;
-    return this.loadTranslations();
-  }
-
-  getTranslation(key: string): string {
-    return this.translations[key] || key;
-  }
-
-  get selectedLanguage$() {
+  get selectedLanguage$(): Observable<string> {
     return this.selectedLanguageSubject.asObservable();
   }
 
-  get selectedLanguage() {
+  get selectedLanguage(): string {
     return this.selectedLanguageSubject.value;
   }
 
   set selectedLanguage(language: string) {
-    this.selectedLanguageSubject.next(language);
+    if (this.selectedLanguage !== language) {
+      this.loadLanguageData(language);
+      this.selectedLanguageSubject.next(language);
+    }
   }
 
-  // loadTranslations(language: string): void {
-  //   this.currentLanguage = language;
-  //   import(`../translations/${language}.json`).then((translation) => {
-  //     this.translations = translation;
-  //   });
-  // }
+  private loadLanguageData(language: string): void {
+    const languageFilePath = `assets/languages/${language}.json`;
+    this.http.get(languageFilePath).subscribe(
+      (data: any) => {
+        this.languageData = data;
+      },
+      (error: any) => {
+        console.error(`Failed to load language data for '${language}':`, error);
+      }
+    );
+  }
+  
 
-  // translate(key: string): string {
-  //   return this.translate(this.translations[key] || key);
-  // }
+  getTranslation(key: string): string {
+    if (this.languageData && this.languageData[key]) {
+      return this.languageData[key];
+    }
+    return key; // Return the key itself if translation is not found
+  }
 }

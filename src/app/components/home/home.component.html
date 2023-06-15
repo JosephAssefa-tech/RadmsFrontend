@@ -1,6 +1,24 @@
 <!-- <div nz-col   ><label>Date</label><br/>
   <nz-date-picker formControlName="dateAndTime" [(ngModel)]="dateAndTime"  nzShowTime></nz-date-picker>
 </div> -->
+  <!-- <div class="datepicker"style="display: initial !important;">
+    <nz-date-picker
+      [(ngModel)]="startDate"
+      nzShowTime
+      nzFormat="yyyy-MM-dd HH:mm:ss"
+      nzPlaceHolder="Start"
+    ></nz-date-picker>
+    <nz-date-picker
+      #endDatePicker
+      [(ngModel)]="endDate"
+      nzShowTime
+      nzFormat="yyyy-MM-dd HH:mm:ss"
+      nzPlaceHolder="End"
+    ></nz-date-picker>
+    <button nz-button (click)="onFilterClick()">
+      Search
+    </button>
+  </div> -->
  <div nz-row style="justify-content: space-around;display:flex;">
 
           <div style="color:white;border-radius: 10px;text-align: center;width:14vw;background-color: #ffffff;color: #bc3333">
@@ -64,7 +82,7 @@
                 [(ngModel)]="regionIdd"
                 (ngModelChange)="getRegionBasedSummaryData($event)"
                  >
-                  <nz-option       *ngFor="let option of regionMasters$ | async"
+                  <nz-option       *ngFor="let option of regionMasters"
                   [nzLabel]="option.regionName"
                   [nzValue]="option.regionId"
                   ></nz-option>

@@ -63,9 +63,14 @@ setButtonLable()
 {
   this.sharedbuttonService.getButtonLabel().subscribe((label: string) => {
     if (this.action === 'Edit') {
+
       this.buttonLabel = 'Update Region'; // Customize the label for editing
+      this.onUpdate();
+
     } else {
+
       this.buttonLabel = label; // Use the label as it is for adding
+      this.submitForm();
     }
   });
 }
@@ -76,14 +81,24 @@ setButtonLable()
   }
 
   onUpdate(): void {
+    console.log("Updating form");
     if (this.validateForm.valid) {
       const updatedData = {
         ...this.selectedRowData,
         ...this.validateForm.value
       };
-      this.dataUpdated.emit(updatedData);
-    }
+      this.regionService.update(updatedData).subscribe(
+        response => {
+          // Handle the success response
+          this.dataUpdated.emit(updatedData);
+        },
+        error => {
+          // Handle the error response
+          console.error('Error updating row data:', error);
+        }
+      );
   }
+}
 
   onSave(): void {
     if (this.validateForm.valid) {
@@ -100,6 +115,7 @@ setButtonLable()
     // ...
   }
   submitForm(): void {
+    console.log("submitting form")
     for (const i in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(i)) {
         this.validateForm.controls[i].markAsDirty();

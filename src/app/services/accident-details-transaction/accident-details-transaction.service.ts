@@ -1,6 +1,6 @@
 import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-transaction';
 import { BaseService } from '../base-service/BaseService';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -37,14 +37,40 @@ export class AccidentDetailsTransactionService extends BaseService<AccidentDetai
   updateNumberOfForms(number: number) {
     this.numberSource.next(number);
   }
-  getTotalAccidentCount()
-  {
-    return this.httpClient.get<{ totalAccidentCount: number }>(this.totalAccidentCountEndPoint);
+  // getTotalAccidentCount()
+  // {
+  //   return this.httpClient.get<{ totalAccidentCount: number }>(this.totalAccidentCountEndPoint);
 
-  }
-  getTotalPropertyDamageCount()
-  {
-    return this.httpClient.get<{ totalPropertyDamage: number }>(this.totalPropertyDamageEndPoint);
-  }
+  // }
+  getTotalAccidentCount(startDate?: Date, endDate?: Date) {
+    let params = new HttpParams();
+  
+    if (startDate) {
+      params = params.set('startDate', startDate.toISOString());
+    }
+  
+    if (endDate) {
+      params = params.set('endDate', endDate.toISOString());
+    }
 
+    return this.httpClient.get<{ totalAccidentCount: number }>(this.totalAccidentCountEndPoint, { params });
+  }
+  
+  // getTotalPropertyDamageCount()
+  // {
+  //   return this.httpClient.get<{ totalPropertyDamage: number }>(this.totalPropertyDamageEndPoint);
+  // }
+  getTotalPropertyDamageCount(startDate?: Date, endDate?: Date) {
+    let params = new HttpParams();
+  
+    if (startDate) {
+      params = params.set('startDate', startDate.toISOString());
+    }
+  
+    if (endDate) {
+      params = params.set('endDate', endDate.toISOString());
+    }
+  
+    return this.httpClient.get<{ totalPropertyDamage: number }>(this.totalPropertyDamageEndPoint,{ params });
+  }
 }

@@ -17,18 +17,11 @@
         <!-- <a>{{ getTranslation('Home') }}</a>; -->
         <a>Home</a>
       </li>
-      <li nz-submenu nzTitle="Conditions" nzIcon="appstore">
-        <ul>
-          <li nz-menu-item (click)="subcityTable()">Road Surface Condition</li>
-          <li nz-menu-item (click)="subcityTable()">Weather Condition Type </li>
-          <li nz-menu-item (click)="subcityTable()">Road Surface Condition</li>
-          <li nz-menu-item (click)="regionTable()">Light Condition </li>
-          <li nz-menu-item (click)="cityTable()">AirCondition Type</li>
-
-
-        </ul>
+      <li nz-menu-item (click)="selectMenuItem('accident-data')" style="color: white">
+        <i nz-icon nzType="car" style="margin-right: 8px;"></i>
+        <a>Accident Data Collection</a>
       </li>
-      <li nz-submenu nzTitle="Locational Referencing System" nzIcon="appstore">
+      <li nz-submenu nzTitle="Locational Referencing System" nzIcon="environment">
         <ul>
           <li nz-menu-item (click)="regionTable()">Region Master</li>
           <li nz-menu-item (click)="zoneTable()">Zone Master</li>
@@ -38,78 +31,109 @@
 
         </ul>
       </li>
-      <li nz-submenu nzTitle="Vechile" nzIcon="appstore">
+      <li nz-submenu nzTitle="Vechile" nzIcon="car">
         <ul>
-          <li nz-menu-item (click)="zoneTable()">Vechile Master </li>
-          <li nz-menu-item (click)="woredaTable()">Vechile Defect </li>
-          <li nz-menu-item (click)="cityTable()">Vehicle Movement Master</li>
-          <li nz-menu-item (click)="subcityTable()">Vechile Ownership</li>
-          <li nz-menu-item (click)="regionTable()">Vechile Relation </li>
-          <li nz-menu-item (click)="zoneTable()">Vechile Service Age </li>
-          <li nz-menu-item (click)="woredaTable()">Speed Limit </li>
+          <li nz-menu-item (click)="vechileMaster()">Vechile Master </li>
+          <li nz-menu-item (click)="vechileDefect()">Vechile Defect </li>
+          <li nz-menu-item (click)="vechileMovement()">Vehicle Movement Master</li>
+          <li nz-menu-item (click)="vechileOwnership()">Vechile Ownership</li>
+          <li nz-menu-item (click)="vechileRelation()">Vechile Relation </li>
+          <li nz-menu-item (click)="vechileServiceAge()">Vechile Service Age </li>
+          <li nz-menu-item (click)="speedLimit()">Speed Limit </li>
           </ul>
         </li>
-        <li nz-submenu nzTitle="Driver" nzIcon="appstore">
+        <li nz-submenu nzTitle="Roads" nzIcon="fork">
+          <ul> 
+            <li nz-menu-item (click)="highwayType()">Highway Type </li>
+            <li nz-menu-item (click)="junctionType()">Junction Type </li>
+            <li nz-menu-item (click)="landmarkType()">Landmark Type</li>
+            <li nz-menu-item (click)="highwayMaster()">Highway Master </li>
+            <li nz-menu-item (click)="roadcariagewayType()">RoadCarriageway Type</li>
+          </ul>
+         </li>
+      <li nz-submenu nzTitle="Conditions" nzIcon="cloud">
+        <ul>
+          <li nz-menu-item (click)="roadSurface()">Road Surface Condition</li>
+          <li nz-menu-item (click)="weatheronditionTable()">Weather Condition Type </li>
+          <!-- <li nz-menu-item (click)="RoadSurfaceTable()">Road Surface Condition</li> -->
+          <li nz-menu-item (click)="LightConditionTable()">Light Condition </li>
+          <li nz-menu-item (click)="healthTable()">HealthCondition</li>
+          <li nz-menu-item (click)="AirTable()">AirCondition Type</li>
+
+
+
+        </ul>
+      </li>
+
+
+        <li nz-submenu nzTitle="Driver" nzIcon="contacts">
           <ul>
-            <li nz-menu-item (click)="subcityTable()">Licence Level </li>
-            <li nz-menu-item (click)="woredaTable()">Education Level </li>
-            <li nz-menu-item (click)="regionTable()">Driver Experience </li>
-            <li nz-menu-item (click)="zoneTable()">Driving Licience Category</li>
-            <li nz-menu-item (click)="subcityTable()">Health Condition</li>
+            <li nz-menu-item (click)="licenseLevel()">Licence Level </li>
+            <li nz-menu-item (click)="educationLevel()">Education Level </li>
+            <li nz-menu-item (click)="driverExperience()">Driver Experience </li>
+            <li nz-menu-item (click)="driverLicenseCategory()">Driving Licience Category</li>
             </ul>
           </li>
       <li nz-submenu nzTitle="looksup" nzIcon="appstore">
         <ul>
-          <li nz-menu-item (click)="regionTable()">Accident Cause </li>
-          <li nz-menu-item (click)="zoneTable()">Accident Type</li>
-          <li nz-menu-item (click)="woredaTable()">Activity Type </li>
+          <li nz-menu-item (click)="accidentCause()">Accident Cause </li>
+          <li nz-menu-item (click)="accidentType()">Accident Type</li>
 
-          <li nz-menu-item (click)="subcityTable()">Collision Type</li>
+          <li nz-menu-item (click)="collisionType()">Collision Type</li>
 
 
-          <li nz-menu-item (click)="cityTable()">Employment Status</li>
+          <li nz-menu-item (click)="employmentStatus()">Employment Status</li>
 
-          <li nz-menu-item (click)="regionTable()">Highway Type </li>
-          <li nz-menu-item (click)="zoneTable()">Impact Type</li>
-          <li nz-menu-item (click)="woredaTable()">Junction Type </li>
-          <li nz-menu-item (click)="cityTable()">Landmark Type</li>
-          <li nz-menu-item (click)="subcityTable()">Licence Level </li>
+         
+          <li nz-menu-item (click)="impactType()">Impact Type</li>
 
-          <li nz-menu-item (click)="zoneTable()">Pavemenet Type</li>
-          <li nz-menu-item (click)="woredaTable()">Pedestrian Movement </li>
-          <li nz-menu-item (click)="cityTable()">RoadCarriageway Type</li>
 
-          <li nz-menu-item (click)="regionTable()">Seating Type </li>
-          <li nz-menu-item (click)="zoneTable()">Severity Level </li>
 
-          <li nz-menu-item (click)="cityTable()">Terian Type</li>
+          <li nz-menu-item (click)="pavementType()">Pavemenet Type</li>
+          <li nz-menu-item (click)="pedestrianMovement()">Pedestrian Movement </li>
+      
+
+          <li nz-menu-item (click)="seatingType()">Seating Type </li>
+          <li nz-menu-item (click)="severityLevel()">Severity Level </li>
+
+          <li nz-menu-item (click)="terianType()">Terian Type</li>
 
 
 
 
-          <li nz-menu-item (click)="regionTable()">User Type </li>
+          <!-- <li nz-menu-item (click)="userType()">User Type </li> -->
 
-          <li nz-menu-item (click)="woredaTable()">Victim Movement </li>
-          <li nz-menu-item (click)="cityTable()">Victim Type</li>
+          <li nz-menu-item (click)="victimMovement()">Victim Movement </li>
+          <li nz-menu-item (click)="victimType()">Victim Type</li>
 
 
 
 
         </ul>
       </li>
-      <li nz-menu-item  (click)="selectMenuItem('accident-data')"   style="color:white">
-        <i class="anticon anticon-setting"></i>
-        <a>Accident Data Collection</a>
-      </li>
-      <li nz-menu-item (click)="selectMenuItem('settings')" style="color:white">
-        <i class="anticon anticon-setting"></i>
+ 
+       <li nz-submenu nzTitle="Users" nzIcon="user">
+      <!-- <ul>
+        <li nz-menu-item (click)="regionTable()">User Master </li>
+        <li nz-menu-item (click)="regionTable()">User Role transaction </li>
+        <li nz-menu-item (click)="woredaTable()">User Type </li>
+
+      </ul> -->
+     </li>
+ 
+    
+      <li nz-menu-item (click)="selectMenuItem('settings')" style="color: white">
+        <i nz-icon nzType="file-text" style="margin-right: 8px;"></i>
         <a>Report</a>
       </li>
+      
 
-      <li nz-menu-item (click)="selectMenuItem('settings')" style="color:white">
-        <i class="anticon anticon-setting"></i>
-        <a>System Adminstration</a>
+      <li nz-menu-item (click)="selectMenuItem('settings')" style="color: white">
+        <i nz-icon nzType="setting" style="margin-right: 8px;"></i>
+        <a>System Administration</a>
       </li>
+      
+      
     </ul>
   </nz-sider>
   <nz-layout>
@@ -140,26 +164,25 @@
   </nz-tabset>
   <div>
     <nz-date-picker
-
-    nzShowTime
-    nzFormat="yyyy-MM-dd HH:mm:ss"
-
-    nzPlaceHolder="Start"
-
-  ></nz-date-picker>
-  <nz-date-picker
-    #endDatePicker
-
-    nzShowTime
-    nzFormat="yyyy-MM-dd HH:mm:ss"
-
-    nzPlaceHolder="End"
-
-  ></nz-date-picker>
-  <button nz-button>
-    Search
-  </button>
+      [(ngModel)]="startDate"
+      nzShowTime
+      nzFormat="yyyy-MM-dd HH:mm:ss"
+      nzPlaceHolder="Start"
+    ></nz-date-picker>
+    <nz-date-picker
+      #endDatePicker
+      [(ngModel)]="endDate"
+      nzShowTime
+      nzFormat="yyyy-MM-dd HH:mm:ss"
+      nzPlaceHolder="End"
+    ></nz-date-picker>
+    <button style="margin-left:15px" nz-button (click)="onFilterButtonClick(startDate, endDate)">
+      <i nz-icon nzType="filter" class="filter-icon"></i>
+      Filter
+    </button>
+    
   </div>
+  
   <nz-upload nzAccept=".xlsx">
     <button nz-button>
       <i nz-icon nzType="import"></i> Import Data

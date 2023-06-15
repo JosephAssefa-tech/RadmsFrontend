@@ -75,7 +75,7 @@ export class CityMasterComponent implements OnInit {
   }
   deleteZone(cityId:number)
   {
-    this.cityService.delete(cityId).subscribe(
+    this.cityService.delete(cityId,'cityId').subscribe(
       (response) => {
         // Success logic, if needed
         // Remove the deleted region from the regions array

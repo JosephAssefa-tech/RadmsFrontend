@@ -75,7 +75,7 @@ export class SubcityMasterComponent implements OnInit {
   }
   deleteSubcity(subCityId:number)
   {
-    this.subCityService.delete(subCityId).subscribe(
+    this.subCityService.delete(subCityId,'subCityId').subscribe(
       (response) => {
         // Success logic, if needed
         // Remove the deleted region from the regions array

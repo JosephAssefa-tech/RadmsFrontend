@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ZoneMasterService extends BaseService<ZoneMaster> {
   private zonesSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  private selectedZoneRowData$ = new BehaviorSubject<any>(null);
   public zones$ = this.zonesSubject.asObservable();
 
   listOfZones=`${environment.apiUrl}ZoneMaster`;
@@ -31,5 +32,12 @@ export class ZoneMasterService extends BaseService<ZoneMaster> {
     return this.zonesSubject.asObservable(); // Return the Observable of the BehaviorSubject
 
 
+  }
+  updateSelectedZoneRowData(data: any): void {
+    this.selectedZoneRowData$.next(data);
+  }
+
+  getSelectedZoneRowData(): BehaviorSubject<any> {
+    return this.selectedZoneRowData$;
   }
 }

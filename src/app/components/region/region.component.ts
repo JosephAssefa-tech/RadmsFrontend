@@ -67,7 +67,6 @@ export class RegionComponent implements OnInit {
         // You can perform any necessary actions here, such as closing the modal
         modalRef.destroy();
 
-
       },
       nzComponentParams: {
         action: action // Pass the action to the modal component
@@ -104,7 +103,7 @@ export class RegionComponent implements OnInit {
   }
   deleteRegion(regionId:number)
 {
-  this.regionService.delete(regionId).subscribe(
+  this.regionService.delete(regionId,'regionId').subscribe(
     (response) => {
       // Success logic, if needed
       // Remove the deleted region from the regions array

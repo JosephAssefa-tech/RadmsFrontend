@@ -90,45 +90,78 @@ endDate?:Date
    // this.mapp = this.mapServicee.createMap();
   }
   ngOnInit(): void {
+
     this.languageService.selectedLanguage$.subscribe(language => {
       this.subscribeToFilterChanges(); // Subscribe to date filter changes
       this.GetRegionMaster(language);
-  
-
-
     });
 
 
    // this.GetRegionMaster();
   // this.TrendanalysisServiceWithoutDateFilter();
     this.TrendanalysisServiceWithDateFilter();
+    const map = L.map('mapid').setView([8.9733, 38.7930], 8);
 
-    this.blackSpotService.getBlackSpots().subscribe(data=>{
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  
 
-      this.blackSpots = data;
-
-      const map = L.map('mapid').setView([8.9733, 38.7930], 8);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-
-      }).addTo(map);
-
-      for (const blackSpot of this.blackSpots) {
-        const lat = blackSpot.blackSpotLat;
-        const long = blackSpot.blackSpotLong;
-
-        const marker = L.marker([lat, long], {
-          icon: L.icon({
-            iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
-            iconSize: [30, 35],
-            iconAnchor: [22, 94],
-            popupAnchor: [-3, -76]
-          })
-        }).addTo(map);
-
-        marker.bindPopup(`Lat: ${lat}, Long: ${long}`);
+    
+    this.victimDetailService.dateFilterSubject.subscribe(filter => {
+      if (filter.startDate && filter.endDate) {
+        this.blackSpotService.getBlackSpots(filter.startDate, filter.endDate).subscribe(data => {
+          this.blackSpots = data;
+  
+          map.eachLayer(layer => {
+            if (layer instanceof L.Marker) {
+              map.removeLayer(layer);
+            }
+          });
+  
+          for (const blackSpot of this.blackSpots) {
+            const lat = blackSpot.blackSpotLat;
+            const long = blackSpot.blackSpotLong;
+  
+            const marker = L.marker([lat, long], {
+              icon: L.icon({
+                iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
+                iconSize: [30, 35],
+                iconAnchor: [22, 94],
+                popupAnchor: [-3, -76]
+              })
+            }).addTo(map);
+  
+            marker.bindPopup(`Lat: ${lat}, Long: ${long}`);
+          }
+        });
+      } else {
+        this.blackSpotService.getBlackSpots().subscribe(data => {
+          this.blackSpots = data;
+  
+          map.eachLayer(layer => {
+            if (layer instanceof L.Marker) {
+              map.removeLayer(layer);
+            }
+          });
+  
+          for (const blackSpot of this.blackSpots) {
+            const lat = blackSpot.blackSpotLat;
+            const long = blackSpot.blackSpotLong;
+  
+            const marker = L.marker([lat, long], {
+              icon: L.icon({
+                iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
+                iconSize: [30, 35],
+                iconAnchor: [22, 94],
+                popupAnchor: [-3, -76]
+              })
+            }).addTo(map);
+  
+            marker.bindPopup(`Lat: ${lat}, Long: ${long}`);
+          }
+        });
       }
     });
+ 
 
 
   this.GetSeverity();
@@ -322,23 +355,35 @@ endDate?:Date
 
     });
   }
-  getRegionBasedSummaryData(regionId:number)
-  {
+  getRegionBasedSummaryData(regionId: number) {
+    this.victimDetailService.dateFilterSubject.subscribe(filter => {
+      // Check if both startDate and endDate are defined
+      if (filter.startDate && filter.endDate) {
+        this.regionService.getDataByRegion(regionId, filter.startDate, filter.endDate).subscribe(data => {
+          this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death')?.count || 0;
+          this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury')?.count || 0;
+          this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury')?.count || 0;
+          this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage')?.count || 0;
+  
+          this.regionService.updateCounts(this.deathCount, this.seriousCount, this.slightCount, this.propertyDamageCount);
+        }, error => {
+          console.log('Error sending filter request: ', error);
+        });
+      }else{
+        this.regionService.getDataByRegion(regionId).subscribe(data => {
+          this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death')?.count || 0;
+          this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury')?.count || 0;
+          this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury')?.count || 0;
+          this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage')?.count || 0;
+  
+          this.regionService.updateCounts(this.deathCount, this.seriousCount, this.slightCount, this.propertyDamageCount);
+  
 
-
-    this.regionService.getDataByRegion(regionId).subscribe(data => {
-
-      this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death').count;
-      this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury').count;
-      this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury').count;
-      this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage').count;
-
-      this.regionService.updateCounts(this.deathCount, this.seriousCount, this.slightCount, this.propertyDamageCount);
-    }, error => {
-      console.log('Error sending filter request: ', error);
+      });}
     });
+  
   }
-
+  
 
   AdvancedSearchPage()
   {

@@ -43,7 +43,7 @@
           </ul>
         </li>
         <li nz-submenu [nzTitle]="getTranslation('Roads')" nzIcon="fork">
-          <ul> 
+          <ul>
             <li nz-menu-item (click)="highwayType()">Highway Type </li>
             <li nz-menu-item (click)="junctionType()">Junction Type </li>
             <li nz-menu-item (click)="landmarkType()">Landmark Type</li>
@@ -84,14 +84,14 @@
 
           <li nz-menu-item (click)="employmentStatus()">Employment Status</li>
 
-         
+
           <li nz-menu-item (click)="impactType()">Impact Type</li>
 
 
 
           <li nz-menu-item (click)="pavementType()">Pavemenet Type</li>
           <li nz-menu-item (click)="pedestrianMovement()">Pedestrian Movement </li>
-      
+
 
           <li nz-menu-item (click)="seatingType()">Seating Type </li>
           <li nz-menu-item (click)="severityLevel()">Severity Level </li>
@@ -111,7 +111,7 @@
 
         </ul>
       </li>
- 
+
        <li nz-submenu [nzTitle]="getTranslation('Users')" nzIcon="user">
       <!-- <ul>
         <li nz-menu-item (click)="regionTable()">User Master </li>
@@ -120,20 +120,59 @@
 
       </ul> -->
      </li>
- 
-    
-      <li nz-menu-item (click)="selectMenuItem('settings')" style="color: white">
+
+
+      <!-- <li nz-menu-item (click)="selectMenuItem('settings')" style="color: white">
         <i nz-icon nzType="file-text" style="margin-right: 8px;"></i>
         <a>{{ getTranslation('Report') }}</a>
-      </li>
-      
+      </li> -->
+
+      <li nz-submenu [nzTitle]="getTranslation('Report')" nzIcon="contacts">
+        <ul>
+          <li nz-menu-item (click)="dailyAccidentReport()">Daily Accident </li>
+          <li nz-menu-item (click)="hourlyAccidentReport()">Hourly Accident </li>
+          <li nz-menu-item (click)="accidentInvolvedDriversAgeReport()">Accident Involved Drivers Age </li>
+          <li nz-menu-item (click)="accidentInvolvedDriversSexReport()">Accident Involved Drivers Sex</li>
+          <li nz-menu-item (click)="accidentInvolvedDriversEducationLevelReport()">Accident Involved Drivers Education Level </li>
+          <li nz-menu-item (click)="driverAndVehicleRelationshipReport()">Relation of Driver and Vehicle</li>
+          <li nz-menu-item (click)="drivingExperienceOfDriversReport()">Driving Experience of Drivers </li>
+          <li nz-menu-item (click)="levelOfDrivingLicenseReport()">Level of Driving License</li>
+          <li nz-menu-item (click)="serviceAgeOfVehiclesReport()">Service Age of Vehicles</li>
+          <li nz-menu-item (click)="accidentInvolvedVehiclesByType()">Accident Involved Vehicles by Type</li>
+          <li nz-menu-item (click)="ownersAndVehicleTypesReport()">Owners and Type of Vehicle</li>
+          <li nz-menu-item (click)="vehicleDefectReport()">Vehicle Defect</li>
+          <li nz-menu-item (click)="accidentByRoadTypeReport()">Road Types</li>
+          <li nz-menu-item (click)="accidentByRoadAreaReport()">Area of Road Accident</li>
+          <li nz-menu-item (click)="accidentByRoadDevidentReport()">Road Devident</li>
+          <li nz-menu-item (click)="accidentByRoadSurfaceReport()">Road Surface</li>
+          <li nz-menu-item (click)="accidentByPavementTypeReport()">Pavement Types</li>
+          <li nz-menu-item (click)="accidentByRoadJunctionReport()">Road Junction</li>
+          <li nz-menu-item (click)="accidentByRoadConditionReport()">Road Condition</li>
+          <li nz-menu-item (click)="accidentByRoadLightConditionReport()">Light Condition</li>
+          <li nz-menu-item (click)="accidentByRoadAirConditionReport()">Road Air Condition</li>
+          <li nz-menu-item (click)="accidentByvehicleMovementReport()">Vehicle Movement</li>
+          <li nz-menu-item (click)="accidentByCollisionTypeReport()">Collision Type</li>
+          <li nz-menu-item (click)="accidentByPedestrianJobTypeReport()">Pedestrian Job Type</li>
+          <li nz-menu-item (click)="accidentByPedestrianHealthReport()">Pedestrian Health</li>
+          <li nz-menu-item (click)="accidentByPedestrianMovementReport()">Pedestrian Movement</li>
+          <li nz-menu-item (click)="accidentByCauseOfAccidentReport()">Cause of Accident</li>
+          <li nz-menu-item (click)="numberOfVictimsInAccidentReport()">Number of Victims in Accident</li>
+          <li nz-menu-item (click)="insuranceDetailReport()">Insurance Detail</li>
+
+          <li nz-menu-item (click)="victimAnimalsReport()">Victim Animals</li>
+          <li nz-menu-item (click)="victimVehiclesReport()">Victim Vehicles</li>
+          <li nz-menu-item (click)="previousYearInvestigationReport()">Previous Year Investigation</li>
+          <li nz-menu-item (click)="legalMesurementReport()">Legal Measurement</li>
+          </ul>
+        </li>
+
 
       <li nz-menu-item (click)="selectMenuItem('settings')" style="color: white">
         <i nz-icon nzType="setting" style="margin-right: 8px;"></i>
         <a>{{ getTranslation('System Administration') }}</a>
       </li>
-      
-      
+
+
     </ul>
   </nz-sider>
   <nz-layout>
@@ -179,9 +218,9 @@
       <i nz-icon nzType="filter" class="filter-icon"></i>
       {{ getTranslation('Filter') }}
     </button>
-    
+
   </div>
-  
+
   <nz-upload nzAccept=".xlsx">
     <button nz-button>
       <i nz-icon nzType="import"></i>  {{ getTranslation('Import Data') }}

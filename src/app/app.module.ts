@@ -14,7 +14,7 @@ import { IconsProviderModule } from './icons-provider.module';
 import { LoginComponent } from './components/login/login.component';
 import { MapService } from './services/map-services/map.service';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { NzAffixModule } from 'ng-zorro-antd/affix';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzAnchorModule } from 'ng-zorro-antd/anchor';
@@ -176,40 +176,6 @@ import { DriverExperienceComponent } from './components/driver-experience/driver
 import { DriverLicenseCategoryComponent } from './components/driver-license-category/driver-license-category.component';
 import { DriverLicenseCategoryModalComponent } from './shared/driver-license-category-modal/driver-license-category-modal.component';
 
-import { TelerikReportingModule } from '@progress/telerik-angular-report-viewer';
-import { DailyAccidentReportComponent } from './components/reporting/daily-accident-report/daily-accident-report.component';
-import { HourlyAccidentReportComponent } from './components/reporting/hourly-accident-report/hourly-accident-report.component';
-import { AccidentInvolvedDriversAgeReportComponent } from './components/reporting/accident-involved-drivers-age-report/accident-involved-drivers-age-report.component';
-import { AccidentInvolvedDriversSexReportComponent } from './components/reporting/accident-involved-drivers-sex-report/accident-involved-drivers-sex-report.component';
-import { AccidentInvolvedDriversEducationLevelReportComponent } from './components/reporting/accident-involved-drivers-education-level-report/accident-involved-drivers-education-level-report.component';
-import { DriverAndVehicleRelationshipReportComponent } from './components/reporting/driver-and-vehicle-relationship-report/driver-and-vehicle-relationship-report.component';
-import { DrivingExperienceOfDriversReportComponent } from './components/reporting/driving-experience-of-drivers-report/driving-experience-of-drivers-report.component';
-import { LevelOfDrivingLicenseReportComponent } from './components/reporting/level-of-driving-license-report/level-of-driving-license-report.component';
-import { ServiceAgeOfVehiclesReportComponent } from './components/reporting/service-age-of-vehicles-report/service-age-of-vehicles-report.component';
-import { AccidentInvolvedVehicleByTypeReportComponent } from './components/reporting/accident-involved-vehicle-by-type-report/accident-involved-vehicle-by-type-report.component';
-import { OwnersAndTypeOfVehiclesReportComponent } from './components/reporting/owners-and-type-of-vehicles-report/owners-and-type-of-vehicles-report.component';
-import { VehicleDefectReportComponent } from './components/reporting/vehicle-defect-report/vehicle-defect-report.component';
-import { AccidentByRoadTypeReportComponent } from './components/reporting/accident-by-road-type-report/accident-by-road-type-report.component';
-import { AccidentByRoadAreaReportComponent } from './components/reporting/accident-by-road-area-report/accident-by-road-area-report.component';
-import { AccidentByRoadDividentReportComponent } from './components/reporting/accident-by-road-divident-report/accident-by-road-divident-report.component';
-import { AccidentByRoadSurfaceReportComponent } from './components/reporting/accident-by-road-surface-report/accident-by-road-surface-report.component';
-import { AccidentByPavementTypeReportComponent } from './components/reporting/accident-by-pavement-type-report/accident-by-pavement-type-report.component';
-import { AccidentByRoadConditionReportComponent } from './components/reporting/accident-by-road-condition-report/accident-by-road-condition-report.component';
-import { AccidentByRoadLightConditionReportComponent } from './components/reporting/accident-by-road-light-condition-report/accident-by-road-light-condition-report.component';
-import { AccidentByJunctionTypeReportComponent } from './components/reporting/accident-by-junction-type-report/accident-by-junction-type-report.component';
-import { AccidentByRoadAirConditionReportComponent } from './components/reporting/accident-by-road-air-condition-report/accident-by-road-air-condition-report.component';
-import { AccidentByVehicleMovementReportComponent } from './components/reporting/accident-by-vehicle-movement-report/accident-by-vehicle-movement-report.component';
-import { AccidentByCollisionTypeReportComponent } from './components/reporting/accident-by-collision-type-report/accident-by-collision-type-report.component';
-import { AccidentByPedestrianHealthReportComponent } from './components/reporting/accident-by-pedestrian-health-report/accident-by-pedestrian-health-report.component';
-import { AccidentByPedestrianJobTypeReportComponent } from './components/reporting/accident-by-pedestrian-job-type-report/accident-by-pedestrian-job-type-report.component';
-import { AccidentByPedestrianMovementReportComponent } from './components/reporting/accident-by-pedestrian-movement-report/accident-by-pedestrian-movement-report.component';
-import { AccidentByCauseOfAccidentReportComponent } from './components/reporting/accident-by-cause-of-accident-report/accident-by-cause-of-accident-report.component';
-import { NumberOfVictimsInAccidentReportComponent } from './components/reporting/number-of-victims-in-accident-report/number-of-victims-in-accident-report.component';
-import { InsuranceDetailReportComponent } from './components/reporting/insurance-detail-report/insurance-detail-report.component';
-import { VictimAnimalsReportComponent } from './components/reporting/victim-animals-report/victim-animals-report.component';
-import { VictimVehiclesReportComponent } from './components/reporting/victim-vehicles-report/victim-vehicles-report.component';
-import { PreviousYearInvestigationReportComponent } from './components/reporting/previous-year-investigation-report/previous-year-investigation-report.component';
-import { LegalMeasurementReportComponent } from './components/reporting/legal-measurement-report/legal-measurement-report.component';
 
 registerLocaleData(en);
 
@@ -311,39 +277,6 @@ registerLocaleData(en);
     DriverExperienceComponent,
     DriverLicenseCategoryComponent,
     DriverLicenseCategoryModalComponent,
-    DailyAccidentReportComponent,
-    HourlyAccidentReportComponent,
-    AccidentInvolvedDriversAgeReportComponent,
-    AccidentInvolvedDriversSexReportComponent,
-    AccidentInvolvedDriversEducationLevelReportComponent,
-    DriverAndVehicleRelationshipReportComponent,
-    DrivingExperienceOfDriversReportComponent,
-    LevelOfDrivingLicenseReportComponent,
-    ServiceAgeOfVehiclesReportComponent,
-    AccidentInvolvedVehicleByTypeReportComponent,
-    OwnersAndTypeOfVehiclesReportComponent,
-    VehicleDefectReportComponent,
-    AccidentByRoadTypeReportComponent,
-    AccidentByRoadAreaReportComponent,
-    AccidentByRoadDividentReportComponent,
-    AccidentByRoadSurfaceReportComponent,
-    AccidentByPavementTypeReportComponent,
-    AccidentByRoadConditionReportComponent,
-    AccidentByRoadLightConditionReportComponent,
-    AccidentByJunctionTypeReportComponent,
-    AccidentByRoadAirConditionReportComponent,
-    AccidentByVehicleMovementReportComponent,
-    AccidentByCollisionTypeReportComponent,
-    AccidentByPedestrianHealthReportComponent,
-    AccidentByPedestrianJobTypeReportComponent,
-    AccidentByPedestrianMovementReportComponent,
-    AccidentByCauseOfAccidentReportComponent,
-    NumberOfVictimsInAccidentReportComponent,
-    InsuranceDetailReportComponent,
-    VictimAnimalsReportComponent,
-    VictimVehiclesReportComponent,
-    PreviousYearInvestigationReportComponent,
-    LegalMeasurementReportComponent
   ],
   imports: [
     BrowserModule,
@@ -436,11 +369,10 @@ registerLocaleData(en);
       { path: 'accident', component: AccidentDetailsComponent },
     ]),
     NzLayoutModule,
-    TelerikReportingModule,
+
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US },MapService,FormsBaseStateService],
   bootstrap: [AppComponent],
-    entryComponents: [LoginComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    entryComponents: [LoginComponent]
 })
 export class AppModule { }

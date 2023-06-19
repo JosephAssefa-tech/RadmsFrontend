@@ -163,7 +163,7 @@ pavementType():void{
   this.router.navigate(['/pavementType'])
 }
 pedestrianMovement():void{
-  this.router.navigate(['/pedestrianMovement'])
+  this.router.navigate(['/pedestrianMovement']) 
 }
 vechileRelation():void{
   this.router.navigate(['/vechileRelation']);
@@ -182,10 +182,10 @@ seatingType():void{
 
 }
 victimType():void{
-  this.router.navigate(['/victimType']);
+  this.router.navigate(['/victimType']); 
 }
 victimMovement():void{
-  this.router.navigate(['/victimMovement']);
+  this.router.navigate(['/victimMovement']); 
 }
 userType():void{
   this.router.navigate(['/userType']);
@@ -198,106 +198,7 @@ severityLevel():void{
 terianType():void{
   this.router.navigate(['/terianType']);
 }
-dailyAccidentReport():void{
-  this.router.navigate(['/reports/daily-accident-report']);
-}
-hourlyAccidentReport():void{
-  this.router.navigate(['/reports/hourly-accident-report']);
-}
-accidentInvolvedDriversAgeReport():void{
-  this.router.navigate(['/reports/accident-involved-drivers-age']);
-}
-accidentInvolvedDriversSexReport():void{
-  this.router.navigate(['/reports/accident-involved-drivers-sex']);
-}
-accidentInvolvedDriversEducationLevelReport():void{
-  this.router.navigate(['/reports/accident-involved-drivers-education-level']);
-}
-driverAndVehicleRelationshipReport():void{
-  this.router.navigate(['/reports/relation-of-driver-and-vehicle']);
-}
-drivingExperienceOfDriversReport():void{
-  this.router.navigate(['/reports/driving-experience-of-drivers']);
-}
-levelOfDrivingLicenseReport():void{
-  this.router.navigate(['/reports/level-of-driving-lcense']);
-}
-serviceAgeOfVehiclesReport():void{
-  this.router.navigate(['/reports/service-age-of-vehicles']);
-}
-accidentInvolvedVehiclesByType():void{
-  this.router.navigate(['/reports/accident-involved-vehicles-by-type']);
-}
-ownersAndVehicleTypesReport():void{
-  this.router.navigate(['/reports/owners-and-vehicle-types']);
-}
-vehicleDefectReport():void{
-  this.router.navigate(['/reports/vehicle-defect']);
-}
-accidentByRoadTypeReport():void{
-  this.router.navigate(['/reports/accident-by-road-type']);
-}
-accidentByRoadAreaReport():void{
-  this.router.navigate(['/reports/accident-by-road-area']);
-}
-accidentByRoadDevidentReport():void{
-  this.router.navigate(['/reports/accident-by-road-devident']);
-}
-accidentByRoadSurfaceReport():void{
-  this.router.navigate(['/reports/accident-by-road-surface']);
-}
-accidentByPavementTypeReport():void{
-  this.router.navigate(['/reports/accident-by-pavement-type']);
-}
-accidentByRoadJunctionReport():void{
-  this.router.navigate(['/reports/accident-by-road-junction']);
-}
-accidentByRoadConditionReport():void{
-  this.router.navigate(['/reports/accident-by-road-condition']);
-}
-accidentByRoadLightConditionReport():void{
-  this.router.navigate(['/reports/accident-by-road-light-condition']);
-}
-accidentByRoadAirConditionReport():void{
-  this.router.navigate(['/reports/accident-by-road-air-condition']);
-}
-accidentByvehicleMovementReport():void{
-  this.router.navigate(['/reports/accident-by-vehicle-movement']);
-}
-accidentByPedestrianJobTypeReport():void{
-  this.router.navigate(['/reports/accident-by-pedestrian-job-type']);
-}
-accidentByPedestrianHealthReport():void{
-  this.router.navigate(['/reports/accident-by-pedestrian-health']);
-}
-accidentByCollisionTypeReport():void{
-  this.router.navigate(['/reports/accident-by-collision-type']);
-}
-accidentByPedestrianMovementReport():void{
-  this.router.navigate(['/reports/accident-by-pedestrian-movement']);
-}
-accidentByCauseOfAccidentReport():void{
-  this.router.navigate(['/reports/accident-by-cause-of-accident']);
-}
-numberOfVictimsInAccidentReport():void{
-  this.router.navigate(['/reports/number-of-victims-in-accident']);
-}
-insuranceDetailReport():void{
-  this.router.navigate(['/reports/insurance-details']);
-}
 
-victimAnimalsReport():void{
-  this.router.navigate(['/reports/victim-animals']);
-}
-victimVehiclesReport():void{
-  this.router.navigate(['/reports/victim-vehicles']);
-}
-previousYearInvestigationReport():void{
-  this.router.navigate(['/reports/previous-year-investigation']);
-}
-legalMesurementReport():void{
-  this.router.navigate(['/reports/legal-mesurement']);
-}
 // cityMaster(): void {
 //   const modalRef = this.modal.create({
 //     nzTitle: 'City Master ',

@@ -5,7 +5,16 @@
 export const environment = {
   production: false,
   baseApiUrl: 'http://localhost:5068/api/',
-  apiUrl: 'http://localhost:5068/api/'
+  apiUrl: 'http://localhost:5068/api/',
+
+  reportingRestUrl: 'http://localhost:5068/api/reports',
+
+  trReportViewerContainerStyle: {
+    position: 'relative',
+    width: '100%',
+    height: '800px',
+    ['font-family']: 'ms sans serif',
+  },
 };
 
 /*

@@ -14,9 +14,14 @@
       <td>{{ health.healthConditionName }}</td>
       <td>
 
-        <a  (click)="editHealthConditioinRow(health)">Edit</a> |
+        <button class="edit-button" (click)="editHealthConditioinRow(health)">  <i class="icon-edit"></i>
+          Edit</button> 
+          <span class="button-spacing"></span>
         <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
-        <a  (click)="openDeleteConfirmation(health.healthConditionId)">Delete</a>
+        <a class="delete"  (click)="openDeleteConfirmation(health.healthConditionId)">
+          <i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span>
+        </a>
       </td>
     </tr>
   </tbody>

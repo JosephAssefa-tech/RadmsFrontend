@@ -14,9 +14,16 @@
       <td>{{ airCondition.airConditionName }}</td>
       <td>
 
-        <a  (click)="editAirConditioinRow(airCondition)">Edit</a> |
+        <button class="edit-button"   (click)="editAirConditioinRow(airCondition)">
+          <i class="icon-edit"></i>
+          Edit</button> 
+          <span class="button-spacing"></span>
+
         <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
-        <a  (click)="openDeleteConfirmation(airCondition.airConditionId)">Delete</a>
+        <a class="delete" (click)="openDeleteConfirmation(airCondition.airConditionId)">
+          <i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span>
+        </a>
       </td>
     </tr>
   </tbody>

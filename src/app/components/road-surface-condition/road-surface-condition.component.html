@@ -13,11 +13,19 @@
       <td>{{ surface.roadSurfaceId }}</td>
       <td>{{ surface.roadSurfaceName }}</td>
       <td>
-
-        <a  (click)="onEditRow(surface)">Edit</a> |
-        <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
-        <a  (click)="openDeleteConfirmation(surface.roadSurfaceId)">Delete</a>
+        <button class="edit-button" (click)="onEditRow(surface)">
+          <i class="icon-edit"></i>
+          Edit
+        </button>
+        
+        <span class="button-spacing"></span> <!-- Add a span element for spacing -->
+        
+        <a class="delete" (click)="openDeleteConfirmation(surface.roadSurfaceId)">
+          <i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span>
+        </a>
       </td>
+      
     </tr>
   </tbody>
 

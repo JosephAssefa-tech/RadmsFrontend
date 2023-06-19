@@ -7,6 +7,7 @@ import { RegionComponent } from './components/region/region.component';
 import { Router } from '@angular/router';
 import { LanguageService } from './services/language-change/language-change-service';
 import { VictimDetailService } from './services/victim-details/victim-detail.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { VictimDetailService } from './services/victim-details/victim-detail.ser
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  severityData:any[]=[];
   startDate: Date;
   endDate: Date;
   selectedLanguage: string = 'english';
@@ -29,7 +31,7 @@ export class AppComponent {
     }]
 
   fileList1 = [...this.defaultFileList];
-constructor(private victimDetailService:VictimDetailService, private languageService:LanguageService,private router:Router,private modal: NzModalService, private fb: FormBuilder)
+constructor(private notification: NzNotificationService, private victimDetailService:VictimDetailService, private languageService:LanguageService,private router:Router,private modal: NzModalService, private fb: FormBuilder)
 {
 
 }
@@ -210,6 +212,11 @@ switchLanguage(language: string) {
   this.languageService.selectedLanguage = language;
 
 }
+// getTranslation(key: string): string {
+//   // return this.languageService.getTranslation(key);
+//   return 's'
+// }
+
 vechileTable()
 {
   this.router.navigate(['/vechileMaster']);
@@ -225,4 +232,17 @@ vechileTable()
 
 //   })
 // }
+
+onFilterButtonClick(startDate: Date, endDate: Date): void {
+  if (!startDate || !endDate) {
+    this.notification.warning('Missing Dates', 'Please select both start and end dates.');
+    return;
+  }
+
+  this.victimDetailService.setDateFilter(startDate, endDate);
+}
+ getTranslation(key: string): string {
+    return this.languageService.getTranslation(key);
+  }
+
 }

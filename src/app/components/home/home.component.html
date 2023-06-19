@@ -22,51 +22,51 @@
  <div nz-row style="justify-content: space-around;display:flex;">
 
           <div style="color:white;border-radius: 10px;text-align: center;width:14vw;background-color: #ffffff;color: #bc3333">
-             <p>Total accident</p>
+             <p>{{ getTranslation('Total accident') }}</p>
             <p style="color: #bc3333;font-size: 24px;"><b>{{totalAccidentCount}}</b></p>
         </div>
           <div style="color:white;width:14vw;background-color: #bc3333;border-radius: 10px;" >
-            <p style="color:ffffff;padding-left: 15px;">Fatal</p>
+            <p style="color:ffffff;padding-left: 15px;">{{ getTranslation('Fatal') }}</p>
 
             <div class="text-container" >
-              <span class="left-text">Injury</span>
+              <span class="left-text">{{ getTranslation('Injury') }}</span>
              <span class="right-text">{{ getSeverityByType(2).count }}</span>
             </div>
 
-            <p style="color:ffffff;padding-left: 15px;">Crash</p>
+            <p style="color:ffffff;padding-left: 15px;">{{ getTranslation('Crash') }}</p>
             </div>
           <div style="color:white;border-radius: 10px;width:14vw;background-color: #ff9900;">
-              <p style="text-align: center" >Serious</p>
+              <p style="text-align: center" >{{ getTranslation('Serious') }}</p>
               <div class="text-container" >
-                <span class="left-text">Injury</span>
+                <span class="left-text">{{ getTranslation('Injury') }}</span>
                <span class="right-text">{{ getSeverityByType(3).count }}</span>
               </div>
 
 
-              <p style="color:ffffff;padding-left: 15px;">Crash</p>
+              <p style="color:ffffff;padding-left: 15px;">{{ getTranslation('Crash') }}</p>
           </div>
           <div style="color:white;border-radius: 10px;width:14vw;background-color: #1eaab2;">
-             <p style="text-align: center;" >Slight</p>
+             <p style="text-align: center;" >{{ getTranslation('Slight') }}</p>
              <div class="text-container" >
-              <span class="left-text">Injury</span>
+              <span class="left-text">{{ getTranslation('Injury') }}</span>
              <span class="right-text">{{ getSeverityByType(4).count }}</span>
             </div>
-            <p style="color:ffffff;padding-left: 15px;">Crash</p>
+            <p style="color:ffffff;padding-left: 15px;">{{ getTranslation('Crash') }}</p>
           </div>
           <div style="color:white;border-radius: 10px;width:14vw;background-color: #4caef4;">
 
             <div class="text-container" >
-              <span class="left-text">Property Datamage</span>
+              <span class="left-text">{{ getTranslation('Property Damage') }}</span>
              <span class="right-text">{{ totalPropertyDamage }}</span>
 
             </div>
             <div class="text-container" >
-            <span class="left-text">Accident Cost</span>
+            <span class="left-text">{{ getTranslation('Accident Cost') }}</span>
             <span class="right-text">{{ totalPropertyDamage }}</span>
             </div>
             <div class="text-container" >
 
-              <span class="left-text">Accident Prone Section</span>
+              <span class="left-text">{{ getTranslation('Accident Prone Section') }}</span>
               <span class="right-text">{{ totalBlackspotCount }}</span>
               </div>
           </div>
@@ -76,13 +76,13 @@
           <div nz-col nzSpan="18">
             <div style="display:flex;color:white;width:14vw;background-color: white;width: 100%;padding: 15px;">
              <div>
-              <p style="text-align: center;color:black" ><b>Region Wise Accident Summary</b></p>
-              <div  ><label style="color:black">Please select region</label><br/>
+              <p style="text-align: center;color:black" ><b>{{ getTranslation('Region Wise Accident Summary') }}</b></p>
+              <div  ><label style="color:black">{{ getTranslation('Please select region') }}</label><br/>
                 <nz-select
                 [(ngModel)]="regionIdd"
                 (ngModelChange)="getRegionBasedSummaryData($event)"
                  >
-                  <nz-option       *ngFor="let option of regionMasters$ | async"
+                  <nz-option       *ngFor="let option of regionMasters"
                   [nzLabel]="option.regionName"
                   [nzValue]="option.regionId"
                   ></nz-option>
@@ -92,13 +92,13 @@
                <div class="text-container" style="padding-top:15px;" >
               </div>
                <div class="text-container" >
-                <span class="left-text" style="color:red;">Fatal Injury</span>
+                <span class="left-text" style="color:red;">{{ getTranslation('Fatal Injury') }}</span>
                <span class="right-text" style="color:red;">{{ (regionService.deathCount$ | async) || 0 }}
                 <br/>
               </span>
               </div>
               <div class="text-container" >
-                <span class="left-text" style="color:red;">Fatal Crush</span>
+                <span class="left-text" style="color:red;">{{ getTranslation('Fatal Crush') }}</span>
                <span class="right-text" style="color:red;">{{ (regionService.deathCount$ | async) || 0 }}
                 <br/>
               </span>
@@ -107,13 +107,13 @@
               <div class="text-container" style="padding-top:15px;" >
               </div>
               <div class="text-container" >
-                <span class="left-text" style="color:#ff9900;">Seriously Injury</span>
+                <span class="left-text" style="color:#ff9900;">{{ getTranslation('Seriously Injury') }}</span>
                <span class="right-text" style="color:#ff9900;">{{ (regionService.seriousCount$ | async) || 0 }}
                 <br/>
               </span>
               </div>
               <div class="text-container" >
-                <span class="left-text" style="color:#ff9900;">Seriously Crash</span>
+                <span class="left-text" style="color:#ff9900;">{{ getTranslation('Seriously Crash') }}</span>
                <span class="right-text" style="color:#ff9900;">{{ (regionService.seriousCount$ | async) || 0 }}
                 <br/>
               </span>
@@ -122,12 +122,12 @@
               </div>
 
               <div class="text-container" >
-                <span class="left-text" style="color:#1eaab2;">Slightly Injury</span>
+                <span class="left-text" style="color:#1eaab2;">{{ getTranslation('Slightly Injury') }}</span>
                <span class="right-text" style="color:#1eaab2;">{{ (regionService.slightCount$ | async) || 0 }}
               </span>
               </div>
               <div class="text-container" >
-                <span class="left-text" style="color:#1eaab2;">Slightly Crash</span>
+                <span class="left-text" style="color:#1eaab2;">{{ getTranslation('Slightly Crash') }}</span>
                <span class="right-text" style="color:#1eaab2;">{{ (regionService.seriousCount$ | async) || 0 }}
                 <br/>
               </span>
@@ -137,7 +137,7 @@
               </div>
 
               <div class="text-container" >
-                <span class="left-text" style="color:#4caef4;">Accident Cost</span>
+                <span class="left-text" style="color:#4caef4;">{{ getTranslation('Accident Cost') }}</span>
                <span class="right-text" style="color:#4caef4;">{{ (regionService.seriousCount$ | async) || 0 }}
                 <br/>
               </span>
@@ -145,7 +145,7 @@
 
 
 
-              <p style="color:black;padding-left: 15px; color: #4caef4;">Accident Prone Section </p>
+              <p style="color:black;padding-left: 15px; color: #4caef4;">{{ getTranslation('Accident Prone Section') }} </p>
             </div>
 
              <div style="padding-left:15px;">

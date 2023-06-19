@@ -31,7 +31,9 @@ import { LanguageService } from 'src/app/services/language-change/language-chang
 })
 
 export class HomeComponent implements OnInit,AfterViewInit  {
-
+  private trendChart: Chart;
+startDate?:Date;
+endDate?:Date
   regionMasters$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   /////////////
   trendAnalysisData: TrendAnalysisResponse[] = [];
@@ -88,42 +90,78 @@ export class HomeComponent implements OnInit,AfterViewInit  {
    // this.mapp = this.mapServicee.createMap();
   }
   ngOnInit(): void {
+
     this.languageService.selectedLanguage$.subscribe(language => {
+      this.subscribeToFilterChanges(); // Subscribe to date filter changes
       this.GetRegionMaster(language);
-
-
     });
 
 
    // this.GetRegionMaster();
-    this.TrendanalysisService();
+  // this.TrendanalysisServiceWithoutDateFilter();
+    this.TrendanalysisServiceWithDateFilter();
+    const map = L.map('mapid').setView([8.9733, 38.7930], 8);
 
-    this.blackSpotService.getBlackSpots().subscribe(data=>{
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  
 
-      this.blackSpots = data;
-
-      const map = L.map('mapid').setView([8.9733, 38.7930], 8);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-
-      }).addTo(map);
-
-      for (const blackSpot of this.blackSpots) {
-        const lat = blackSpot.blackSpotLat;
-        const long = blackSpot.blackSpotLong;
-
-        const marker = L.marker([lat, long], {
-          icon: L.icon({
-            iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
-            iconSize: [30, 35],
-            iconAnchor: [22, 94],
-            popupAnchor: [-3, -76]
-          })
-        }).addTo(map);
-
-        marker.bindPopup(`Lat: ${lat}, Long: ${long}`);
+    
+    this.victimDetailService.dateFilterSubject.subscribe(filter => {
+      if (filter.startDate && filter.endDate) {
+        this.blackSpotService.getBlackSpots(filter.startDate, filter.endDate).subscribe(data => {
+          this.blackSpots = data;
+  
+          map.eachLayer(layer => {
+            if (layer instanceof L.Marker) {
+              map.removeLayer(layer);
+            }
+          });
+  
+          for (const blackSpot of this.blackSpots) {
+            const lat = blackSpot.blackSpotLat;
+            const long = blackSpot.blackSpotLong;
+  
+            const marker = L.marker([lat, long], {
+              icon: L.icon({
+                iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
+                iconSize: [30, 35],
+                iconAnchor: [22, 94],
+                popupAnchor: [-3, -76]
+              })
+            }).addTo(map);
+  
+            marker.bindPopup(`Lat: ${lat}, Long: ${long}`);
+          }
+        });
+      } else {
+        this.blackSpotService.getBlackSpots().subscribe(data => {
+          this.blackSpots = data;
+  
+          map.eachLayer(layer => {
+            if (layer instanceof L.Marker) {
+              map.removeLayer(layer);
+            }
+          });
+  
+          for (const blackSpot of this.blackSpots) {
+            const lat = blackSpot.blackSpotLat;
+            const long = blackSpot.blackSpotLong;
+  
+            const marker = L.marker([lat, long], {
+              icon: L.icon({
+                iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
+                iconSize: [30, 35],
+                iconAnchor: [22, 94],
+                popupAnchor: [-3, -76]
+              })
+            }).addTo(map);
+  
+            marker.bindPopup(`Lat: ${lat}, Long: ${long}`);
+          }
+        });
       }
     });
+ 
 
 
   this.GetSeverity();
@@ -132,17 +170,39 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   this.GettotalPropertyDamageCount();
 
   }
-  TrendanalysisService()
-  {
-    this.trendAnalysisService.getTrendAnalysisdData().subscribe(data => {
-      this.trendAnalysisData=data;
-      this.createChart();
-
+  subscribeToFilterChanges(): void {
+    this.victimDetailService.dateFilterSubject.subscribe(filter => {
+      // Check if both startDate and endDate are defined
+      if (filter.startDate && filter.endDate) {
+        this.victimDetailService.getGroupedData(filter.startDate, filter.endDate).subscribe(data => {
+          this.severityData = data;
+          // Perform any additional actions with the filtered data
+          console.log(this.severityData);
+        });
+      }
     });
-
   }
-    createChart() {
-      const years = this.trendAnalysisData.map(item => item.year);
+  TrendanalysisServiceWithoutDateFilter() {
+    this.trendAnalysisService.getTrendAnalysisdData().subscribe(data => {
+      this.trendAnalysisData = data;
+      this.createChart();
+    });
+  }
+  TrendanalysisServiceWithDateFilter() {
+    this.victimDetailService.dateFilterSubject.subscribe(filter => {
+      // Check if both startDate and endDate are defined
+      if (filter.startDate && filter.endDate) {
+        this.trendAnalysisService.getTrendAnalysisdData(filter.startDate, filter.endDate).subscribe(data => {
+          this.trendAnalysisData = data;
+          this.createChart();
+        });
+      } else {
+        this.TrendanalysisServiceWithoutDateFilter();
+      }
+    });
+  }
+  createChart() {
+    const years = this.trendAnalysisData.map(item => item.year);
     const datasets = [
       {
         label: 'Fatal',
@@ -169,14 +229,20 @@ export class HomeComponent implements OnInit,AfterViewInit  {
         fill: false
       }
     ];
-
-    new Chart('trendChart', {
+  
+    // Destroy the previous chart if it exists
+    if (this.trendChart) {
+      this.trendChart.destroy();
+    }
+  
+    // Create the new chart
+    this.trendChart = new Chart('trendChart', {
       type: 'line',
       data: {
         labels: years,
         datasets: datasets
       },
-        options: {
+      options: {
         responsive: true,
         scales: {
           x: {
@@ -206,6 +272,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
       }
     });
   }
+  
 
   getRandomColor() {
     const letters = '0123456789ABCDEF';
@@ -224,6 +291,7 @@ export class HomeComponent implements OnInit,AfterViewInit  {
     .subscribe(
       (response) => {
         this.regionMasters$ .next(response);
+        this.regionMasters = response; 
         // Reset the selected option when the options change
         this.regionIdd = null;
       },
@@ -247,23 +315,38 @@ export class HomeComponent implements OnInit,AfterViewInit  {
   getSeverityByType(type: number): any {
     return this.severityData.find(item => item.severityId === type);
   }
-  GetTotalAccidentCount()
-  {
-    this.accidentDetailTransactionService.getTotalAccidentCount().subscribe(result => {
-      this.totalAccidentCount = result.totalAccidentCount;
-
-
+  GetTotalAccidentCount() {
+    this.victimDetailService.dateFilterSubject.subscribe(filter => {
+      // Check if both startDate and endDate are defined
+      if (filter.startDate && filter.endDate) {
+        console.log(filter.startDate)
+        this.accidentDetailTransactionService.getTotalAccidentCount(filter.startDate, filter.endDate).subscribe(result => {
+          this.totalAccidentCount = result.totalAccidentCount;
+        });
+      }else{
+        
+        this.accidentDetailTransactionService.getTotalAccidentCount().subscribe(result => {
+          this.totalAccidentCount = result.totalAccidentCount;
+        });
+      }
     });
   }
+  
+
   GettotalPropertyDamageCount()
   {
-    this.accidentDetailTransactionService.getTotalPropertyDamageCount().subscribe(result => {
+    this.victimDetailService.dateFilterSubject.subscribe(filter => {
+      // Check if both startDate and endDate are defined
+      if (filter.startDate && filter.endDate) {
+    this.accidentDetailTransactionService.getTotalPropertyDamageCount(filter.startDate, filter.endDate).subscribe(result => {
       this.totalPropertyDamage = result.totalPropertyDamage;
       console.log(this.totalPropertyDamage);
 
     });
 
   }
+});
+}
   getTotalBlackspotCount()
   {
     this.blackSpotService.getTotalBlackspotCount().subscribe(result => {
@@ -272,37 +355,51 @@ export class HomeComponent implements OnInit,AfterViewInit  {
 
     });
   }
-  getRegionBasedSummaryData(regionId:number)
-  {
+  getRegionBasedSummaryData(regionId: number) {
+    this.victimDetailService.dateFilterSubject.subscribe(filter => {
+      // Check if both startDate and endDate are defined
+      if (filter.startDate && filter.endDate) {
+        this.regionService.getDataByRegion(regionId, filter.startDate, filter.endDate).subscribe(data => {
+          this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death')?.count || 0;
+          this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury')?.count || 0;
+          this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury')?.count || 0;
+          this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage')?.count || 0;
+  
+          this.regionService.updateCounts(this.deathCount, this.seriousCount, this.slightCount, this.propertyDamageCount);
+        }, error => {
+          console.log('Error sending filter request: ', error);
+        });
+      }else{
+        this.regionService.getDataByRegion(regionId).subscribe(data => {
+          this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death')?.count || 0;
+          this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury')?.count || 0;
+          this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury')?.count || 0;
+          this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage')?.count || 0;
+  
+          this.regionService.updateCounts(this.deathCount, this.seriousCount, this.slightCount, this.propertyDamageCount);
+  
 
-
-    this.regionService.getDataByRegion(regionId).subscribe(data => {
-
-      this.deathCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Death').count;
-      this.seriousCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Serious Injury').count;
-      this.slightCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Slight Injury').count;
-      this.propertyDamageCount = data.find((item: RegionBasedSummaryData) => item.severityType === 'Property Damage').count;
-
-      this.regionService.updateCounts(this.deathCount, this.seriousCount, this.slightCount, this.propertyDamageCount);
-    }, error => {
-      console.log('Error sending filter request: ', error);
+      });}
     });
+  
   }
-
+  
 
   AdvancedSearchPage()
   {
     this.route.navigate(['/advanceSearch']);
 
   }
-onFilterClick() {
+// onFilterClick() {
 
-  // Call your API or perform other actions here
-  this.victimDetailService.getGroupedData().subscribe(data=>{
-    this.severityData  = data;
+//   // Call your API or perform other actions here
+//   this.victimDetailService.getGroupedData().subscribe(data=>{
+//     this.severityData  = data;
 
-  })
+//   })
+// }
+
+getTranslation(key: string): string {
+  return this.languageService.getTranslation(key);
 }
-
-
 }

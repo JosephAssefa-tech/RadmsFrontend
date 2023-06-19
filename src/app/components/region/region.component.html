@@ -14,9 +14,13 @@
       <td>{{ region.regionName }}</td>
       <td>
 
-        <a  (click)="onEditRow(region)">Edit</a> |
+        <button class="edit-button"  (click)="onEditRow(region)">       <i class="icon-edit"></i>Edit</button> 
         <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
-        <a  (click)="openDeleteConfirmation(region.regionId)">Delete</a>
+        <span class="button-spacing"></span>
+        <a class="delete"  (click)="openDeleteConfirmation(region.regionId)">
+          <i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span>
+        </a>
       </td>
     </tr>
   </tbody>

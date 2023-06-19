@@ -14,9 +14,16 @@
       <td>{{ light.lightConditionName }}</td>
       <td>
 
-        <a  (click)="editLightConditioinRow(light)">Edit</a> |
+        <button  class="edit-button" (click)="editLightConditioinRow(light)"> 
+            <i class="icon-edit"></i>
+          Edit
+        </button> 
+          <span class="button-spacing"></span>
         <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
-        <a  (click)="openDeleteConfirmation(light.lightConditionId)">Delete</a>
+        <a class="delete"  (click)="openDeleteConfirmation(light.lightConditionId)">
+          <i nz-icon nzType="delete" class="delete-icon"></i>
+          <span class="delete-text">Delete</span>
+        </a>
       </td>
     </tr>
   </tbody>

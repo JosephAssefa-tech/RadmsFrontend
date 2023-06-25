@@ -211,6 +211,7 @@ import { VictimAnimalsReportComponent } from './components/reporting/victim-anim
 import { VictimVehiclesReportComponent } from './components/reporting/victim-vehicles-report/victim-vehicles-report.component';
 import { PreviousYearInvestigationReportComponent } from './components/reporting/previous-year-investigation-report/previous-year-investigation-report.component';
 import { LegalMeasurementReportComponent } from './components/reporting/legal-measurement-report/legal-measurement-report.component';
+import { CategoryOfDrivingLicenseReportComponent } from './components/reporting/category-of-driving-license-report/category-of-driving-license-report.component';
 
 
 registerLocaleData(en);
@@ -346,7 +347,8 @@ registerLocaleData(en);
     VictimAnimalsReportComponent,
     VictimVehiclesReportComponent,
     PreviousYearInvestigationReportComponent,
-    LegalMeasurementReportComponent
+    LegalMeasurementReportComponent,
+    CategoryOfDrivingLicenseReportComponent
   ],
   imports: [
     BrowserModule,

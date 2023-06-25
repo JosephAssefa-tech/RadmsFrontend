@@ -225,6 +225,9 @@ drivingExperienceOfDriversReport():void{
 levelOfDrivingLicenseReport():void{
   this.router.navigate(['/reports/level-of-driving-lcense']);
 }
+categoryOfDrivingLicenseReport():void{
+  this.router.navigate(['/reports/category-of-driving-lcense']);
+}
 serviceAgeOfVehiclesReport():void{
   this.router.navigate(['/reports/service-age-of-vehicles']);
 }

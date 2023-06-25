@@ -98,6 +98,7 @@ import { VictimAnimalsReportComponent } from './components/reporting/victim-anim
 import { VictimVehiclesReportComponent } from './components/reporting/victim-vehicles-report/victim-vehicles-report.component';
 import { PreviousYearInvestigationReportComponent } from './components/reporting/previous-year-investigation-report/previous-year-investigation-report.component';
 import { LegalMeasurementReportComponent } from './components/reporting/legal-measurement-report/legal-measurement-report.component';
+import { CategoryOfDrivingLicenseReportComponent } from './components/reporting/category-of-driving-license-report/category-of-driving-license-report.component';
 
 const routes: Routes = [
    //{ path: '', pathMatch: 'full', redirectTo: '/welcome' },
@@ -163,6 +164,7 @@ const routes: Routes = [
   {path:'reports/relation-of-driver-and-vehicle', component:DriverAndVehicleRelationshipReportComponent},
   {path:'reports/driving-experience-of-drivers', component:DrivingExperienceOfDriversReportComponent},
   {path:'reports/level-of-driving-lcense', component:LevelOfDrivingLicenseReportComponent},
+  {path:'reports/category-of-driving-lcense', component:CategoryOfDrivingLicenseReportComponent},
   {path: 'reports/service-age-of-vehicles', component: ServiceAgeOfVehiclesReportComponent},
   {path:'reports/accident-involved-vehicles-by-type', component: AccidentInvolvedVehicleByTypeReportComponent},
   {path: 'reports/owners-and-vehicle-types', component: OwnersAndTypeOfVehiclesReportComponent},

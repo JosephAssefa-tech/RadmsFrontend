@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AccidentDetailsTransactionService extends BaseService<AccidentDetailsTransaction> {
   totalAccidentCountEndPoint=`${environment.apiUrl}AccidentDetailsTransaction/count`;
-  totalPropertyDamageEndPoint=`${environment.apiUrl}AccidentDetailsTransaction/property-damage`;
+  totalPropertyDamageEndPoint=`${environment.apiUrl}AccidentDetailsTransaction/dashboard-property-damage`;
 
   number: any;
   NoumberOfRoads:any;
@@ -71,6 +71,6 @@ export class AccidentDetailsTransactionService extends BaseService<AccidentDetai
       params = params.set('endDate', endDate.toISOString());
     }
   
-    return this.httpClient.get<{ totalPropertyDamage: number }>(this.totalPropertyDamageEndPoint,{ params });
+    return this.httpClient.get<{ dashboardTotalPropertyDamage: number }>(this.totalPropertyDamageEndPoint,{ params });
   }
 }

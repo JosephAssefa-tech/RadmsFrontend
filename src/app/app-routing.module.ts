@@ -65,6 +65,7 @@ import { RoadCarriagewayTypeComponent } from './components/road-carriageway-type
 import { EducationLevelComponent } from './components/education-level/education-level.component';
 import { DriverExperienceComponent } from './components/driver-experience/driver-experience.component';
 import { DriverLicenseCategoryComponent } from './components/driver-license-category/driver-license-category.component';
+import { CourtChargeComponent } from './components/court-charge/court-charge.component';
 
 const routes: Routes = [
    //{ path: '', pathMatch: 'full', redirectTo: '/welcome' },
@@ -122,6 +123,7 @@ const routes: Routes = [
   {path:'educationLevel',component:EducationLevelComponent},
   {path:'driverExperience',component:DriverExperienceComponent},
   {path:'driverLicenseCategory',component:DriverLicenseCategoryComponent},
+  {path:'courtChargeType',component:CourtChargeComponent},
   
  //{ path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
 ];

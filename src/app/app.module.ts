@@ -176,6 +176,8 @@ import { VechileServiceAgeModalComponent } from './shared/vechile-service-age-mo
 import { VictimMovementModalComponent } from './shared/victim-movement-modal/victim-movement-modal.component';
 import { VictimMovementTypeModalComponent } from './shared/victim-type-modal/victim-type-modal.component';
 import { WeatherConditionModalComponent } from './shared/weather-condition-modal/weather-condition-modal.component';
+import { CourtChargeComponent } from './components/court-charge/court-charge.component';
+import { CourtChargeModalComponent } from './shared/court-charge-modal/court-charge-modal.component';
 
 registerLocaleData(en);
 
@@ -277,6 +279,8 @@ registerLocaleData(en);
     DriverExperienceComponent,
     DriverLicenseCategoryComponent,
     DriverLicenseCategoryModalComponent,
+    CourtChargeComponent,
+    CourtChargeModalComponent,
   ],
   imports: [
     BrowserModule,

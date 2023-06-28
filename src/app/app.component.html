@@ -14,7 +14,7 @@
     <ul nz-menu  nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-menu-item (click)="selectMenuItem('home')" style="color:white" nzIcon="home"><span nz-icon [nzType]="'home'"></span>
         <i class="anticon anticon-dashboard"></i>
-        <a>{{ getTranslation('Home') }}</a>;
+        <a>{{ getTranslation('Home') }}</a>
         <!-- <a>Home</a> -->
       </li>
       <li nz-menu-item (click)="selectMenuItem('accident-data')" style="color: white">
@@ -182,7 +182,9 @@
     
   </div>
   
-  <nz-upload nzAccept=".xlsx">
+  <nz-upload nzAccept=".xlsx"
+  (nzChange)="handleFileUpload($event)"
+  >
     <button nz-button>
       <i nz-icon nzType="import"></i>  {{ getTranslation('Import Data') }}
     </button>

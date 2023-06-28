@@ -339,8 +339,14 @@ endDate?:Date
       // Check if both startDate and endDate are defined
       if (filter.startDate && filter.endDate) {
     this.accidentDetailTransactionService.getTotalPropertyDamageCount(filter.startDate, filter.endDate).subscribe(result => {
-      this.totalPropertyDamage = result.totalPropertyDamage;
-      console.log(this.totalPropertyDamage);
+      this.totalPropertyDamage = result.dashboardTotalPropertyDamage;
+     
+
+    });
+
+  }else{
+    this.accidentDetailTransactionService.getTotalPropertyDamageCount().subscribe(result => {
+      this.totalPropertyDamage = result.dashboardTotalPropertyDamage;
 
     });
 

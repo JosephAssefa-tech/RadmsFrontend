@@ -1,0 +1,53 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-label [nzRequired]="true">Court Charge Type English</nz-form-label>
+      <nz-form-control [nzErrorTip]="'Please input Court charge type!'"
+                       [nzValidateStatus]="validateForm.controls.CourtChargeType.invalid && validateForm.controls.CourtChargeType.touched ? 'error' : ''">
+        <input nz-input formControlName="CourtChargeType" placeholder="CourtChargeType">
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label >Court charge type Name</nz-form-label>
+      <nz-form-control                     >
+        <input nz-input formControlName="CourtChargeTypeAm" placeholder="CourtChargeTypeAf">
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label>Court charge Afan Oroma</nz-form-label>
+      <nz-form-control
+  >
+        <input nz-input formControlName="CourtChargeTypeOr" placeholder="CourtChargeTypeOr">
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label >Court charge  Somalia</nz-form-label>
+      <nz-form-control
+  >
+        <input nz-input formControlName="CourtChargeTypeSo" placeholder="CourtChargeTypeAf">
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label >Court charge  Tigiray</nz-form-label>
+      <nz-form-control
+  >
+        <input nz-input formControlName="CourtChargeTypeTi" placeholder="CourtChargeTypeAf">
+      </nz-form-control>
+    </nz-form-item>
+  
+    <nz-form-item>
+      <nz-form-label >Court charge </nz-form-label>
+      <nz-form-control
+  >
+        <input nz-input formControlName="CourtChargeTypeAf" placeholder="CourtChargeTypeAf">
+      </nz-form-control>
+    </nz-form-item>
+    <button nz-button nzType="primary" [disabled]="!validateForm.valid" >{{buttonLabel}}</button>
+    <!-- <button nz-button nzType="primary" (click)="onSave()">
+      {{ isEditMode ? 'Update' : 'Add' }}
+    </button> -->
+  </form>
+  

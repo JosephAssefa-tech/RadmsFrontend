@@ -1,0 +1,28 @@
+
+<button class="add-region" nz-button nzType="primary" (click)="showModal('Add court charge type')">Add Court charge type</button>
+    <nz-table #middleTable nzSize="middle" [nzData]="courtChargeType">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Court Charge Type</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let court of courtChargeType">
+          <td>{{ court.courtChargeID }}</td>
+          <td>{{ court.courtChargeType }}</td>
+          <td>
+    
+            <button class="edit-button"   (click)="onEditRow(court)"><i class="icon-edit"></i>
+              Edit</button> 
+              <span class="button-spacing"></span>
+            <!-- <a  (click)="editRegion(region.regionId)">Edit</a> | -->
+            <a class="delete" (click)="openDeleteConfirmation(court.courtChargeID)"><i nz-icon nzType="delete" class="delete-icon"></i>
+              <span class="delete-text">Delete</span></a>
+          </td>
+        </tr>
+      </tbody>
+    
+    </nz-table>
+    

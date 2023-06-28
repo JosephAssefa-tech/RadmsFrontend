@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { LanguageService } from './services/language-change/language-change-service';
 import { VictimDetailService } from './services/victim-details/victim-detail.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { UploadFileService } from './services/upload-file-service/upload-file-service';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,7 @@ export class AppComponent {
     }]
 
   fileList1 = [...this.defaultFileList];
-constructor(private notification: NzNotificationService, private victimDetailService:VictimDetailService, private languageService:LanguageService,private router:Router,private modal: NzModalService, private fb: FormBuilder)
+constructor(private uploadFileService:UploadFileService,private notification: NzNotificationService, private victimDetailService:VictimDetailService, private languageService:LanguageService,private router:Router,private modal: NzModalService, private fb: FormBuilder)
 {
 
 }
@@ -244,5 +245,27 @@ onFilterButtonClick(startDate: Date, endDate: Date): void {
  getTranslation(key: string): string {
     return this.languageService.getTranslation(key);
   }
+  handleFileUpload(event: any): void {
+    const file = event.target.files[0];
+
+    // Perform any necessary validations on the file (e.g., file type, size)
+
+    // Create a new FormData object
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Make the API call to upload the file
+    this.uploadFileService.uploadFile(formData).subscribe(
+      response => {
+        // Handle the successful upload response
+        console.log('File uploaded successfully:', response);
+      },
+      error => {
+        // Handle any errors that occurred during file upload
+        console.error('File upload error:', error);
+      }
+    );
+  }
+
 
 }

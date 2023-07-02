@@ -2,7 +2,7 @@ import { AccidentDetailsTransaction } from 'src/app/models/get/accident-details-
 import { BaseService } from '../base-service/BaseService';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,7 +11,18 @@ import { environment } from 'src/environments/environment';
 export class AccidentDetailsTransactionService extends BaseService<AccidentDetailsTransaction> {
   totalAccidentCountEndPoint=`${environment.apiUrl}AccidentDetailsTransaction/count`;
   totalPropertyDamageEndPoint=`${environment.apiUrl}AccidentDetailsTransaction/dashboard-property-damage`;
+  getAccidentListsForCourtCaseEndPoint=`${environment.apiUrl}AccidentDetailsTransaction/get-accident-lists-for`;
+  
 
+  private accidentDetailsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  public accidentDetails$ = this.accidentDetailsSubject.asObservable();
+
+  private selectedAirConditionRowData$ = new BehaviorSubject<any>(null);
+
+
+
+  
+  
   number: any;
   NoumberOfRoads:any;
 
@@ -72,5 +83,12 @@ export class AccidentDetailsTransactionService extends BaseService<AccidentDetai
     }
   
     return this.httpClient.get<{ dashboardTotalPropertyDamage: number }>(this.totalPropertyDamageEndPoint,{ params });
+  }
+  getAirConditionsListByLanguage(language:string,page: number, pageSize: number): Observable<any> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.httpClient.get<any>(`${environment.apiUrl}AccidentDetailsTransaction/get-accident-lists-for`, { params });
   }
 }

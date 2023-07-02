@@ -51,7 +51,11 @@ export interface AccidentDetailsTransaction{
   submissionFlag:number;
 hid:string;
   accidentLocalName :string;
-
+  regionName:string;
+  woredaName:string;
+  zoneName:string;
+  cityName:string;
+  subCityName:string;
   accidentType :AccidentType | undefined;
   airCondition :AirConditionType | undefined;
   causeofAccident :AccidentCause| undefined;

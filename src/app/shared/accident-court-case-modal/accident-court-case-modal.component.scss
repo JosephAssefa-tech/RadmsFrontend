@@ -1,0 +1,14 @@
+.vertical-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .vertical-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+  form {
+    width: 50%;
+  }
+  

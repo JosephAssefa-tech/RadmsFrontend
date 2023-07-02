@@ -178,6 +178,8 @@ import { VictimMovementTypeModalComponent } from './shared/victim-type-modal/vic
 import { WeatherConditionModalComponent } from './shared/weather-condition-modal/weather-condition-modal.component';
 import { CourtChargeComponent } from './components/court-charge/court-charge.component';
 import { CourtChargeModalComponent } from './shared/court-charge-modal/court-charge-modal.component';
+import { CourtCaseTransactionComponent } from './components/court-case-transaction/court-case-transaction.component';
+import { AccidentCourtCaseModalComponent } from './shared/accident-court-case-modal/accident-court-case-modal.component';
 
 registerLocaleData(en);
 
@@ -281,6 +283,8 @@ registerLocaleData(en);
     DriverLicenseCategoryModalComponent,
     CourtChargeComponent,
     CourtChargeModalComponent,
+    CourtCaseTransactionComponent,
+    AccidentCourtCaseModalComponent,
   ],
   imports: [
     BrowserModule,

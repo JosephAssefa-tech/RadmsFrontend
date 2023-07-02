@@ -126,6 +126,11 @@
         <i nz-icon nzType="file-text" style="margin-right: 8px;"></i>
         <a>{{ getTranslation('Report') }}</a>
       </li>
+       
+      <li nz-menu-item (click)="accidetnCourtCases()" style="color: white">
+        <i nz-icon nzType="file-text" style="margin-right: 8px;"></i>
+        <a>{{ getTranslation('accident Court Cases') }}</a>
+      </li>
       
 
       <li nz-menu-item (click)="selectMenuItem('settings')" style="color: white">
@@ -133,6 +138,7 @@
         <a>{{ getTranslation('System Administration') }}</a>
       </li>
       
+
       
     </ul>
   </nz-sider>

@@ -1,0 +1,19 @@
+/* styles.css */
+.hover-row.hovered {
+    background-color: #f5f5f5; /* Set the desired background color for the hover effect */
+  }
+  
+  .background {
+    background-color: #3035ad;
+    color: white; /* Set the font color to white for better contrast */
+  }
+  .background .options{
+    color: black;
+  }
+  .options {
+    width: 8vw !important;
+    padding: 4px 8px; /* Adjust the padding as needed */
+    font-size: 14px; /* Adjust the font size as needed */
+    /* Add any other custom styles for the select element */
+  }
+  

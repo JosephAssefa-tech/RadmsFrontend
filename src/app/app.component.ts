@@ -180,6 +180,7 @@ speedLimit():void{
   this.router.navigate(['/speedLimit']);
 
 }
+
 seatingType():void{
   this.router.navigate(['/seatingType']);
 
@@ -233,6 +234,9 @@ vechileTable()
 
 //   })
 // }
+accidetnCourtCases():void{
+  this.router.navigate(['/accidentDetailsCourtCases']); 
+}
 
 onFilterButtonClick(startDate: Date, endDate: Date): void {
   if (!startDate || !endDate) {

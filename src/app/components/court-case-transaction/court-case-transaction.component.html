@@ -1,0 +1,64 @@
+
+<nz-table #middleTable nzSize="middle" [nzData]="accidentDetails" [nzShowPagination]="false">
+  <thead>
+    <tr>
+      <th class="background">Id</th>
+      <th class="background">accidentId</th>
+      <th class="background">
+        <span>Region</span>
+        <select class="options">
+          <option value="">All</option>
+          <option *ngFor="let region of regions" [value]="region.regionId">{{ region.regionName }}</option>
+        </select>
+        
+      </th>
+
+      <th class="background">
+        <span>Zone</span>
+        <nz-select class="options" nzShowSearch nzAllowClear >
+          <ng-template #suffixTemplate>
+            <i nz-icon nzType="search" nzTheme="outline" style="font-size: 18px;"></i>
+          </ng-template>
+          <nz-option *ngFor="let zone of zones" [nzLabel]="zone.zoneName" [nzValue]="zone.zoneId"></nz-option>
+        </nz-select>
+      </th>
+      
+      <th class="background">Woreda</th>
+      <th class="background">City</th>
+      <th class="background">Sub city</th>
+      <th class="background">kebeleName</th>
+      <th class="background">RecordNumber</th>
+      <th class="background">property Damage</th>
+      <th class="background">numberofVictims</th>
+      <th class="background">Local Name</th>
+      <th class="background">Date Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let accident of accidentDetails; let i = index" (click)="openModal(accident)">
+      <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+      <td>{{ accident.accidentId }}</td>
+      <td>{{ accident.regionName }}</td>
+      <td>{{ accident.zoneName }}</td>
+      <td>{{ accident.woredaName }}</td>
+      <td>{{ accident.cityName }}</td>
+      <td>{{ accident.subCityName }}</td>
+      <td>{{ accident.kebeleName }}</td>
+      <td>{{ accident.policeRecordNumber }}</td>
+      <td>{{ accident.propertyDamage }}</td>
+      <td>{{ accident.numberofVictims }}</td>
+      <td>{{ accident.accidentLocalName }}</td>
+      <td>{{ accident.dateAndTime }}</td>
+    </tr>
+  </tbody>
+
+</nz-table>
+
+<div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+  <nz-pagination
+    [(nzPageIndex)]="currentPage"
+    [nzTotal]="totalItems"
+    [nzPageSize]="pageSize"
+    (nzPageIndexChange)="onPageChange($event)"
+  ></nz-pagination>
+<!-- </div><nz-spin  nzSimple></nz-spin> -->

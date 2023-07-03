@@ -21,18 +21,25 @@ export class ZoneMasterService extends BaseService<ZoneMaster> {
   getResourceUrl(): string {
     return 'ZoneMaster';
    }
-   getZonesListByLanguage(language:string)
-   :Observable<any[]> {
-    const params = { language: language };
+   getZonesListByLanguage(language: string, selectedRegionId?: number): Observable<any[]> {
+    const params: { [key: string]: string | number } = { language: language };
+  
+    // If selectedRegionId is provided, add it to the params
+    if (selectedRegionId) {
+      params['regionId'] = selectedRegionId;
+    }
+    console.log("selectedRegionId");
+  console.log(selectedRegionId);
     this.httpClient.get<any[]>(this.listOfZones, { params: params })
       .subscribe(zones => {
-        this.zonesSubject.next(zones); // Update the regions data in the BehaviorSubject
+        this.zonesSubject.next(zones); // Update the zones data in the BehaviorSubject
       });
-
+  
     return this.zonesSubject.asObservable(); // Return the Observable of the BehaviorSubject
-
-
   }
+  
+  
+  
   updateSelectedZoneRowData(data: any): void {
     this.selectedZoneRowData$.next(data);
   }

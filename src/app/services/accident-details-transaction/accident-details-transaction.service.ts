@@ -84,11 +84,16 @@ export class AccidentDetailsTransactionService extends BaseService<AccidentDetai
   
     return this.httpClient.get<{ dashboardTotalPropertyDamage: number }>(this.totalPropertyDamageEndPoint,{ params });
   }
-  getAirConditionsListByLanguage(language:string,page: number, pageSize: number): Observable<any> {
-    const params = new HttpParams()
+  getAirConditionsListByLanguage(language: string, page: number, pageSize: number, regionId?: number): Observable<any> {
+    let params = new HttpParams()
       .set('page', page.toString())
       .set('pageSize', pageSize.toString());
-
+  
+    if (regionId) {
+      params = params.set('regionId', regionId);
+    }
+  
     return this.httpClient.get<any>(`${environment.apiUrl}AccidentDetailsTransaction/get-accident-lists-for`, { params });
   }
+  
 }

@@ -6,7 +6,7 @@
       <th class="background">accidentId</th>
       <th class="background">
         <span>Region</span>
-        <select class="options">
+        <select class="options" [(ngModel)]="selectedRegionId" (ngModelChange)="applyRegionFilter()">
           <option value="">All</option>
           <option *ngFor="let region of regions" [value]="region.regionId">{{ region.regionName }}</option>
         </select>
@@ -15,12 +15,13 @@
 
       <th class="background">
         <span>Zone</span>
-        <nz-select class="options" nzShowSearch nzAllowClear >
+        <nz-select class="options" nzShowSearch nzAllowClear>
           <ng-template #suffixTemplate>
             <i nz-icon nzType="search" nzTheme="outline" style="font-size: 18px;"></i>
           </ng-template>
           <nz-option *ngFor="let zone of zones" [nzLabel]="zone.zoneName" [nzValue]="zone.zoneId"></nz-option>
         </nz-select>
+        
       </th>
       
       <th class="background">Woreda</th>

@@ -22,7 +22,7 @@ import { AirConditionModalComponent } from 'src/app/shared/air-condition-modal/a
 })
 export class CourtCaseTransactionComponent implements OnInit {
   loading = false; // Flag to indicate loading state
-
+  selectedRegionId!:number;
   regionMasters$:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   accidentDetails: AccidentDetailsTransaction[] = [];
   filteredAccidentDetails: AccidentDetailsTransaction[] = [];
@@ -68,19 +68,25 @@ export class CourtCaseTransactionComponent implements OnInit {
         );
     }
     
-    GetZoneMaster(language: string) {
+    GetZoneMaster(language: string, selectedRegionId?: number) {
       this.zoneService.getAllByLanguage(language)
         .subscribe(
           (response: ZoneMaster[]) => {
-            this.zones = response;
-            // Reset the selected option when the options change
+            if (selectedRegionId) {
+      
+              // Filter zones based on the selected regionId
+              this.zones = response.filter(zone => zone.region && zone.region.regionId === selectedRegionId);
 
+            } else {
+              this.zones = response;
+            }
           },
           (error) => {
             console.error('Error retrieving data:', error);
           }
         );
     }
+    
   
     openModal(accident: any): void {
       const modalRef = this.modal.create({
@@ -131,7 +137,20 @@ export class CourtCaseTransactionComponent implements OnInit {
       });
     }
     
-    
+    applyRegionFilter(): void {
+      // Call the API with the selected regionId filter
+      this.languageService.selectedLanguage$.subscribe(language => {
+        this.accidentDetailsService.getAirConditionsListByLanguage(language, this.currentPage, this.pageSize, this.selectedRegionId)
+        .subscribe((response: any) => {
+          this.accidentDetails = response.data;
+          this.totalItems = response.totalCount;
+          console.log("total records:", this.totalItems);
+          
+          // Pass the selected regionId to the GetZoneMaster method
+          this.GetZoneMaster(language, this.selectedRegionId);
+        });
+    });
+  }
     
     
   }

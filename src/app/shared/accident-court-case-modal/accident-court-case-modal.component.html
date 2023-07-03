@@ -11,11 +11,11 @@
 
 <form [formGroup]="myForm" class="vertical-form" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label >Selected Accident Id:</label>
+        <label > Accident Id:</label>
         <input formControlName="accidentID" type="text" [value]="selectedAccident?.accidentId" [readonly]="true">
       </div>
       <div class="form-group">
-        <span>Court charge</span>
+        <span >Court charge</span>
         <select class="options" formControlName="courtChargeID">
           <option value="">All</option>
           <option *ngFor="let court of cases" [value]="court.courtChargeID">{{ court.courtChargeType }}</option>

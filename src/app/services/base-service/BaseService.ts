@@ -22,13 +22,23 @@ getAll(): Observable<Array<T>> {
   return this.httpClient.get<T[]>(this.APIUrl);
 
 }
-getAllByLanguage(language: string): Observable<Array<T>>
-{
-  const params = new HttpParams().set('language', language);
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+// getAllByLanguage(language: string): Observable<Array<T>>
+// {
+//   const params = new HttpParams().set('language', language);
+//     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-  return this.httpClient.get<T[]>(this.APIUrl,{ params, headers });
+//   return this.httpClient.get<T[]>(this.APIUrl,{ params, headers });
+// }
+getAllByLanguage(language: string, selectedRegionId?: number): Observable<Array<T>> {
+  let params = new HttpParams().set('language', language);
+  if (selectedRegionId !== undefined) {
+    params = params.set('regionId', selectedRegionId);
+  }
+  const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+  return this.httpClient.get<T[]>(this.APIUrl, { params, headers });
 }
+
 get(id: string | number): Observable<[T]> {
   return this.httpClient.get<[T]>(this.APIUrl + "/" + id);
 }

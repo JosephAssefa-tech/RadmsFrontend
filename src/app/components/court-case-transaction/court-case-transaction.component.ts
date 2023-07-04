@@ -69,16 +69,26 @@ export class CourtCaseTransactionComponent implements OnInit {
     }
     
     GetZoneMaster(language: string, selectedRegionId?: number) {
-      this.zoneService.getAllByLanguage(language)
+      this.zoneService.getAllByLanguage(language, selectedRegionId)
         .subscribe(
           (response: ZoneMaster[]) => {
             if (selectedRegionId) {
-      
               // Filter zones based on the selected regionId
-              this.zones = response.filter(zone => zone.region && zone.region.regionId === selectedRegionId);
-
+              this.zones = response;
+              this.zones.forEach((zone: ZoneMaster) => {
+                console.log("Zone ID:", zone.zoneId);
+                console.log("Zone Name:", zone.zoneName);
+                console.log("Region ID:", zone.region.regionId);
+                console.log("Region Name:", zone.region.regionName);
+              });
             } else {
               this.zones = response;
+              this.zones.forEach((zone: ZoneMaster) => {
+                console.log("Zone ID:", zone.zoneId);
+                console.log("Zone Name:", zone.zoneName);
+                console.log("Region ID:", zone.region.regionId);
+                console.log("Region Name:", zone.region.regionName);
+              });
             }
           },
           (error) => {
@@ -86,6 +96,7 @@ export class CourtCaseTransactionComponent implements OnInit {
           }
         );
     }
+    
     
   
     openModal(accident: any): void {
@@ -128,7 +139,7 @@ export class CourtCaseTransactionComponent implements OnInit {
       this.loading = true; // Show the spinner
       this.currentPage = page;
       this.languageService.selectedLanguage$.subscribe(language => {
-        this.accidentDetailsService.getAirConditionsListByLanguage(language, this.currentPage, this.pageSize)
+        this.accidentDetailsService.getAirConditionsListByLanguage(language, this.currentPage, this.pageSize,this.selectedRegionId)
           .subscribe((response: any) => {
             this.accidentDetails = response.data;
             this.totalItems = response.totalCount;
